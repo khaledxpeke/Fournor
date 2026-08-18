@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Fourn'Or">
+  <circle cx="100" cy="100" r="100" fill="#88857E"/>
+  <g fill="#F0C667">
+    <ellipse cx="100" cy="46" rx="9" ry="15"/>
+    <ellipse cx="84" cy="64" rx="9" ry="15" transform="rotate(-30 84 64)"/>
+    <ellipse cx="116" cy="64" rx="9" ry="15" transform="rotate(30 116 64)"/>
+    <ellipse cx="82" cy="86" rx="9" ry="15" transform="rotate(-34 82 86)"/>
+    <ellipse cx="118" cy="86" rx="9" ry="15" transform="rotate(34 118 86)"/>
+    <ellipse cx="84" cy="108" rx="9" ry="15" transform="rotate(-38 84 108)"/>
+    <ellipse cx="116" cy="108" rx="9" ry="15" transform="rotate(38 116 108)"/>
+  </g>
+  <rect x="97.5" y="50" width="5" height="64" rx="2" fill="#F7F4ED"/>
+  <text x="100" y="152" text-anchor="middle" fill="#F7F4ED" font-family="Georgia, 'Times New Roman', serif" font-size="22" font-weight="700" letter-spacing="2.4">FOURN'OR</text>
+</svg>

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1100" preserveAspectRatio="xMidYMid slice">
+  <rect width="900" height="1100" fill="#88857E"/>
+  <g fill="#F0C667" opacity="0.92">
+    <ellipse cx="620" cy="160" rx="28" ry="48"/>
+    <ellipse cx="575" cy="230" rx="26" ry="46" transform="rotate(-32 575 230)"/>
+    <ellipse cx="665" cy="230" rx="26" ry="46" transform="rotate(32 665 230)"/>
+    <ellipse cx="568" cy="320" rx="26" ry="46" transform="rotate(-36 568 320)"/>
+    <ellipse cx="672" cy="320" rx="26" ry="46" transform="rotate(36 672 320)"/>
+    <ellipse cx="575" cy="410" rx="26" ry="46" transform="rotate(-38 575 410)"/>
+    <ellipse cx="665" cy="410" rx="26" ry="46" transform="rotate(38 665 410)"/>
+    <ellipse cx="590" cy="500" rx="24" ry="42" transform="rotate(-40 590 500)"/>
+    <ellipse cx="650" cy="500" rx="24" ry="42" transform="rotate(40 650 500)"/>
+  </g>
+  <rect x="614" y="170" width="12" height="360" rx="6" fill="#F7F4ED"/>
+  <g fill="#F7F4ED">
+    <path d="M120 780c80-90 250-90 330 0 20 22 18 70-8 88-90 62-230 62-316 0-24-18-26-66-6-88z"/>
+    <ellipse cx="285" cy="820" rx="175" ry="58"/>
+    <path d="M430 860c70-40 210-28 280 36 18 16 12 48-12 58-92 36-220 28-292-10-22-12-18-50 24-84z"/>
+    <path d="M80 920c40-18 90-12 120 14 8 8 6 22-6 26-42 14-96 8-128-12-10-6-8-20 14-28z"/>
+    <path d="M200 940c50-14 140-10 190 18 10 6 8 20-6 24-58 16-148 10-198-14-10-6-8-22 14-28z"/>
+  </g>
+</svg>
