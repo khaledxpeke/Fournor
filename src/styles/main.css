@@ -303,7 +303,7 @@ p {
 .hero {
   position: relative;
   height: auto;
-  min-height: min(48vh, 420px);
+  min-height: 0;
   margin: 0.8rem 1rem 0;
   border-radius: var(--radius-lg);
   overflow: hidden;
@@ -317,7 +317,8 @@ p {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transform: scale(1.08);
+  object-position: 68% 42%;
+  transform: scale(1.06);
   animation: kenburns 22s var(--ease) infinite alternate;
 }
 
@@ -325,22 +326,25 @@ p {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, rgb(22 20 18 / 0.62) 0%, rgb(22 20 18 / 0.18) 58%, transparent 100%);
+  background: linear-gradient(90deg, rgb(22 20 18 / 0.66) 0%, rgb(22 20 18 / 0.28) 52%, rgb(22 20 18 / 0.08) 100%);
   z-index: 1;
 }
 
 .hero-copy {
   position: relative;
   z-index: 2;
-  padding: clamp(2.2rem, 5vw, 4.2rem) clamp(1.6rem, 5vw, 3.8rem) clamp(3.4rem, 7vw, 5rem);
-  max-width: 40rem;
+  padding: clamp(1.5rem, 3.2vw, 2.4rem) clamp(1.3rem, 3.5vw, 2.6rem) clamp(1.7rem, 3.5vw, 2.5rem);
+  max-width: min(36rem, 100%);
   color: var(--ivory);
 }
 
 .hero-copy h1 {
-  font-size: clamp(2.35rem, 5.4vw, 4.6rem);
-  line-height: 0.96;
-  margin: 0.12em 0 0.28em;
+  font-size: clamp(1.85rem, 3.6vw, 3.15rem);
+  line-height: 1.08;
+  margin: 0.1em 0 0.28em;
+  text-wrap: balance;
+  overflow-wrap: break-word;
+  hyphens: none;
 }
 
 .hero-copy .kicker,
@@ -352,21 +356,36 @@ p {
 
 .hero-copy .lead {
   color: #eee7db;
+  font-size: clamp(0.95rem, 1.5vw, 1.08rem);
+  max-width: 42ch;
+  margin-bottom: 1rem;
+  text-wrap: pretty;
+  overflow-wrap: break-word;
+  hyphens: none;
 }
 
 .hero-quote {
   font-family: var(--serif);
   font-style: italic;
-  font-size: 1.35rem;
-  margin-top: 1.4rem;
+  font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+  margin-top: 0.85rem;
+  margin-bottom: 0;
   opacity: 0.88;
+  text-wrap: pretty;
 }
 
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-top: 0.4rem;
+  gap: 0.55rem;
+  margin-top: 0.15rem;
+}
+
+.hero-actions .btn {
+  white-space: nowrap;
+  min-height: 2.65rem;
+  padding: 0.55rem 1.15rem;
+  font-size: 0.7rem;
 }
 
 .hero .btn-ghost {
@@ -377,12 +396,12 @@ p {
 
 .hero-caption {
   position: absolute;
-  right: 1.4rem;
-  bottom: 1.4rem;
+  right: 1.2rem;
+  bottom: 1.1rem;
   z-index: 2;
   background: rgb(251 248 242 / 0.92);
-  padding: 0.55rem 0.95rem;
-  font-size: 0.72rem;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.68rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   border-radius: var(--pill);
@@ -784,16 +803,109 @@ p {
   line-height: 1.02;
 }
 
+.page-open,
+.maison-open {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: clamp(1.4rem, 4vw, 2.8rem);
+  align-items: start;
+  padding: clamp(1.3rem, 3vw, 2rem) 0 var(--section-y);
+}
+
+.page-open-photo,
+.maison-open-photo {
+  margin: 0;
+  border-radius: 1.6rem;
+  overflow: hidden;
+  background: #1c1b19;
+}
+
+.page-open-photo img,
+.maison-open-photo img {
+  width: 100%;
+  height: 100%;
+  max-height: 340px;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: center 22%;
+}
+
+.page-open-copy h1,
+.maison-open-copy h1 {
+  font-size: clamp(2.1rem, 5vw, 3.4rem);
+  line-height: 1.04;
+  margin: 0 0 0.3em;
+  text-wrap: balance;
+}
+
+.page-open-copy .lead,
+.maison-open-copy .lead {
+  margin-bottom: 1.35rem;
+}
+
+.page-open-copy h2,
+.maison-open-copy h2 {
+  font-size: clamp(1.45rem, 2.4vw, 1.9rem);
+  margin: 0 0 0.4em;
+}
+
+.page-open-copy p:last-child,
+.maison-open-copy p:last-child {
+  margin-bottom: 0;
+}
+
+.page-notes,
+.maison-notes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.page-notes article,
+.maison-notes article {
+  background: var(--paper);
+  border-radius: 1.5rem;
+  padding: 1.45rem 1.35rem;
+}
+
+.page-notes h2,
+.maison-notes h2 {
+  font-size: clamp(1.45rem, 2.4vw, 1.85rem);
+}
+
+.page-notes p:last-child,
+.maison-notes p:last-child {
+  margin-bottom: 0;
+}
+
 .values {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1rem;
+  counter-reset: maison-val;
 }
 
 .value {
   background: var(--paper);
   border-radius: 1.5rem;
   padding: 1.3rem 1.15rem;
+}
+
+.value h3::before {
+  counter-increment: maison-val;
+  content: counter(maison-val, decimal-leading-zero);
+  display: block;
+  font-family: var(--sans);
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--greige-deep);
+  margin-bottom: 0.55rem;
+  font-weight: 700;
+}
+
+.value p:last-child {
+  margin-bottom: 0;
 }
 
 .partner-list {
@@ -1312,7 +1424,11 @@ p {
   .split,
   .prod-hero,
   .contact-grid,
-  .footer-grid {
+  .footer-grid,
+  .page-open,
+  .maison-open,
+  .page-notes,
+  .maison-notes {
     grid-template-columns: 1fr;
   }
 
@@ -1368,10 +1484,14 @@ p {
     max-width: none;
   }
 
+  .page-open-photo img,
+  .maison-open-photo img {
+    max-height: 240px;
+    aspect-ratio: 16 / 10;
+  }
+
   .hero-caption {
-    right: auto;
-    left: 1rem;
-    bottom: 1rem;
+    display: none;
   }
 }
 
@@ -1394,39 +1514,35 @@ p {
   .hero {
     margin: 0.55rem 0.65rem 0;
     min-height: 0;
-    border-radius: 1.6rem;
+    border-radius: 1.5rem;
   }
 
   .hero::before {
-    background: linear-gradient(180deg, rgb(22 20 18 / 0.15) 0%, rgb(22 20 18 / 0.72) 100%);
+    background: linear-gradient(180deg, rgb(22 20 18 / 0.22) 0%, rgb(22 20 18 / 0.78) 100%);
   }
 
   .hero-copy {
-    padding: 1.6rem 1.15rem 2.2rem;
+    padding: 1.25rem 1.1rem 1.35rem;
     max-width: none;
   }
 
   .hero-copy h1 {
-    font-size: clamp(2rem, 10vw, 2.8rem);
-    line-height: 1.02;
+    font-size: clamp(1.7rem, 7.5vw, 2.25rem);
+    line-height: 1.1;
+  }
+
+  .hero-copy .lead {
+    font-size: 0.95rem;
+    max-width: none;
   }
 
   .hero-quote {
-    font-size: 1.15rem;
-    margin-top: 1rem;
+    font-size: 1.05rem;
+    margin-top: 0.75rem;
   }
 
   .hero-caption {
     display: none;
-  }
-
-  .hero-actions {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .hero-actions .btn {
-    width: 100%;
   }
 
   .rings,
@@ -1580,6 +1696,18 @@ p {
 
   .lead {
     font-size: 1.02rem;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+    white-space: normal;
+    text-align: center;
+    line-height: 1.3;
   }
 
   .card-grid,

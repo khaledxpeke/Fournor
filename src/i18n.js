@@ -83,7 +83,7 @@ const dict = {
     "maison.listenTitle": "Assistance et écoute",
     "maison.listen":
       "Des boulangers-formateurs et démonstrateurs assurent la formation, accompagnent au fournil et conseillent sur la meilleure façon d’utiliser chaque prémix.",
-    "maison.valuesTitle": "Valeurs visuelles",
+    "maison.valuesTitle": "Quatre piliers",
     "maison.v1": "Authenticité",
     "maison.v1t": "Naturel, simple, rassurant.",
     "maison.v2": "Qualité",
@@ -233,7 +233,7 @@ const dict = {
     "maison.listenTitle": "Support and listening",
     "maison.listen":
       "Baker-trainers and demonstrators deliver training, support in the bakery, and advice on how to use each premix.",
-    "maison.valuesTitle": "Visual values",
+    "maison.valuesTitle": "Four pillars",
     "maison.v1": "Authenticity",
     "maison.v1t": "Natural, simple, reassuring.",
     "maison.v2": "Quality",

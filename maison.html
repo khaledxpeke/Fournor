@@ -11,20 +11,25 @@
   </head>
   <body data-page="maison">
     <main>
-      <section class="page-hero wrap">
-        <p class="kicker" data-i18n="page.kicker"></p>
-        <h1 data-i18n="maison.hero"></h1>
-        <p class="lead" data-i18n="maison.lead"></p>
-      </section>
-      <section class="split">
-        <img src="/images/gal1.jpg" alt="Pains spéciaux Fourn’Or" />
-        <div class="split-copy">
+      <section class="maison-open wrap">
+        <figure class="maison-open-photo">
+          <img src="/images/gal1.jpg" alt="Pains spéciaux Fourn’Or" />
+        </figure>
+        <div class="maison-open-copy">
+          <p class="kicker" data-i18n="page.kicker"></p>
+          <h1 data-i18n="maison.hero"></h1>
+          <p class="lead" data-i18n="maison.lead"></p>
           <h2 data-i18n="maison.storyTitle"></h2>
           <p data-i18n="maison.story"></p>
         </div>
       </section>
-      <section class="section">
+
+      <section class="section" style="padding-top:0">
         <div class="wrap">
+          <div class="section-head">
+            <p class="kicker" data-i18n="page.kicker"></p>
+            <h2 data-i18n="maison.valuesTitle"></h2>
+          </div>
           <div class="values">
             <article class="value">
               <h3 data-i18n="maison.v1"></h3>
@@ -45,28 +50,34 @@
           </div>
         </div>
       </section>
+
       <section class="section" style="padding-top:0">
-        <div class="wrap stats">
-          <div>
+        <div class="wrap maison-notes">
+          <article>
             <h2 data-i18n="maison.engageTitle"></h2>
             <p data-i18n="maison.engage"></p>
-          </div>
-          <div>
+          </article>
+          <article>
             <h2 data-i18n="maison.listenTitle"></h2>
             <p data-i18n="maison.listen"></p>
-          </div>
+          </article>
         </div>
       </section>
+
       <section class="section section-charcoal">
         <div class="wrap">
+          <p class="kicker" data-i18n="page.kicker"></p>
           <h2 data-i18n="maison.groupTitle"></h2>
           <p class="lead" data-i18n="maison.group"></p>
         </div>
       </section>
+
       <section class="section">
         <div class="wrap">
-          <p class="kicker" data-i18n="maison.partnersTitle"></p>
-          <h2 data-i18n="maison.partnersLead"></h2>
+          <div class="section-head">
+            <p class="kicker" data-i18n="maison.partnersTitle"></p>
+            <h2 data-i18n="maison.partnersLead"></h2>
+          </div>
           <ul class="partner-list" id="partners"></ul>
         </div>
       </section>
