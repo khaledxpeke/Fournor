@@ -1,4 +1,3 @@
-import "./styles/main.css";
 import { mountLayout } from "./layout.js";
 import { getLang } from "./i18n.js";
 import { products, events, dosageMeta, partners, getProduct } from "./products.js";
@@ -24,7 +23,7 @@ function productCard(p) {
   const L = lang();
   return `<a class="p-card" href="/produit.html?id=${p.id}">
     <div class="p-card-img">
-      <img src="${p.image}" alt="${p.name[L]}" />
+      <img src="${p.image}" alt="${p.name[L]}" width="800" height="600" loading="lazy" decoding="async" />
       <span class="photo-badge">${p.dosage}%</span>
     </div>
     <div class="p-card-body">
@@ -44,7 +43,7 @@ function eventCard(e) {
     year: "numeric",
   }).format(new Date(e.date));
   return `<article class="e-card">
-    <div class="e-card-img"><img src="${e.image}" alt="${e.title[L]}"/></div>
+    <div class="e-card-img"><img src="${e.image}" alt="${e.title[L]}" width="360" height="240" loading="lazy" decoding="async"/></div>
     <div>
       <p class="kicker">${d} · ${e.place[L]}</p>
       <h3>${e.title[L]}</h3>
@@ -114,6 +113,7 @@ function renderGamme() {
     empty.hidden = list.length > 0;
     empty.textContent = t("gamme.empty", L);
   }
+  hydrateMedia(grid);
 }
 
 function setupFilters() {
@@ -140,10 +140,36 @@ function renderProduit() {
   const L = lang();
   const root = document.getElementById("produit");
   if (!root) return;
+  document.title = `${p.name[L]} — Fourn’Or`;
+  const videoBlock = p.video
+    ? `<section class="prod-video" id="prod-video">
+        <p class="kicker">${t("prod.video", L)}</p>
+        <h2>${t("prod.videoTitle", L)}</h2>
+        <div class="prod-video-frame">
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/${p.video}"
+            title="${p.name[L]}"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </section>`
+    : "";
+  const sheetBtn = p.sheet
+    ? `<a class="btn btn-gold" href="${p.sheet}" target="_blank" rel="noopener noreferrer">
+        <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M7 3.5h6.5L18.5 9v11.5H7V3.5Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+          <path d="M13.5 3.5V9H18.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+          <path d="M9.5 13.5h5M9.5 16.5h5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+        ${t("prod.download", L)}
+      </a>`
+    : "";
   root.innerHTML = `
     <div class="prod-hero">
       <div class="prod-photo">
-        <img src="${p.image}" alt="${p.name[L]}" />
+        <img src="${p.image}" alt="${p.name[L]}" width="900" height="900" fetchpriority="high" decoding="async" />
       </div>
       <div class="prod-intro">
         <p class="kicker" data-i18n="prod.kicker">${t("prod.kicker", L)}</p>
@@ -157,38 +183,162 @@ function renderProduit() {
             <p>${dosageMeta[p.dosage].blurb[L]}</p>
           </div>
         </div>
+        <div class="prod-actions">
+          ${sheetBtn}
+          ${p.video ? `<a class="btn btn-ghost" href="#prod-video">${t("prod.watch", L)}</a>` : ""}
+        </div>
       </div>
     </div>
-    <div class="prod-grid">
-      <article><h2 data-i18n="prod.adds">${t("prod.adds", L)}</h2><p>${p.adds[L]}</p></article>
-      <article><h2 data-i18n="prod.sensory">${t("prod.sensory", L)}</h2><p>${p.sensory[L]}</p></article>
-      <article><h2 data-i18n="prod.target">${t("prod.target", L)}</h2><p>${p.target[L]}</p></article>
-      <article><h2 data-i18n="prod.usage">${t("prod.usage", L)}</h2><p data-i18n="prod.usageText">${t("prod.usageText", L)}</p></article>
+    <div class="prod-specs">
+      <div class="prod-spec-main">
+        <article>
+          <h3>${t("prod.composition", L)}</h3>
+          <p>${p.composition[L]}</p>
+        </article>
+        <article class="prod-spec-weight">
+          <h3>${t("prod.weight", L)}</h3>
+          <p>${p.weight}</p>
+        </article>
+      </div>
+      <div class="prod-spec-grid">
+        <article><h3>${t("prod.adds", L)}</h3><p>${p.adds[L]}</p></article>
+        <article><h3>${t("prod.sensory", L)}</h3><p>${p.sensory[L]}</p></article>
+        <article><h3>${t("prod.target", L)}</h3><p>${p.target[L]}</p></article>
+        <article><h3>${t("prod.usage", L)}</h3><p>${t("prod.usageText", L)}</p></article>
+      </div>
     </div>
+    ${videoBlock}
     <p><a class="btn btn-ghost" href="/gamme.html" data-i18n="prod.back">${t("prod.back", L)}</a></p>
     <h2 class="section-title" data-i18n="prod.other">${t("prod.other", L)}</h2>
     <div class="card-grid">${products.filter((x) => x.id !== p.id).slice(0, 3).map(productCard).join("")}</div>
   `;
 }
 
-function renderComposer() {
-  const select = document.getElementById("composer-select");
-  const visual = document.getElementById("composer-visual");
-  if (!select || !visual) return;
-  const L = lang();
-  if (!select.dataset.ready) {
-    select.innerHTML = products
-      .map((p) => `<option value="${p.id}">${p.name.fr} · ${p.dosage}%</option>`)
-      .join("");
-    select.dataset.ready = "1";
-    select.addEventListener("change", renderComposer);
-  }
-  const p = getProduct(select.value);
-  const flour = 100 - p.dosage;
-  select.querySelectorAll("option").forEach((opt) => {
-    const prod = getProduct(opt.value);
-    opt.textContent = `${prod.name[L]} · ${prod.dosage}%`;
+function composerLabel(p, L) {
+  return `${p.name[L]} · ${p.dosage}%`;
+}
+
+function closeComposerSelect() {
+  const wrap = document.getElementById("composer-select");
+  if (!wrap) return;
+  wrap.classList.remove("is-open");
+  const trigger = wrap.querySelector(".fo-select-trigger");
+  const list = wrap.querySelector(".fo-select-list");
+  trigger?.setAttribute("aria-expanded", "false");
+  if (list) list.hidden = true;
+}
+
+function openComposerSelect() {
+  const wrap = document.getElementById("composer-select");
+  if (!wrap) return;
+  wrap.classList.add("is-open");
+  const trigger = wrap.querySelector(".fo-select-trigger");
+  const list = wrap.querySelector(".fo-select-list");
+  trigger?.setAttribute("aria-expanded", "true");
+  if (list) list.hidden = false;
+  const selected = list?.querySelector('[aria-selected="true"]') || list?.querySelector("[role='option']");
+  list?.querySelectorAll("[role='option']").forEach((opt) => opt.classList.remove("is-active"));
+  selected?.classList.add("is-active");
+  selected?.scrollIntoView({ block: "nearest" });
+}
+
+function moveComposerActive(delta) {
+  const list = document.querySelector("#composer-select .fo-select-list");
+  if (!list || list.hidden) return;
+  const options = [...list.querySelectorAll("[role='option']")];
+  const current = options.findIndex((opt) => opt.classList.contains("is-active"));
+  const next = options[(Math.max(current, 0) + delta + options.length) % options.length];
+  options.forEach((opt) => opt.classList.remove("is-active"));
+  next.classList.add("is-active");
+  next.scrollIntoView({ block: "nearest" });
+}
+
+function mountComposerSelect(wrap) {
+  wrap.dataset.value = wrap.dataset.value || products[0].id;
+  wrap.innerHTML = `
+    <button type="button" class="fo-select-trigger" id="composer-trigger" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="composer-label composer-value" aria-controls="composer-list">
+      <span class="fo-select-value" id="composer-value"></span>
+      <svg class="fo-select-chevron" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    <ul class="fo-select-list" role="listbox" id="composer-list" aria-labelledby="composer-label" hidden></ul>
+  `;
+
+  const trigger = wrap.querySelector(".fo-select-trigger");
+  const list = wrap.querySelector(".fo-select-list");
+
+  trigger.addEventListener("click", () => {
+    if (wrap.classList.contains("is-open")) closeComposerSelect();
+    else openComposerSelect();
   });
+
+  trigger.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+      event.preventDefault();
+      if (!wrap.classList.contains("is-open")) openComposerSelect();
+      moveComposerActive(event.key === "ArrowDown" ? 1 : -1);
+    }
+    if (event.key === "Enter" || event.key === " ") {
+      if (wrap.classList.contains("is-open")) {
+        event.preventDefault();
+        const active = list.querySelector(".is-active");
+        if (active) {
+          wrap.dataset.value = active.dataset.value;
+          closeComposerSelect();
+          renderComposer();
+        }
+      }
+    }
+    if (event.key === "Escape") {
+      event.preventDefault();
+      closeComposerSelect();
+    }
+  });
+
+  list.addEventListener("click", (event) => {
+    const option = event.target.closest("[role='option']");
+    if (!option) return;
+    wrap.dataset.value = option.dataset.value;
+    closeComposerSelect();
+    renderComposer();
+  });
+
+  if (!window.__foSelectBound) {
+    window.__foSelectBound = true;
+    document.addEventListener("click", (event) => {
+      if (!event.target.closest("#composer-select")) closeComposerSelect();
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeComposerSelect();
+    });
+  }
+}
+
+function renderComposer() {
+  const wrap = document.getElementById("composer-select");
+  const visual = document.getElementById("composer-visual");
+  if (!wrap || !visual) return;
+  const L = lang();
+  if (!wrap.dataset.ready) {
+    mountComposerSelect(wrap);
+    wrap.dataset.ready = "1";
+  }
+  const current = wrap.dataset.value || products[0].id;
+  wrap.dataset.value = current;
+  const list = wrap.querySelector(".fo-select-list");
+  if (list) {
+    list.innerHTML = products
+      .map(
+        (p) =>
+          `<li role="option" data-value="${p.id}" id="composer-opt-${p.id}" aria-selected="${p.id === current ? "true" : "false"}">${composerLabel(p, L)}</li>`
+      )
+      .join("");
+  }
+  const valueEl = wrap.querySelector(".fo-select-value");
+  const p = getProduct(current);
+  if (valueEl) valueEl.textContent = composerLabel(p, L);
+  const flour = 100 - p.dosage;
   visual.innerHTML = `
     <div class="mix-readout">
       <div class="mix-stat">
@@ -294,6 +444,22 @@ function paint() {
   renderPartners();
   setupAtelierNav();
   setupMotion();
+  hydrateMedia();
+}
+
+function hydrateMedia(root = document) {
+  root.querySelectorAll("img").forEach((img) => {
+    const show = (cached) => {
+      if (cached) img.classList.add("is-cached");
+      img.classList.add("is-loaded");
+    };
+    if (img.complete && img.naturalWidth > 0) {
+      show(true);
+      return;
+    }
+    img.addEventListener("load", () => show(false), { once: true });
+    img.addEventListener("error", () => show(false), { once: true });
+  });
 }
 
 window.addEventListener("fournor:lang", paint);

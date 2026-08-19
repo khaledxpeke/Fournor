@@ -1,7 +1,7 @@
-import { applyI18n, getLang, setLang } from "./i18n.js";
+import { applyI18n, getLang, setLang, t } from "./i18n.js";
 
 const LOGO = `
-<svg class="logo-mark" viewBox="0 0 200 200" aria-hidden="true">
+<svg class="logo-mark" width="44" height="44" viewBox="0 0 200 200" aria-hidden="true">
   <circle cx="100" cy="100" r="100" fill="#88857E"/>
   <g fill="#F0C667">
     <ellipse cx="100" cy="46" rx="9" ry="15"/>
@@ -69,8 +69,8 @@ function footer() {
       <p><a href="tel:+21671100797" data-i18n="footer.phone"></a></p>
       <p data-i18n="footer.fax"></p>
       <p class="social">
-        <a href="https://www.facebook.com/profile.php?id=100088082392675" rel="noopener">Facebook</a>
-        <a href="https://www.instagram.com/stdtayara.tn/" rel="noopener">Instagram</a>
+        <a href="https://www.facebook.com/profile.php?id=100088082392675" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <a href="https://www.instagram.com/stdtayara.tn/" target="_blank" rel="noopener noreferrer">Instagram</a>
       </p>
     </div>
   </div>
@@ -81,10 +81,75 @@ function footer() {
 </footer>`;
 }
 
+function pagePath(page) {
+  const paths = {
+    home: "/index.html",
+    maison: "/maison.html",
+    gamme: "/gamme.html",
+    produit: "/produit.html",
+    expertise: "/expertise.html",
+    actualites: "/actualites.html",
+    contact: "/contact.html",
+  };
+  return paths[page] || "/index.html";
+}
+
+function mountHead() {
+  if (document.querySelector("meta[property='og:title']")) return;
+  const page = document.body.dataset.page || "home";
+  const lang = getLang();
+  const title = t(`meta.${page}`, lang);
+  const desc = t(`meta.desc.${page}`, lang);
+  const origin = window.location.origin;
+  const url = `${origin}${pagePath(page)}${window.location.search}`;
+  const image = `${origin}/images/banner.webp`;
+  const esc = (value) => String(value).replace(/"/g, "&quot;");
+
+  if (!document.querySelector("meta[name='description']")) {
+    document.head.insertAdjacentHTML("beforeend", `<meta name="description" content="${esc(desc)}">`);
+  }
+  if (!document.querySelector("meta[name='theme-color']")) {
+    document.head.insertAdjacentHTML("beforeend", `<meta name="theme-color" content="#f4efe6">`);
+  }
+  document.head.insertAdjacentHTML(
+    "beforeend",
+    `<meta property="og:site_name" content="Fourn’Or">
+<meta property="og:type" content="website">
+<meta property="og:title" content="${esc(title)}">
+<meta property="og:description" content="${esc(desc)}">
+<meta property="og:url" content="${esc(url)}">
+<meta property="og:image" content="${esc(image)}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="${esc(title)}">
+<meta name="twitter:description" content="${esc(desc)}">
+<link rel="canonical" href="${esc(url)}">`
+  );
+
+  const ld = document.createElement("script");
+  ld.type = "application/ld+json";
+  ld.textContent = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Fourn’Or",
+    legalName: "Société Tayara Distribution",
+    url: origin,
+    telephone: "+21671100797",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "01 rue du Nil, Sidi Fathallah Djebel Djelloud",
+      postalCode: "2023",
+      addressLocality: "Tunis",
+      addressCountry: "TN",
+    },
+  });
+  document.head.appendChild(ld);
+}
+
 export function mountLayout(active) {
+  mountHead();
   document.body.insertAdjacentHTML(
     "afterbegin",
-    `<a class="skip" href="#content">Aller au contenu</a>` + header(active)
+    `<a class="skip" href="#content" data-i18n="skip">${t("skip")}</a>` + header(active)
   );
   document.body.insertAdjacentHTML("beforeend", footer());
   document.querySelector("main")?.setAttribute("id", "content");

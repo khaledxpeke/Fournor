@@ -4,25 +4,29 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/src/styles/main.css" />
+    <link rel="preload" as="image" href="/images/banner.webp" fetchpriority="high" />
+    <meta name="theme-color" content="#f4efe6" />
     <title>Fourn’Or — L’or de votre fournil</title>
     <meta name="description" content="Fourn’Or, prémix de farines spéciales pour boulangers. Une marque de Société Tayara Distribution, Tunis." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" /></noscript>
   </head>
   <body data-page="home">
     <main>
       <section class="hero">
-        <img class="hero-bg" src="/images/hero.jpg" alt="Boulangers au fournil Tayara" />
+        <img class="hero-bg" src="/images/banner.webp" alt="Pains artisanaux et blé" width="2400" height="1029" fetchpriority="high" decoding="async" />
         <div class="hero-copy reveal">
-          <p class="kicker" data-i18n="hero.kicker"></p>
-          <h1 data-i18n="hero.title"></h1>
-          <p class="lead" data-i18n="hero.lead"></p>
+          <p class="kicker" data-i18n="hero.kicker">Prémix de panification · Tunis</p>
+          <h1 data-i18n="hero.title">L’or de votre fournil</h1>
+          <p class="lead" data-i18n="hero.lead">Fourn’Or formule des prémix de farines spéciales pour les boulangers qui veulent régularité, goût et caractère — sans perdre le geste.</p>
           <div class="hero-actions">
-            <a class="btn btn-gold" href="/gamme.html" data-i18n="hero.cta1"></a>
-            <a class="btn btn-ghost" href="/contact.html" data-i18n="hero.cta2"></a>
+            <a class="btn btn-gold" href="/gamme.html" data-i18n="hero.cta1">Découvrir la gamme</a>
+            <a class="btn btn-ghost" href="/contact.html" data-i18n="hero.cta2">Parler à un boulanger-formateur</a>
           </div>
-          <p class="hero-quote" data-i18n="hero.quote"></p>
+          <p class="hero-quote" data-i18n="hero.quote">On ne naît pas boulanger, on le devient.</p>
         </div>
         <span class="hero-caption">Le goût du vrai</span>
       </section>
@@ -44,7 +48,7 @@
           <div class="rings">
             <article class="ring-card reveal">
               <div class="orb">
-                <img src="/images/banette.png" alt="" />
+                <img src="/images/banette.webp" alt="" width="480" height="480" loading="lazy" decoding="async" />
                 <div class="ring" data-pct="2"><span class="ring-pct">2%</span></div>
               </div>
               <h3 data-dosage-label="2"></h3>
@@ -53,7 +57,7 @@
             </article>
             <article class="ring-card reveal">
               <div class="orb">
-                <img src="/images/complet.png" alt="" />
+                <img src="/images/complet.webp" alt="" width="480" height="480" loading="lazy" decoding="async" />
                 <div class="ring" data-pct="30"><span class="ring-pct">30%</span></div>
               </div>
               <h3 data-dosage-label="30"></h3>
@@ -62,7 +66,7 @@
             </article>
             <article class="ring-card reveal">
               <div class="orb">
-                <img src="/images/multigrain.png" alt="" />
+                <img src="/images/multigrain.webp" alt="" width="480" height="480" loading="lazy" decoding="async" />
                 <div class="ring" data-pct="50"><span class="ring-pct">50%</span></div>
               </div>
               <h3 data-dosage-label="50"></h3>
@@ -74,7 +78,7 @@
       </section>
 
       <section class="section" style="padding-top:0">
-        <div class="wide">
+        <div class="wrap">
           <div class="section-head reveal">
             <p class="kicker" data-i18n="atelier.kicker"></p>
             <h2 data-i18n="atelier.title"></h2>
@@ -83,7 +87,12 @@
           </div>
           <div class="atelier-stage">
             <button type="button" class="rail-nav prev" id="atelier-prev" aria-label="Précédent">‹</button>
-            <div class="atelier" id="atelier-rail" tabindex="0"></div>
+            <div class="atelier" id="atelier-rail" tabindex="0">
+              <article class="p-card is-skeleton" aria-hidden="true"><div class="p-card-img"></div><div class="p-card-body"><span class="sk-line sk-sm"></span><span class="sk-line sk-lg"></span><span class="sk-line"></span></div></article>
+              <article class="p-card is-skeleton" aria-hidden="true"><div class="p-card-img"></div><div class="p-card-body"><span class="sk-line sk-sm"></span><span class="sk-line sk-lg"></span><span class="sk-line"></span></div></article>
+              <article class="p-card is-skeleton" aria-hidden="true"><div class="p-card-img"></div><div class="p-card-body"><span class="sk-line sk-sm"></span><span class="sk-line sk-lg"></span><span class="sk-line"></span></div></article>
+              <article class="p-card is-skeleton" aria-hidden="true"><div class="p-card-img"></div><div class="p-card-body"><span class="sk-line sk-sm"></span><span class="sk-line sk-lg"></span><span class="sk-line"></span></div></article>
+            </div>
             <button type="button" class="rail-nav next" id="atelier-next" aria-label="Suivant">›</button>
           </div>
         </div>
@@ -108,7 +117,7 @@
       </section>
 
       <section class="feature reveal">
-        <img src="/images/fournil.jpg" alt="Fournil d’essai STD" />
+        <img src="/images/hero.webp" alt="Boulangers au fournil d’essai" width="1920" height="1016" loading="lazy" decoding="async" />
         <div class="feature-card">
           <p class="kicker" data-i18n="fournil.kicker"></p>
           <h2 data-i18n="fournil.title"></h2>
@@ -124,7 +133,10 @@
             <h2 data-i18n="news.title"></h2>
             <a class="more" href="/actualites.html" data-i18n="news.all"></a>
           </div>
-          <div id="home-news"></div>
+          <div id="home-news">
+            <article class="e-card is-skeleton" aria-hidden="true"><div class="e-card-img"></div><div><span class="sk-line sk-sm"></span><span class="sk-line sk-lg"></span><span class="sk-line"></span></div></article>
+            <article class="e-card is-skeleton" aria-hidden="true"><div class="e-card-img"></div><div><span class="sk-line sk-sm"></span><span class="sk-line sk-lg"></span><span class="sk-line"></span></div></article>
+          </div>
         </div>
       </section>
 

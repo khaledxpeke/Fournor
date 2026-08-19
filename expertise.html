@@ -4,20 +4,25 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/src/styles/main.css" />
+    <link rel="preload" as="image" href="/images/expertise.webp" fetchpriority="high" />
+    <meta name="theme-color" content="#f4efe6" />
+    <meta name="description" content="Le prémix, le fournil d’essai et l’accompagnement des boulangers-formateurs Fourn’Or à Tunis." />
     <title>Expertise — Fourn’Or</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" /></noscript>
   </head>
   <body data-page="expertise">
     <main>
       <section class="page-open wrap">
         <figure class="page-open-photo">
-          <img src="/images/gal2.jpg" alt="Travail au fournil" />
+          <img src="/images/expertise.webp" alt="Façonnage de la pâte au fournil" width="1600" height="1200" fetchpriority="high" decoding="async" />
         </figure>
         <div class="page-open-copy">
           <p class="kicker" data-i18n="page.kicker"></p>
-          <h1 data-i18n="exp.hero"></h1>
+          <h1 data-i18n="exp.hero">Expertise</h1>
           <p class="lead" data-i18n="exp.lead"></p>
           <h2 data-i18n="exp.whatTitle"></h2>
           <p data-i18n="exp.what"></p>
@@ -31,8 +36,8 @@
               <p class="kicker" data-i18n="exp.compose"></p>
               <h2 data-i18n="exp.composeLead"></h2>
               <div class="composer-pick">
-                <label for="composer-select" data-i18n="gamme.sku"></label>
-                <select id="composer-select"></select>
+                <label for="composer-trigger" id="composer-label" data-i18n="gamme.sku"></label>
+                <div class="fo-select" id="composer-select"></div>
               </div>
             </div>
             <div class="composer-visual" id="composer-visual"></div>

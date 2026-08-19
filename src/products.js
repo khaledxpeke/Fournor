@@ -4,7 +4,7 @@ export const products = [
     sku: "PREMIX BANETTE FOURN'OR 2%",
     dosage: 2,
     family: "tradition",
-    image: "/images/banette.png",
+    image: "/images/banette.webp",
     name: { fr: "Banette", en: "Banette" },
     promise: {
       fr: "La baguette de tous les jours, régulière et croustillante.",
@@ -19,6 +19,13 @@ export const products = [
       en: "Artisan bakeries and in-store bake-off.",
     },
     adds: { fr: "Farine, eau, sel, levure", en: "Flour, water, salt, yeast" },
+    weight: "20 kg",
+    composition: {
+      fr: "Farine de blé, farine de seigle, gluten de blé, farine d’orge malté torréfié, enzymes, agent de traitement de la farine E300.",
+      en: "Wheat flour, rye flour, wheat gluten, roasted malted barley flour, enzymes, flour treatment agent E300.",
+    },
+    video: "LlvjIN_3BgM",
+    sheet: "https://www.std-tayara.com/pain-banette/brochure",
   },
   {
     id: "tradition",
@@ -40,13 +47,19 @@ export const products = [
       en: "Bakers focused on traditional French bread.",
     },
     adds: { fr: "Farine, eau, sel, levure", en: "Flour, water, salt, yeast" },
+    weight: "20 kg",
+    composition: {
+      fr: "Protéines de blé (gluten), farine de maïs, sel, farine de blé, levain de seigle dévitalisé et déshydraté, enzymes, agent de traitement de la farine : E300.",
+      en: "Wheat proteins (gluten), maize flour, salt, wheat flour, deactivated dehydrated rye sourdough, enzymes, flour treatment agent E300.",
+    },
+    sheet: "https://www.std-tayara.com/premix-pain-tradition/brochure",
   },
   {
     id: "complet",
     sku: "PREMIX COMPLET FOURN'OR 30%",
     dosage: 30,
     family: "caractere",
-    image: "/images/complet.png",
+    image: "/images/complet.webp",
     name: { fr: "Complet", en: "Wholemeal" },
     promise: {
       fr: "Un pain complet moelleux, riche en fibres et en goût.",
@@ -61,6 +74,13 @@ export const products = [
       en: "Health-led bakery ranges.",
     },
     adds: { fr: "Farine, eau, sel, levure", en: "Flour, water, salt, yeast" },
+    weight: "20 kg",
+    composition: {
+      fr: "Farine de blé, issues de blé, gluten de blé, sel, enzymes.",
+      en: "Wheat flour, wheat offals, wheat gluten, salt, enzymes.",
+    },
+    video: "WWqEQFC0uxs",
+    sheet: "https://www.std-tayara.com/premix-pain-complet/brochure",
   },
   {
     id: "campagne",
@@ -82,13 +102,20 @@ export const products = [
       en: "Village bakeries and foodservice.",
     },
     adds: { fr: "Farine, eau, sel, levure", en: "Flour, water, salt, yeast" },
+    weight: "20 kg",
+    composition: {
+      fr: "Farine de seigle, protéines de blé (gluten), sel, farine de blé, levain de seigle et de blé dévitalisés et déshydratés, issues de blé, farine d’orge malté torréfié, enzymes, agent de traitement de la farine : E300.",
+      en: "Rye flour, wheat proteins (gluten), salt, wheat flour, deactivated dehydrated rye and wheat sourdough, wheat offals, roasted malted barley flour, enzymes, flour treatment agent E300.",
+    },
+    video: "0Rc_xCFNiL4",
+    sheet: "https://www.std-tayara.com/pain-de-compagne/brochure",
   },
   {
     id: "cereales-noir",
     sku: "PREMIX CEREALES NOIR FOURN'OR 30%",
     dosage: 30,
     family: "caractere",
-    image: "/images/noir.png",
+    image: "/images/noir.webp",
     name: { fr: "Céréales noir", en: "Dark cereals" },
     promise: {
       fr: "Un pain sombre, profond, aux céréales torréfiées.",
@@ -103,13 +130,20 @@ export const products = [
       en: "Speciality breads and premium sandwiches.",
     },
     adds: { fr: "Farine, eau, sel, levure", en: "Flour, water, salt, yeast" },
+    weight: "20 kg",
+    composition: {
+      fr: "Farine de blé, farine de seigle, gluten de blé, farine d’orge malté torréfié, enzymes, agent de traitement de la farine E300.",
+      en: "Wheat flour, rye flour, wheat gluten, roasted malted barley flour, enzymes, flour treatment agent E300.",
+    },
+    video: "2OcI9IANqI4",
+    sheet: "https://www.std-tayara.com/pain-cereales-foncees/brochure",
   },
   {
     id: "scandinave",
     sku: "PREMIX SCANDINAVE FOURN'OR 30%",
     dosage: 30,
     family: "caractere",
-    image: "/images/scandinave.png",
+    image: "/images/scandinave.webp",
     name: { fr: "Scandinave", en: "Scandinavian" },
     promise: {
       fr: "Inspiration nordique : seigle, graines, caractère.",
@@ -124,6 +158,13 @@ export const products = [
       en: "Character breads and breakfast service.",
     },
     adds: { fr: "Farine, eau, sel, levure", en: "Flour, water, salt, yeast" },
+    weight: "20 kg",
+    composition: {
+      fr: "Graines (sésame, tournesol, lin, millet), protéines de blé (gluten), farine d’orge malté torréfié, sel, farine de blé, farine de blé malté, enzymes, agent de traitement de la farine : E300.",
+      en: "Seeds (sesame, sunflower, linseed, millet), wheat proteins (gluten), roasted malted barley flour, salt, wheat flour, malted wheat flour, enzymes, flour treatment agent E300.",
+    },
+    video: "YM8kJcURY1U",
+    sheet: "https://www.std-tayara.com/pain-scandinave/brochure",
   },
   {
     id: "chia-quinoa",
@@ -145,13 +186,20 @@ export const products = [
       en: "Nutrition-led and wellness ranges.",
     },
     adds: { fr: "Farine, eau, sel, levure", en: "Flour, water, salt, yeast" },
+    weight: "20 kg",
+    composition: {
+      fr: "Graines (chia, quinoa, tournesol, lin), protéines de blé (gluten), farine de seigle, sel, levain de seigle dévitalisé et déshydraté, farine d’orge malté torréfié, farine de blé, enzymes, agent de traitement de la farine : E300.",
+      en: "Seeds (chia, quinoa, sunflower, linseed), wheat proteins (gluten), rye flour, salt, deactivated dehydrated rye sourdough, roasted malted barley flour, wheat flour, enzymes, flour treatment agent E300.",
+    },
+    video: "tRTgYl2fjrk",
+    sheet: "https://www.std-tayara.com/premix-pain-au-chia/brochure",
   },
   {
     id: "maxi-graines",
     sku: "PREMIX MAXI GRAINES FOURN'OR 50%",
     dosage: 50,
     family: "graines",
-    image: "/images/viking.png",
+    image: "/images/viking.webp",
     name: { fr: "Maxi graines", en: "Maxi seeds" },
     promise: {
       fr: "Le pain le plus généreux en graines de la gamme.",
@@ -166,13 +214,20 @@ export const products = [
       en: "Signature loaves and premium counters.",
     },
     adds: { fr: "Farine, eau, sel, levure", en: "Flour, water, salt, yeast" },
+    weight: "20 kg",
+    composition: {
+      fr: "Farine de blé, graines (tournesol, lin, sésame, soja), son de seigle, gluten de blé, sel, farine d’orge malté torréfié, levain de seigle et de blé dévitalisés et déshydratés, farine de blé malté, émulsifiant E471, enzymes, agent de traitement de la farine E300.",
+      en: "Wheat flour, seeds (sunflower, linseed, sesame, soya), rye bran, wheat gluten, salt, roasted malted barley flour, deactivated dehydrated rye and wheat sourdough, malted wheat flour, emulsifier E471, enzymes, flour treatment agent E300.",
+    },
+    video: "y-jIelJ77tU",
+    sheet: "https://www.std-tayara.com/pain-viking/brochure",
   },
   {
     id: "multigrain",
     sku: "PREMIX MULTIGRAIN FOURN'OR 50%",
     dosage: 50,
     family: "graines",
-    image: "/images/multigrain.png",
+    image: "/images/multigrain.webp",
     name: { fr: "Multigrain", en: "Multigrain" },
     promise: {
       fr: "L’équilibre des céréales, simple à réussir chaque jour.",
@@ -187,6 +242,13 @@ export const products = [
       en: "Daily volume and foodservice.",
     },
     adds: { fr: "Farine, eau, sel, levure", en: "Flour, water, salt, yeast" },
+    weight: "20 kg",
+    composition: {
+      fr: "Farine de blé, graines (tournesol, lin, sésame, soja concassé), farine de maïs, gluten de blé, sel, levain de seigle et de blé dévitalisés et déshydratés, farine de blé malté, émulsifiant E472e, enzymes.",
+      en: "Wheat flour, seeds (sunflower, linseed, sesame, crushed soya), maize flour, wheat gluten, salt, deactivated dehydrated rye and wheat sourdough, malted wheat flour, emulsifier E472e, enzymes.",
+    },
+    video: "FsKuchfSEgs",
+    sheet: "https://www.std-tayara.com/pain-multigrains/brochure",
   },
   {
     id: "mais",
@@ -208,6 +270,13 @@ export const products = [
       en: "Speciality loaves and themed foodservice.",
     },
     adds: { fr: "Farine, eau, sel, levure", en: "Flour, water, salt, yeast" },
+    weight: "20 kg",
+    composition: {
+      fr: "Billes de maïs extrudés, protéines de blé (gluten), farine de maïs, sel, graines de tournesol, émulsifiant E472e, épices, farine d’orge malté torréfié, extrait d’épices, enzymes, agent de traitement de la farine : E300.",
+      en: "Extruded maize pellets, wheat proteins (gluten), maize flour, salt, sunflower seeds, emulsifier E472e, spices, roasted malted barley flour, spice extract, enzymes, flour treatment agent E300.",
+    },
+    video: "oLQBs858UH4",
+    sheet: "https://www.std-tayara.com/pain-de-mais/brochure",
   },
 ];
 
@@ -242,7 +311,7 @@ export const events = [
   {
     id: "lancement-premix",
     date: "2024-02-01",
-    image: "/images/event22.png",
+    image: "/images/event22.webp",
     title: { fr: "Lancement de la gamme de Prémix", en: "Premix range launch" },
     place: { fr: "STD, Tunis", en: "STD, Tunis" },
     text: {
@@ -253,7 +322,7 @@ export const events = [
   {
     id: "masterclass",
     date: "2023-11-12",
-    image: "/images/event-a.png",
+    image: "/images/event-a.webp",
     title: { fr: "Masterclass à STD", en: "Masterclass at STD" },
     place: { fr: "Fournil d’essai, Tunis", en: "Test bakery, Tunis" },
     text: {
@@ -264,7 +333,7 @@ export const events = [
   {
     id: "fete-culinaire",
     date: "2023-09-20",
-    image: "/images/event3.png",
+    image: "/images/event3.webp",
     title: { fr: "La Fête Culinaire", en: "Culinary Festival" },
     place: { fr: "Tunis", en: "Tunis" },
     text: {
@@ -275,7 +344,7 @@ export const events = [
   {
     id: "rupture",
     date: "2023-04-08",
-    image: "/images/event-b.png",
+    image: "/images/event-b.webp",
     title: { fr: "Rupture du jeûne", en: "Iftar gathering" },
     place: { fr: "Tunis", en: "Tunis" },
     text: {
@@ -286,7 +355,7 @@ export const events = [
   {
     id: "degustation",
     date: "2023-06-15",
-    image: "/images/event2.png",
+    image: "/images/event2.webp",
     title: { fr: "Dégustation d’une variété de pains", en: "Bread tasting" },
     place: { fr: "Tunis", en: "Tunis" },
     text: {
@@ -297,7 +366,7 @@ export const events = [
   {
     id: "ecole",
     date: "2023-05-04",
-    image: "/images/event1.png",
+    image: "/images/event1.webp",
     title: { fr: "Animation dans une école", en: "School workshop" },
     place: { fr: "Tunis", en: "Tunis" },
     text: {

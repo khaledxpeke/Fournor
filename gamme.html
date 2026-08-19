@@ -4,16 +4,20 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/src/styles/main.css" />
+    <meta name="theme-color" content="#f4efe6" />
+    <meta name="description" content="Dix prémix Fourn’Or — Banette, Tradition, Complet, Campagne, graines et plus — dosés à 2 %, 30 % ou 50 %." />
     <title>La gamme — Fourn’Or</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" /></noscript>
   </head>
   <body data-page="gamme">
     <main>
       <section class="page-hero wrap">
         <p class="kicker" data-i18n="page.kicker"></p>
-        <h1 data-i18n="gamme.hero"></h1>
+        <h1 data-i18n="gamme.hero">La gamme</h1>
         <p class="lead" data-i18n="gamme.lead"></p>
       </section>
       <section class="section" style="padding-top:0">
@@ -21,7 +25,7 @@
           <div class="gamme-toolbar">
             <div class="gamme-search">
               <label class="visually-hidden" for="gamme-search" data-i18n="gamme.searchLabel"></label>
-              <svg class="gamme-search-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <svg class="gamme-search-icon" width="17" height="17" viewBox="0 0 24 24" aria-hidden="true">
                 <circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
                 <path d="M16.2 16.2 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
               </svg>
@@ -41,7 +45,14 @@
             </div>
           </div>
           <p class="gamme-empty" id="gamme-empty" hidden></p>
-          <div class="card-grid" id="gamme-grid"></div>
+          <div class="card-grid" id="gamme-grid">
+            <article class="p-card is-skeleton" aria-hidden="true"><div class="p-card-img"></div><div class="p-card-body"><span class="sk-line sk-sm"></span><span class="sk-line sk-lg"></span><span class="sk-line"></span></div></article>
+            <article class="p-card is-skeleton" aria-hidden="true"><div class="p-card-img"></div><div class="p-card-body"><span class="sk-line sk-sm"></span><span class="sk-line sk-lg"></span><span class="sk-line"></span></div></article>
+            <article class="p-card is-skeleton" aria-hidden="true"><div class="p-card-img"></div><div class="p-card-body"><span class="sk-line sk-sm"></span><span class="sk-line sk-lg"></span><span class="sk-line"></span></div></article>
+            <article class="p-card is-skeleton" aria-hidden="true"><div class="p-card-img"></div><div class="p-card-body"><span class="sk-line sk-sm"></span><span class="sk-line sk-lg"></span><span class="sk-line"></span></div></article>
+            <article class="p-card is-skeleton" aria-hidden="true"><div class="p-card-img"></div><div class="p-card-body"><span class="sk-line sk-sm"></span><span class="sk-line sk-lg"></span><span class="sk-line"></span></div></article>
+            <article class="p-card is-skeleton" aria-hidden="true"><div class="p-card-img"></div><div class="p-card-body"><span class="sk-line sk-sm"></span><span class="sk-line sk-lg"></span><span class="sk-line"></span></div></article>
+          </div>
         </div>
       </section>
     </main>
