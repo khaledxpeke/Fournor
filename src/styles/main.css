@@ -717,7 +717,7 @@ p {
 }
 
 .mix-band {
-  margin: 0 1rem var(--section-y);
+  margin: 0 1rem;
   padding: clamp(1.8rem, 4vw, 3.1rem) 0;
   background: var(--gold);
   color: var(--ink);
