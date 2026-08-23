@@ -7,7 +7,7 @@ function header(active) {
   return `
 <header class="site-header">
   <a class="brand" href="/index.html" aria-label="SATIA">
-    <img class="logo-satia" src="/logo-satia.png" alt="SATIA" width="220" height="220" />
+    <img class="logo-satia" src="/logo-satia.webp" alt="SATIA" width="220" height="126" draggable="false" />
   </a>
   <nav class="nav" id="site-nav" aria-label="Primary">
     ${item("home", "/index.html", "nav.home")}
