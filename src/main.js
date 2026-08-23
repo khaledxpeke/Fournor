@@ -19,9 +19,10 @@ function ringSvg(pct) {
   </svg>`;
 }
 
-function productCard(p) {
+function productCard(p, { decoy = false } = {}) {
   const L = lang();
-  return `<a class="p-card" href="/produit.html?id=${p.id}">
+  const extra = decoy ? ' aria-hidden="true" tabindex="-1"' : "";
+  return `<a class="p-card" href="/produit.html?id=${p.id}"${extra}>
     <div class="p-card-img">
       <img src="${p.image}" alt="${p.name[L]}" width="800" height="600" loading="lazy" decoding="async" />
       <span class="photo-badge">${p.dosage}%</span>
@@ -55,7 +56,11 @@ function eventCard(e) {
 function renderHome() {
   const L = lang();
   const rail = document.getElementById("atelier-rail");
-  if (rail) rail.innerHTML = products.map(productCard).join("");
+  if (rail) {
+    rail.innerHTML =
+      products.map((p) => productCard(p)).join("") +
+      products.map((p) => productCard(p, { decoy: true })).join("");
+  }
   const news = document.getElementById("home-news");
   if (news) news.innerHTML = events.slice(0, 3).map(eventCard).join("");
   document.querySelectorAll("[data-dosage-label]").forEach((el) => {
@@ -406,18 +411,36 @@ function setupAtelierNav() {
   const rail = document.getElementById("atelier-rail");
   const prev = document.getElementById("atelier-prev");
   const next = document.getElementById("atelier-next");
+  const stage = rail?.closest(".atelier-stage");
   if (!rail || !prev || !next) return;
 
   const L = lang();
   prev.setAttribute("aria-label", t("atelier.prev", L));
   next.setAttribute("aria-label", t("atelier.next", L));
 
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const looping = !reduceMotion && rail.querySelectorAll(".p-card").length > products.length;
+
   const step = () => {
     const card = rail.querySelector(".p-card");
     return (card?.getBoundingClientRect().width || 240) + 20;
   };
 
+  const wrapScroll = () => {
+    if (!looping) return;
+    const loop = rail.scrollWidth / 2;
+    if (loop <= 0) return;
+    if (rail.scrollLeft >= loop) rail.scrollLeft -= loop;
+    else if (rail.scrollLeft < 0) rail.scrollLeft += loop;
+  };
+
   const update = () => {
+    wrapScroll();
+    if (looping) {
+      prev.disabled = false;
+      next.disabled = false;
+      return;
+    }
     const max = rail.scrollWidth - rail.clientWidth - 4;
     prev.disabled = rail.scrollLeft <= 4;
     next.disabled = rail.scrollLeft >= max;
@@ -425,24 +448,78 @@ function setupAtelierNav() {
 
   if (!rail.dataset.navReady) {
     rail.dataset.navReady = "1";
-    prev.addEventListener("click", () => {
-      rail.scrollBy({ left: -step() * 2, behavior: "smooth" });
-    });
-    next.addEventListener("click", () => {
-      rail.scrollBy({ left: step() * 2, behavior: "smooth" });
-    });
+
+    const go = (dir) => {
+      rail.classList.add("is-manual");
+      rail.scrollBy({ left: dir * step() * 2, behavior: "smooth" });
+      window.setTimeout(() => rail.classList.remove("is-manual"), 700);
+    };
+
+    prev.addEventListener("click", () => go(-1));
+    next.addEventListener("click", () => go(1));
     rail.addEventListener("scroll", update, { passive: true });
     window.addEventListener("resize", update);
     rail.addEventListener("keydown", (e) => {
       if (e.key === "ArrowRight") {
         e.preventDefault();
-        rail.scrollBy({ left: step() * 2, behavior: "smooth" });
+        go(1);
       }
       if (e.key === "ArrowLeft") {
         e.preventDefault();
-        rail.scrollBy({ left: -step() * 2, behavior: "smooth" });
+        go(-1);
       }
     });
+
+    if (!reduceMotion) {
+      rail.classList.add("is-autoplay");
+      let paused = false;
+      let inView = true;
+      let resumeAt = 0;
+      let last = 0;
+      const speed = 42;
+
+      const hold = (ms = 4500) => {
+        paused = true;
+        resumeAt = performance.now() + ms;
+      };
+
+      const tick = (now) => {
+        if (!last) last = now;
+        const dt = Math.min(now - last, 48);
+        last = now;
+        if (paused && now >= resumeAt && !stage?.matches(":hover") && !rail.matches(":focus-within")) {
+          paused = false;
+        }
+        if (!paused && inView && !document.hidden && !rail.classList.contains("is-manual")) {
+          rail.scrollLeft += (speed * dt) / 1000;
+          wrapScroll();
+        }
+        requestAnimationFrame(tick);
+      };
+
+      stage?.addEventListener("mouseenter", () => hold(999999));
+      stage?.addEventListener("mouseleave", () => hold(400));
+      rail.addEventListener("pointerdown", () => hold(5000));
+      rail.addEventListener("wheel", () => hold(5000), { passive: true });
+      prev.addEventListener("click", () => hold(5000));
+      next.addEventListener("click", () => hold(5000));
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) hold(999999);
+        else hold(600);
+      });
+
+      if ("IntersectionObserver" in window) {
+        const io = new IntersectionObserver(
+          ([entry]) => {
+            inView = entry.isIntersecting;
+          },
+          { threshold: 0.12 }
+        );
+        io.observe(rail);
+      }
+
+      requestAnimationFrame(tick);
+    }
   }
 
   requestAnimationFrame(update);
@@ -503,6 +580,7 @@ function setupMotion() {
     );
   }
   document.querySelectorAll(".reveal, .p-card, .e-card, .value, .partner-list li").forEach((el) => {
+    if (el.closest("#atelier-rail")) return;
     el.classList.add("reveal");
     if (reduce) {
       el.classList.add("is-in");

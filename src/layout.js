@@ -7,13 +7,13 @@ function header(active) {
   return `
 <header class="site-header">
   <a class="brand" href="/index.html" aria-label="SATIA">
-    <img class="logo-satia" src="/logo-satia.jpg" alt="SATIA" width="220" height="168" />
+    <img class="logo-satia" src="/logo-satia.png" alt="SATIA" width="220" height="220" />
   </a>
   <nav class="nav" id="site-nav" aria-label="Primary">
     ${item("home", "/index.html", "nav.home")}
     ${item("solution", "/solution.html", "nav.solution")}
     <div class="nav-item${mixActive ? " is-active" : ""}">
-      <a class="nav-link${mixActive ? " is-active" : ""}" href="/gamme.html" data-i18n="nav.melanges"></a>
+      <a class="nav-link${mixActive ? " is-active" : ""}" href="/gamme.html" data-i18n="nav.melanges" aria-haspopup="true" aria-expanded="false"></a>
       <div class="nav-sub">
         <a href="/gamme.html?mix=premix-poudres" data-i18n="nav.premix"></a>
         <a href="/gamme.html?mix=mix-poudres" data-i18n="nav.mixpoudres"></a>
@@ -21,7 +21,6 @@ function header(active) {
       </div>
     </div>
     ${item("ingredients", "/ingredients.html", "nav.ingredients")}
-    ${item("actualites", "/actualites.html", "nav.news")}
     ${item("contact", "/contact.html", "nav.contact")}
   </nav>
   <div class="header-tools">
@@ -146,17 +145,36 @@ export function mountLayout(active) {
 
   const toggle = document.querySelector(".nav-toggle");
   const nav = document.querySelector(".nav");
+  const mixItem = nav?.querySelector(".nav-item");
+  const mixLink = mixItem?.querySelector(":scope > .nav-link");
+  const isMobileNav = () => window.matchMedia("(max-width: 1180px)").matches;
+
+  const closeMix = () => {
+    mixItem?.classList.remove("is-open");
+    mixLink?.setAttribute("aria-expanded", "false");
+  };
+
   const closeNav = () => {
     nav?.classList.remove("is-open");
     toggle?.setAttribute("aria-expanded", "false");
+    closeMix();
   };
 
   toggle?.addEventListener("click", () => {
     const open = nav.classList.toggle("is-open");
     toggle.setAttribute("aria-expanded", String(open));
+    if (!open) closeMix();
+  });
+
+  mixLink?.addEventListener("click", (event) => {
+    if (!isMobileNav()) return;
+    event.preventDefault();
+    const open = mixItem.classList.toggle("is-open");
+    mixLink.setAttribute("aria-expanded", String(open));
   });
 
   nav?.querySelectorAll("a").forEach((link) => {
+    if (link === mixLink) return;
     link.addEventListener("click", closeNav);
   });
 
