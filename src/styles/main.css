@@ -719,7 +719,7 @@ p {
 .mix-band {
   margin: 0 1rem var(--section-y);
   padding: clamp(1.8rem, 4vw, 3.1rem) 0;
-  background: #e39b12;
+  background: var(--gold);
   color: var(--ink);
   border-radius: var(--radius-lg);
 }
@@ -734,6 +734,22 @@ p {
   gap: clamp(1.3rem, 4vw, 3rem);
   align-items: center;
   margin-bottom: 1.7rem;
+}
+
+.sol-intro {
+  display: grid;
+  grid-template-columns: minmax(15rem, 0.9fr) minmax(0, 1.05fr);
+  gap: clamp(1.3rem, 4vw, 3rem);
+  align-items: center;
+}
+
+.sol-intro .mix-copy {
+  max-width: none;
+}
+
+.sol-intro .stat-row {
+  margin-top: 1.5rem;
+  margin-bottom: 0;
 }
 
 .mix-copy {
@@ -1965,7 +1981,8 @@ p {
     grid-template-columns: 1fr;
   }
 
-  .mix-intro {
+  .mix-intro,
+  .sol-intro {
     grid-template-columns: 1fr;
   }
 
