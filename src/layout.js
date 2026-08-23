@@ -1,38 +1,26 @@
 import { applyI18n, getLang, setLang, t } from "./i18n.js";
 
-const LOGO = `
-<svg class="logo-mark" width="44" height="44" viewBox="0 0 200 200" aria-hidden="true">
-  <circle cx="100" cy="100" r="100" fill="#88857E"/>
-  <g fill="#F0C667">
-    <ellipse cx="100" cy="46" rx="9" ry="15"/>
-    <ellipse cx="84" cy="64" rx="9" ry="15" transform="rotate(-30 84 64)"/>
-    <ellipse cx="116" cy="64" rx="9" ry="15" transform="rotate(30 116 64)"/>
-    <ellipse cx="82" cy="86" rx="9" ry="15" transform="rotate(-34 82 86)"/>
-    <ellipse cx="118" cy="86" rx="9" ry="15" transform="rotate(34 118 86)"/>
-    <ellipse cx="84" cy="108" rx="9" ry="15" transform="rotate(-38 84 108)"/>
-    <ellipse cx="116" cy="108" rx="9" ry="15" transform="rotate(38 116 108)"/>
-  </g>
-  <rect x="97.5" y="50" width="5" height="64" rx="2" fill="#F7F4ED"/>
-  <text x="100" y="152" text-anchor="middle" fill="#F7F4ED" font-family="Georgia, serif" font-size="22" font-weight="700" letter-spacing="2.4">FOURN'OR</text>
-</svg>`;
-
 function header(active) {
   const item = (id, href, key) =>
     `<a class="nav-link${active === id ? " is-active" : ""}" href="${href}" data-i18n="${key}"></a>`;
+  const mixActive = active === "gamme" || active === "produit";
   return `
 <header class="site-header">
-  <a class="brand" href="/index.html" aria-label="Fourn’Or">
-    ${LOGO}
-    <span class="brand-text">
-      <span class="brand-name">Fourn’Or</span>
-      <span class="brand-legal" data-i18n="brand.legal"></span>
-    </span>
+  <a class="brand" href="/index.html" aria-label="SATIA">
+    <img class="logo-satia" src="/logo-satia.jpg" alt="SATIA" width="220" height="168" />
   </a>
   <nav class="nav" id="site-nav" aria-label="Primary">
     ${item("home", "/index.html", "nav.home")}
-    ${item("maison", "/maison.html", "nav.maison")}
-    ${item("gamme", "/gamme.html", "nav.gamme")}
-    ${item("expertise", "/expertise.html", "nav.expertise")}
+    ${item("solution", "/solution.html", "nav.solution")}
+    <div class="nav-item${mixActive ? " is-active" : ""}">
+      <a class="nav-link${mixActive ? " is-active" : ""}" href="/gamme.html" data-i18n="nav.melanges"></a>
+      <div class="nav-sub">
+        <a href="/gamme.html?mix=premix-poudres" data-i18n="nav.premix"></a>
+        <a href="/gamme.html?mix=mix-poudres" data-i18n="nav.mixpoudres"></a>
+        <a href="/gamme.html?mix=mix-liquides" data-i18n="nav.mixliquides"></a>
+      </div>
+    </div>
+    ${item("ingredients", "/ingredients.html", "nav.ingredients")}
     ${item("actualites", "/actualites.html", "nav.news")}
     ${item("contact", "/contact.html", "nav.contact")}
   </nav>
@@ -53,15 +41,15 @@ function footer() {
 <footer class="site-footer">
   <div class="footer-grid">
     <div>
-      <p class="footer-brand">Fourn’Or</p>
+      <p class="footer-brand">SATIA</p>
       <p data-i18n="footer.about"></p>
       <p class="muted" data-i18n="brand.tag"></p>
     </div>
     <div>
       <p class="footer-label" data-i18n="footer.products"></p>
-      <a href="/gamme.html">Banette · Tradition · Complet</a>
-      <a href="/gamme.html">Campagne · Céréales noir · Scandinave</a>
-      <a href="/gamme.html">Maxi graines · Multigrain · Maïs · Chia quinoa</a>
+      <a href="/gamme.html?mix=premix-poudres" data-i18n="nav.premix"></a>
+      <a href="/gamme.html?mix=mix-poudres" data-i18n="nav.mixpoudres"></a>
+      <a href="/gamme.html?mix=mix-liquides" data-i18n="nav.mixliquides"></a>
     </div>
     <div>
       <p class="footer-label" data-i18n="footer.contact"></p>
@@ -85,9 +73,11 @@ function pagePath(page) {
   const paths = {
     home: "/index.html",
     maison: "/maison.html",
+    solution: "/solution.html",
     gamme: "/gamme.html",
     produit: "/produit.html",
     expertise: "/expertise.html",
+    ingredients: "/ingredients.html",
     actualites: "/actualites.html",
     contact: "/contact.html",
   };
@@ -113,7 +103,7 @@ function mountHead() {
   }
   document.head.insertAdjacentHTML(
     "beforeend",
-    `<meta property="og:site_name" content="Fourn’Or">
+    `<meta property="og:site_name" content="SATIA">
 <meta property="og:type" content="website">
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(desc)}">
@@ -130,7 +120,7 @@ function mountHead() {
   ld.textContent = JSON.stringify({
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "Fourn’Or",
+    name: "SATIA",
     legalName: "Société Tayara Distribution",
     url: origin,
     telephone: "+21671100797",

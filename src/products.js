@@ -4,6 +4,7 @@ export const products = [
     sku: "PREMIX BANETTE FOURN'OR 2%",
     dosage: 2,
     family: "tradition",
+    mix: "premix-poudres",
     image: "/images/banette.webp",
     name: { fr: "Banette", en: "Banette" },
     promise: {
@@ -32,6 +33,7 @@ export const products = [
     sku: "PREMIX TRADITION FOURN'OR 2%",
     dosage: 2,
     family: "tradition",
+    mix: "premix-poudres",
     image: "/images/tradition.webp",
     name: { fr: "Tradition", en: "Tradition" },
     promise: {
@@ -59,6 +61,7 @@ export const products = [
     sku: "PREMIX COMPLET FOURN'OR 30%",
     dosage: 30,
     family: "caractere",
+    mix: "premix-poudres",
     image: "/images/complet.webp",
     name: { fr: "Complet", en: "Wholemeal" },
     promise: {
@@ -87,6 +90,7 @@ export const products = [
     sku: "PREMIX CAMPAGNE FOURN'OR 30%",
     dosage: 30,
     family: "caractere",
+    mix: "premix-poudres",
     image: "/images/campagne2.webp",
     name: { fr: "Campagne", en: "Country loaf" },
     promise: {
@@ -115,6 +119,7 @@ export const products = [
     sku: "PREMIX CEREALES NOIR FOURN'OR 30%",
     dosage: 30,
     family: "caractere",
+    mix: "premix-poudres",
     image: "/images/noir.webp",
     name: { fr: "Céréales noir", en: "Dark cereals" },
     promise: {
@@ -143,6 +148,7 @@ export const products = [
     sku: "PREMIX SCANDINAVE FOURN'OR 30%",
     dosage: 30,
     family: "caractere",
+    mix: "premix-poudres",
     image: "/images/scandinave.webp",
     name: { fr: "Scandinave", en: "Scandinavian" },
     promise: {
@@ -171,6 +177,7 @@ export const products = [
     sku: "PREMIX CHIA QUINOA FOURN'OR 30%",
     dosage: 30,
     family: "caractere",
+    mix: "premix-poudres",
     image: "/images/quinoa.webp",
     name: { fr: "Chia quinoa", en: "Chia quinoa" },
     promise: {
@@ -199,6 +206,7 @@ export const products = [
     sku: "PREMIX MAXI GRAINES FOURN'OR 50%",
     dosage: 50,
     family: "graines",
+    mix: "premix-poudres",
     image: "/images/viking.webp",
     name: { fr: "Maxi graines", en: "Maxi seeds" },
     promise: {
@@ -227,6 +235,7 @@ export const products = [
     sku: "PREMIX MULTIGRAIN FOURN'OR 50%",
     dosage: 50,
     family: "graines",
+    mix: "premix-poudres",
     image: "/images/multigrain.webp",
     name: { fr: "Multigrain", en: "Multigrain" },
     promise: {
@@ -255,6 +264,7 @@ export const products = [
     sku: "PREMIX MAIS FOURN'OR 50%",
     dosage: 50,
     family: "graines",
+    mix: "premix-poudres",
     image: "/images/mais.webp",
     name: { fr: "Maïs", en: "Corn" },
     promise: {

@@ -1,14 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Fourn'Or">
-  <circle cx="100" cy="100" r="100" fill="#88857E"/>
-  <g fill="#F0C667">
-    <ellipse cx="100" cy="46" rx="9" ry="15"/>
-    <ellipse cx="84" cy="64" rx="9" ry="15" transform="rotate(-30 84 64)"/>
-    <ellipse cx="116" cy="64" rx="9" ry="15" transform="rotate(30 116 64)"/>
-    <ellipse cx="82" cy="86" rx="9" ry="15" transform="rotate(-34 82 86)"/>
-    <ellipse cx="118" cy="86" rx="9" ry="15" transform="rotate(34 118 86)"/>
-    <ellipse cx="84" cy="108" rx="9" ry="15" transform="rotate(-38 84 108)"/>
-    <ellipse cx="116" cy="108" rx="9" ry="15" transform="rotate(38 116 108)"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 220" role="img" aria-label="SATIA">
+  <g fill="#e39b12">
+    <ellipse cx="180" cy="28" rx="11" ry="22"/>
+    <ellipse cx="158" cy="40" rx="11" ry="22" transform="rotate(-30 158 40)"/>
+    <ellipse cx="202" cy="40" rx="11" ry="22" transform="rotate(30 202 40)"/>
+    <ellipse cx="146" cy="58" rx="10" ry="20" transform="rotate(-55 146 58)"/>
+    <ellipse cx="214" cy="58" rx="10" ry="20" transform="rotate(55 214 58)"/>
   </g>
-  <rect x="97.5" y="50" width="5" height="64" rx="2" fill="#F7F4ED"/>
-  <text x="100" y="152" text-anchor="middle" fill="#F7F4ED" font-family="Georgia, 'Times New Roman', serif" font-size="22" font-weight="700" letter-spacing="2.4">FOURN'OR</text>
+  <path d="M70 88c40-22 180-22 220 0" fill="none" stroke="#2d2a26" stroke-width="3"/>
+  <text x="180" y="148" text-anchor="middle" fill="#2d2a26" font-family="Georgia, 'Times New Roman', serif" font-size="64" font-weight="700" letter-spacing="6">SATIA</text>
+  <text x="180" y="178" text-anchor="middle" fill="#e39b12" font-family="Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="2.4">SOLUTION · MÉLANGE · INGRÉDIENT</text>
 </svg>

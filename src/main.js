@@ -82,6 +82,7 @@ function matchesGammeQuery(p, query) {
       p.id,
       p.sku,
       p.family,
+      p.mix,
       p.dosage,
       `${p.dosage}%`,
       p.name.fr,
@@ -104,8 +105,8 @@ function renderGamme() {
   const current = document.querySelector(".filters [aria-pressed='true']")?.dataset.filter || "all";
   const query = fold(document.getElementById("gamme-search")?.value.trim());
   const list = products.filter((p) => {
-    const byDose = current === "all" || String(p.dosage) === current;
-    return byDose && matchesGammeQuery(p, query);
+    const byMix = current === "all" || p.mix === current;
+    return byMix && matchesGammeQuery(p, query);
   });
   grid.innerHTML = list.map(productCard).join("");
   const empty = document.getElementById("gamme-empty");
@@ -117,10 +118,22 @@ function renderGamme() {
 }
 
 function setupFilters() {
+  const start = new URLSearchParams(location.search).get("mix");
+  if (start) {
+    const match = document.querySelector(`.filters [data-filter="${start}"]`);
+    if (match) {
+      document.querySelectorAll(".filters [data-filter]").forEach((b) => b.setAttribute("aria-pressed", "false"));
+      match.setAttribute("aria-pressed", "true");
+    }
+  }
   document.querySelectorAll(".filters [data-filter]").forEach((btn) => {
     btn.addEventListener("click", () => {
       document.querySelectorAll(".filters [data-filter]").forEach((b) => b.setAttribute("aria-pressed", "false"));
       btn.setAttribute("aria-pressed", "true");
+      const url = new URL(location.href);
+      if (btn.dataset.filter === "all") url.searchParams.delete("mix");
+      else url.searchParams.set("mix", btn.dataset.filter);
+      history.replaceState({}, "", url);
       renderGamme();
     });
   });
