@@ -103,16 +103,53 @@ function matchesGammeQuery(p, query) {
   return query.split(/\s+/).every((word) => hay.includes(word));
 }
 
+function currentMix() {
+  return new URLSearchParams(location.search).get("mix");
+}
+
+function isGammeHub() {
+  const mix = currentMix();
+  return !mix || mix === "all";
+}
+
+function mixTitleKey(mix) {
+  return {
+    "premix-poudres": "gamme.filterPremix",
+    "mix-poudres": "gamme.filterMix",
+    "mix-liquides": "gamme.filterLiquid",
+  }[mix];
+}
+
+function syncGammeView() {
+  const hub = document.getElementById("mix-hub");
+  const catalog = document.getElementById("gamme-catalog");
+  const title = document.getElementById("gamme-title");
+  const lead = document.getElementById("gamme-lead");
+  const back = document.getElementById("gamme-back");
+  if (!hub || !catalog) return;
+  const hubMode = isGammeHub();
+  const L = lang();
+  hub.hidden = !hubMode;
+  catalog.hidden = hubMode;
+  if (lead) lead.hidden = !hubMode;
+  if (back) back.hidden = hubMode;
+  if (title) {
+    const key = mixTitleKey(currentMix());
+    title.textContent = key ? t(key, L) : t("gamme.hero", L);
+    title.removeAttribute("data-i18n");
+  }
+  document.title = `${title?.textContent || t("gamme.hero", L)} — SATIA`;
+}
+
 function renderGamme() {
   const grid = document.getElementById("gamme-grid");
   if (!grid) return;
+  syncGammeView();
+  if (isGammeHub()) return;
   const L = lang();
-  const current = document.querySelector(".filters [aria-pressed='true']")?.dataset.filter || "all";
+  const mix = currentMix();
   const query = fold(document.getElementById("gamme-search")?.value.trim());
-  const list = products.filter((p) => {
-    const byMix = current === "all" || p.mix === current;
-    return byMix && matchesGammeQuery(p, query);
-  });
+  const list = products.filter((p) => p.mix === mix && matchesGammeQuery(p, query));
   grid.innerHTML = list.map(productCard).join("");
   const empty = document.getElementById("gamme-empty");
   if (empty) {
@@ -123,25 +160,7 @@ function renderGamme() {
 }
 
 function setupFilters() {
-  const start = new URLSearchParams(location.search).get("mix");
-  if (start) {
-    const match = document.querySelector(`.filters [data-filter="${start}"]`);
-    if (match) {
-      document.querySelectorAll(".filters [data-filter]").forEach((b) => b.setAttribute("aria-pressed", "false"));
-      match.setAttribute("aria-pressed", "true");
-    }
-  }
-  document.querySelectorAll(".filters [data-filter]").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      document.querySelectorAll(".filters [data-filter]").forEach((b) => b.setAttribute("aria-pressed", "false"));
-      btn.setAttribute("aria-pressed", "true");
-      const url = new URL(location.href);
-      if (btn.dataset.filter === "all") url.searchParams.delete("mix");
-      else url.searchParams.set("mix", btn.dataset.filter);
-      history.replaceState({}, "", url);
-      renderGamme();
-    });
-  });
+  syncGammeView();
 }
 
 function setupGammeSearch() {

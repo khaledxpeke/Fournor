@@ -1089,6 +1089,89 @@ p {
   line-height: 1.02;
 }
 
+body[data-page="gamme"] .wrap {
+  width: min(64rem, calc(100% - 2.5rem));
+}
+
+body[data-page="gamme"] .page-hero {
+  padding: 0.9rem 0 1.6rem;
+}
+
+body[data-page="gamme"] .page-hero h1 {
+  font-size: clamp(2.4rem, 5vw, 3.55rem);
+  padding-inline: 0.08em;
+  margin-left: -0.08em;
+}
+
+body[data-page="gamme"] .page-hero .lead {
+  max-width: 38rem;
+  font-size: 1.05rem;
+}
+
+#gamme-back[hidden],
+#gamme-lead[hidden] {
+  display: none;
+}
+
+.mix-hub[hidden],
+.gamme-catalog[hidden] {
+  display: none;
+}
+
+.mix-hub {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.35rem 1.5rem;
+  width: 100%;
+}
+
+.mix-tile {
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  gap: 0.7rem;
+  min-width: 0;
+  text-align: center;
+}
+
+.mix-tile-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  margin: 0 auto;
+  background: var(--gold);
+  color: var(--ink);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1;
+  padding: 0.48rem 1.05rem;
+  border-radius: var(--pill);
+}
+
+.mix-tile-photo {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 1.7rem;
+  background: #1a1816;
+}
+
+.mix-tile-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: center 50%;
+  transition: transform 0.8s var(--ease);
+}
+
+.mix-tile:hover .mix-tile-photo img {
+  transform: scale(1.04);
+}
+
 .page-open,
 .maison-open {
   display: grid;
@@ -1232,7 +1315,7 @@ p {
 
 .gamme-toolbar {
   display: grid;
-  grid-template-columns: minmax(16rem, 22rem) minmax(0, 1fr);
+  grid-template-columns: minmax(16rem, 28rem);
   gap: 0.85rem 1.2rem;
   align-items: center;
   margin: 0 0 1.6rem;
@@ -1981,6 +2064,13 @@ p {
     grid-template-columns: 1fr;
   }
 
+  .mix-hub {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    width: min(100%, 20.5rem);
+    margin-inline: auto;
+  }
+
   .mix-intro,
   .sol-intro {
     grid-template-columns: 1fr;
@@ -2240,6 +2330,10 @@ p {
   }
 
   .p-card:hover {
+    transform: none;
+  }
+
+  .mix-tile:hover .mix-tile-photo img {
     transform: none;
   }
 }

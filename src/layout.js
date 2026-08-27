@@ -21,6 +21,7 @@ function header(active) {
       </div>
     </div>
     ${item("ingredients", "/ingredients.html", "nav.ingredients")}
+    ${item("partenaires", "/partenaires.html", "nav.partners")}
     ${item("contact", "/contact.html", "nav.contact")}
   </nav>
   <div class="header-tools">
@@ -77,6 +78,7 @@ function pagePath(page) {
     produit: "/produit.html",
     expertise: "/expertise.html",
     ingredients: "/ingredients.html",
+    partenaires: "/partenaires.html",
     actualites: "/actualites.html",
     contact: "/contact.html",
   };

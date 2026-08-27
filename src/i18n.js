@@ -7,6 +7,7 @@ const dict = {
     "meta.produit": "Fiche produit — SATIA",
     "meta.expertise": "Expertise — SATIA",
     "meta.ingredients": "Ingrédients — SATIA",
+    "meta.partenaires": "Partenaires — SATIA",
     "meta.actualites": "Nos franchises — SATIA",
     "meta.contact": "Contact — SATIA",
     "meta.desc.home":
@@ -15,6 +16,8 @@ const dict = {
       "SATIA, partenaire industriel du concept au produit fini : formulation, lignes de production et innovation.",
     "meta.desc.ingredients":
       "SATIA fournit matières premières, mélanges spécifiques et solutions d’emballage, avec qualité et traçabilité.",
+    "meta.desc.partenaires":
+      "Les maisons partenaires SATIA en Tunisie — boulangeries et fournil qui travaillent déjà avec nos mélanges.",
     "meta.desc.maison":
       "La Maison Fourn’Or : Société Tayara Distribution, farines spéciales et améliorant de panification depuis 2020 à Tunis.",
     "meta.desc.gamme":
@@ -34,6 +37,7 @@ const dict = {
     "nav.mixpoudres": "Mix poudres",
     "nav.mixliquides": "Mix liquides",
     "nav.ingredients": "Ingrédients",
+    "nav.partners": "Partenaires",
     "nav.expertise": "Expertise",
     "nav.news": "Nos franchises",
     "nav.contact": "Contact",
@@ -160,6 +164,10 @@ const dict = {
       "SATIA fournit l’ensemble des ingrédients nécessaires à vos productions : matières premières brutes, mélanges spécifiques poudre et liquides formulés selon vos besoins, ainsi que les solutions d’emballage adaptées à vos produits.",
     "ing.text":
       "Que vous recherchiez un ingrédient standard ou une formulation sur mesure, notre réseau d’approvisionnement et notre expertise technique vous garantissent qualité, traçabilité et disponibilité.",
+    "part.kicker": "Réseau",
+    "part.hero": "Partenaires",
+    "part.lead":
+      "Des fournil et des maisons qui font déjà lever SATIA en Tunisie. Un réseau de confiance, de Tunis à Djerba.",
     "prod.kicker": "Fiche technique",
     "prod.dosage": "Dosage",
     "prod.adds": "Le boulanger ajoute",
@@ -214,6 +222,7 @@ const dict = {
     "meta.produit": "Product sheet — SATIA",
     "meta.expertise": "Expertise — SATIA",
     "meta.ingredients": "Ingredients — SATIA",
+    "meta.partenaires": "Partners — SATIA",
     "meta.actualites": "Our franchises — SATIA",
     "meta.contact": "Contact — SATIA",
     "meta.desc.home":
@@ -224,6 +233,8 @@ const dict = {
       "Ten Fourn’Or premixes — Banette, Tradition, Complet, Campagne, seeds and more — dosed at 2%, 30% or 50%.",
     "meta.desc.produit": "Technical sheet for a Fourn’Or premix: dosage, use and sensory profile.",
     "meta.desc.expertise": "Premix, the test bakery, and Fourn’Or baker-trainers in Tunis.",
+    "meta.desc.partenaires":
+      "SATIA partner bakeries in Tunisia — houses already working with our blends.",
     "meta.desc.actualites": "The SATIA franchise network — openings, partners and network news.",
     "meta.desc.contact": "Contact Fourn’Or in Tunis: 01 rue du Nil, Sidi Fathallah. Tel. +216 71 100 797.",
     "skip": "Skip to content",
@@ -236,6 +247,7 @@ const dict = {
     "nav.mixpoudres": "Powder mixes",
     "nav.mixliquides": "Liquid mixes",
     "nav.ingredients": "Ingredients",
+    "nav.partners": "Partners",
     "nav.expertise": "Expertise",
     "nav.news": "Our franchises",
     "nav.contact": "Contact",
@@ -362,6 +374,10 @@ const dict = {
       "SATIA supplies the ingredients your production needs: raw materials, powder and liquid mixes formulated to your brief, and packaging suited to your products.",
     "ing.text":
       "Whether you need a standard ingredient or a custom formulation, our supply network and technical expertise guarantee quality, traceability and availability.",
+    "part.kicker": "Network",
+    "part.hero": "Partners",
+    "part.lead":
+      "Bakeries and houses already baking SATIA in Tunisia. A trusted network, from Tunis to Djerba.",
     "prod.kicker": "Technical sheet",
     "prod.dosage": "Dosage",
     "prod.adds": "The baker adds",
