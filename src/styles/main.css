@@ -1850,6 +1850,23 @@ body[data-page="gamme"] .page-hero .lead {
   margin-bottom: 0.35rem;
 }
 
+.contact-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4em;
+}
+
+.contact-line [dir="ltr"] {
+  unicode-bidi: isolate;
+  white-space: nowrap;
+}
+
+.site-footer .contact-line {
+  display: flex;
+  margin-bottom: 0.35rem;
+}
+
 .social {
   display: flex;
   gap: 1rem;
@@ -2530,11 +2547,10 @@ html[dir="rtl"] .e-card:hover {
   transform: translateX(-8px);
 }
 
-html[dir="rtl"] .form input[type="email"],
-html[dir="rtl"] a[href^="tel"] {
+html[dir="rtl"] .form input[type="email"] {
   direction: ltr;
   unicode-bidi: isolate;
-  text-align: start;
+  text-align: left;
 }
 
 html[dir="rtl"] .hero-actions .btn,

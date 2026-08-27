@@ -55,8 +55,16 @@ function footer() {
     <div>
       <p class="footer-label" data-i18n="footer.contact"></p>
       <p data-i18n="footer.address"></p>
-      <p><a href="tel:+21671100797" data-i18n="footer.phone"></a></p>
-      <p data-i18n="footer.fax"></p>
+      <p>
+        <a class="contact-line" href="tel:+21671100797">
+          <span data-i18n="footer.phone"></span>
+          <span dir="ltr">+216 71 100 797</span>
+        </a>
+      </p>
+      <p class="contact-line">
+        <span data-i18n="footer.fax"></span>
+        <span dir="ltr">+216 71 100 798</span>
+      </p>
       <p class="social">
         <a href="https://www.facebook.com/profile.php?id=100088082392675" target="_blank" rel="noopener noreferrer">Facebook</a>
         <a href="https://www.instagram.com/stdtayara.tn/" target="_blank" rel="noopener noreferrer">Instagram</a>
