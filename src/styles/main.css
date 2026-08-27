@@ -712,7 +712,7 @@ p {
 .marquee-track {
   display: inline-flex;
   gap: 1.25rem;
-  animation: marquee 28s linear infinite;
+  animation: marquee 40s linear infinite;
   font-family: var(--serif);
   font-size: 1.35rem;
   color: var(--ink);
@@ -804,6 +804,116 @@ p {
 
 .mix-band .atelier {
   scrollbar-color: var(--ink) rgb(28 26 23 / 0.12);
+}
+
+.ad-band {
+  margin: 0.85rem 1rem;
+}
+
+.ad-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.ad-frame {
+  position: relative;
+  display: grid;
+  align-items: center;
+  min-height: clamp(16.5rem, 36vw, 26rem);
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: #1c1a17;
+}
+
+.ad-band-split .ad-frame {
+  min-height: clamp(14rem, 28vw, 19.5rem);
+  align-items: end;
+}
+
+.ad-frame img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: center 40%;
+}
+
+.ad-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    rgb(22 20 18 / 0.84) 0%,
+    rgb(22 20 18 / 0.48) 46%,
+    rgb(22 20 18 / 0.12) 100%
+  );
+}
+
+.ad-band-split .ad-frame::after {
+  background: linear-gradient(180deg, rgb(22 20 18 / 0.18) 0%, rgb(22 20 18 / 0.86) 100%);
+}
+
+.ad-copy {
+  position: relative;
+  z-index: 2;
+  max-width: 34rem;
+  padding: clamp(1.45rem, 4vw, 2.7rem);
+}
+
+.ad-band-split .ad-copy {
+  max-width: none;
+  padding: 1.25rem 1.2rem 1.4rem;
+}
+
+.ad-label {
+  display: inline-block;
+  margin: 0 0 0.75rem;
+  padding: 0.22rem 0.7rem;
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--ink);
+  background: var(--gold);
+  border-radius: var(--pill);
+}
+
+.ad-copy .kicker,
+.ad-copy h2,
+.ad-copy .lead {
+  color: var(--ivory);
+}
+
+.ad-copy h2 {
+  font-size: clamp(1.7rem, 3.4vw, 2.7rem);
+  line-height: 1.08;
+  margin: 0 0 0.4em;
+  text-wrap: balance;
+}
+
+.ad-band-split .ad-copy h2 {
+  font-size: clamp(1.35rem, 2.2vw, 1.9rem);
+}
+
+.ad-copy .lead {
+  color: #eee7db;
+  max-width: 38ch;
+  margin-bottom: 1.1rem;
+}
+
+.ad-band-split .ad-copy .lead {
+  max-width: none;
+  font-size: 0.95rem;
+}
+
+.ad-copy .btn {
+  width: fit-content;
 }
 
 .atelier-stage {
@@ -2114,6 +2224,10 @@ body[data-page="gamme"] .page-hero .lead {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
+  .ad-grid {
+    grid-template-columns: 1fr;
+  }
+
   .prod-spec-main,
   .prod-spec-grid {
     grid-template-columns: 1fr;
@@ -2346,9 +2460,46 @@ body[data-page="gamme"] .page-hero .lead {
 
   .section-charcoal,
   .cta-band,
-  .mix-band {
+  .mix-band,
+  .ad-band {
     margin-inline: 0.65rem;
     border-radius: 1.6rem;
+  }
+
+  .ad-frame {
+    min-height: 22rem;
+    border-radius: 1.6rem;
+    align-items: end;
+  }
+
+  .ad-frame::after {
+    background: linear-gradient(180deg, rgb(22 20 18 / 0.18) 0%, rgb(22 20 18 / 0.86) 100%);
+  }
+
+  .ad-copy {
+    max-width: none;
+    padding: 1.25rem 1.15rem 1.4rem;
+  }
+
+  .ad-copy h2 {
+    font-size: clamp(1.45rem, 6.5vw, 2rem);
+    line-height: 1.18;
+  }
+
+  .ad-copy .lead {
+    font-size: 0.95rem;
+    max-width: none;
+  }
+
+  .ad-copy .btn {
+    width: 100%;
+    white-space: normal;
+    text-align: center;
+    line-height: 1.35;
+  }
+
+  .ad-band-split .ad-frame {
+    min-height: 16.5rem;
   }
 
   .cta-band {
@@ -2498,6 +2649,7 @@ body[data-page="gamme"] .page-hero .lead {
   .skip,
   .hero-actions,
   .marquee,
+  .ad-band,
   form,
   .site-footer .social,
   .prod-video {
@@ -2575,6 +2727,28 @@ html[dir="rtl"] .hero::before {
   );
 }
 
+html[dir="rtl"] .ad-frame::after {
+  background: linear-gradient(
+    270deg,
+    rgb(22 20 18 / 0.84) 0%,
+    rgb(22 20 18 / 0.48) 46%,
+    rgb(22 20 18 / 0.12) 100%
+  );
+}
+
+html[dir="rtl"] .ad-band-split .ad-frame::after {
+  background: linear-gradient(180deg, rgb(22 20 18 / 0.18) 0%, rgb(22 20 18 / 0.86) 100%);
+}
+
+html[dir="rtl"] .ad-label {
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+html[dir="rtl"] .ad-copy h2 {
+  line-height: 1.28;
+}
+
 html[dir="rtl"] .e-card:hover {
   transform: translateX(-8px);
 }
@@ -2586,7 +2760,8 @@ html[dir="rtl"] .form input[type="email"] {
 }
 
 html[dir="rtl"] .hero-actions .btn,
-html[dir="rtl"] .cta-band .btn {
+html[dir="rtl"] .cta-band .btn,
+html[dir="rtl"] .ad-copy .btn {
   white-space: normal;
   line-height: 1.4;
   text-align: center;
@@ -2639,6 +2814,10 @@ html[dir="rtl"] .photo-badge {
 
   html[dir="rtl"] .hero::before {
     background: linear-gradient(180deg, rgb(22 20 18 / 0.22) 0%, rgb(22 20 18 / 0.78) 100%);
+  }
+
+  html[dir="rtl"] .ad-frame::after {
+    background: linear-gradient(180deg, rgb(22 20 18 / 0.18) 0%, rgb(22 20 18 / 0.86) 100%);
   }
 
   html[dir="rtl"] .site-header {

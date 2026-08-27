@@ -118,15 +118,7 @@ function renderMarquee() {
   const track = document.querySelector(".marquee-track");
   if (!track) return;
   const L = lang();
-  const items = [
-    t("nav.solution", L),
-    t("nav.melanges", L),
-    t("nav.ingredients", L),
-    t("nav.premix", L),
-    t("nav.mixpoudres", L),
-    t("nav.mixliquides", L),
-    "FOURN’OR",
-  ];
+  const items = products.map((p) => loc(p.name, L));
   const html = items.map((item) => `<span>${item}</span>`).join("");
   track.innerHTML = html + html;
 }
