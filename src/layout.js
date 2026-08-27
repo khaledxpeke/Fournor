@@ -1,5 +1,15 @@
 import { applyI18n, getLang, setLang, t } from "./i18n.js";
 
+(function applyDesktopSiteViewport() {
+  const ua = navigator.userAgent || "";
+  const touch = navigator.maxTouchPoints > 1;
+  const desktopUA = /Macintosh|Windows NT|X11|Linux x86_64/i.test(ua) && !/Mobile/i.test(ua);
+  const phoneScreen = Math.min(screen.width, screen.height) < 600;
+  if (!touch || !desktopUA || !phoneScreen) return;
+  const vp = document.querySelector('meta[name="viewport"]');
+  if (vp) vp.setAttribute("content", "width=1100");
+})();
+
 function header(active) {
   const item = (id, href, key) =>
     `<a class="nav-link${active === id ? " is-active" : ""}" href="${href}" data-i18n="${key}"></a>`;
@@ -158,7 +168,7 @@ export function mountLayout(active) {
   const nav = document.querySelector(".nav");
   const mixItem = nav?.querySelector(".nav-item");
   const mixLink = mixItem?.querySelector(":scope > .nav-link");
-  const isMobileNav = () => window.matchMedia("(max-width: 1240px)").matches;
+  const isMobileNav = () => window.matchMedia("(max-width: 960px)").matches;
 
   const closeMix = () => {
     mixItem?.classList.remove("is-open");
@@ -190,7 +200,7 @@ export function mountLayout(active) {
   });
 
   window.addEventListener("resize", () => {
-    if (window.matchMedia("(min-width: 1241px)").matches) closeNav();
+    if (window.matchMedia("(min-width: 961px)").matches) closeNav();
   });
 
   document.querySelectorAll("[data-lang]").forEach((btn) => {

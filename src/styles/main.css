@@ -374,6 +374,7 @@ p {
   font-weight: 700;
   color: var(--greige-deep);
   position: relative;
+  white-space: nowrap;
 }
 
 .nav-link::after {
@@ -1938,7 +1939,43 @@ body[data-page="gamme"] .page-hero .lead {
   }
 }
 
-@media (max-width: 1240px) {
+@media (max-width: 1320px) and (min-width: 961px) {
+  .site-header {
+    gap: 0.4rem;
+    padding-inline: 0.85rem 0.7rem;
+  }
+
+  .logo-satia {
+    height: 2.15rem;
+    max-width: 7.6rem;
+  }
+
+  .nav {
+    gap: 0.55rem;
+  }
+
+  .nav-link {
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+  }
+
+  .header-tools {
+    margin-inline-start: 0.2rem;
+  }
+
+  .lang button {
+    padding: 0.32rem 0.4rem;
+    min-width: 1.85rem;
+    font-size: 0.6rem;
+  }
+
+  html[dir="rtl"] .nav-link {
+    font-size: 0.78rem;
+    letter-spacing: 0;
+  }
+}
+
+@media (max-width: 960px) {
   .nav-toggle {
     display: block;
   }
@@ -1981,6 +2018,7 @@ body[data-page="gamme"] .page-hero .lead {
     width: 100%;
     padding: 0.7rem 0.15rem;
     font-size: 0.82rem;
+    white-space: normal;
   }
 
   .nav-link::after {
@@ -2047,12 +2085,6 @@ body[data-page="gamme"] .page-hero .lead {
     width: 100%;
     padding: 0.55rem 0.1rem;
     font-size: 0.72rem;
-  }
-
-  .cta-band {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1.25rem;
   }
 }
 
@@ -2583,7 +2615,7 @@ html[dir="rtl"] .photo-badge {
   unicode-bidi: isolate;
 }
 
-@media (max-width: 1240px) {
+@media (max-width: 960px) {
   html[dir="rtl"] .nav > .nav-link,
   html[dir="rtl"] .nav-item > .nav-link {
     font-size: 0.92rem;
