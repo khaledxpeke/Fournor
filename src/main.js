@@ -1,5 +1,5 @@
 import { mountLayout } from "./layout.js";
-import { getLang } from "./i18n.js";
+import { getLang, isRtl } from "./i18n.js";
 import { products, events, dosageMeta, partners, getProduct } from "./products.js";
 import { t } from "./i18n.js";
 
@@ -7,6 +7,11 @@ const page = document.body.dataset.page || "home";
 mountLayout(page === "produit" ? "gamme" : page);
 
 const lang = () => getLang();
+const loc = (obj, L = lang()) => obj?.[L] ?? obj?.fr ?? obj?.en ?? "";
+
+function dateLocale(L = lang()) {
+  return { fr: "fr-TN", en: "en-GB", ar: "ar-TN" }[L] || "fr-TN";
+}
 
 function ringSvg(pct) {
   const r = 42;
@@ -24,13 +29,13 @@ function productCard(p, { decoy = false } = {}) {
   const extra = decoy ? ' aria-hidden="true" tabindex="-1"' : "";
   return `<a class="p-card" href="/produit.html?id=${p.id}"${extra}>
     <div class="p-card-img">
-      <img src="${p.image}" alt="${p.name[L]}" width="800" height="600" loading="lazy" decoding="async" />
+      <img src="${p.image}" alt="${loc(p.name, L)}" width="800" height="600" loading="lazy" decoding="async" />
       <span class="photo-badge">${p.dosage}%</span>
     </div>
     <div class="p-card-body">
       <span class="badge">${p.dosage}%</span>
-      <h3>${p.name[L]}</h3>
-      <p>${p.promise[L]}</p>
+      <h3>${loc(p.name, L)}</h3>
+      <p>${loc(p.promise, L)}</p>
       <span class="more" data-i18n="gamme.more">${t("gamme.more", L)}</span>
     </div>
   </a>`;
@@ -38,17 +43,17 @@ function productCard(p, { decoy = false } = {}) {
 
 function eventCard(e) {
   const L = lang();
-  const d = new Intl.DateTimeFormat(L === "fr" ? "fr-TN" : "en-GB", {
+  const d = new Intl.DateTimeFormat(dateLocale(L), {
     day: "2-digit",
     month: "short",
     year: "numeric",
   }).format(new Date(e.date));
   return `<article class="e-card">
-    <div class="e-card-img"><img src="${e.image}" alt="${e.title[L]}" width="360" height="240" loading="lazy" decoding="async"/></div>
+    <div class="e-card-img"><img src="${e.image}" alt="${loc(e.title, L)}" width="360" height="240" loading="lazy" decoding="async"/></div>
     <div>
-      <p class="kicker">${d} · ${e.place[L]}</p>
-      <h3>${e.title[L]}</h3>
-      <p>${e.text[L]}</p>
+      <p class="kicker">${d} · ${loc(e.place, L)}</p>
+      <h3>${loc(e.title, L)}</h3>
+      <p>${loc(e.text, L)}</p>
     </div>
   </article>`;
 }
@@ -65,19 +70,21 @@ function renderHome() {
   if (news) news.innerHTML = events.slice(0, 3).map(eventCard).join("");
   document.querySelectorAll("[data-dosage-label]").forEach((el) => {
     const d = Number(el.dataset.dosageLabel);
-    el.textContent = dosageMeta[d].label[L];
+    el.textContent = loc(dosageMeta[d].label, L);
   });
   document.querySelectorAll("[data-dosage-blurb]").forEach((el) => {
     const d = Number(el.dataset.dosageBlurb);
-    el.textContent = dosageMeta[d].blurb[L];
+    el.textContent = loc(dosageMeta[d].blurb, L);
   });
+  renderMarquee();
 }
 
 function fold(value) {
   return String(value || "")
     .toLowerCase()
     .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "");
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[\u064B-\u065F\u0670]/g, "");
 }
 
 function matchesGammeQuery(p, query) {
@@ -90,17 +97,38 @@ function matchesGammeQuery(p, query) {
       p.mix,
       p.dosage,
       `${p.dosage}%`,
-      p.name.fr,
-      p.name.en,
-      p.promise.fr,
-      p.promise.en,
-      p.sensory.fr,
-      p.sensory.en,
-      p.target.fr,
-      p.target.en,
+      loc(p.name, "fr"),
+      loc(p.name, "en"),
+      loc(p.name, "ar"),
+      loc(p.promise, "fr"),
+      loc(p.promise, "en"),
+      loc(p.promise, "ar"),
+      loc(p.sensory, "fr"),
+      loc(p.sensory, "en"),
+      loc(p.sensory, "ar"),
+      loc(p.target, "fr"),
+      loc(p.target, "en"),
+      loc(p.target, "ar"),
     ].join(" ")
   );
   return query.split(/\s+/).every((word) => hay.includes(word));
+}
+
+function renderMarquee() {
+  const track = document.querySelector(".marquee-track");
+  if (!track) return;
+  const L = lang();
+  const items = [
+    t("nav.solution", L),
+    t("nav.melanges", L),
+    t("nav.ingredients", L),
+    t("nav.premix", L),
+    t("nav.mixpoudres", L),
+    t("nav.mixliquides", L),
+    "FOURN’OR",
+  ];
+  const html = items.map((item) => `<span>${item}</span>`).join("");
+  track.innerHTML = html + html;
 }
 
 function currentMix() {
@@ -177,7 +205,7 @@ function renderProduit() {
   const L = lang();
   const root = document.getElementById("produit");
   if (!root) return;
-  document.title = `${p.name[L]} — Fourn’Or`;
+  document.title = `${loc(p.name, L)} — Fourn’Or`;
   const videoBlock = p.video
     ? `<section class="prod-video" id="prod-video">
         <p class="kicker">${t("prod.video", L)}</p>
@@ -185,7 +213,7 @@ function renderProduit() {
         <div class="prod-video-frame">
           <iframe
             src="https://www.youtube-nocookie.com/embed/${p.video}"
-            title="${p.name[L]}"
+            title="${loc(p.name, L)}"
             loading="lazy"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen
@@ -206,18 +234,18 @@ function renderProduit() {
   root.innerHTML = `
     <div class="prod-hero">
       <div class="prod-photo">
-        <img src="${p.image}" alt="${p.name[L]}" width="900" height="900" fetchpriority="high" decoding="async" />
+        <img src="${p.image}" alt="${loc(p.name, L)}" width="900" height="900" fetchpriority="high" decoding="async" />
       </div>
       <div class="prod-intro">
         <p class="kicker" data-i18n="prod.kicker">${t("prod.kicker", L)}</p>
-        <h1>${p.name[L]}</h1>
+        <h1>${loc(p.name, L)}</h1>
         <p class="sku">${p.sku}</p>
-        <p class="lead">${p.promise[L]}</p>
+        <p class="lead">${loc(p.promise, L)}</p>
         <div class="prod-mix">
           ${ringSvg(p.dosage)}
           <div>
             <p class="badge">${p.dosage}%</p>
-            <p>${dosageMeta[p.dosage].blurb[L]}</p>
+            <p>${loc(dosageMeta[p.dosage].blurb, L)}</p>
           </div>
         </div>
         <div class="prod-actions">
@@ -230,7 +258,7 @@ function renderProduit() {
       <div class="prod-spec-main">
         <article>
           <h3>${t("prod.composition", L)}</h3>
-          <p>${p.composition[L]}</p>
+          <p>${loc(p.composition, L)}</p>
         </article>
         <article class="prod-spec-weight">
           <h3>${t("prod.weight", L)}</h3>
@@ -238,9 +266,9 @@ function renderProduit() {
         </article>
       </div>
       <div class="prod-spec-grid">
-        <article><h3>${t("prod.adds", L)}</h3><p>${p.adds[L]}</p></article>
-        <article><h3>${t("prod.sensory", L)}</h3><p>${p.sensory[L]}</p></article>
-        <article><h3>${t("prod.target", L)}</h3><p>${p.target[L]}</p></article>
+        <article><h3>${t("prod.adds", L)}</h3><p>${loc(p.adds, L)}</p></article>
+        <article><h3>${t("prod.sensory", L)}</h3><p>${loc(p.sensory, L)}</p></article>
+        <article><h3>${t("prod.target", L)}</h3><p>${loc(p.target, L)}</p></article>
         <article><h3>${t("prod.usage", L)}</h3><p>${t("prod.usageText", L)}</p></article>
       </div>
     </div>
@@ -252,7 +280,7 @@ function renderProduit() {
 }
 
 function composerLabel(p, L) {
-  return `${p.name[L]} · ${p.dosage}%`;
+  return `${loc(p.name, L)} · ${p.dosage}%`;
 }
 
 function closeComposerSelect() {
@@ -392,7 +420,7 @@ function renderComposer() {
       <span class="mix-flour" style="flex:${flour} 1 0"></span>
     </div>
     <p class="mix-plus">${t("exp.plus", L)}</p>
-    <p class="mix-note">${p.promise[L]}</p>
+    <p class="mix-note">${loc(p.promise, L)}</p>
   `;
 }
 
@@ -434,8 +462,11 @@ function setupAtelierNav() {
   if (!rail || !prev || !next) return;
 
   const L = lang();
+  const rtl = isRtl(L);
   prev.setAttribute("aria-label", t("atelier.prev", L));
   next.setAttribute("aria-label", t("atelier.next", L));
+  prev.textContent = rtl ? "›" : "‹";
+  next.textContent = rtl ? "‹" : "›";
 
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const looping = !reduceMotion && rail.querySelectorAll(".p-card").length > products.length;
@@ -449,7 +480,10 @@ function setupAtelierNav() {
     if (!looping) return;
     const loop = rail.scrollWidth / 2;
     if (loop <= 0) return;
-    if (rail.scrollLeft >= loop) rail.scrollLeft -= loop;
+    if (isRtl()) {
+      if (rail.scrollLeft <= -loop) rail.scrollLeft += loop;
+      else if (rail.scrollLeft > 0) rail.scrollLeft -= loop;
+    } else if (rail.scrollLeft >= loop) rail.scrollLeft -= loop;
     else if (rail.scrollLeft < 0) rail.scrollLeft += loop;
   };
 
@@ -469,8 +503,9 @@ function setupAtelierNav() {
     rail.dataset.navReady = "1";
 
     const go = (dir) => {
+      const axis = isRtl() ? -1 : 1;
       rail.classList.add("is-manual");
-      rail.scrollBy({ left: dir * step() * 2, behavior: "smooth" });
+      rail.scrollBy({ left: axis * dir * step() * 2, behavior: "smooth" });
       window.setTimeout(() => rail.classList.remove("is-manual"), 700);
     };
 
@@ -481,11 +516,11 @@ function setupAtelierNav() {
     rail.addEventListener("keydown", (e) => {
       if (e.key === "ArrowRight") {
         e.preventDefault();
-        go(1);
+        go(isRtl() ? -1 : 1);
       }
       if (e.key === "ArrowLeft") {
         e.preventDefault();
-        go(-1);
+        go(isRtl() ? 1 : -1);
       }
     });
 
@@ -510,7 +545,8 @@ function setupAtelierNav() {
           paused = false;
         }
         if (!paused && inView && !document.hidden && !rail.classList.contains("is-manual")) {
-          rail.scrollLeft += (speed * dt) / 1000;
+          const axis = isRtl() ? -1 : 1;
+          rail.scrollLeft += (axis * speed * dt) / 1000;
           wrapScroll();
         }
         requestAnimationFrame(tick);

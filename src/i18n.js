@@ -43,6 +43,7 @@ const dict = {
     "nav.contact": "Contact",
     "nav.open": "Ouvrir le menu",
     "nav.close": "Fermer le menu",
+    "nav.lang": "Langue",
     "brand.legal": "Solution · Mélange · Ingrédient",
     "brand.tag": "Solution · Mélange · Ingrédient",
     "hero.kicker": "Solution · Mélange · Ingrédient",
@@ -227,6 +228,10 @@ const dict = {
     "meta.contact": "Contact — SATIA",
     "meta.desc.home":
       "Fourn’Or speciality flour premixes for bakers. A brand of Société Tayara Distribution, Tunis.",
+    "meta.desc.solution":
+      "SATIA, industrial partner from concept to finished product: formulation, production lines and innovation.",
+    "meta.desc.ingredients":
+      "SATIA supplies raw materials, specific blends and packaging, with quality and traceability.",
     "meta.desc.maison":
       "The Fourn’Or house: Société Tayara Distribution, speciality flours and bread improvers since 2020 in Tunis.",
     "meta.desc.gamme":
@@ -253,6 +258,7 @@ const dict = {
     "nav.contact": "Contact",
     "nav.open": "Open menu",
     "nav.close": "Close menu",
+    "nav.lang": "Language",
     "brand.legal": "Solution · Blend · Ingredient",
     "brand.tag": "Solution · Blend · Ingredient",
     "hero.kicker": "Solution · Blend · Ingredient",
@@ -424,17 +430,242 @@ const dict = {
     "contact.visit": "Visit us",
     "contact.map": "Open in Google Maps",
   },
+  ar: {
+    "meta.home": "SATIA — حلول، خلطات، مكوّنات",
+    "meta.maison": "الدار — SATIA",
+    "meta.solution": "الحلول — SATIA",
+    "meta.gamme": "الخلطات — SATIA",
+    "meta.produit": "بطاقة المنتج — SATIA",
+    "meta.expertise": "الخبرة — SATIA",
+    "meta.ingredients": "المكوّنات — SATIA",
+    "meta.partenaires": "الشركاء — SATIA",
+    "meta.actualites": "امتيازاتنا — SATIA",
+    "meta.contact": "اتصل بنا — SATIA",
+    "meta.desc.home":
+      "ترافق SATIA الصناعيين الغذائيين والحلوانيين وخبّازي الحرفة: حلول، خلطات ومكوّنات.",
+    "meta.desc.solution":
+      "SATIA، شريك صناعي من الفكرة إلى المنتج النهائي: صياغة، خطوط إنتاج وابتكار.",
+    "meta.desc.ingredients":
+      "توفّر SATIA المواد الأولية والخلطات الخاصة وحلول التعبئة، بجودة وتتبع كامل.",
+    "meta.desc.partenaires":
+      "دور SATIA الشريكة في تونس — مخابز وأفران تعمل أصلاً بخلطاتنا.",
+    "meta.desc.maison":
+      "دار Fourn’Or: شركة تيارة للتوزيع، دقيق خاص ومحسّن خبز منذ 2020 في تونس.",
+    "meta.desc.gamme":
+      "عشرة خلطات Fourn’Or جاهزة — بانيت، تراديسيون، كامل، كامبان وبذور وأكثر — بجرعات 2٪ و30٪ و50٪.",
+    "meta.desc.produit": "بطاقة تقنية لخلطة Fourn’Or: الجرعة والاستخدام والملف الحسّي.",
+    "meta.desc.expertise":
+      "الخلطة الجاهزة، فرن التجربة ومرافقة خبّازي التكوين في Fourn’Or بتونس.",
+    "meta.desc.actualites": "شبكة امتيازات SATIA — أخبار وافتتاحات وحياة الشبكة.",
+    "meta.desc.contact": "الاتصال بـ Fourn’Or في تونس: 01 نهج النيل، سيدي فتح الله. هاتف +216 71 100 797.",
+    "skip": "الانتقال إلى المحتوى",
+    "nav.home": "الرئيسية",
+    "nav.maison": "الدار",
+    "nav.solution": "الحلول",
+    "nav.gamme": "الخلطات",
+    "nav.melanges": "الخلطات",
+    "nav.premix": "خلطات بودرة جاهزة",
+    "nav.mixpoudres": "خلطات بودرة",
+    "nav.mixliquides": "خلطات سائلة",
+    "nav.ingredients": "المكوّنات",
+    "nav.partners": "الشركاء",
+    "nav.expertise": "الخبرة",
+    "nav.news": "امتيازاتنا",
+    "nav.contact": "اتصل بنا",
+    "nav.open": "فتح القائمة",
+    "nav.close": "إغلاق القائمة",
+    "nav.lang": "اللغة",
+    "brand.legal": "حلول · خلطات · مكوّنات",
+    "brand.tag": "حلول · خلطات · مكوّنات",
+    "hero.kicker": "حلول · خلطات · مكوّنات",
+    "hero.title": "SATIA، شريككم",
+    "hero.lead":
+      "ترافق SATIA الصناعيين الغذائيين والحلوانيين وخبّازي الحرفة بثلاثة أعمدة: حلول صناعية مفصّلة، مجموعة واسعة من الخلطات، وجميع المكوّنات اللازمة للإنتاج.",
+    "hero.cta1": "اكتشفوا الخلطات",
+    "hero.cta2": "تحدثوا إلى خبير",
+    "hero.quote": "حلول، خلطات، مكوّنات — تحت علامة واحدة.",
+    "dosage.kicker": "ثلاثة أعمدة",
+    "dosage.title": "حلول. خلطات. مكوّنات.",
+    "dosage.lead":
+      "تجمع SATIA المرافقة الصناعية ومجموعة واسعة من الخلطات وكل المواد الأولية اللازمة للإنتاج.",
+    "dosage.2": "01",
+    "dosage.30": "02",
+    "dosage.50": "03",
+    "dosage.see": "عرض الخلطات",
+    "pillars.sol": "الحلول",
+    "pillars.solt": "من الفكرة إلى المنتج النهائي: صياغة، خطوط إنتاج، ابتكار.",
+    "pillars.mix": "الخلطات",
+    "pillars.mixt": "خلطات بودرة جاهزة وخلطات بودرة وخلطات سائلة — ومنها خلطات FOURN’OR.",
+    "pillars.ing": "المكوّنات",
+    "pillars.ingt": "مواد أولية وصياغات حسب الطلب وحلول تعبئة.",
+    "pillars.seeSol": "اكتشفوا الحلول",
+    "pillars.seeMix": "عرض الخلطات",
+    "pillars.seeIng": "عرض المكوّنات",
+    "atelier.kicker": "02 — الخلطات",
+    "atelier.title": "مجموعة واسعة من الخلطات",
+    "atelier.lead":
+      "خلطات جاهزة وخلطات بودرة وخلطات سائلة، مصمّمة للصناعة الغذائية والحلويات والمخابز الحرفية.",
+    "atelier.all": "كل الخلطات",
+    "atelier.prev": "الخلطات السابقة",
+    "atelier.next": "الخلطات التالية",
+    "maison.kicker": "01 — الحلول",
+    "maison.stat1": "3",
+    "maison.stat1l": "أعمدة SATIA",
+    "maison.stat2": "FOURN’OR",
+    "maison.stat2l": "علامة الخلطات",
+    "maison.stat3": "تونس",
+    "maison.stat3l": "المقرّ والفرق",
+    "maison.title": "شريككم الصناعي",
+    "maison.text":
+      "من الصياغة إلى تحسين الخطوط، يعمل فريقنا التقني-التجاري مع بحثكم وتطويركم وإنتاجكم لحلول مفصّلة.",
+    "maison.more": "عرض الحلول",
+    "fournil.kicker": "03 — المكوّنات",
+    "fournil.title": "كل المواد الأولية",
+    "fournil.text":
+      "مواد أولية خام، خلطات خاصة بودرة وسائلة، وحلول تعبئة — جودة وتتبع وتوفّر.",
+    "fournil.cta": "عرض المكوّنات",
+    "news.kicker": "شبكة SATIA",
+    "news.title": "الامتيازات",
+    "news.all": "كل الامتيازات",
+    "cta.title": "مشروع تريدون إطلاقه؟",
+    "cta.text":
+      "لنتحدث عن حلّ أو خلطة أو مكوّن. فرق SATIA في تونس، قريبة من الصناعيين والحرفيين.",
+    "cta.btn": "راسلونا",
+    "footer.about":
+      "ترافق SATIA الصناعة الغذائية والحلويات والمخابز الحرفية: حلول وخلطات ومكوّنات.",
+    "footer.products": "الخلطات",
+    "footer.contact": "اتصل بنا",
+    "footer.address": "01 نهج النيل، سيدي فتح الله جبل الجلود، 2023 تونس",
+    "footer.phone": "هاتف +216 71 100 797",
+    "footer.fax": "فاكس +216 71 100 798",
+    "footer.copy": "© SATIA — شركة تيارة للتوزيع",
+    "footer.photo": "الصور: أرشيف STD Tayara.",
+    "page.kicker": "SATIA",
+    "maison.hero": "الدار",
+    "maison.lead":
+      "هوية دافئة وأصيلة وراقية، مستوحاة من الحبّة والأرض وقيمة المهارة.",
+    "maison.storyTitle": "STD، منذ 2020",
+    "maison.story":
+      "منذ تأسيسها سنة 2020، تخصّصت شركة تيارة للتوزيع في إنتاج وبيع وتوزيع مجموعة متنوّعة من الدقيق الخاص عالي الجودة، وتسويق محسّن الخبز. هذه المنتجات، المطلوبة في السوق المحلية، موجّهة للمهنيين وللاستهلاك الواسع.",
+    "maison.engageTitle": "التزامنا",
+    "maison.engage":
+      "توفير أفضل المنتجات، وإرضاء شركائنا بالكامل، والبقاء قريبين منهم. الجودة والسلامة والمهارة والبحث عن نكهات جديدة تبني الثقة.",
+    "maison.listenTitle": "المساعدة والإنصات",
+    "maison.listen":
+      "خبّازون مكوِّنون وعارضون يضمنون التكوين، ويرافقون في الفرن، وينصحون بأفضل طريقة لاستخدام كل خلطة.",
+    "maison.valuesTitle": "أربعة أعمدة",
+    "maison.v1": "الأصالة",
+    "maison.v1t": "طبيعي، بسيط، مطمئن.",
+    "maison.v2": "الجودة",
+    "maison.v2t": "دقيق، متقن، راقٍ.",
+    "maison.v3": "التقاليد",
+    "maison.v3t": "مهارة، مادة، تراب.",
+    "maison.v4": "الحداثة",
+    "maison.v4t": "صافٍ، مقروء، قابل للتكيّف.",
+    "maison.groupTitle": "المجموعة",
+    "maison.group":
+      "تستند Fourn’Or إلى سلسلة الطحن في مجموعة تيارة — مطاحن تونس الحديثة (MMT) — لربط القمح بالخبز. علامة Fourn’Or هي وجه الخلطات؛ وSTD هي الدار.",
+    "maison.partnersTitle": "دور شريكة",
+    "maison.partnersLead": "أفران تخبز أصلاً بـ Fourn’Or في تونس.",
+    "gamme.hero": "الخلطات",
+    "gamme.lead":
+      "مجموعة خلطات — بودرة جاهزة وخلطات بودرة وخلطات سائلة — للصناعة والحلويات والمخابز.",
+    "gamme.all": "الكل",
+    "gamme.filter2": "خلطات بودرة جاهزة",
+    "gamme.filter30": "خلطات بودرة",
+    "gamme.filter50": "خلطات سائلة",
+    "gamme.filterPremix": "خلطات بودرة جاهزة",
+    "gamme.filterMix": "خلطات بودرة",
+    "gamme.filterLiquid": "خلطات سائلة",
+    "gamme.sku": "المرجع",
+    "gamme.more": "بطاقة المنتج",
+    "gamme.search": "بانيت، خلطة، سائل…",
+    "gamme.searchLabel": "البحث عن خلطة",
+    "gamme.empty": "لا توجد خلطة مطابقة. غيّروا التصفية أو كلمة البحث.",
+    "sol.kicker": "01 — الحلول",
+    "sol.hero": "الحلول",
+    "sol.title": "شريككم الصناعي، من الفكرة إلى المنتج النهائي",
+    "sol.lead":
+      "ترافق SATIA صناعيي الأغذية في كل مشاريعهم الصناعية وتطوير المنتجات.",
+    "sol.text":
+      "من الصياغة إلى تحسين خطوط الإنتاج، نضع خبرتنا التقنية في خدمة طموحاتكم: إطلاق مراجع جديدة، تحسين وصفات قائمة، المطابقة مع المعايير، أو المرافقة في مسار ابتكار. يعمل فريقنا التقني-التجاري يداً بيد مع فرق البحث والتطوير والإنتاج لديكم لتصميم حلول مفصّلة، تلائم قيودكم الصناعية وأهداف السوق.",
+    "ing.kicker": "03 — المكوّنات",
+    "ing.hero": "المكوّنات",
+    "ing.title": "كل المواد الأولية، تحت علامة واحدة",
+    "ing.lead":
+      "توفّر SATIA كل المكوّنات اللازمة لإنتاجكم: مواد أولية خام، خلطات خاصة بودرة وسائلة حسب الطلب، وحلول تعبئة ملائمة لمنتجاتكم.",
+    "ing.text":
+      "سواء بحثتم عن مكوّن معياري أو صياغة حسب الطلب، تضمن لكم شبكة التوريد وخبرتنا التقنية الجودة والتتبع والتوفّر.",
+    "part.kicker": "الشبكة",
+    "part.hero": "الشركاء",
+    "part.lead":
+      "أفران ودور تخبز أصلاً بـ SATIA في تونس. شبكة ثقة، من تونس إلى جربة.",
+    "prod.kicker": "بطاقة تقنية",
+    "prod.dosage": "الجرعة",
+    "prod.adds": "يضيف الخبّاز",
+    "prod.sensory": "الملف الحسّي",
+    "prod.target": "لمن",
+    "prod.usage": "طريقة الاستخدام",
+    "prod.usageText":
+      "أدخلوا الخلطة في الدقيق حسب الجرعة المذكورة، ثم أضيفوا الماء والملح والخميرة عند العجن. عدّلوا الترطيب حسب دقيقكم وفرنكم.",
+    "prod.back": "العودة إلى المجموعة",
+    "prod.other": "مراجع أخرى",
+    "prod.composition": "التركيب",
+    "prod.weight": "الوزن الصافي",
+    "prod.download": "تنزيل البطاقة",
+    "prod.watch": "مشاهدة الفيديو",
+    "prod.video": "في الفرن",
+    "prod.videoTitle": "المرجع، بالصور",
+    "exp.hero": "الخبرة",
+    "exp.lead":
+      "الخلطة الجاهزة لا تنقص من المهنة شيئاً. توضّح الوصفة، تؤمّن النتيجة، وتفتح الواجهة.",
+    "exp.whatTitle": "ما هي الخلطة الجاهزة؟",
+    "exp.what":
+      "مزيج محضَّر من دقيق وحبوب ومكوّنات حسّية وتقنية. يكمّله الخبّاز بدقيقه والماء والملح والخميرة. الهدف: تبسيط العجن والتخمير والخبز — دون تسطيح الطعم.",
+    "exp.compose": "تركيب الخبز",
+    "exp.composeLead": "اختاروا مرجعاً. شاهدوا ما يبقى بين يدي الخبّاز.",
+    "exp.premix": "خلطة Fourn’Or",
+    "exp.flour": "دقيق الخبّاز",
+    "exp.plus": "ثم: ماء، ملح، خميرة",
+    "exp.trainersTitle": "خبّازون مكوِّنون",
+    "exp.trainers":
+      "نضع فريقاً من الخبّازين المكوِّنين والعارضين للتكوين والمرافقة والنصح. فرن التجربة في STD هو مكان البحث والتطوير وابتكار المنتج.",
+    "exp.rdTitle": "البحث في الفرن",
+    "exp.rd":
+      "فريق مخصّص يحلّل مكوّنات ومنتجات وتقنيات جديدة لتلبية حاجات الزبائن المتغيّرة — نكهات جديدة، انتظام، طبيعية.",
+    "news.hero": "الامتيازات",
+    "news.lead": "شبكة SATIA: افتتاحات وشركاء وحياة الامتيازات.",
+    "contact.hero": "اتصل بنا",
+    "contact.lead": "مرجع، تكوين، زيارة للفرن: راسلونا.",
+    "contact.formName": "الاسم واللقب",
+    "contact.formEmail": "البريد الإلكتروني",
+    "contact.formMsg": "الرسالة",
+    "contact.send": "إرسال",
+    "contact.ok": "شكراً. سجّلنا رسالتكم — سيتواصل معكم مكوِّن.",
+    "contact.error": "يرجى إدخال اسم وبريد صالح ورسالة.",
+    "contact.visit": "زيارتنا",
+    "contact.map": "فتح في خرائط Google",
+  },
 };
 
 const KEY = "fournor-lang";
+const LANGS = ["fr", "en", "ar"];
+
+export function isRtl(lang = getLang()) {
+  return lang === "ar";
+}
 
 export function getLang() {
   const saved = localStorage.getItem(KEY);
-  if (saved === "en" || saved === "fr") return saved;
+  if (LANGS.includes(saved)) return saved;
+  const nav = (navigator.language || "").toLowerCase();
+  if (nav.startsWith("ar")) return "ar";
+  if (nav.startsWith("en")) return "en";
   return "fr";
 }
 
 export function setLang(lang) {
+  if (!LANGS.includes(lang)) return;
   localStorage.setItem(KEY, lang);
   applyI18n(lang);
 }
@@ -445,6 +676,7 @@ export function t(key, lang = getLang()) {
 
 export function applyI18n(lang = getLang()) {
   document.documentElement.lang = lang;
+  document.documentElement.dir = isRtl(lang) ? "rtl" : "ltr";
   document.querySelectorAll("[data-i18n]").forEach((el) => {
     el.textContent = t(el.dataset.i18n, lang);
   });
@@ -458,6 +690,8 @@ export function applyI18n(lang = getLang()) {
   const page = document.body?.dataset.page;
   const titleKey = page ? `meta.${page}` : "meta.home";
   if (meta) document.title = t(titleKey, lang);
+  const desc = document.querySelector("meta[name='description']");
+  if (desc && page) desc.setAttribute("content", t(`meta.desc.${page}`, lang));
   document.querySelectorAll("[data-lang]").forEach((btn) => {
     btn.setAttribute("aria-pressed", String(btn.dataset.lang === lang));
   });

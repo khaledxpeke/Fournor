@@ -25,9 +25,10 @@ function header(active) {
     ${item("contact", "/contact.html", "nav.contact")}
   </nav>
   <div class="header-tools">
-    <div class="lang" role="group" aria-label="Language">
+    <div class="lang" role="group" data-i18n-aria="nav.lang" aria-label="Langue">
       <button type="button" data-lang="fr">FR</button>
       <button type="button" data-lang="en">EN</button>
+      <button type="button" data-lang="ar">AR</button>
     </div>
     <button class="nav-toggle" type="button" data-i18n-aria="nav.open" aria-expanded="false" aria-controls="site-nav">
       <span></span><span></span>
@@ -149,7 +150,7 @@ export function mountLayout(active) {
   const nav = document.querySelector(".nav");
   const mixItem = nav?.querySelector(".nav-item");
   const mixLink = mixItem?.querySelector(":scope > .nav-link");
-  const isMobileNav = () => window.matchMedia("(max-width: 1180px)").matches;
+  const isMobileNav = () => window.matchMedia("(max-width: 1240px)").matches;
 
   const closeMix = () => {
     mixItem?.classList.remove("is-open");
@@ -181,7 +182,7 @@ export function mountLayout(active) {
   });
 
   window.addEventListener("resize", () => {
-    if (window.matchMedia("(min-width: 1181px)").matches) closeNav();
+    if (window.matchMedia("(min-width: 1241px)").matches) closeNav();
   });
 
   document.querySelectorAll("[data-lang]").forEach((btn) => {
