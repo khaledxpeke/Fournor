@@ -603,6 +603,7 @@ window.addEventListener("fournor:lang", paint);
 setupFilters();
 setupGammeSearch();
 setupContact();
+setupHeroVideo();
 paint();
 
 document.querySelectorAll(".ring").forEach((el) => {
@@ -610,6 +611,48 @@ document.querySelectorAll(".ring").forEach((el) => {
   const pct = Number(el.dataset.pct);
   el.insertAdjacentHTML("afterbegin", ringSvg(pct));
 });
+
+function setupHeroVideo() {
+  const video = document.querySelector("video.hero-bg");
+  if (!video) return;
+
+  video.muted = true;
+  video.defaultMuted = true;
+  video.playsInline = true;
+
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const play = () => {
+    if (reduce.matches) return;
+    video.play().catch(() => {});
+  };
+  const pause = () => video.pause();
+
+  const applyPref = () => {
+    if (reduce.matches) pause();
+    else play();
+  };
+
+  applyPref();
+  if (typeof reduce.addEventListener === "function") {
+    reduce.addEventListener("change", applyPref);
+  }
+
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) play();
+        else pause();
+      },
+      { threshold: 0.15 }
+    );
+    io.observe(video);
+  }
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) pause();
+    else play();
+  });
+}
 
 function setupMotion() {
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;

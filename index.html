@@ -27,7 +27,20 @@
   <body data-page="home">
     <main>
       <section class="hero">
-        <img class="hero-bg" src="/images/banner.webp" alt="SATIA — solution, mélange, ingrédient" width="2400" height="1029" fetchpriority="high" decoding="async" />
+        <video
+          class="hero-bg"
+          autoplay
+          muted
+          loop
+          playsinline
+          webkit-playsinline
+          preload="auto"
+          poster="/images/banner.webp"
+          aria-hidden="true"
+          disablepictureinpicture
+        >
+          <source src="/videos/banner.mp4" type="video/mp4" />
+        </video>
         <div class="hero-copy reveal">
           <p class="kicker" data-i18n="hero.kicker">Solution · Mélange · Ingrédient</p>
           <h1 data-i18n="hero.title">SATIA, votre partenaire</h1>
@@ -65,8 +78,8 @@
       <aside class="ad-band" data-i18n-aria="ad.label">
         <div class="ad-frame reveal">
           <img src="/images/gal1.webp" alt="" width="1600" height="900" loading="lazy" decoding="async" />
+          <p class="ad-label" data-i18n="ad.label">Publicité</p>
           <div class="ad-copy">
-            <p class="ad-label" data-i18n="ad.label">Publicité</p>
             <p class="kicker" data-i18n="ad.sol.kicker"></p>
             <h2 data-i18n="ad.sol.title"></h2>
             <p class="lead" data-i18n="ad.sol.lead"></p>
@@ -105,8 +118,8 @@
         <div class="ad-grid">
           <div class="ad-frame reveal">
             <img src="/images/mix-premix.webp" alt="" width="800" height="1200" loading="lazy" decoding="async" />
+            <p class="ad-label" data-i18n="ad.label">Publicité</p>
             <div class="ad-copy">
-              <p class="ad-label" data-i18n="ad.label">Publicité</p>
               <p class="kicker" data-i18n="ad.a.kicker"></p>
               <h2 data-i18n="ad.a.title"></h2>
               <p class="lead" data-i18n="ad.a.lead"></p>
@@ -115,8 +128,8 @@
           </div>
           <div class="ad-frame reveal">
             <img src="/images/mix-liquides.webp" alt="" width="800" height="1200" loading="lazy" decoding="async" />
+            <p class="ad-label" data-i18n="ad.label">Publicité</p>
             <div class="ad-copy">
-              <p class="ad-label" data-i18n="ad.label">Publicité</p>
               <p class="kicker" data-i18n="ad.b.kicker"></p>
               <h2 data-i18n="ad.b.title"></h2>
               <p class="lead" data-i18n="ad.b.lead"></p>
