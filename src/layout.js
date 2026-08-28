@@ -21,6 +21,7 @@ function header(active) {
   </a>
   <nav class="nav" id="site-nav" aria-label="Primary">
     ${item("home", "/index.html", "nav.home")}
+    ${item("maison", "/maison.html", "nav.maison")}
     ${item("solution", "/solution.html", "nav.solution")}
     <div class="nav-item${mixActive ? " is-active" : ""}">
       <a class="nav-link${mixActive ? " is-active" : ""}" href="/gamme.html" data-i18n="nav.melanges" aria-haspopup="true" aria-expanded="false"></a>

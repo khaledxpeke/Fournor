@@ -42,15 +42,10 @@ function productCard(p, { decoy = false } = {}) {
 
 function eventCard(e) {
   const L = lang();
-  const d = new Intl.DateTimeFormat(dateLocale(L), {
-    day: "2-digit",
-    month: "short",
-    year: "numeric",
-  }).format(new Date(e.date));
   return `<article class="e-card">
-    <div class="e-card-img"><img src="${e.image}" alt="${loc(e.title, L)}" width="360" height="240" loading="lazy" decoding="async"/></div>
+    <div class="e-card-img"><img src="${e.image}" alt="${loc(e.title, L)}" width="800" height="500" loading="lazy" decoding="async"/></div>
     <div>
-      <p class="kicker">${d} · ${loc(e.place, L)}</p>
+      <p class="kicker">${loc(e.place, L)}</p>
       <h3>${loc(e.title, L)}</h3>
       <p>${loc(e.text, L)}</p>
     </div>

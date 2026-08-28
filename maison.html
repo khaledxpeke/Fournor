@@ -15,10 +15,10 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/src/styles/main.css" />
-    <link rel="preload" as="image" href="/images/maison.webp" fetchpriority="high" />
+    <link rel="preload" as="image" href="/images/expertise.webp" fetchpriority="high" />
     <meta name="theme-color" content="#f4efe6" />
-    <meta name="description" content="La Maison Fourn’Or : Société Tayara Distribution, farines spéciales et améliorant de panification depuis 2020 à Tunis." />
-    <title>La Maison — Fourn’Or</title>
+    <meta name="description" content="SATIA accompagne les industriels agroalimentaires, pâtissiers et artisans boulangers : solutions, mélanges et ingrédients." />
+    <title>Présentation — SATIA</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,500&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
@@ -26,74 +26,51 @@
   </head>
   <body data-page="maison">
     <main>
-      <section class="maison-open wrap">
-        <figure class="maison-open-photo">
-          <img src="/images/maison.webp" alt="Pain de campagne tranché" width="1600" height="1200" fetchpriority="high" decoding="async" />
+      <section class="page-open wrap">
+        <figure class="page-open-photo">
+          <img src="/images/expertise.webp" alt="SATIA" width="1600" height="1200" fetchpriority="high" decoding="async" />
         </figure>
-        <div class="maison-open-copy">
+        <div class="page-open-copy">
           <p class="kicker" data-i18n="page.kicker"></p>
-          <h1 data-i18n="maison.hero">La Maison</h1>
+          <h1 data-i18n="maison.hero">Présentation</h1>
           <p class="lead" data-i18n="maison.lead"></p>
-          <h2 data-i18n="maison.storyTitle"></h2>
-          <p data-i18n="maison.story"></p>
+          <p data-i18n="hero.quote"></p>
         </div>
       </section>
 
       <section class="section" style="padding-top:0">
-        <div class="wrap">
-          <div class="section-head">
-            <p class="kicker" data-i18n="page.kicker"></p>
-            <h2 data-i18n="maison.valuesTitle"></h2>
-          </div>
-          <div class="values">
-            <article class="value">
-              <h3 data-i18n="maison.v1"></h3>
-              <p data-i18n="maison.v1t"></p>
-            </article>
-            <article class="value">
-              <h3 data-i18n="maison.v2"></h3>
-              <p data-i18n="maison.v2t"></p>
-            </article>
-            <article class="value">
-              <h3 data-i18n="maison.v3"></h3>
-              <p data-i18n="maison.v3t"></p>
-            </article>
-            <article class="value">
-              <h3 data-i18n="maison.v4"></h3>
-              <p data-i18n="maison.v4t"></p>
-            </article>
-          </div>
+        <div class="wrap pres-pillars">
+          <article class="reveal">
+            <h2 data-i18n="sol.hero">Solution</h2>
+            <p class="pillar-tagline" data-i18n="sol.title"></p>
+            <p data-i18n="sol.lead"></p>
+            <p data-i18n="sol.text"></p>
+            <a class="btn btn-gold" href="/solution.html" data-i18n="pillars.seeSol"></a>
+          </article>
+          <article class="reveal">
+            <h2 data-i18n="atelier.kicker">Mélanges</h2>
+            <p class="pillar-tagline" data-i18n="atelier.title"></p>
+            <p data-i18n="atelier.lead"></p>
+            <p data-i18n="maison.mixExtra"></p>
+            <a class="btn btn-gold" href="/gamme.html" data-i18n="pillars.seeMix"></a>
+          </article>
+          <article class="reveal">
+            <h2 data-i18n="ing.hero">Ingrédients</h2>
+            <p class="pillar-tagline" data-i18n="ing.title"></p>
+            <p data-i18n="ing.lead"></p>
+            <p data-i18n="ing.text"></p>
+            <a class="btn btn-gold" href="/ingredients.html" data-i18n="pillars.seeIng"></a>
+          </article>
         </div>
       </section>
 
       <section class="section" style="padding-top:0">
-        <div class="wrap maison-notes">
-          <article>
-            <h2 data-i18n="maison.engageTitle"></h2>
-            <p data-i18n="maison.engage"></p>
-          </article>
-          <article>
-            <h2 data-i18n="maison.listenTitle"></h2>
-            <p data-i18n="maison.listen"></p>
-          </article>
-        </div>
-      </section>
-
-      <section class="section section-charcoal">
-        <div class="wrap">
-          <p class="kicker" data-i18n="page.kicker"></p>
-          <h2 data-i18n="maison.groupTitle"></h2>
-          <p class="lead" data-i18n="maison.group"></p>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="wrap">
-          <div class="section-head">
-            <p class="kicker" data-i18n="maison.partnersTitle"></p>
-            <h2 data-i18n="maison.partnersLead"></h2>
+        <div class="cta-band reveal">
+          <div>
+            <h2 data-i18n="cta.title"></h2>
+            <p data-i18n="cta.text"></p>
           </div>
-          <ul class="partner-list" id="partners"></ul>
+          <a class="btn btn-gold" href="/contact.html" data-i18n="cta.btn"></a>
         </div>
       </section>
     </main>

@@ -1,7 +1,7 @@
 const dict = {
   fr: {
     "meta.home": "SATIA — Solution, mélange, ingrédient",
-    "meta.maison": "La Maison — SATIA",
+    "meta.maison": "Présentation — SATIA",
     "meta.solution": "Solution — SATIA",
     "meta.gamme": "Mélanges — SATIA",
     "meta.produit": "Fiche produit — SATIA",
@@ -19,7 +19,7 @@ const dict = {
     "meta.desc.partenaires":
       "Les partenaires SATIA — Artésienne de Minoterie, farines et mélanges meuniers.",
     "meta.desc.maison":
-      "La Maison Fourn’Or : Société Tayara Distribution, farines spéciales et améliorant de panification depuis 2020 à Tunis.",
+      "SATIA accompagne les industriels agroalimentaires, pâtissiers et artisans boulangers : solutions, mélanges et ingrédients.",
     "meta.desc.gamme":
       "Dix prémix Fourn’Or — Banette, Tradition, Complet, Campagne, graines et plus — dosés à 2 %, 30 % ou 50 %.",
     "meta.desc.produit": "Fiche technique d’un prémix Fourn’Or : dosage, usage et profil sensoriel.",
@@ -29,7 +29,7 @@ const dict = {
     "meta.desc.contact": "Contacter SATIA à Soliman : Route de Korbous km 2, 8020 Soliman, Nabeul. Tél. +216 98 692 222.",
     "skip": "Aller au contenu",
     "nav.home": "Accueil",
-    "nav.maison": "La Maison",
+    "nav.maison": "Présentation",
     "nav.solution": "Solution",
     "nav.gamme": "Mélanges",
     "nav.melanges": "Mélanges",
@@ -135,32 +135,11 @@ const dict = {
     "footer.copy": "© SATIA — Société Tayara Distribution",
     "footer.photo": "Photos : archives STD Tayara.",
     "page.kicker": "SATIA",
-    "maison.hero": "La Maison",
+    "maison.hero": "Présentation",
     "maison.lead":
-      "Une identité chaleureuse, authentique et premium, inspirée du grain, de la terre et de la valeur du savoir-faire.",
-    "maison.storyTitle": "STD, depuis 2020",
-    "maison.story":
-      "Depuis sa création en 2020, la Société Tayara Distribution s’est spécialisée dans la production, la vente et la distribution d’une gamme très variée de farines spéciales de qualité supérieure, ainsi que la commercialisation de l’améliorant de panification. Ces produits, prisés sur le marché local, s’adressent aux professionnels et à la grande consommation.",
-    "maison.engageTitle": "Notre engagement",
-    "maison.engage":
-      "Fournir les meilleurs produits, donner entière satisfaction, et rester proches de nos clients partenaires. La qualité, la sécurité, le savoir-faire et la recherche de nouvelles saveurs fondent la confiance.",
-    "maison.listenTitle": "Assistance et écoute",
-    "maison.listen":
-      "Des boulangers-formateurs et démonstrateurs assurent la formation, accompagnent au fournil et conseillent sur la meilleure façon d’utiliser chaque prémix.",
-    "maison.valuesTitle": "Quatre piliers",
-    "maison.v1": "Authenticité",
-    "maison.v1t": "Naturel, simple, rassurant.",
-    "maison.v2": "Qualité",
-    "maison.v2t": "Précis, soigné, premium.",
-    "maison.v3": "Tradition",
-    "maison.v3t": "Savoir-faire, matière, terroir.",
-    "maison.v4": "Modernité",
-    "maison.v4t": "Épuré, lisible, adaptable.",
-    "maison.groupTitle": "Le groupe",
-    "maison.group":
-      "Fourn’Or s’appuie sur l’amont meunier du groupe Tayara — Les Moulins Modernes de Tunis (MMT) — pour relier le blé au pain. La marque Fourn’Or est le visage des prémix ; STD en est la maison.",
-    "maison.partnersTitle": "Maisons partenaires",
-    "maison.partnersLead": "Des fournil qui font déjà lever Fourn’Or en Tunisie.",
+      "SATIA accompagne les industriels agroalimentaires, les pâtissiers et les artisans boulangers avec trois piliers : des solutions industrielles sur mesure, une large gamme de mélanges, et l’ensemble des ingrédients nécessaires à la production.",
+    "maison.mixExtra":
+      "Sous la marque FOURN’OR, nos prémix panification et viennoiserie garantissent régularité, praticité et qualité constante, quelle que soit l’échelle de production : de la boulangerie artisanale à l’unité industrielle.",
     "gamme.hero": "Mélanges",
     "gamme.lead":
       "Une gamme de mélanges — prémix poudres, mix poudres et mix liquides — pour l’industrie, la pâtisserie et la boulangerie.",
@@ -244,7 +223,7 @@ const dict = {
   },
   en: {
     "meta.home": "SATIA — Solution, blend, ingredient",
-    "meta.maison": "The House — SATIA",
+    "meta.maison": "Presentation — SATIA",
     "meta.solution": "Solution — SATIA",
     "meta.gamme": "Blends — SATIA",
     "meta.produit": "Product sheet — SATIA",
@@ -260,7 +239,7 @@ const dict = {
     "meta.desc.ingredients":
       "SATIA supplies raw materials, specific blends and packaging, with quality and traceability.",
     "meta.desc.maison":
-      "The Fourn’Or house: Société Tayara Distribution, speciality flours and bread improvers since 2020 in Tunis.",
+      "SATIA supports food manufacturers, pastry chefs and artisan bakers: solutions, blends and ingredients.",
     "meta.desc.gamme":
       "Ten Fourn’Or premixes — Banette, Tradition, Complet, Campagne, seeds and more — dosed at 2%, 30% or 50%.",
     "meta.desc.produit": "Technical sheet for a Fourn’Or premix: dosage, use and sensory profile.",
@@ -271,7 +250,7 @@ const dict = {
     "meta.desc.contact": "Contact SATIA in Soliman: Route de Korbous km 2, 8020 Soliman, Nabeul. Tel. +216 98 692 222.",
     "skip": "Skip to content",
     "nav.home": "Home",
-    "nav.maison": "The House",
+    "nav.maison": "Presentation",
     "nav.solution": "Solution",
     "nav.gamme": "Blends",
     "nav.melanges": "Blends",
@@ -377,32 +356,11 @@ const dict = {
     "footer.copy": "© SATIA — Société Tayara Distribution",
     "footer.photo": "Photos: STD Tayara archives.",
     "page.kicker": "SATIA",
-    "maison.hero": "The House",
+    "maison.hero": "Presentation",
     "maison.lead":
-      "A warm, authentic, premium identity, inspired by grain, earth and the value of craft.",
-    "maison.storyTitle": "STD, since 2020",
-    "maison.story":
-      "Since 2020, Société Tayara Distribution has specialised in producing, selling and distributing a wide range of premium speciality flours, as well as bread improvers. These products, valued on the local market, serve professionals and retail consumers.",
-    "maison.engageTitle": "Our commitment",
-    "maison.engage":
-      "To provide the best products, to satisfy fully, and to stay close to partner clients. Quality, safety, craft and the search for new flavours earn trust.",
-    "maison.listenTitle": "Support and listening",
-    "maison.listen":
-      "Baker-trainers and demonstrators deliver training, support in the bakery, and advice on how to use each premix.",
-    "maison.valuesTitle": "Four pillars",
-    "maison.v1": "Authenticity",
-    "maison.v1t": "Natural, simple, reassuring.",
-    "maison.v2": "Quality",
-    "maison.v2t": "Precise, careful, premium.",
-    "maison.v3": "Tradition",
-    "maison.v3t": "Craft, material, terroir.",
-    "maison.v4": "Modernity",
-    "maison.v4t": "Clean, legible, adaptable.",
-    "maison.groupTitle": "The group",
-    "maison.group":
-      "Fourn’Or sits downstream of the Tayara milling group — Les Moulins Modernes de Tunis (MMT) — linking wheat to bread. Fourn’Or is the premix face; STD is the house.",
-    "maison.partnersTitle": "Partner bakeries",
-    "maison.partnersLead": "Bakeries already baking Fourn’Or in Tunisia.",
+      "SATIA supports food manufacturers, pastry chefs and artisan bakers with three pillars: tailored industrial solutions, a wide range of blends, and all the ingredients production needs.",
+    "maison.mixExtra":
+      "Under the FOURN’OR brand, our bread and viennoiserie premixes guarantee consistency, practicality and constant quality, at any scale of production: from the artisan bakery to the industrial plant.",
     "gamme.hero": "Blends",
     "gamme.lead":
       "A range of blends — powder premixes, powder mixes and liquid mixes — for industry, pastry and bakery.",
@@ -486,7 +444,7 @@ const dict = {
   },
   ar: {
     "meta.home": "SATIA — حلول، خلطات، مكوّنات",
-    "meta.maison": "الدار — SATIA",
+    "meta.maison": "تقديم — SATIA",
     "meta.solution": "الحلول — SATIA",
     "meta.gamme": "الخلطات — SATIA",
     "meta.produit": "بطاقة المنتج — SATIA",
@@ -504,7 +462,7 @@ const dict = {
     "meta.desc.partenaires":
       "شركاء SATIA — Artésienne de Minoterie، دقيق وخلطات مطاحن.",
     "meta.desc.maison":
-      "دار Fourn’Or: شركة تيارة للتوزيع، دقيق خاص ومحسّن خبز منذ 2020 في تونس.",
+      "ترافق SATIA صناعيي الصناعات الغذائية والحلوانيّين والخبّازين الحرفيين: حلول وخلطات ومكوّنات.",
     "meta.desc.gamme":
       "عشرة خلطات Fourn’Or جاهزة — بانيت، تراديسيون، كامل، كامبان وبذور وأكثر — بجرعات 2٪ و30٪ و50٪.",
     "meta.desc.produit": "بطاقة تقنية لخلطة Fourn’Or: الجرعة والاستخدام والملف الحسّي.",
@@ -514,7 +472,7 @@ const dict = {
     "meta.desc.contact": "الاتصال بـ SATIA في سليمان: طريق قربص كم 2، 8020 سليمان، نابل. هاتف +216 98 692 222.",
     "skip": "الانتقال إلى المحتوى",
     "nav.home": "الرئيسية",
-    "nav.maison": "الدار",
+    "nav.maison": "تقديم",
     "nav.solution": "الحلول",
     "nav.gamme": "الخلطات",
     "nav.melanges": "الخلطات",
@@ -620,32 +578,11 @@ const dict = {
     "footer.copy": "© SATIA — شركة تيارة للتوزيع",
     "footer.photo": "الصور: أرشيف STD Tayara.",
     "page.kicker": "SATIA",
-    "maison.hero": "الدار",
+    "maison.hero": "تقديم",
     "maison.lead":
-      "هوية دافئة وأصيلة وراقية، مستوحاة من الحبّة والأرض وقيمة المهارة.",
-    "maison.storyTitle": "STD، منذ 2020",
-    "maison.story":
-      "منذ تأسيسها سنة 2020، تخصّصت شركة تيارة للتوزيع في إنتاج وبيع وتوزيع مجموعة متنوّعة من الدقيق الخاص عالي الجودة، وتسويق محسّن الخبز. هذه المنتجات، المطلوبة في السوق المحلية، موجّهة للمهنيين وللاستهلاك الواسع.",
-    "maison.engageTitle": "التزامنا",
-    "maison.engage":
-      "توفير أفضل المنتجات، وإرضاء شركائنا بالكامل، والبقاء قريبين منهم. الجودة والسلامة والمهارة والبحث عن نكهات جديدة تبني الثقة.",
-    "maison.listenTitle": "المساعدة والإنصات",
-    "maison.listen":
-      "خبّازون مكوِّنون وعارضون يضمنون التكوين، ويرافقون في الفرن، وينصحون بأفضل طريقة لاستخدام كل خلطة.",
-    "maison.valuesTitle": "أربعة أعمدة",
-    "maison.v1": "الأصالة",
-    "maison.v1t": "طبيعي، بسيط، مطمئن.",
-    "maison.v2": "الجودة",
-    "maison.v2t": "دقيق، متقن، راقٍ.",
-    "maison.v3": "التقاليد",
-    "maison.v3t": "مهارة، مادة، تراب.",
-    "maison.v4": "الحداثة",
-    "maison.v4t": "صافٍ، مقروء، قابل للتكيّف.",
-    "maison.groupTitle": "المجموعة",
-    "maison.group":
-      "تستند Fourn’Or إلى سلسلة الطحن في مجموعة تيارة — مطاحن تونس الحديثة (MMT) — لربط القمح بالخبز. علامة Fourn’Or هي وجه الخلطات؛ وSTD هي الدار.",
-    "maison.partnersTitle": "دور شريكة",
-    "maison.partnersLead": "أفران تخبز أصلاً بـ Fourn’Or في تونس.",
+      "ترافق SATIA صناعيي الصناعات الغذائية والحلوانيّين والخبّازين الحرفيين بثلاثة أعمدة: حلول صناعية حسب الطلب، ومجموعة واسعة من الخلطات، وجميع المكوّنات اللازمة للإنتاج.",
+    "maison.mixExtra":
+      "تحت علامة FOURN’OR، تضمن خلطاتنا للخبز والفينوازري الانتظام والعملية والجودة الثابتة، أياً كان حجم الإنتاج: من المخبزة الحرفية إلى الوحدة الصناعية.",
     "gamme.hero": "الخلطات",
     "gamme.lead":
       "مجموعة خلطات — بودرة جاهزة وخلطات بودرة وخلطات سائلة — للصناعة والحلويات والمخابز.",
