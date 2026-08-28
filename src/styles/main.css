@@ -17,6 +17,7 @@
   --page: 1680px;
   --page-wide: 1840px;
   --gutter: clamp(6rem, 7.5vw, 8rem);
+  --band-gap: clamp(1.6rem, 3.4vw, 2.6rem);
 }
 
 *,
@@ -821,28 +822,64 @@ p {
 }
 
 .ad-band {
-  margin: 0.85rem var(--gutter);
+  margin: 0 var(--gutter);
+}
+
+body[data-page="home"] main > .section {
+  padding-block: 0;
+  margin-top: var(--band-gap);
+}
+
+body[data-page="home"] main > .ad-band,
+body[data-page="home"] main > .mix-band {
+  margin-top: var(--band-gap);
+  margin-bottom: 0;
+}
+
+.ad-band:not(.ad-band-split) {
+  display: flex;
+  justify-content: center;
+}
+
+.ad-band-split {
+  display: flex;
+  justify-content: center;
 }
 
 .ad-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1rem;
+  gap: 1.75rem;
+  width: 100%;
 }
 
 .ad-frame {
   position: relative;
-  display: grid;
-  align-items: center;
-  aspect-ratio: 3 / 1;
+  display: block;
+  aspect-ratio: 21 / 5;
+  max-height: 13rem;
+  min-height: 7.5rem;
   overflow: hidden;
   border-radius: var(--radius-lg);
   background: #1c1a17;
+  text-decoration: none;
+  color: inherit;
+}
+
+.ad-band:not(.ad-band-split) .ad-frame {
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+  height: 12.5rem;
+  max-height: none;
+  aspect-ratio: auto;
 }
 
 .ad-band-split .ad-frame {
-  aspect-ratio: 12 / 5;
-  align-items: end;
+  width: 100%;
+  height: 12.5rem;
+  max-height: none;
+  aspect-ratio: auto;
 }
 
 .ad-frame img {
@@ -853,6 +890,11 @@ p {
   max-width: none;
   object-fit: cover;
   object-position: center 40%;
+  transition: transform 0.7s var(--ease);
+}
+
+a.ad-frame:hover img {
+  transform: scale(1.05);
 }
 
 .ad-frame::after {
@@ -861,16 +903,11 @@ p {
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  background: linear-gradient(
-    90deg,
-    rgb(22 20 18 / 0.84) 0%,
-    rgb(22 20 18 / 0.48) 46%,
-    rgb(22 20 18 / 0.12) 100%
-  );
+  background: rgb(22 20 18 / 0.12);
 }
 
 .ad-band-split .ad-frame::after {
-  background: linear-gradient(180deg, rgb(22 20 18 / 0.18) 0%, rgb(22 20 18 / 0.86) 100%);
+  background: rgb(22 20 18 / 0.1);
 }
 
 .ad-copy {
@@ -2342,6 +2379,9 @@ body[data-page="gamme"] .page-hero .lead {
 
   .ad-grid {
     grid-template-columns: 1fr;
+    width: 100%;
+    max-width: none;
+    gap: 1rem;
   }
 
   .prod-spec-main,
@@ -2591,35 +2631,19 @@ body[data-page="gamme"] .page-hero .lead {
   }
 
   .ad-frame {
-    aspect-ratio: 1 / 1;
+    height: 9.5rem;
+    max-height: none;
+    aspect-ratio: auto;
     border-radius: 1.6rem;
-    align-items: end;
+  }
+
+  .ad-band:not(.ad-band-split) .ad-frame {
+    width: 100%;
+    height: 9.5rem;
   }
 
   .ad-frame::after {
-    background: linear-gradient(180deg, rgb(22 20 18 / 0.18) 0%, rgb(22 20 18 / 0.86) 100%);
-  }
-
-  .ad-copy {
-    max-width: none;
-    padding: 1.25rem 1.15rem 1.4rem;
-  }
-
-  .ad-copy h2 {
-    font-size: clamp(1.45rem, 6.5vw, 2rem);
-    line-height: 1.18;
-  }
-
-  .ad-copy .lead {
-    font-size: 0.95rem;
-    max-width: none;
-  }
-
-  .ad-copy .btn {
-    width: 100%;
-    white-space: normal;
-    text-align: center;
-    line-height: 1.35;
+    background: rgb(22 20 18 / 0.12);
   }
 
   .ad-label {
@@ -2631,7 +2655,8 @@ body[data-page="gamme"] .page-hero .lead {
   }
 
   .ad-band-split .ad-frame {
-    aspect-ratio: 5 / 4;
+    height: 9.5rem;
+    aspect-ratio: auto;
   }
 
   .cta-band {
@@ -2861,16 +2886,11 @@ html[dir="rtl"] .hero::before {
 }
 
 html[dir="rtl"] .ad-frame::after {
-  background: linear-gradient(
-    270deg,
-    rgb(22 20 18 / 0.84) 0%,
-    rgb(22 20 18 / 0.48) 46%,
-    rgb(22 20 18 / 0.12) 100%
-  );
+  background: rgb(22 20 18 / 0.12);
 }
 
 html[dir="rtl"] .ad-band-split .ad-frame::after {
-  background: linear-gradient(180deg, rgb(22 20 18 / 0.18) 0%, rgb(22 20 18 / 0.86) 100%);
+  background: rgb(22 20 18 / 0.1);
 }
 
 html[dir="rtl"] .ad-label {
@@ -2950,7 +2970,7 @@ html[dir="rtl"] .photo-badge {
   }
 
   html[dir="rtl"] .ad-frame::after {
-    background: linear-gradient(180deg, rgb(22 20 18 / 0.18) 0%, rgb(22 20 18 / 0.86) 100%);
+    background: rgb(22 20 18 / 0.12);
   }
 
   html[dir="rtl"] .site-header {
