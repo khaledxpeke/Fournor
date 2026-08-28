@@ -790,7 +790,7 @@ body[data-page="home"] main > .mix-band {
 
 .ad-band-split .ad-frame {
   width: 100%;
-  height: 12.5rem;
+  height: calc(26rem * 10 / 16);
   max-height: none;
   aspect-ratio: auto;
 }
