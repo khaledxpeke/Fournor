@@ -33,7 +33,6 @@ function productCard(p, { decoy = false } = {}) {
       <span class="photo-badge">${p.dosage}%</span>
     </div>
     <div class="p-card-body">
-      <span class="badge">${p.dosage}%</span>
       <h3>${loc(p.name, L)}</h3>
       <p>${loc(p.promise, L)}</p>
       <span class="more" data-i18n="gamme.more">${t("gamme.more", L)}</span>
@@ -62,9 +61,9 @@ function renderHome() {
   const L = lang();
   const rail = document.getElementById("atelier-rail");
   if (rail) {
-    rail.innerHTML =
-      products.map((p) => productCard(p)).join("") +
-      products.map((p) => productCard(p, { decoy: true })).join("");
+    const cards = products.map((p) => productCard(p)).join("");
+    const decoys = products.map((p) => productCard(p, { decoy: true })).join("");
+    rail.innerHTML = `<div class="atelier-shift"><div class="atelier-track">${cards}${decoys}</div></div>`;
   }
   const news = document.getElementById("home-news");
   if (news) news.innerHTML = events.slice(0, 3).map(eventCard).join("");
@@ -446,130 +445,132 @@ function setupContact() {
   });
 }
 
+let atelierGoTo = () => {};
+let atelierDotRaf = 0;
+
 function setupAtelierNav() {
   const rail = document.getElementById("atelier-rail");
   const prev = document.getElementById("atelier-prev");
   const next = document.getElementById("atelier-next");
-  const stage = rail?.closest(".atelier-stage");
+  const dots = document.getElementById("atelier-dots");
   if (!rail || !prev || !next) return;
 
   const L = lang();
   const rtl = isRtl(L);
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const count = products.length;
   prev.setAttribute("aria-label", t("atelier.prev", L));
   next.setAttribute("aria-label", t("atelier.next", L));
   prev.textContent = rtl ? "›" : "‹";
   next.textContent = rtl ? "‹" : "›";
+  prev.disabled = false;
+  next.disabled = false;
+  rail.classList.toggle("is-static", reduceMotion);
 
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const looping = !reduceMotion && rail.querySelectorAll(".p-card").length > products.length;
+  if (dots) {
+    dots.setAttribute("aria-label", t("atelier.dots", L));
+    dots.innerHTML = products
+      .map(
+        (p, i) =>
+          `<button type="button" class="atelier-dot" data-index="${i}" aria-label="${loc(p.name, L)}"></button>`
+      )
+      .join("");
+  }
 
+  const shift = () => rail.querySelector(".atelier-shift");
+  const cards = () => [...rail.querySelectorAll(".p-card")];
   const step = () => {
     const card = rail.querySelector(".p-card");
-    return (card?.getBoundingClientRect().width || 240) + 20;
+    return (card?.getBoundingClientRect().width || 240) + 18;
   };
 
-  const wrapScroll = () => {
-    if (!looping) return;
-    const loop = rail.scrollWidth / 2;
-    if (loop <= 0) return;
-    if (isRtl()) {
-      if (rail.scrollLeft <= -loop) rail.scrollLeft += loop;
-      else if (rail.scrollLeft > 0) rail.scrollLeft -= loop;
-    } else if (rail.scrollLeft >= loop) rail.scrollLeft -= loop;
-    else if (rail.scrollLeft < 0) rail.scrollLeft += loop;
+  const go = (dir) => {
+    const el = shift();
+    if (!el) return;
+    const jump = Number(rail.dataset.jump || 0) + (rtl ? 1 : -1) * dir * step() * 2;
+    rail.dataset.jump = String(jump);
+    el.style.transform = `translateX(${jump}px)`;
   };
 
-  const update = () => {
-    wrapScroll();
-    if (looping) {
-      prev.disabled = false;
-      next.disabled = false;
-      return;
+  const goTo = (index) => {
+    const el = shift();
+    const list = cards();
+    if (!el || !list.length) return;
+    const railBox = rail.getBoundingClientRect();
+    const start = rtl ? railBox.right : railBox.left;
+    const pick = [list[index], list[index + count]].filter(Boolean).reduce((best, card) => {
+      const box = card.getBoundingClientRect();
+      const edge = rtl ? box.right : box.left;
+      const dist = Math.abs(edge - start);
+      if (!best || dist < best.dist) return { card, dist };
+      return best;
+    }, null);
+    if (!pick) return;
+    const box = pick.card.getBoundingClientRect();
+    const edge = rtl ? box.right : box.left;
+    const delta = edge - start;
+    const jump = Number(rail.dataset.jump || 0) + (rtl ? delta : -delta);
+    rail.dataset.jump = String(jump);
+    el.style.transform = `translateX(${jump}px)`;
+  };
+
+  const syncDots = () => {
+    if (!dots) return;
+    const list = cards();
+    if (list.length < count) return;
+    const railBox = rail.getBoundingClientRect();
+    const start = rtl ? railBox.right : railBox.left;
+    let active = 0;
+    let best = Infinity;
+    for (let i = 0; i < count; i += 1) {
+      const pair = [list[i], list[i + count]].filter(Boolean);
+      const dist = Math.min(
+        ...pair.map((card) => {
+          const box = card.getBoundingClientRect();
+          const edge = rtl ? box.right : box.left;
+          return Math.abs(edge - start);
+        })
+      );
+      if (dist < best) {
+        best = dist;
+        active = i;
+      }
     }
-    const max = rail.scrollWidth - rail.clientWidth - 4;
-    prev.disabled = rail.scrollLeft <= 4;
-    next.disabled = rail.scrollLeft >= max;
+    dots.querySelectorAll(".atelier-dot").forEach((dot, i) => {
+      dot.classList.toggle("is-on", i === active);
+      dot.setAttribute("aria-current", i === active ? "true" : "false");
+    });
   };
+
+  atelierGoTo = goTo;
 
   if (!rail.dataset.navReady) {
     rail.dataset.navReady = "1";
-
-    const go = (dir) => {
-      const axis = isRtl() ? -1 : 1;
-      rail.classList.add("is-manual");
-      rail.scrollBy({ left: axis * dir * step() * 2, behavior: "smooth" });
-      window.setTimeout(() => rail.classList.remove("is-manual"), 700);
-    };
-
     prev.addEventListener("click", () => go(-1));
     next.addEventListener("click", () => go(1));
-    rail.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
     rail.addEventListener("keydown", (e) => {
       if (e.key === "ArrowRight") {
         e.preventDefault();
-        go(isRtl() ? -1 : 1);
+        go(rtl ? -1 : 1);
       }
       if (e.key === "ArrowLeft") {
         e.preventDefault();
-        go(isRtl() ? 1 : -1);
+        go(rtl ? 1 : -1);
       }
     });
-
-    if (!reduceMotion) {
-      rail.classList.add("is-autoplay");
-      let paused = false;
-      let inView = true;
-      let resumeAt = 0;
-      let last = 0;
-      const speed = 42;
-
-      const hold = (ms = 4500) => {
-        paused = true;
-        resumeAt = performance.now() + ms;
-      };
-
-      const tick = (now) => {
-        if (!last) last = now;
-        const dt = Math.min(now - last, 48);
-        last = now;
-        if (paused && now >= resumeAt && !stage?.matches(":hover") && !rail.matches(":focus-within")) {
-          paused = false;
-        }
-        if (!paused && inView && !document.hidden && !rail.classList.contains("is-manual")) {
-          const axis = isRtl() ? -1 : 1;
-          rail.scrollLeft += (axis * speed * dt) / 1000;
-          wrapScroll();
-        }
-        requestAnimationFrame(tick);
-      };
-
-      stage?.addEventListener("mouseenter", () => hold(999999));
-      stage?.addEventListener("mouseleave", () => hold(400));
-      rail.addEventListener("pointerdown", () => hold(5000));
-      rail.addEventListener("wheel", () => hold(5000), { passive: true });
-      prev.addEventListener("click", () => hold(5000));
-      next.addEventListener("click", () => hold(5000));
-      document.addEventListener("visibilitychange", () => {
-        if (document.hidden) hold(999999);
-        else hold(600);
-      });
-
-      if ("IntersectionObserver" in window) {
-        const io = new IntersectionObserver(
-          ([entry]) => {
-            inView = entry.isIntersecting;
-          },
-          { threshold: 0.12 }
-        );
-        io.observe(rail);
-      }
-
-      requestAnimationFrame(tick);
-    }
+    dots?.addEventListener("click", (e) => {
+      const btn = e.target.closest(".atelier-dot");
+      if (!btn) return;
+      atelierGoTo(Number(btn.dataset.index));
+    });
   }
 
-  requestAnimationFrame(update);
+  if (atelierDotRaf) cancelAnimationFrame(atelierDotRaf);
+  const tick = () => {
+    syncDots();
+    atelierDotRaf = requestAnimationFrame(tick);
+  };
+  atelierDotRaf = requestAnimationFrame(tick);
 }
 
 function paint() {
