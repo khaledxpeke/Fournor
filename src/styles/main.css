@@ -499,8 +499,6 @@ p {
   margin: 0.8rem auto 0;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  display: grid;
-  align-items: center;
   background: #6a655e;
 }
 
@@ -514,91 +512,6 @@ p {
   object-position: center 52%;
   pointer-events: none;
   z-index: 0;
-}
-
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, rgb(22 20 18 / 0.66) 0%, rgb(22 20 18 / 0.28) 52%, rgb(22 20 18 / 0.08) 100%);
-  z-index: 1;
-}
-
-.hero-copy {
-  position: relative;
-  z-index: 2;
-  padding: clamp(1.5rem, 3.2vw, 2.4rem) clamp(1.3rem, 3.5vw, 2.6rem) clamp(1.7rem, 3.5vw, 2.5rem);
-  max-width: min(36rem, 100%);
-  color: var(--ivory);
-}
-
-.hero-copy h1 {
-  font-size: clamp(1.85rem, 3.6vw, 3.15rem);
-  line-height: 1.08;
-  margin: 0.1em 0 0.28em;
-  text-wrap: balance;
-  overflow-wrap: break-word;
-  hyphens: none;
-}
-
-.hero-copy .kicker,
-.hero-copy .lead,
-.hero-copy h1,
-.hero-quote {
-  color: var(--ivory);
-}
-
-.hero-copy .lead {
-  color: #eee7db;
-  font-size: clamp(0.95rem, 1.5vw, 1.08rem);
-  max-width: 42ch;
-  margin-bottom: 1rem;
-  text-wrap: pretty;
-  overflow-wrap: break-word;
-  hyphens: none;
-}
-
-.hero-quote {
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: clamp(1.05rem, 1.8vw, 1.25rem);
-  margin-top: 0.85rem;
-  margin-bottom: 0;
-  opacity: 0.88;
-  text-wrap: pretty;
-}
-
-.hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.55rem;
-  margin-top: 0.15rem;
-}
-
-.hero-actions .btn {
-  white-space: nowrap;
-  min-height: 2.65rem;
-  padding: 0.55rem 1.15rem;
-  font-size: 0.7rem;
-}
-
-.hero .btn-ghost {
-  background: rgb(255 255 255 / 0.16);
-  border-color: rgb(255 255 255 / 0.4);
-  color: #fff;
-}
-
-.hero-caption {
-  position: absolute;
-  inset-inline-end: 1.2rem;
-  bottom: 1.1rem;
-  z-index: 2;
-  background: rgb(251 248 242 / 0.92);
-  padding: 0.4rem 0.8rem;
-  font-size: 0.68rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  border-radius: var(--pill);
 }
 
 .section {
@@ -848,8 +761,8 @@ body[data-page="home"] main > .mix-band {
 
 .ad-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.75rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
   width: 100%;
 }
 
@@ -2456,10 +2369,6 @@ body[data-page="gamme"] .page-hero .lead {
   .maison-open-photo img {
     aspect-ratio: 16 / 10;
   }
-
-  .hero-caption {
-    display: none;
-  }
 }
 
 @media (max-width: 720px) {
@@ -2507,34 +2416,6 @@ body[data-page="gamme"] .page-hero .lead {
 
   .hero-bg {
     object-position: center 40%;
-  }
-
-  .hero::before {
-    background: linear-gradient(180deg, rgb(22 20 18 / 0.22) 0%, rgb(22 20 18 / 0.78) 100%);
-  }
-
-  .hero-copy {
-    padding: 1.25rem 1.1rem 1.35rem;
-    max-width: none;
-  }
-
-  .hero-copy h1 {
-    font-size: clamp(1.7rem, 7.5vw, 2.25rem);
-    line-height: 1.1;
-  }
-
-  .hero-copy .lead {
-    font-size: 0.95rem;
-    max-width: none;
-  }
-
-  .hero-quote {
-    font-size: 1.05rem;
-    margin-top: 0.75rem;
-  }
-
-  .hero-caption {
-    display: none;
   }
 
   .rings,
@@ -2734,18 +2615,6 @@ body[data-page="gamme"] .page-hero .lead {
     grid-template-columns: 1fr;
   }
 
-  .hero-actions {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .hero-actions .btn {
-    width: 100%;
-    white-space: normal;
-    text-align: center;
-    line-height: 1.3;
-  }
-
   .card-grid,
   .values {
     grid-template-columns: 1fr;
@@ -2800,7 +2669,6 @@ body[data-page="gamme"] .page-hero .lead {
   .nav-toggle,
   .lang,
   .skip,
-  .hero-actions,
   .marquee,
   .ad-band,
   form,
@@ -2845,7 +2713,6 @@ html[dir="rtl"] h3 {
   line-height: 1.35;
 }
 
-html[dir="rtl"] .hero-copy h1,
 html[dir="rtl"] .page-hero h1,
 html[dir="rtl"] .page-open-copy h1,
 html[dir="rtl"] .maison-open-copy h1,
@@ -2860,7 +2727,6 @@ html[dir="rtl"] .btn,
 html[dir="rtl"] .more,
 html[dir="rtl"] .badge,
 html[dir="rtl"] .photo-badge,
-html[dir="rtl"] .hero-caption,
 html[dir="rtl"] .form label,
 html[dir="rtl"] .footer-label,
 html[dir="rtl"] .composer-pick label,
@@ -2869,20 +2735,6 @@ html[dir="rtl"] .value h3::before,
 html[dir="rtl"] .mix-tile-label {
   letter-spacing: 0;
   text-transform: none;
-}
-
-html[dir="rtl"] .hero-quote {
-  font-style: normal;
-  line-height: 1.55;
-}
-
-html[dir="rtl"] .hero::before {
-  background: linear-gradient(
-    270deg,
-    rgb(22 20 18 / 0.66) 0%,
-    rgb(22 20 18 / 0.28) 52%,
-    rgb(22 20 18 / 0.08) 100%
-  );
 }
 
 html[dir="rtl"] .ad-frame::after {
@@ -2912,7 +2764,6 @@ html[dir="rtl"] .form input[type="email"] {
   text-align: left;
 }
 
-html[dir="rtl"] .hero-actions .btn,
 html[dir="rtl"] .cta-band .btn,
 html[dir="rtl"] .ad-copy .btn {
   white-space: normal;
@@ -2955,20 +2806,6 @@ html[dir="rtl"] .photo-badge {
 }
 
 @media (max-width: 720px) {
-  html[dir="rtl"] .hero-copy h1 {
-    font-size: clamp(1.55rem, 7vw, 2.1rem);
-    line-height: 1.32;
-  }
-
-  html[dir="rtl"] .hero-copy .lead {
-    font-size: 1rem;
-    line-height: 1.7;
-  }
-
-  html[dir="rtl"] .hero::before {
-    background: linear-gradient(180deg, rgb(22 20 18 / 0.22) 0%, rgb(22 20 18 / 0.78) 100%);
-  }
-
   html[dir="rtl"] .ad-frame::after {
     background: rgb(22 20 18 / 0.12);
   }
