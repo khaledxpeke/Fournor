@@ -16,6 +16,7 @@
   --section-y: clamp(2.4rem, 5.2vw, 4.25rem);
   --page: 1680px;
   --page-wide: 1840px;
+  --gutter: clamp(1.75rem, 5.5vw, 4.25rem);
 }
 
 *,
@@ -226,7 +227,7 @@ p {
 }
 
 .wrap {
-  width: min(var(--page), calc(100% - 3rem));
+  width: min(var(--page), calc(100% - (var(--gutter) * 2)));
   margin-inline: auto;
 }
 
@@ -610,7 +611,7 @@ p {
 }
 
 .section-charcoal {
-  margin: 0 1rem;
+  margin: 0 var(--gutter);
   border-radius: var(--radius-lg);
   background: var(--charcoal);
   color: var(--ivory);
@@ -726,7 +727,7 @@ p {
 }
 
 .mix-band {
-  margin: 0 1rem;
+  margin: 0 var(--gutter);
   padding: clamp(1.8rem, 4vw, 3.1rem) 0;
   background: var(--gold);
   color: var(--ink);
@@ -809,7 +810,7 @@ p {
 }
 
 .ad-band {
-  margin: 0.85rem 1rem;
+  margin: 0.85rem var(--gutter);
 }
 
 .ad-grid {
@@ -1122,7 +1123,7 @@ p {
 
 .feature {
   position: relative;
-  width: min(var(--page), calc(100% - 2rem));
+  width: min(var(--page), calc(100% - (var(--gutter) * 2)));
   margin: 0 auto var(--section-y);
 }
 
@@ -1181,7 +1182,7 @@ p {
   justify-content: space-between;
   align-items: center;
   gap: 2rem;
-  margin: 0 1rem;
+  margin: 0 var(--gutter);
   padding: clamp(2.4rem, 6vw, 4.2rem);
   background: var(--charcoal);
   color: var(--ivory);
@@ -1938,7 +1939,7 @@ body[data-page="gamme"] .page-hero .lead {
 .site-footer {
   background: var(--charcoal);
   color: #ddd8ce;
-  padding: 3.4rem 1.5rem 1.4rem;
+  padding: 3.4rem var(--gutter) 1.4rem;
   margin-top: 2rem;
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
 }
@@ -2207,8 +2208,8 @@ body[data-page="gamme"] .page-hero .lead {
 }
 
 @media (max-width: 900px) {
-  .wrap {
-    width: min(var(--page), calc(100% - 1.5rem));
+  :root {
+    --gutter: 1.25rem;
   }
 
   .stats,
@@ -2309,6 +2310,10 @@ body[data-page="gamme"] .page-hero .lead {
 }
 
 @media (max-width: 720px) {
+  :root {
+    --gutter: 0.65rem;
+  }
+
   .site-header {
     top: 0.45rem;
     width: auto;
@@ -2409,7 +2414,7 @@ body[data-page="gamme"] .page-hero .lead {
   }
 
   .feature {
-    width: min(var(--page), calc(100% - 1.3rem));
+    width: min(var(--page), calc(100% - (var(--gutter) * 2)));
   }
 
   .feature img {
@@ -2469,7 +2474,6 @@ body[data-page="gamme"] .page-hero .lead {
   .cta-band,
   .mix-band,
   .ad-band {
-    margin-inline: 0.65rem;
     border-radius: 1.6rem;
   }
 
@@ -2574,11 +2578,6 @@ body[data-page="gamme"] .page-hero .lead {
 @media (max-width: 520px) {
   body {
     font-size: 1rem;
-  }
-
-  .wrap,
-  .wide {
-    width: min(var(--page), calc(100% - 1.2rem));
   }
 
   h2 {
