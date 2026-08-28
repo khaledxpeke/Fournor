@@ -29,7 +29,7 @@ function productCard(p, { decoy = false } = {}) {
   const extra = decoy ? ' aria-hidden="true" tabindex="-1"' : "";
   return `<a class="p-card" href="/produit.html?id=${p.id}"${extra}>
     <div class="p-card-img">
-      <img src="${p.image}" alt="${loc(p.name, L)}" width="800" height="600" loading="lazy" decoding="async" />
+      <img src="${p.image}?v=2" alt="${loc(p.name, L)}" width="800" height="600" loading="lazy" decoding="async" />
       <span class="photo-badge">${p.dosage}%</span>
     </div>
     <div class="p-card-body">
@@ -225,7 +225,7 @@ function renderProduit() {
   root.innerHTML = `
     <div class="prod-hero">
       <div class="prod-photo">
-        <img src="${p.image}" alt="${loc(p.name, L)}" width="900" height="900" fetchpriority="high" decoding="async" />
+        <img src="${p.image}?v=2" alt="${loc(p.name, L)}" width="900" height="900" fetchpriority="high" decoding="async" />
       </div>
       <div class="prod-intro">
         <p class="kicker" data-i18n="prod.kicker">${t("prod.kicker", L)}</p>
@@ -573,6 +573,34 @@ function setupAtelierNav() {
   atelierDotRaf = requestAnimationFrame(tick);
 }
 
+function fitPillarHeadings() {
+  const headings = [...document.querySelectorAll(".pillar-heading")];
+  if (!headings.length) return;
+
+  const source =
+    document.querySelector(".sol-intro .pillar-heading") || headings[0];
+  const ref = source.closest(".mix-copy")?.querySelector(".pillar-fit-ref");
+
+  headings.forEach((heading) => {
+    heading.style.fontSize = "";
+  });
+
+  if (ref) {
+    const target = ref.getBoundingClientRect().width;
+    const current = source.getBoundingClientRect().width;
+    const size = parseFloat(getComputedStyle(source).fontSize);
+    if (target && current && size) {
+      const maxW = source.parentElement?.clientWidth || target;
+      source.style.fontSize = `${((size * Math.min(target, maxW)) / current).toFixed(2)}px`;
+    }
+  }
+
+  const shared = getComputedStyle(source).fontSize;
+  headings.forEach((heading) => {
+    if (heading !== source) heading.style.fontSize = shared;
+  });
+}
+
 function paint() {
   renderHome();
   renderGamme();
@@ -583,6 +611,7 @@ function paint() {
   setupAtelierNav();
   setupMotion();
   hydrateMedia();
+  requestAnimationFrame(fitPillarHeadings);
 }
 
 function hydrateMedia(root = document) {
@@ -601,6 +630,8 @@ function hydrateMedia(root = document) {
 }
 
 window.addEventListener("fournor:lang", paint);
+window.addEventListener("resize", fitPillarHeadings);
+if (document.fonts?.ready) document.fonts.ready.then(fitPillarHeadings);
 setupFilters();
 setupGammeSearch();
 setupContact();
