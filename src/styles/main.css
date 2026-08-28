@@ -869,6 +869,11 @@ body[data-page="home"] main > .mix-band {
   transition: transform 0.7s var(--ease);
 }
 
+.ad-band-split .ad-grid .ad-frame:nth-child(1) img,
+.ad-band-split .ad-grid .ad-frame:nth-child(2) img {
+  object-position: center 78%;
+}
+
 a.ad-frame:hover img {
   transform: scale(1.05);
 }
@@ -1451,6 +1456,28 @@ body[data-page="gamme"] .page-hero .lead {
 .page-open-copy p:last-child,
 .maison-open-copy p:last-child {
   margin-bottom: 0;
+}
+
+.page-open-logo {
+  background: none;
+  display: grid;
+  place-items: center;
+  padding: 0.4rem 0;
+  aspect-ratio: auto;
+  border-radius: 0;
+  box-shadow: none;
+  overflow: visible;
+}
+
+.page-open-logo img {
+  width: min(100%, 16rem);
+  height: auto;
+  aspect-ratio: auto;
+  object-fit: contain;
+}
+
+.page-open-logo::after {
+  display: none;
 }
 
 .page-notes,
@@ -2493,6 +2520,10 @@ body[data-page="gamme"] .page-hero .lead {
   .page-open-photo img,
   .maison-open-photo img {
     aspect-ratio: 16 / 10;
+  }
+
+  .page-open-logo img {
+    aspect-ratio: auto;
   }
 }
 
