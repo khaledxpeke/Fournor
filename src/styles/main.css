@@ -1475,6 +1475,32 @@ body[data-page="gamme"] .page-hero .lead {
   font-size: 0.9rem;
 }
 
+.partner-feature {
+  max-width: 38rem;
+  padding: 2rem 1.75rem 1.85rem;
+  background: var(--paper);
+  border-radius: var(--radius-lg);
+}
+
+.partner-logo {
+  margin: 0 0 1.35rem;
+  padding: 1.1rem 1.25rem;
+  background: #fff;
+  border-radius: 1.2rem;
+}
+
+.partner-logo img {
+  display: block;
+  width: min(100%, 28rem);
+  height: auto;
+  margin-inline: auto;
+}
+
+.partner-feature .lead {
+  margin: 0;
+  max-width: none;
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;

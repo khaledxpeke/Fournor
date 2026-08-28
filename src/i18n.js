@@ -17,7 +17,7 @@ const dict = {
     "meta.desc.ingredients":
       "SATIA fournit matières premières, mélanges spécifiques et solutions d’emballage, avec qualité et traçabilité.",
     "meta.desc.partenaires":
-      "Les maisons partenaires SATIA en Tunisie — boulangeries et fournil qui travaillent déjà avec nos mélanges.",
+      "Les partenaires SATIA — Artésienne de Minoterie, farines et mélanges meuniers.",
     "meta.desc.maison":
       "La Maison Fourn’Or : Société Tayara Distribution, farines spéciales et améliorant de panification depuis 2020 à Tunis.",
     "meta.desc.gamme":
@@ -184,10 +184,12 @@ const dict = {
       "SATIA fournit l’ensemble des ingrédients nécessaires à vos productions : matières premières brutes, mélanges spécifiques poudre et liquides formulés selon vos besoins, ainsi que les solutions d’emballage adaptées à vos produits.",
     "ing.text":
       "Que vous recherchiez un ingrédient standard ou une formulation sur mesure, notre réseau d’approvisionnement et notre expertise technique vous garantissent qualité, traçabilité et disponibilité.",
-    "part.kicker": "Réseau",
+    "part.kicker": "Partenaires",
     "part.hero": "Partenaires",
     "part.lead":
-      "Des fournil et des maisons qui font déjà lever SATIA en Tunisie. Un réseau de confiance, de Tunis à Djerba.",
+      "SATIA s’appuie sur des partenaires meuniers de référence pour la qualité des farines et des mélanges.",
+    "part.artesienne":
+      "Artésienne de Minoterie est notre partenaire meunier. Spécialiste des farines et mélanges meuniers, elle accompagne SATIA pour des formulations régulières, tracées et adaptées à l’industrie agroalimentaire, à la pâtisserie et à la boulangerie artisanale.",
     "prod.kicker": "Fiche technique",
     "prod.dosage": "Dosage",
     "prod.adds": "Le boulanger ajoute",
@@ -258,7 +260,7 @@ const dict = {
     "meta.desc.produit": "Technical sheet for a Fourn’Or premix: dosage, use and sensory profile.",
     "meta.desc.expertise": "Premix, the test bakery, and Fourn’Or baker-trainers in Tunis.",
     "meta.desc.partenaires":
-      "SATIA partner bakeries in Tunisia — houses already working with our blends.",
+      "SATIA partners — Artésienne de Minoterie, flours and miller blends.",
     "meta.desc.actualites": "The SATIA franchise network — openings, partners and network news.",
     "meta.desc.contact": "Contact SATIA in Soliman: Route de Korbous km 2, 8020 Soliman, Nabeul. Tel. +216 98 692 222.",
     "skip": "Skip to content",
@@ -418,10 +420,12 @@ const dict = {
       "SATIA supplies the ingredients your production needs: raw materials, powder and liquid mixes formulated to your brief, and packaging suited to your products.",
     "ing.text":
       "Whether you need a standard ingredient or a custom formulation, our supply network and technical expertise guarantee quality, traceability and availability.",
-    "part.kicker": "Network",
+    "part.kicker": "Partners",
     "part.hero": "Partners",
     "part.lead":
-      "Bakeries and houses already baking SATIA in Tunisia. A trusted network, from Tunis to Djerba.",
+      "SATIA works with reference milling partners for the quality of its flours and blends.",
+    "part.artesienne":
+      "Artésienne de Minoterie is our milling partner. A specialist in flours and miller blends, it supports SATIA with consistent, traceable formulations for the food industry, pastry and artisan bakery.",
     "prod.kicker": "Technical sheet",
     "prod.dosage": "Dosage",
     "prod.adds": "The baker adds",
@@ -486,7 +490,7 @@ const dict = {
     "meta.desc.ingredients":
       "توفّر SATIA المواد الأولية والخلطات الخاصة وحلول التعبئة، بجودة وتتبع كامل.",
     "meta.desc.partenaires":
-      "دور SATIA الشريكة في تونس — مخابز وأفران تعمل أصلاً بخلطاتنا.",
+      "شركاء SATIA — Artésienne de Minoterie، دقيق وخلطات مطاحن.",
     "meta.desc.maison":
       "دار Fourn’Or: شركة تيارة للتوزيع، دقيق خاص ومحسّن خبز منذ 2020 في تونس.",
     "meta.desc.gamme":
@@ -653,10 +657,12 @@ const dict = {
       "توفّر SATIA كل المكوّنات اللازمة لإنتاجكم: مواد أولية خام، خلطات خاصة بودرة وسائلة حسب الطلب، وحلول تعبئة ملائمة لمنتجاتكم.",
     "ing.text":
       "سواء بحثتم عن مكوّن معياري أو صياغة حسب الطلب، تضمن لكم شبكة التوريد وخبرتنا التقنية الجودة والتتبع والتوفّر.",
-    "part.kicker": "الشبكة",
+    "part.kicker": "الشركاء",
     "part.hero": "الشركاء",
     "part.lead":
-      "أفران ودور تخبز أصلاً بـ SATIA في تونس. شبكة ثقة، من تونس إلى جربة.",
+      "تعتمد SATIA على شركاء مطاحن مرجعيين لجودة الدقيق والخلطات.",
+    "part.artesienne":
+      "Artésienne de Minoterie شريكنا في المطاحن. متخصصة في الدقيق وخلطات المطاحن، ترافق SATIA بصيغ منتظمة وقابلة للتتبع تناسب الصناعة الغذائية والحلويات والمخابز الحرفية.",
     "prod.kicker": "بطاقة تقنية",
     "prod.dosage": "الجرعة",
     "prod.adds": "يضيف الخبّاز",
