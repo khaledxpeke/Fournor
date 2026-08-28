@@ -15,7 +15,7 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/src/styles/main.css" />
-    <link rel="preload" as="image" href="/images/banner.webp" fetchpriority="high" />
+    <link rel="preload" as="image" href="/images/banner.webp?v=2" fetchpriority="high" />
     <meta name="theme-color" content="#f4efe6" />
     <title>SATIA — Solution, mélange, ingrédient</title>
     <meta name="description" content="SATIA accompagne les industriels agroalimentaires, pâtissiers et artisans boulangers : solutions, mélanges et ingrédients." />
@@ -27,20 +27,15 @@
   <body data-page="home">
     <main>
       <section class="hero">
-        <video
+        <img
           class="hero-bg"
-          autoplay
-          muted
-          loop
-          playsinline
-          webkit-playsinline
-          preload="auto"
-          poster="/images/banner.webp"
-          aria-hidden="true"
-          disablepictureinpicture
-        >
-          <source src="/videos/banner.mp4" type="video/mp4" />
-        </video>
+          src="/images/banner.webp?v=2"
+          alt=""
+          width="1774"
+          height="887"
+          fetchpriority="high"
+          decoding="async"
+        />
         <h1 class="visually-hidden" data-i18n="hero.title">SATIA, votre partenaire</h1>
       </section>
 

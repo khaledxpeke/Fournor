@@ -112,7 +112,7 @@ function mountHead() {
   const desc = t(`meta.desc.${page}`, lang);
   const origin = window.location.origin;
   const url = `${origin}${pagePath(page)}${window.location.search}`;
-  const image = `${origin}/images/banner.webp`;
+  const image = `${origin}/images/banner.webp?v=2`;
   const esc = (value) => String(value).replace(/"/g, "&quot;");
 
   if (!document.querySelector("meta[name='description']")) {

@@ -2674,12 +2674,12 @@ body[data-page="gamme"] .page-hero .lead {
   form,
   .site-footer .social,
   .prod-video,
-  video.hero-bg {
+  .hero-bg {
     display: none !important;
   }
 
   .hero {
-    background: #6a655e url("/images/banner.webp") center / cover no-repeat;
+    background: #0b0a09 url("/images/banner.webp?v=2") center / cover no-repeat;
   }
 }
 
