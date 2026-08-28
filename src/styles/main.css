@@ -16,7 +16,7 @@
   --section-y: clamp(2.4rem, 5.2vw, 4.25rem);
   --page: 1680px;
   --page-wide: 1840px;
-  --gutter: clamp(1.75rem, 5.5vw, 4.25rem);
+  --gutter: clamp(6rem, 7.5vw, 8rem);
 }
 
 *,
