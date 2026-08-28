@@ -786,6 +786,16 @@ body[data-page="home"] main > .mix-band {
   height: 12.5rem;
   max-height: none;
   aspect-ratio: auto;
+  background: #fff;
+}
+
+.ad-band:not(.ad-band-split) .ad-frame img {
+  object-fit: contain;
+  object-position: center;
+}
+
+.ad-band:not(.ad-band-split) .ad-frame::after {
+  display: none;
 }
 
 .ad-band-split .ad-frame {
@@ -1985,7 +1995,7 @@ body[data-page="gamme"] .page-hero .lead {
 
 .footer-grid {
   width: min(var(--page), 100%);
-  margin: 0 auto 2rem;
+  margin: 0 auto;
   display: grid;
   grid-template-columns: 1.4fr 1fr 1fr;
   gap: 2rem;

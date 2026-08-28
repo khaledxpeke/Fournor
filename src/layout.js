@@ -66,24 +66,16 @@ function footer() {
       <p class="footer-label" data-i18n="footer.contact"></p>
       <p data-i18n="footer.address"></p>
       <p>
-        <a class="contact-line" href="tel:+21671100797">
+        <a class="contact-line" href="tel:+21698692222">
           <span data-i18n="footer.phone"></span>
-          <span dir="ltr">+216 71 100 797</span>
+          <span dir="ltr">+216 98 692 222</span>
         </a>
-      </p>
-      <p class="contact-line">
-        <span data-i18n="footer.fax"></span>
-        <span dir="ltr">+216 71 100 798</span>
       </p>
       <p class="social">
         <a href="https://www.facebook.com/profile.php?id=100088082392675" target="_blank" rel="noopener noreferrer">Facebook</a>
         <a href="https://www.instagram.com/stdtayara.tn/" target="_blank" rel="noopener noreferrer">Instagram</a>
       </p>
     </div>
-  </div>
-  <div class="footer-bar">
-    <span data-i18n="footer.copy"></span>
-    <span data-i18n="footer.photo"></span>
   </div>
 </footer>`;
 }
@@ -143,12 +135,13 @@ function mountHead() {
     name: "SATIA",
     legalName: "Société Tayara Distribution",
     url: origin,
-    telephone: "+21671100797",
+    telephone: "+21698692222",
     address: {
       "@type": "PostalAddress",
-      streetAddress: "01 rue du Nil, Sidi Fathallah Djebel Djelloud",
-      postalCode: "2023",
-      addressLocality: "Tunis",
+      streetAddress: "Route de Korbous km 2",
+      postalCode: "8020",
+      addressLocality: "Soliman",
+      addressRegion: "Nabeul",
       addressCountry: "TN",
     },
   });
