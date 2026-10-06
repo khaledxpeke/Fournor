@@ -586,6 +586,8 @@ function fitPillarHeadings() {
     heading.style.fontSize = "";
   });
 
+  if (window.matchMedia("(max-width: 900px)").matches) return;
+
   const source =
     document.querySelector(".sol-intro .pillar-heading") || headings[0];
   const ref = source.closest(".mix-copy")?.querySelector(".pillar-fit-ref");

@@ -1014,7 +1014,7 @@ body[data-page="home"] .sol-intro.wrap {
 
 .ad-band-split .ad-frame {
   width: 100%;
-  height: calc(26rem * 10 / 16);
+  height: calc(26rem * 10 / 16 * 3);
   max-height: none;
   aspect-ratio: auto;
 }
@@ -2872,6 +2872,10 @@ body[data-page="gamme"] .page-hero .lead {
     gap: 1rem;
   }
 
+  .ad-band-split .ad-frame {
+    height: calc(9.5rem * 3);
+  }
+
   .prod-spec-main,
   .prod-spec-grid {
     grid-template-columns: 1fr;
@@ -2890,7 +2894,25 @@ body[data-page="gamme"] .page-hero .lead {
 
   .mix-intro,
   .sol-intro {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .mix-copy,
+  .mix-photo,
+  .sol-intro .mix-photo,
+  .mix-intro .mix-photo {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .pillar-heading {
+    width: auto;
+    max-width: 100%;
+    white-space: normal;
+  }
+
+  .pillar-fit-ref {
+    white-space: normal;
   }
 
   .ad-band:not(.ad-band-split) .ad-frame {
@@ -3127,7 +3149,7 @@ body[data-page="gamme"] .page-hero .lead {
   }
 
   .ad-band-split .ad-frame {
-    height: 9.5rem;
+    height: calc(9.5rem * 3);
     aspect-ratio: auto;
   }
 
