@@ -1,4 +1,5 @@
 import { applyI18n, getLang, setLang, t } from "./i18n.js";
+import { xpTree, xpNav, xpHref, ingFamilies, ingHref } from "./xp-data.js";
 
 (function applyDesktopSiteViewport() {
   const ua = navigator.userAgent || "";
@@ -10,10 +11,77 @@ import { applyI18n, getLang, setLang, t } from "./i18n.js";
   if (vp) vp.setAttribute("content", "width=1100");
 })();
 
+function locNav(id) {
+  const lang = getLang();
+  return xpNav[id]?.[lang] ?? xpNav[id]?.fr ?? id;
+}
+
+export function fillNavLabels() {
+  document.querySelectorAll("[data-xp-nav]").forEach((el) => {
+    el.textContent = locNav(el.dataset.xpNav);
+  });
+}
+
+function megaRows(items) {
+  return items
+    .map((item) => {
+      const hasKids = (item.children || []).length > 0;
+      const kids = (item.children || [])
+        .map((child) => `<a href="${child.href}" ${child.attr}></a>`)
+        .join("");
+      return `<div class="nav-mega-row${hasKids ? " has-kids" : ""}">
+        <a class="nav-mega-head" href="${item.href}" ${item.attr}></a>
+        ${hasKids ? `<div class="nav-mega-kids">${kids}</div>` : ""}
+      </div>`;
+    })
+    .join("");
+}
+
+function megaPanel(href, titleKey, items) {
+  return `<a class="nav-mega-title" href="${href}" data-i18n="${titleKey}"></a>
+    <div class="nav-mega-cats">${megaRows(items)}</div>`;
+}
+
+function megaMenu() {
+  return megaPanel(
+    "/solution.html",
+    "nav.solution",
+    xpTree.map((col) => ({
+      href: xpHref(col.id),
+      attr: `data-xp-nav="${col.id}"`,
+      children: (col.children || []).map((id) => ({
+        href: xpHref(id),
+        attr: `data-xp-nav="${id}"`,
+      })),
+    }))
+  );
+}
+
+function mixMega() {
+  return megaPanel("/gamme.html", "nav.melanges", [
+    { href: "/gamme.html?mix=premix-poudres", attr: 'data-i18n="nav.premix"' },
+    { href: "/gamme.html?mix=mix-poudres", attr: 'data-i18n="nav.mixpoudres"' },
+    { href: "/gamme.html?mix=mix-liquides", attr: 'data-i18n="nav.mixliquides"' },
+  ]);
+}
+
+function ingMega() {
+  return megaPanel(
+    "/ingredients.html",
+    "nav.ingredients",
+    ingFamilies.map((id) => ({
+      href: ingHref(id),
+      attr: `data-xp-nav="${id}"`,
+    }))
+  );
+}
+
 function header(active) {
   const item = (id, href, key) =>
     `<a class="nav-link${active === id ? " is-active" : ""}" href="${href}" data-i18n="${key}"></a>`;
   const mixActive = active === "gamme" || active === "produit";
+  const solActive = active === "solution";
+  const ingActive = active === "ingredients";
   return `
 <header class="site-header">
   <a class="brand" href="/index.html" aria-label="SATIA">
@@ -22,16 +90,18 @@ function header(active) {
   <nav class="nav" id="site-nav" aria-label="Primary">
     ${item("home", "/index.html", "nav.home")}
     ${item("maison", "/maison.html", "nav.maison")}
-    ${item("solution", "/solution.html", "nav.solution")}
-    <div class="nav-item${mixActive ? " is-active" : ""}">
-      <a class="nav-link${mixActive ? " is-active" : ""}" href="/gamme.html" data-i18n="nav.melanges" aria-haspopup="true" aria-expanded="false"></a>
-      <div class="nav-sub">
-        <a href="/gamme.html?mix=premix-poudres" data-i18n="nav.premix"></a>
-        <a href="/gamme.html?mix=mix-poudres" data-i18n="nav.mixpoudres"></a>
-        <a href="/gamme.html?mix=mix-liquides" data-i18n="nav.mixliquides"></a>
-      </div>
+    <div class="nav-item nav-item-mega${solActive ? " is-active" : ""}">
+      <a class="nav-link${solActive ? " is-active" : ""}" href="/solution.html" data-i18n="nav.solution" aria-haspopup="true" aria-expanded="false"></a>
+      <div class="nav-mega">${megaMenu()}</div>
     </div>
-    ${item("ingredients", "/ingredients.html", "nav.ingredients")}
+    <div class="nav-item nav-item-mega${mixActive ? " is-active" : ""}">
+      <a class="nav-link${mixActive ? " is-active" : ""}" href="/gamme.html" data-i18n="nav.melanges" aria-haspopup="true" aria-expanded="false"></a>
+      <div class="nav-mega nav-mega-simple">${mixMega()}</div>
+    </div>
+    <div class="nav-item nav-item-mega${ingActive ? " is-active" : ""}">
+      <a class="nav-link${ingActive ? " is-active" : ""}" href="/ingredients.html" data-i18n="nav.ingredients" aria-haspopup="true" aria-expanded="false"></a>
+      <div class="nav-mega nav-mega-simple">${ingMega()}</div>
+    </div>
     ${item("partenaires", "/partenaires.html", "nav.partners")}
     ${item("contact", "/contact.html", "nav.contact")}
   </nav>
@@ -52,18 +122,20 @@ function footer() {
   return `
 <footer class="site-footer">
   <div class="footer-grid">
-    <div>
+    <div class="footer-about">
       <p class="footer-brand">SATIA</p>
       <p data-i18n="footer.about"></p>
-      <p class="muted" data-i18n="brand.tag"></p>
     </div>
-    <div>
-      <p class="footer-label" data-i18n="footer.products"></p>
-      <a href="/gamme.html?mix=premix-poudres" data-i18n="nav.premix"></a>
-      <a href="/gamme.html?mix=mix-poudres" data-i18n="nav.mixpoudres"></a>
-      <a href="/gamme.html?mix=mix-liquides" data-i18n="nav.mixliquides"></a>
+    <div class="footer-logo">
+      <img class="footer-mark" src="/logo-satia.webp" alt="SATIA" width="220" height="126" draggable="false" />
     </div>
-    <div>
+    <div class="footer-xp">
+      <p class="footer-label" data-i18n="footer.expertises"></p>
+      <a href="${xpHref("metiers")}" data-xp-nav="metiers"></a>
+      <a href="${xpHref("xp-ingredient")}" data-xp-nav="xp-ingredient"></a>
+      <a href="${xpHref("formulation")}" data-xp-nav="formulation"></a>
+    </div>
+    <div class="footer-contact">
       <p class="footer-label" data-i18n="footer.contact"></p>
       <p data-i18n="footer.address"></p>
       <p>
@@ -89,6 +161,7 @@ function pagePath(page) {
     gamme: "/gamme.html",
     produit: "/produit.html",
     expertise: "/expertise.html",
+    xp: "/xp.html",
     ingredients: "/ingredients.html",
     partenaires: "/partenaires.html",
     actualites: "/actualites.html",
@@ -160,37 +233,53 @@ export function mountLayout(active) {
 
   const toggle = document.querySelector(".nav-toggle");
   const nav = document.querySelector(".nav");
-  const mixItem = nav?.querySelector(".nav-item");
-  const mixLink = mixItem?.querySelector(":scope > .nav-link");
+  const navItems = [...(nav?.querySelectorAll(".nav-item") || [])];
   const isMobileNav = () => window.matchMedia("(max-width: 960px)").matches;
+  const topLink = (item) => item.querySelector(":scope > .nav-link");
 
-  const closeMix = () => {
-    mixItem?.classList.remove("is-open");
-    mixLink?.setAttribute("aria-expanded", "false");
+  const closeSubs = () => {
+    navItems.forEach((item) => {
+      item.classList.remove("is-open");
+      topLink(item)?.setAttribute("aria-expanded", "false");
+    });
   };
 
   const closeNav = () => {
     nav?.classList.remove("is-open");
     toggle?.setAttribute("aria-expanded", "false");
-    closeMix();
+    closeSubs();
   };
 
   toggle?.addEventListener("click", () => {
     const open = nav.classList.toggle("is-open");
     toggle.setAttribute("aria-expanded", String(open));
-    if (!open) closeMix();
+    if (!open) closeSubs();
   });
 
-  mixLink?.addEventListener("click", (event) => {
-    if (!isMobileNav()) return;
-    event.preventDefault();
-    const open = mixItem.classList.toggle("is-open");
-    mixLink.setAttribute("aria-expanded", String(open));
+  navItems.forEach((item) => {
+    const link = topLink(item);
+    link?.addEventListener("click", (event) => {
+      if (!isMobileNav()) return;
+      event.preventDefault();
+      const willOpen = !item.classList.contains("is-open");
+      closeSubs();
+      if (willOpen) {
+        item.classList.add("is-open");
+        link.setAttribute("aria-expanded", "true");
+      }
+    });
   });
 
-  nav?.querySelectorAll("a").forEach((link) => {
-    if (link === mixLink) return;
-    link.addEventListener("click", closeNav);
+  nav?.querySelectorAll(".nav-mega-row.has-kids > .nav-mega-head").forEach((link) => {
+    link.addEventListener("click", (event) => {
+      if (!isMobileNav()) return;
+      const row = link.closest(".nav-mega-row");
+      if (!row.classList.contains("is-open")) {
+        event.preventDefault();
+        nav.querySelectorAll(".nav-mega-row").forEach((r) => r.classList.remove("is-open"));
+        row.classList.add("is-open");
+      }
+    });
   });
 
   window.addEventListener("resize", () => {
@@ -202,4 +291,5 @@ export function mountLayout(active) {
   });
 
   applyI18n(getLang());
+  fillNavLabels();
 }

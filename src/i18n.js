@@ -2,10 +2,11 @@ const dict = {
   fr: {
     "meta.home": "SATIA — Solution, mélange, ingrédient",
     "meta.maison": "Présentation — SATIA",
-    "meta.solution": "Solution — SATIA",
+    "meta.solution": "Solution & Expertise — SATIA",
     "meta.gamme": "Mélanges — SATIA",
     "meta.produit": "Fiche produit — SATIA",
     "meta.expertise": "Expertise — SATIA",
+    "meta.xp": "Solution & Expertise — SATIA",
     "meta.ingredients": "Ingrédients — SATIA",
     "meta.partenaires": "Partenaires — SATIA",
     "meta.actualites": "Nos franchises — SATIA",
@@ -13,7 +14,9 @@ const dict = {
     "meta.desc.home":
       "SATIA accompagne les industriels agroalimentaires, pâtissiers et artisans boulangers : solutions, mélanges et ingrédients.",
     "meta.desc.solution":
-      "SATIA, partenaire industriel du concept au produit fini : formulation, lignes de production et innovation.",
+      "SATIA — Solution & Expertise : métiers, ingrédients, formulation, innovation, formation et accompagnement.",
+    "meta.desc.xp":
+      "SATIA — Solution & Expertise : métiers, ingrédients, formulation, innovation, formation et accompagnement.",
     "meta.desc.ingredients":
       "SATIA fournit matières premières, mélanges spécifiques et solutions d’emballage, avec qualité et traçabilité.",
     "meta.desc.partenaires":
@@ -30,7 +33,7 @@ const dict = {
     "skip": "Aller au contenu",
     "nav.home": "Accueil",
     "nav.maison": "Présentation",
-    "nav.solution": "Solution",
+    "nav.solution": "Solution & Expertise",
     "nav.gamme": "Mélanges",
     "nav.melanges": "Mélanges",
     "nav.premix": "Prémix poudres",
@@ -126,8 +129,9 @@ const dict = {
       "Parlons solution, mélange ou ingrédient. Les équipes SATIA sont à Tunis, à l’écoute des industriels et des artisans.",
     "cta.btn": "Nous écrire",
     "footer.about":
-      "SATIA accompagne l’industrie agroalimentaire, la pâtisserie et la boulangerie artisanale : solutions, mélanges et ingrédients.",
+      "SATIA accompagne les industriels agroalimentaires, les pâtissiers et les artisans boulangers avec trois piliers : des solutions industrielles sur mesure, une large gamme de mélanges, et l’ensemble des ingrédients nécessaires à la production.",
     "footer.products": "Mélanges",
+    "footer.expertises": "Nos expertises",
     "footer.contact": "Contact",
     "footer.address": "Route de Korbous km 2, 8020 Soliman, Nabeul",
     "footer.phone": "Tél.",
@@ -160,6 +164,9 @@ const dict = {
     "sol.title": "Votre partenaire industriel, du concept au produit fini",
     "sol.lead":
       "SATIA accompagne les industriels de l’agroalimentaire dans tous leurs projets industriels et de développement produit.",
+    "sol.hubLead":
+      "Métiers, ingrédients, formulation, innovation, formation et accompagnement — SATIA réunit l’expertise au service de vos productions.",
+    "metier.more": "Découvrir",
     "sol.text":
       "De la formulation à l’optimisation des lignes de production, nous mettons notre expertise technique au service de vos ambitions : lancement de nouvelles références, amélioration de recettes existantes, mise aux normes, ou accompagnement dans une démarche d’innovation. Notre équipe technico-commerciale travaille main dans la main avec vos équipes R&D et production pour concevoir des solutions sur mesure, adaptées à vos contraintes industrielles et à vos objectifs de marché.",
     "ing.kicker": "03 — Ingrédients",
@@ -224,10 +231,11 @@ const dict = {
   en: {
     "meta.home": "SATIA — Solution, blend, ingredient",
     "meta.maison": "Presentation — SATIA",
-    "meta.solution": "Solution — SATIA",
+    "meta.solution": "Solution & Expertise — SATIA",
     "meta.gamme": "Blends — SATIA",
     "meta.produit": "Product sheet — SATIA",
     "meta.expertise": "Expertise — SATIA",
+    "meta.xp": "Solution & Expertise — SATIA",
     "meta.ingredients": "Ingredients — SATIA",
     "meta.partenaires": "Partners — SATIA",
     "meta.actualites": "Our franchises — SATIA",
@@ -235,7 +243,9 @@ const dict = {
     "meta.desc.home":
       "Fourn’Or speciality flour premixes for bakers. A brand of Société Tayara Distribution, Tunis.",
     "meta.desc.solution":
-      "SATIA, industrial partner from concept to finished product: formulation, production lines and innovation.",
+      "SATIA — Solution & Expertise: crafts, ingredients, formulation, innovation, training and support.",
+    "meta.desc.xp":
+      "SATIA — Solution & Expertise: crafts, ingredients, formulation, innovation, training and support.",
     "meta.desc.ingredients":
       "SATIA supplies raw materials, specific blends and packaging, with quality and traceability.",
     "meta.desc.maison":
@@ -251,7 +261,7 @@ const dict = {
     "skip": "Skip to content",
     "nav.home": "Home",
     "nav.maison": "Presentation",
-    "nav.solution": "Solution",
+    "nav.solution": "Solution & Expertise",
     "nav.gamme": "Blends",
     "nav.melanges": "Blends",
     "nav.premix": "Powder premixes",
@@ -347,8 +357,9 @@ const dict = {
       "Let’s talk solution, blend or ingredient. SATIA teams are in Tunis, close to industry and craft.",
     "cta.btn": "Write to us",
     "footer.about":
-      "SATIA supports the food industry, pastry and artisan baking: solutions, blends and ingredients.",
+      "SATIA supports food manufacturers, pastry chefs and artisan bakers with three pillars: tailored industrial solutions, a wide range of blends, and all the ingredients production needs.",
     "footer.products": "Blends",
+    "footer.expertises": "Our expertises",
     "footer.contact": "Contact",
     "footer.address": "Route de Korbous km 2, 8020 Soliman, Nabeul",
     "footer.phone": "Tel.",
@@ -381,6 +392,9 @@ const dict = {
     "sol.title": "Your industrial partner, from concept to finished product",
     "sol.lead":
       "SATIA supports food manufacturers across industrial and product-development projects.",
+    "sol.hubLead":
+      "Crafts, ingredients, formulation, innovation, training and support — SATIA brings expertise to your production.",
+    "metier.more": "Discover",
     "sol.text":
       "From formulation to production-line optimisation, we put technical expertise behind your goals: new launches, recipe improvement, compliance, or innovation. Our technical-sales team works with your R&D and production teams to design tailored solutions for your industrial constraints and market aims.",
     "ing.kicker": "03 — Ingredients",
@@ -445,10 +459,11 @@ const dict = {
   ar: {
     "meta.home": "SATIA — حلول، خلطات، مكوّنات",
     "meta.maison": "تقديم — SATIA",
-    "meta.solution": "الحلول — SATIA",
+    "meta.solution": "حلول وخبرة — SATIA",
     "meta.gamme": "الخلطات — SATIA",
     "meta.produit": "بطاقة المنتج — SATIA",
     "meta.expertise": "الخبرة — SATIA",
+    "meta.xp": "حلول وخبرة — SATIA",
     "meta.ingredients": "المكوّنات — SATIA",
     "meta.partenaires": "الشركاء — SATIA",
     "meta.actualites": "امتيازاتنا — SATIA",
@@ -456,7 +471,9 @@ const dict = {
     "meta.desc.home":
       "ترافق SATIA الصناعيين الغذائيين والحلوانيين وخبّازي الحرفة: حلول، خلطات ومكوّنات.",
     "meta.desc.solution":
-      "SATIA، شريك صناعي من الفكرة إلى المنتج النهائي: صياغة، خطوط إنتاج وابتكار.",
+      "SATIA — حلول وخبرة: مهن، مكوّنات، صياغة، ابتكار، تكوين ومرافقة.",
+    "meta.desc.xp":
+      "SATIA — حلول وخبرة: مهن، مكوّنات، صياغة، ابتكار، تكوين ومرافقة.",
     "meta.desc.ingredients":
       "توفّر SATIA المواد الأولية والخلطات الخاصة وحلول التعبئة، بجودة وتتبع كامل.",
     "meta.desc.partenaires":
@@ -473,7 +490,7 @@ const dict = {
     "skip": "الانتقال إلى المحتوى",
     "nav.home": "الرئيسية",
     "nav.maison": "تقديم",
-    "nav.solution": "الحلول",
+    "nav.solution": "حلول وخبرة",
     "nav.gamme": "الخلطات",
     "nav.melanges": "الخلطات",
     "nav.premix": "خلطات بودرة جاهزة",
@@ -569,8 +586,9 @@ const dict = {
       "لنتحدث عن حلّ أو خلطة أو مكوّن. فرق SATIA في تونس، قريبة من الصناعيين والحرفيين.",
     "cta.btn": "راسلونا",
     "footer.about":
-      "ترافق SATIA الصناعة الغذائية والحلويات والمخابز الحرفية: حلول وخلطات ومكوّنات.",
+      "ترافق SATIA الصناعيين الغذائيين والحلوانيين وخبّازي الحرفة بثلاثة أعمدة: حلول صناعية مفصّلة، مجموعة واسعة من الخلطات، وجميع المكوّنات اللازمة للإنتاج.",
     "footer.products": "الخلطات",
+    "footer.expertises": "خبراتنا",
     "footer.contact": "اتصل بنا",
     "footer.address": "طريق قربص كم 2، 8020 سليمان، نابل",
     "footer.phone": "هاتف",
@@ -603,6 +621,9 @@ const dict = {
     "sol.title": "شريككم الصناعي، من الفكرة إلى المنتج النهائي",
     "sol.lead":
       "ترافق SATIA صناعيي الأغذية في كل مشاريعهم الصناعية وتطوير المنتجات.",
+    "sol.hubLead":
+      "مهن، مكوّنات، صياغة، ابتكار، تكوين ومرافقة — تجمع SATIA الخبرة في خدمة إنتاجكم.",
+    "metier.more": "اكتشفوا",
     "sol.text":
       "من الصياغة إلى تحسين خطوط الإنتاج، نضع خبرتنا التقنية في خدمة طموحاتكم: إطلاق مراجع جديدة، تحسين وصفات قائمة، المطابقة مع المعايير، أو المرافقة في مسار ابتكار. يعمل فريقنا التقني-التجاري يداً بيد مع فرق البحث والتطوير والإنتاج لديكم لتصميم حلول مفصّلة، تلائم قيودكم الصناعية وأهداف السوق.",
     "ing.kicker": "03 — المكوّنات",

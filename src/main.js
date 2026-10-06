@@ -1,10 +1,20 @@
-import { mountLayout } from "./layout.js";
+import { mountLayout, fillNavLabels } from "./layout.js";
 import { getLang, isRtl } from "./i18n.js";
 import { products, events, dosageMeta, partners, getProduct } from "./products.js";
 import { t } from "./i18n.js";
+import {
+  xpTree,
+  xpNav,
+  xpHref,
+  getXpPage,
+  getXpTitle,
+  ingFamilies,
+  ingFamilyPages,
+  ingHref,
+} from "./xp-data.js";
 
 const page = document.body.dataset.page || "home";
-mountLayout(page === "produit" ? "gamme" : page);
+mountLayout(page === "produit" ? "gamme" : page === "xp" ? "solution" : page);
 
 const lang = () => getLang();
 const loc = (obj, L = lang()) => obj?.[L] ?? obj?.fr ?? obj?.en ?? "";
@@ -572,37 +582,223 @@ function fitPillarHeadings() {
   const headings = [...document.querySelectorAll(".pillar-heading")];
   if (!headings.length) return;
 
-  const source =
-    document.querySelector(".sol-intro .pillar-heading") || headings[0];
-  const ref = source.closest(".mix-copy")?.querySelector(".pillar-fit-ref");
-
   headings.forEach((heading) => {
     heading.style.fontSize = "";
   });
 
-  if (ref) {
-    const target = ref.getBoundingClientRect().width;
-    const current = source.getBoundingClientRect().width;
-    const size = parseFloat(getComputedStyle(source).fontSize);
-    if (target && current && size) {
-      const maxW = source.parentElement?.clientWidth || target;
-      source.style.fontSize = `${((size * Math.min(target, maxW)) / current).toFixed(2)}px`;
-    }
-  }
+  const source =
+    document.querySelector(".sol-intro .pillar-heading") || headings[0];
+  const ref = source.closest(".mix-copy")?.querySelector(".pillar-fit-ref");
+  if (!ref) return;
 
-  const shared = getComputedStyle(source).fontSize;
-  headings.forEach((heading) => {
-    if (heading !== source) heading.style.fontSize = shared;
-  });
+  const probe = source.cloneNode(false);
+  probe.className = source.className;
+  probe.textContent = t("maison.kicker");
+  probe.style.cssText =
+    "position:absolute;left:0;top:0;visibility:hidden;pointer-events:none;white-space:nowrap;width:max-content;font-size:inherit;";
+  source.parentElement.appendChild(probe);
+
+  const target = ref.getBoundingClientRect().width;
+  const current = probe.getBoundingClientRect().width;
+  const size = parseFloat(getComputedStyle(probe).fontSize);
+  probe.remove();
+
+  if (target && current && size) {
+    const maxW = source.parentElement?.clientWidth || target;
+    const shared = `${((size * Math.min(target, maxW)) / current).toFixed(2)}px`;
+    headings.forEach((heading) => {
+      heading.style.fontSize = shared;
+    });
+  }
+}
+
+function xpCta(page) {
+  if (!page?.cta) return "";
+  const L = lang();
+  return `<a class="btn btn-gold" href="${page.cta.href}">${t(page.cta.key, L)}</a>`;
+}
+
+function xpNotes(page) {
+  if (!page?.notes?.length) return "";
+  const L = lang();
+  return `<section class="section" style="padding-top:0">
+    <div class="wrap page-notes">
+      ${page.notes
+        .map(
+          (note) => `<article class="reveal">
+        <h2>${loc(note.title, L)}</h2>
+        <p>${loc(note.text, L)}</p>
+      </article>`
+        )
+        .join("")}
+    </div>
+  </section>`;
+}
+
+function xpChildCards(id) {
+  const col = xpTree.find((c) => c.id === id);
+  if (!col?.children?.length) return "";
+  const L = lang();
+  return `<section class="section" style="padding-top:0">
+    <div class="wrap xp-children">
+      ${col.children
+        .map((cid) => {
+          const child = getXpPage(cid);
+          return `<a class="xp-child reveal" href="${xpHref(cid)}">
+            <h2>${getXpTitle(cid, L)}</h2>
+            <p class="pillar-tagline">${child ? loc(child.tag, L) : ""}</p>
+            <p>${child ? loc(child.lead, L) : ""}</p>
+            <span class="more">${t("metier.more", L)}</span>
+          </a>`;
+        })
+        .join("")}
+    </div>
+  </section>`;
+}
+
+function xpCtaBand() {
+  const L = lang();
+  return `<section class="section" style="padding-top:0">
+    <div class="cta-band reveal">
+      <div>
+        <h2>${t("cta.title", L)}</h2>
+        <p>${t("cta.text", L)}</p>
+      </div>
+      <a class="btn btn-gold" href="/contact.html">${t("cta.btn", L)}</a>
+    </div>
+  </section>`;
+}
+
+function parentOf(id) {
+  return xpTree.find((col) => col.id === id || col.children.includes(id));
+}
+
+function renderXp() {
+  const root = document.getElementById("xp-root");
+  if (!root) return;
+  const id = new URLSearchParams(location.search).get("id");
+  const pageData = getXpPage(id);
+  if (!id || !pageData) {
+    location.replace("/solution.html");
+    return;
+  }
+  const L = lang();
+  const title = getXpTitle(id, L);
+  const parent = parentOf(id);
+  const parentId = parent && parent.id !== id ? parent.id : "solution";
+  const parentHref = parentId === "solution" ? "/solution.html" : xpHref(parentId);
+  const parentLabel = parentId === "solution" ? t("nav.solution", L) : getXpTitle(parentId, L);
+  document.title = `${title} — SATIA`;
+  const desc = document.querySelector("meta[name='description']");
+  if (desc) desc.setAttribute("content", loc(pageData.lead, L));
+
+  root.innerHTML = `
+    <section class="page-open wrap">
+      <figure class="page-open-photo">
+        <img src="${pageData.image}" alt="${title}" width="1600" height="1200" fetchpriority="high" decoding="async" />
+      </figure>
+      <div class="page-open-copy">
+        <p class="kicker"><a href="${parentHref}">${parentLabel}</a></p>
+        <h1>${title}</h1>
+        <p class="lead pillar-tagline">${loc(pageData.tag, L)}</p>
+        <p>${loc(pageData.lead, L)}</p>
+        <p>${loc(pageData.text, L)}</p>
+        ${xpCta(pageData)}
+      </div>
+    </section>
+    ${xpNotes(pageData)}
+    ${xpChildCards(id)}
+    ${xpCtaBand()}`;
+}
+
+function renderSolutionHub() {
+  const hub = document.getElementById("xp-hub");
+  if (!hub) return;
+  const L = lang();
+  hub.innerHTML = xpTree
+    .map((col) => {
+      const pageData = getXpPage(col.id);
+      const kids = (col.children || [])
+        .map((cid) => `<a href="${xpHref(cid)}">${getXpTitle(cid, L)}</a>`)
+        .join("");
+      return `<article class="xp-pillar reveal">
+        <h2><a href="${xpHref(col.id)}">${getXpTitle(col.id, L)}</a></h2>
+        <p class="pillar-tagline">${pageData ? loc(pageData.tag, L) : ""}</p>
+        <p>${pageData ? loc(pageData.lead, L) : ""}</p>
+        ${kids ? `<div class="xp-pillar-links">${kids}</div>` : ""}
+        <a class="btn btn-gold" href="${xpHref(col.id)}">${t("metier.more", L)}</a>
+      </article>`;
+    })
+    .join("");
+}
+
+function renderIngredients() {
+  if (document.body.dataset.page !== "ingredients") return;
+  const L = lang();
+  const fam = new URLSearchParams(location.search).get("fam");
+  const intro = document.getElementById("ing-intro");
+  const detail = document.getElementById("ing-detail");
+  const grid = document.getElementById("ing-families");
+  const list = document.getElementById("ing-family-list");
+  const onFamily = Boolean(fam && ingFamilyPages[fam]);
+  if (onFamily) {
+    const pageData = ingFamilyPages[fam];
+    const title = getXpTitle(fam, L);
+    document.title = `${title} — SATIA`;
+    if (intro) intro.hidden = true;
+    if (list) list.hidden = true;
+    if (detail) {
+      detail.hidden = false;
+      detail.innerHTML = `
+      <section class="page-open wrap">
+        <figure class="page-open-photo">
+          <img src="${pageData.image}" alt="${title}" width="1600" height="1200" fetchpriority="high" decoding="async" />
+        </figure>
+        <div class="page-open-copy">
+          <p class="kicker"><a href="/ingredients.html">${t("ing.hero", L)}</a></p>
+          <h1>${title}</h1>
+          <p class="lead pillar-tagline">${loc(pageData.tag, L)}</p>
+          <p>${loc(pageData.lead, L)}</p>
+          <p>${loc(pageData.text, L)}</p>
+          ${xpCta(pageData)}
+        </div>
+      </section>`;
+    }
+    if (grid) grid.innerHTML = "";
+    return;
+  }
+  if (intro) intro.hidden = false;
+  if (list) list.hidden = false;
+  if (detail) {
+    detail.hidden = true;
+    detail.innerHTML = "";
+  }
+  if (grid) {
+    grid.innerHTML = ingFamilies
+      .map((id) => {
+        const pageData = ingFamilyPages[id];
+        return `<a class="xp-child reveal" href="${ingHref(id)}">
+          <h2>${getXpTitle(id, L)}</h2>
+          <p class="pillar-tagline">${pageData ? loc(pageData.tag, L) : ""}</p>
+          <p>${pageData ? loc(pageData.lead, L) : ""}</p>
+          <span class="more">${t("metier.more", L)}</span>
+        </a>`;
+      })
+      .join("");
+  }
 }
 
 function paint() {
+  fillNavLabels();
   renderHome();
   renderGamme();
   renderProduit();
   renderComposer();
   renderNews();
   renderPartners();
+  renderXp();
+  renderSolutionHub();
+  renderIngredients();
   setupAtelierNav();
   setupMotion();
   hydrateMedia();
