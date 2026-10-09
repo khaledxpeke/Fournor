@@ -8,6 +8,7 @@ const dict = {
     "meta.expertise": "Expertise — SATIA",
     "meta.xp": "Solution & Expertise — SATIA",
     "meta.ingredients": "Ingrédients — SATIA",
+    "meta.formation": "École de Formation Professionnelle SATIA",
     "meta.partenaires": "Partenaires — SATIA",
     "meta.actualites": "Nos franchises — SATIA",
     "meta.contact": "Contact — SATIA",
@@ -19,6 +20,8 @@ const dict = {
       "SATIA — Solution & Expertise : métiers, ingrédients, formulation, innovation, formation et accompagnement.",
     "meta.desc.ingredients":
       "SATIA fournit matières premières, mélanges spécifiques et solutions d’emballage, avec qualité et traçabilité.",
+    "meta.desc.formation":
+      "École de Formation Professionnelle SATIA — CAP Boulangerie, CAP Pâtisserie, CAP Cuisine. Formations aux métiers de la bouche.",
     "meta.desc.partenaires":
       "Les partenaires SATIA — Artésienne de Minoterie, farines et mélanges meuniers.",
     "meta.desc.maison":
@@ -40,6 +43,7 @@ const dict = {
     "nav.mixpoudres": "Mix poudres",
     "nav.mixliquides": "Mix liquides",
     "nav.ingredients": "Ingrédients",
+    "nav.formation": "École de Formation Professionnelle",
     "nav.partners": "Partenaires",
     "nav.expertise": "Expertise",
     "nav.news": "Nos franchises",
@@ -219,6 +223,38 @@ const dict = {
     "news.lead": "Le réseau SATIA : ouvertures, partenaires et vie des franchises.",
     "contact.hero": "Contact",
     "contact.lead": "Une référence, une formation, une visite du fournil : écrivez-nous.",
+    "formation.hero": "École de Formation Professionnelle SATIA",
+    "formation.tag": "Nos Formations aux Métiers de la Bouche",
+    "formation.lead":
+      "Façonnez votre avenir avec passion et savoir-faire. Bienvenue à l’École de Formation Professionnelle SATIA, votre tremplin vers les carrières passionnantes de la gastronomie et des métiers de l’artisanat. Nos formations allient pratique intensive en laboratoires modernes et fondamentaux théoriques auprès de formateurs experts.",
+    "formation.cta": "Demander une session",
+    "formation.obj": "Objectif",
+    "formation.out": "Débouchés",
+    "formation.cap1": "CAP Boulangerie",
+    "formation.cap1tag": "Devenez l’artisan du geste juste et du bon pain.",
+    "formation.cap1obj":
+      "Maîtriser toutes les étapes de fabrication, du choix des farines et des levains naturels jusqu’à la cuisson parfaite des pains traditionnels, des viennoiseries et des spécialités boulangères.",
+    "formation.cap1out":
+      "Ouvrier boulanger, création ou reprise d’une boulangerie artisanale, boulanger en grande distribution ou en hôtellerie-restauration.",
+    "formation.cap2": "CAP Pâtisserie",
+    "formation.cap2tag": "Donnez vie à vos envies créatives et gourmandes.",
+    "formation.cap2obj":
+      "Apprendre les techniques fondamentales de la pâtisserie française : pâtes, crèmes, entremets, viennoiseries, chocolaterie et décors artistiques avec rigueur et esthétique.",
+    "formation.cap2out":
+      "Pâtissier en boutique, laboratoire de production, salon de thé, ou pâtisserie de restaurant gastronomique.",
+    "formation.cap3": "CAP Cuisine",
+    "formation.cap3tag": "Mettez la gastronomie au centre de votre art.",
+    "formation.cap3obj":
+      "Acquérir les techniques culinaires de base (taillage, cuisson, sauces, dressages), respecter les normes d’hygiène et de sécurité (HACCP) et développer la rapidité en brigade.",
+    "formation.cap3out":
+      "Commis de cuisine, cuisinier en restauration traditionnelle, collective ou touristique.",
+    "formation.why": "Pourquoi choisir la SATIA ?",
+    "formation.why1":
+      "Un apprentissage pratique sur des plateaux techniques et cuisines équipées aux standards professionnels.",
+    "formation.why2":
+      "Une équipe pédagogique experte issue du monde de l’artisanat et de la restauration.",
+    "formation.why3":
+      "Un accompagnement personnalisé vers l’emploi et des stages en entreprise intégrés.",
     "contact.formName": "Nom et prénom",
     "contact.formEmail": "Adresse e-mail",
     "contact.formMsg": "Message",
@@ -237,6 +273,7 @@ const dict = {
     "meta.expertise": "Expertise — SATIA",
     "meta.xp": "Solution & Expertise — SATIA",
     "meta.ingredients": "Ingredients — SATIA",
+    "meta.formation": "SATIA Vocational Training School",
     "meta.partenaires": "Partners — SATIA",
     "meta.actualites": "Our franchises — SATIA",
     "meta.contact": "Contact — SATIA",
@@ -248,6 +285,8 @@ const dict = {
       "SATIA — Solution & Expertise: crafts, ingredients, formulation, innovation, training and support.",
     "meta.desc.ingredients":
       "SATIA supplies raw materials, specific blends and packaging, with quality and traceability.",
+    "meta.desc.formation":
+      "SATIA Vocational Training School — CAP Bakery, CAP Pastry, CAP Cuisine. Training for food crafts.",
     "meta.desc.maison":
       "SATIA supports food manufacturers, pastry chefs and artisan bakers: solutions, blends and ingredients.",
     "meta.desc.gamme":
@@ -268,6 +307,7 @@ const dict = {
     "nav.mixpoudres": "Powder mixes",
     "nav.mixliquides": "Liquid mixes",
     "nav.ingredients": "Ingredients",
+    "nav.formation": "Vocational Training School",
     "nav.partners": "Partners",
     "nav.expertise": "Expertise",
     "nav.news": "Our franchises",
@@ -447,6 +487,38 @@ const dict = {
     "news.lead": "The SATIA network: openings, partners and franchise life.",
     "contact.hero": "Contact",
     "contact.lead": "A reference, a training, a visit to the test bakery: write to us.",
+    "formation.hero": "SATIA Vocational Training School",
+    "formation.tag": "Our Food Crafts Training Courses",
+    "formation.lead":
+      "Shape your future with passion and know-how. Welcome to SATIA Vocational Training School, your springboard into exciting careers in gastronomy and artisan crafts. Our programmes combine intensive practice in modern laboratories with theoretical fundamentals taught by expert trainers.",
+    "formation.cta": "Request a session",
+    "formation.obj": "Objective",
+    "formation.out": "Career paths",
+    "formation.cap1": "CAP Bakery",
+    "formation.cap1tag": "Become the artisan of the right gesture and of good bread.",
+    "formation.cap1obj":
+      "Master every stage of production, from choosing flours and natural sourdoughs through to the perfect baking of traditional breads, viennoiseries and bakery specialities.",
+    "formation.cap1out":
+      "Bakery worker, starting or taking over an artisan bakery, baker in retail or in hotels and restaurants.",
+    "formation.cap2": "CAP Pastry",
+    "formation.cap2tag": "Bring your creative and gourmet ideas to life.",
+    "formation.cap2obj":
+      "Learn the fundamental techniques of French pastry: doughs, creams, entremets, viennoiseries, chocolate work and artistic decoration, with rigour and a sense of aesthetics.",
+    "formation.cap2out":
+      "Pastry chef in a shop, production lab, tea salon, or in a gastronomic restaurant pastry kitchen.",
+    "formation.cap3": "CAP Cuisine",
+    "formation.cap3tag": "Put gastronomy at the heart of your craft.",
+    "formation.cap3obj":
+      "Acquire basic culinary techniques (cutting, cooking, sauces, plating), respect hygiene and safety standards (HACCP) and develop speed in a brigade.",
+    "formation.cap3out":
+      "Kitchen commis, cook in traditional, collective or tourist catering.",
+    "formation.why": "Why choose SATIA?",
+    "formation.why1":
+      "Hands-on learning on technical platforms and kitchens equipped to professional standards.",
+    "formation.why2":
+      "An expert teaching team from the world of craft and hospitality.",
+    "formation.why3":
+      "Personalised support towards employment, with internships in companies included.",
     "contact.formName": "Full name",
     "contact.formEmail": "Email address",
     "contact.formMsg": "Message",
@@ -465,6 +537,7 @@ const dict = {
     "meta.expertise": "الخبرة — SATIA",
     "meta.xp": "حلول وخبرة — SATIA",
     "meta.ingredients": "المكوّنات — SATIA",
+    "meta.formation": "مدرسة SATIA للتكوين المهني",
     "meta.partenaires": "الشركاء — SATIA",
     "meta.actualites": "امتيازاتنا — SATIA",
     "meta.contact": "اتصل بنا — SATIA",
@@ -476,6 +549,8 @@ const dict = {
       "SATIA — حلول وخبرة: مهن، مكوّنات، صياغة، ابتكار، تكوين ومرافقة.",
     "meta.desc.ingredients":
       "توفّر SATIA المواد الأولية والخلطات الخاصة وحلول التعبئة، بجودة وتتبع كامل.",
+    "meta.desc.formation":
+      "مدرسة SATIA للتكوين المهني — شهادة CAP في الخبازة والحلويات والطبخ. تكوينات في مهن الفم.",
     "meta.desc.partenaires":
       "شركاء SATIA — Artésienne de Minoterie، دقيق وخلطات مطاحن.",
     "meta.desc.maison":
@@ -497,6 +572,7 @@ const dict = {
     "nav.mixpoudres": "خلطات بودرة",
     "nav.mixliquides": "خلطات سائلة",
     "nav.ingredients": "المكوّنات",
+    "nav.formation": "مدرسة التكوين المهني",
     "nav.partners": "الشركاء",
     "nav.expertise": "الخبرة",
     "nav.news": "امتيازاتنا",
@@ -676,6 +752,38 @@ const dict = {
     "news.lead": "شبكة SATIA: افتتاحات وشركاء وحياة الامتيازات.",
     "contact.hero": "اتصل بنا",
     "contact.lead": "مرجع، تكوين، زيارة للفرن: راسلونا.",
+    "formation.hero": "مدرسة SATIA للتكوين المهني",
+    "formation.tag": "تكويناتنا في مهن الفم",
+    "formation.lead":
+      "اصنعوا مستقبلكم بشغف ومعرفة. مرحباً بكم في مدرسة SATIA للتكوين المهني، منصتكم نحو مهن ممتعة في فنون الطعام والحرف. تجمع تكويناتنا بين الممارسة المكثفة في مختبرات حديثة والأسس النظرية مع مكوّنين خبراء.",
+    "formation.cta": "طلب حصّة",
+    "formation.obj": "الهدف",
+    "formation.out": "آفاق العمل",
+    "formation.cap1": "شهادة CAP في الخبازة",
+    "formation.cap1tag": "كونوا حرفيّ الإيماءة الصحيحة والخبز الجيّد.",
+    "formation.cap1obj":
+      "إتقان كل مراحل التصنيع، من اختيار الدقيق والخميرة الطبيعية حتى الخبز المثالي للخبز التقليدي والفيينوازري وتخصصات المخبز.",
+    "formation.cap1out":
+      "عامل خبّاز، إنشاء أو استعادة مخبز حرفي، خبّاز في التوزيع الكبير أو في الفندقة والإطعام.",
+    "formation.cap2": "شهادة CAP في الحلويات",
+    "formation.cap2tag": "أحيوا رغباتكم الإبداعية واللذيذة.",
+    "formation.cap2obj":
+      "تعلّم التقنيات الأساسية للحلويات الفرنسية: العجائن والكريمات والحلويات المركّبة والفيينوازري والشوكولاتة والزخارف الفنية، بدقّة وجمال.",
+    "formation.cap2out":
+      "حلواني في محل، مختبر إنتاج، صالون شاي، أو حلويات مطعم راقٍ.",
+    "formation.cap3": "شهادة CAP في الطبخ",
+    "formation.cap3tag": "ضعوا فنّ الطعام في قلب حرفتكم.",
+    "formation.cap3obj":
+      "اكتساب التقنيات الأساسية للمطبخ (تقطيع، طهي، صلصات، تقديم)، احترام معايير النظافة والسلامة (HACCP) وتطوير السرعة في الفريق.",
+    "formation.cap3out":
+      "معاون مطبخ، طبّاخ في إطعام تقليدي أو جماعي أو سياحي.",
+    "formation.why": "لماذا تختارون SATIA؟",
+    "formation.why1":
+      "تعلّم عملي على منصّات تقنية ومطابخ مجهّزة بمعايير مهنية.",
+    "formation.why2":
+      "فريق تربوي خبير من عالم الحرفة والإطعام.",
+    "formation.why3":
+      "مرافقة شخصية نحو التشغيل وتدريب في المؤسسات ضمن البرنامج.",
     "contact.formName": "الاسم واللقب",
     "contact.formEmail": "البريد الإلكتروني",
     "contact.formMsg": "الرسالة",

@@ -679,6 +679,10 @@ function renderXp() {
   const root = document.getElementById("xp-root");
   if (!root) return;
   const id = new URLSearchParams(location.search).get("id");
+  if (id === "formation") {
+    location.replace("/formation.html");
+    return;
+  }
   const pageData = getXpPage(id);
   if (!id || !pageData) {
     location.replace("/solution.html");

@@ -17,7 +17,6 @@ export const xpTree = [
     id: "innovation-hub",
     children: ["innovation", "marketing", "collections"],
   },
-  { id: "formation", children: [] },
   { id: "services", children: [] },
 ];
 

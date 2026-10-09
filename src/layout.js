@@ -37,15 +37,12 @@ function megaRows(items) {
     .join("");
 }
 
-function megaPanel(href, titleKey, items) {
-  return `<a class="nav-mega-title" href="${href}" data-i18n="${titleKey}"></a>
-    <div class="nav-mega-cats">${megaRows(items)}</div>`;
+function megaPanel(items) {
+  return `<div class="nav-mega-cats">${megaRows(items)}</div>`;
 }
 
 function megaMenu() {
   return megaPanel(
-    "/solution.html",
-    "nav.solution",
     xpTree.map((col) => ({
       href: xpHref(col.id),
       attr: `data-xp-nav="${col.id}"`,
@@ -58,7 +55,7 @@ function megaMenu() {
 }
 
 function mixMega() {
-  return megaPanel("/gamme.html", "nav.melanges", [
+  return megaPanel([
     { href: "/gamme.html?mix=premix-poudres", attr: 'data-i18n="nav.premix"' },
     { href: "/gamme.html?mix=mix-poudres", attr: 'data-i18n="nav.mixpoudres"' },
     { href: "/gamme.html?mix=mix-liquides", attr: 'data-i18n="nav.mixliquides"' },
@@ -67,8 +64,6 @@ function mixMega() {
 
 function ingMega() {
   return megaPanel(
-    "/ingredients.html",
-    "nav.ingredients",
     ingFamilies.map((id) => ({
       href: ingHref(id),
       attr: `data-xp-nav="${id}"`,
@@ -77,8 +72,8 @@ function ingMega() {
 }
 
 function header(active) {
-  const item = (id, href, key) =>
-    `<a class="nav-link${active === id ? " is-active" : ""}" href="${href}" data-i18n="${key}"></a>`;
+  const item = (id, href, key, extra = "") =>
+    `<a class="nav-link${active === id ? " is-active" : ""}${extra}" href="${href}" data-i18n="${key}"></a>`;
   const mixActive = active === "gamme" || active === "produit";
   const solActive = active === "solution";
   const ingActive = active === "ingredients";
@@ -91,7 +86,7 @@ function header(active) {
     ${item("home", "/index.html", "nav.home")}
     ${item("maison", "/maison.html", "nav.maison")}
     <div class="nav-item nav-item-mega${solActive ? " is-active" : ""}">
-      <a class="nav-link${solActive ? " is-active" : ""}" href="/solution.html" data-i18n="nav.solution" aria-haspopup="true" aria-expanded="false"></a>
+      <a class="nav-link nav-link-wrap${solActive ? " is-active" : ""}" href="/solution.html" data-i18n="nav.solution" aria-haspopup="true" aria-expanded="false"></a>
       <div class="nav-mega">${megaMenu()}</div>
     </div>
     <div class="nav-item nav-item-mega${mixActive ? " is-active" : ""}">
@@ -102,6 +97,7 @@ function header(active) {
       <a class="nav-link${ingActive ? " is-active" : ""}" href="/ingredients.html" data-i18n="nav.ingredients" aria-haspopup="true" aria-expanded="false"></a>
       <div class="nav-mega nav-mega-simple">${ingMega()}</div>
     </div>
+    ${item("formation", "/formation.html", "nav.formation", " nav-link-wrap")}
     ${item("partenaires", "/partenaires.html", "nav.partners")}
     ${item("contact", "/contact.html", "nav.contact")}
   </nav>
@@ -163,6 +159,7 @@ function pagePath(page) {
     expertise: "/expertise.html",
     xp: "/xp.html",
     ingredients: "/ingredients.html",
+    formation: "/formation.html",
     partenaires: "/partenaires.html",
     actualites: "/actualites.html",
     contact: "/contact.html",

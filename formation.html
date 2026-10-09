@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      (function () {
+        var l = localStorage.getItem("fournor-lang");
+        if (l === "ar" || l === "en" || l === "fr") {
+          document.documentElement.lang = l;
+          document.documentElement.dir = l === "ar" ? "rtl" : "ltr";
+        }
+      })();
+    </script>
+    <link rel="icon" type="image/png" href="/favicon.png?v=2" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/src/styles/main.css" />
+    <meta name="theme-color" content="#f4efe6" />
+    <meta name="description" content="École de Formation Professionnelle SATIA — CAP Boulangerie, CAP Pâtisserie, CAP Cuisine." />
+    <title>École de Formation Professionnelle SATIA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,500&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,500&display=swap" rel="stylesheet" /></noscript>
+  </head>
+  <body data-page="formation">
+    <main>
+      <section class="page-open wrap">
+        <figure class="page-open-photo">
+          <img src="/images/expertise.webp" alt="" width="1600" height="1200" fetchpriority="high" decoding="async" />
+        </figure>
+        <div class="page-open-copy">
+          <p class="kicker" data-i18n="page.kicker"></p>
+          <h1 data-i18n="formation.hero">École de Formation Professionnelle SATIA</h1>
+          <p class="pillar-tagline" data-i18n="formation.tag"></p>
+          <p class="lead" data-i18n="formation.lead"></p>
+          <a class="btn btn-gold" href="/contact.html" data-i18n="formation.cta"></a>
+        </div>
+      </section>
+
+      <section class="section" style="padding-top:0">
+        <div class="wrap page-notes">
+          <article class="form-cap reveal">
+            <h2 data-i18n="formation.cap1"></h2>
+            <p class="pillar-tagline" data-i18n="formation.cap1tag"></p>
+            <h3 data-i18n="formation.obj"></h3>
+            <p data-i18n="formation.cap1obj"></p>
+            <h3 data-i18n="formation.out"></h3>
+            <p data-i18n="formation.cap1out"></p>
+          </article>
+          <article class="form-cap reveal">
+            <h2 data-i18n="formation.cap2"></h2>
+            <p class="pillar-tagline" data-i18n="formation.cap2tag"></p>
+            <h3 data-i18n="formation.obj"></h3>
+            <p data-i18n="formation.cap2obj"></p>
+            <h3 data-i18n="formation.out"></h3>
+            <p data-i18n="formation.cap2out"></p>
+          </article>
+          <article class="form-cap reveal">
+            <h2 data-i18n="formation.cap3"></h2>
+            <p class="pillar-tagline" data-i18n="formation.cap3tag"></p>
+            <h3 data-i18n="formation.obj"></h3>
+            <p data-i18n="formation.cap3obj"></p>
+            <h3 data-i18n="formation.out"></h3>
+            <p data-i18n="formation.cap3out"></p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" style="padding-top:0">
+        <div class="wrap">
+          <article class="form-why reveal">
+            <h2 data-i18n="formation.why"></h2>
+            <ul>
+              <li data-i18n="formation.why1"></li>
+              <li data-i18n="formation.why2"></li>
+              <li data-i18n="formation.why3"></li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" style="padding-top:0">
+        <div class="cta-band reveal">
+          <div>
+            <h2 data-i18n="cta.title"></h2>
+            <p data-i18n="cta.text"></p>
+          </div>
+          <a class="btn btn-gold" href="/contact.html" data-i18n="cta.btn"></a>
+        </div>
+      </section>
+    </main>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

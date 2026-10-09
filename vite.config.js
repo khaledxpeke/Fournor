@@ -17,6 +17,7 @@ export default defineConfig({
         produit: resolve(root, "produit.html"),
         expertise: resolve(root, "expertise.html"),
         ingredients: resolve(root, "ingredients.html"),
+        formation: resolve(root, "formation.html"),
         partenaires: resolve(root, "partenaires.html"),
         actualites: resolve(root, "actualites.html"),
         contact: resolve(root, "contact.html"),
