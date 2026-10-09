@@ -28,9 +28,9 @@ export const ingHref = (id) => `/ingredients.html?fam=${id}`;
 export const xpNav = {
   metiers: L("Expertise métiers", "Craft expertise", "خبرة المهن"),
   rd: L("R&D", "R&D", "البحث والتطوير"),
-  artisan: L("Boulangerie artisan", "Artisan bakery", "مخابز حرفية"),
+  artisan: L("Boulangerie Artisanale", "Artisanal bakery", "مخابز حرفية"),
   industriel: L("Boulangerie industrielle", "Industrial bakery", "مخابز صناعية"),
-  patisserie: L("Boulangerie pâtisserie", "Bakery pastry", "مخابز وحلويات"),
+  patisserie: L("Pâtisserie", "Pastry", "حلويات"),
   snacking: L("Snacking", "Snacking", "سناكينغ"),
   agro: L("Agro alimentaire", "Food industry", "الصناعة الغذائية"),
   autres: L("Autres industrielles", "Other industries", "صناعات أخرى"),
