@@ -32,7 +32,7 @@ export const xpNav = {
   industriel: L("Boulangerie industrielle", "Industrial bakery", "مخابز صناعية"),
   patisserie: L("Pâtisserie", "Pastry", "حلويات"),
   snacking: L("Snacking", "Snacking", "سناكينغ"),
-  agro: L("Agro alimentaire", "Food industry", "الصناعة الغذائية"),
+  agro: L("Industries Agro Alimentaires", "Food industries", "الصناعات الغذائية"),
   autres: L("Autres industrielles", "Other industries", "صناعات أخرى"),
   "xp-ingredient": L("Expertise ingrédient", "Ingredient expertise", "خبرة المكوّنات"),
   parcours: L("Le parcours ingrédients", "The ingredient path", "مسار المكوّنات"),
