@@ -1,12 +1,12 @@
 export const products = [
   {
-    id: "banette",
-    sku: "PREMIX BANETTE FOURN'OR 2%",
+    id: "baguette-fournor",
+    sku: "PREMIX BAGUETTE FOURN'OR 2%",
     dosage: 2,
     family: "tradition",
     mix: "premix-poudres",
     image: "/images/banette.webp",
-    name: { fr: "Banette", en: "Banette", ar: "بانيت" },
+    name: { fr: "Baguette Fournor", en: "Baguette Fournor", ar: "باغيت فورنور" },
     promise: {
       fr: "La baguette de tous les jours, régulière et croustillante.",
       en: "The everyday baguette — consistent, crisp, golden.",
@@ -33,7 +33,6 @@ export const products = [
       en: "Wheat flour, rye flour, wheat gluten, roasted malted barley flour, enzymes, flour treatment agent E300.",
       ar: "دقيق القمح، دقيق الجاودار، غلوتين القمح، دقيق الشعير المنبّت المحمّص، إنزيمات، عامل معالجة الدقيق E300.",
     },
-    video: "LlvjIN_3BgM",
     sheet: "https://www.std-tayara.com/pain-banette/brochure",
   },
   {
@@ -106,7 +105,6 @@ export const products = [
       en: "Wheat flour, wheat offals, wheat gluten, salt, enzymes.",
       ar: "دقيق القمح، منتجات القمح الثانوية، غلوتين القمح، ملح، إنزيمات.",
     },
-    video: "WWqEQFC0uxs",
     sheet: "https://www.std-tayara.com/premix-pain-complet/brochure",
   },
   {
@@ -143,7 +141,6 @@ export const products = [
       en: "Rye flour, wheat proteins (gluten), salt, wheat flour, deactivated dehydrated rye and wheat sourdough, wheat offals, roasted malted barley flour, enzymes, flour treatment agent E300.",
       ar: "دقيق الجاودار، بروتينات القمح (غلوتين)، ملح، دقيق القمح، خميرة الجاودار والقمح المعطّلة والمجفّفة، منتجات القمح الثانوية، دقيق الشعير المنبّت المحمّص، إنزيمات، عامل معالجة الدقيق: E300.",
     },
-    video: "0Rc_xCFNiL4",
     sheet: "https://www.std-tayara.com/pain-de-compagne/brochure",
   },
   {
@@ -180,7 +177,6 @@ export const products = [
       en: "Wheat flour, rye flour, wheat gluten, roasted malted barley flour, enzymes, flour treatment agent E300.",
       ar: "دقيق القمح، دقيق الجاودار، غلوتين القمح، دقيق الشعير المنبّت المحمّص، إنزيمات، عامل معالجة الدقيق E300.",
     },
-    video: "2OcI9IANqI4",
     sheet: "https://www.std-tayara.com/pain-cereales-foncees/brochure",
   },
   {
@@ -217,7 +213,6 @@ export const products = [
       en: "Seeds (sesame, sunflower, linseed, millet), wheat proteins (gluten), roasted malted barley flour, salt, wheat flour, malted wheat flour, enzymes, flour treatment agent E300.",
       ar: "بذور (سمسم، دوّار الشمس، كتان، دخن)، بروتينات القمح (غلوتين)، دقيق الشعير المنبّت المحمّص، ملح، دقيق القمح، دقيق القمح المنبّت، إنزيمات، عامل معالجة الدقيق: E300.",
     },
-    video: "YM8kJcURY1U",
     sheet: "https://www.std-tayara.com/pain-scandinave/brochure",
   },
   {
@@ -254,7 +249,6 @@ export const products = [
       en: "Seeds (chia, quinoa, sunflower, linseed), wheat proteins (gluten), rye flour, salt, deactivated dehydrated rye sourdough, roasted malted barley flour, wheat flour, enzymes, flour treatment agent E300.",
       ar: "بذور (شيا، كينوا، دوّار الشمس، كتان)، بروتينات القمح (غلوتين)، دقيق الجاودار، ملح، خميرة الجاودار المعطّلة والمجفّفة، دقيق الشعير المنبّت المحمّص، دقيق القمح، إنزيمات، عامل معالجة الدقيق: E300.",
     },
-    video: "tRTgYl2fjrk",
     sheet: "https://www.std-tayara.com/premix-pain-au-chia/brochure",
   },
   {
@@ -291,7 +285,6 @@ export const products = [
       en: "Wheat flour, seeds (sunflower, linseed, sesame, soya), rye bran, wheat gluten, salt, roasted malted barley flour, deactivated dehydrated rye and wheat sourdough, malted wheat flour, emulsifier E471, enzymes, flour treatment agent E300.",
       ar: "دقيق القمح، بذور (دوّار الشمس، كتان، سمسم، صويا)، نخالة الجاودار، غلوتين القمح، ملح، دقيق الشعير المنبّت المحمّص، خميرة الجاودار والقمح المعطّلة والمجفّفة، دقيق القمح المنبّت، مستحلب E471، إنزيمات، عامل معالجة الدقيق E300.",
     },
-    video: "y-jIelJ77tU",
     sheet: "https://www.std-tayara.com/pain-viking/brochure",
   },
   {
@@ -301,7 +294,7 @@ export const products = [
     family: "graines",
     mix: "premix-poudres",
     image: "/images/multigrain.webp",
-    name: { fr: "Multigrain", en: "Multigrain", ar: "متعدد الحبوب" },
+    name: { fr: "Multi céréales", en: "Multi cereals", ar: "متعدد الحبوب" },
     promise: {
       fr: "L’équilibre des céréales, simple à réussir chaque jour.",
       en: "A balanced cereal loaf, easy to repeat daily.",
@@ -328,7 +321,6 @@ export const products = [
       en: "Wheat flour, seeds (sunflower, linseed, sesame, crushed soya), maize flour, wheat gluten, salt, deactivated dehydrated rye and wheat sourdough, malted wheat flour, emulsifier E472e, enzymes.",
       ar: "دقيق القمح، بذور (دوّار الشمس، كتان، سمسم، صويا مجروشة)، دقيق الذرة، غلوتين القمح، ملح، خميرة الجاودار والقمح المعطّلة والمجفّفة، دقيق القمح المنبّت، مستحلب E472e، إنزيمات.",
     },
-    video: "FsKuchfSEgs",
     sheet: "https://www.std-tayara.com/pain-multigrains/brochure",
   },
   {
@@ -365,7 +357,6 @@ export const products = [
       en: "Extruded maize pellets, wheat proteins (gluten), maize flour, salt, sunflower seeds, emulsifier E472e, spices, roasted malted barley flour, spice extract, enzymes, flour treatment agent E300.",
       ar: "حبّات ذرة مبثوقة، بروتينات القمح (غلوتين)، دقيق الذرة، ملح، بذور دوّار الشمس، مستحلب E472e، بهارات، دقيق الشعير المنبّت المحمّص، مستخلص بهارات، إنزيمات، عامل معالجة الدقيق: E300.",
     },
-    video: "oLQBs858UH4",
     sheet: "https://www.std-tayara.com/pain-de-mais/brochure",
   },
 ];

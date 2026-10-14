@@ -110,9 +110,9 @@ const pages = {
       "تحت علامة FOURN’OR، تؤمّن خلطات الخبز والفينوازري النتيجة دون أن تنقص من مهنة الخبّاز."
     ),
     text: L(
-      "Banette, Tradition, Complet, Campagne, graines… le boulanger complète avec sa farine, l’eau, le sel et la levure. Objectif : clarifier la recette, tenir la régularité, ouvrir la vitrine — du fournil artisanal au point chaud.",
-      "Banette, Tradition, Complet, Campagne, seeds… the baker completes with flour, water, salt and yeast. The aim: clarify the recipe, hold consistency, open the counter — from the artisan bakery to in-store bake-off.",
-      "بانيت، تراديسيون، كامل، كامبان، بذور… يكمّل الخبّاز بدقيقه والماء والملح والخميرة. الهدف: توضيح الوصفة، حفظ الانتظام، فتح الواجهة — من الفرن الحرفي إلى نقطة الخبز الساخن."
+      "Tradition, Complet, Campagne, graines… le boulanger complète avec sa farine, l’eau, le sel et la levure. Objectif : clarifier la recette, tenir la régularité, ouvrir la vitrine — du fournil artisanal au point chaud.",
+      "Tradition, Complet, Campagne, seeds… the baker completes with flour, water, salt and yeast. The aim: clarify the recipe, hold consistency, open the counter — from the artisan bakery to in-store bake-off.",
+      "تراديسيون، كامل، كامبان، بذور… يكمّل الخبّاز بدقيقه والماء والملح والخميرة. الهدف: توضيح الوصفة، حفظ الانتظام، فتح الواجهة — من الفرن الحرفي إلى نقطة الخبز الساخن."
     ),
     cta: { href: "/gamme.html?mix=premix-poudres", key: "ad.a.cta" },
   },
@@ -334,9 +334,9 @@ const pages = {
     image: "/images/mix-premix.webp?v=4",
     tag: L("Des références pour inspirer la vitrine", "References to inspire the counter", "مراجع لإلهام الواجهة"),
     lead: L(
-      "Les prémix FOURN’OR — Banette, Tradition, Complet, Campagne, graines, céréales — forment une collection vivante pour le fournil.",
-      "FOURN’OR premixes — Banette, Tradition, Complet, Campagne, seeds, cereals — form a living collection for the bakery.",
-      "خلطات FOURN’OR الجاهزة — بانيت، تراديسيون، كامل، كامبان، بذور، حبوب — تشكّل مجموعة حيّة للفرن."
+      "Les prémix FOURN’OR — Tradition, Complet, Campagne, graines, céréales — forment une collection vivante pour le fournil.",
+      "FOURN’OR premixes — Tradition, Complet, Campagne, seeds, cereals — form a living collection for the bakery.",
+      "خلطات FOURN’OR الجاهزة — تراديسيون، كامل، كامبان، بذور، حبوب — تشكّل مجموعة حيّة للفرن."
     ),
     text: L(
       "Chaque référence est un point de départ : dosage 2 %, 30 % ou 50 %, usage artisanal ou point chaud. SATIA fait évoluer cette collection avec vous — nouvelles saveurs, nouveaux formats — sans standardiser le goût.",

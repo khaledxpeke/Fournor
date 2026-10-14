@@ -27,7 +27,7 @@ const dict = {
     "meta.desc.maison":
       "SATIA accompagne les industriels agroalimentaires, pâtissiers et artisans boulangers : solutions, mélanges et ingrédients.",
     "meta.desc.gamme":
-      "Dix prémix Fourn’Or — Banette, Tradition, Complet, Campagne, graines et plus — dosés à 2 %, 30 % ou 50 %.",
+      "Prémix Fourn’Or — Tradition, Complet, Campagne, graines et plus — dosés à 2 %, 30 % ou 50 %.",
     "meta.desc.produit": "Fiche technique d’un prémix Fourn’Or : dosage, usage et profil sensoriel.",
     "meta.desc.expertise":
       "Le prémix, le fournil d’essai et l’accompagnement des boulangers-formateurs Fourn’Or à Tunis.",
@@ -94,7 +94,7 @@ const dict = {
       "Formulation, lignes de production et innovation — SATIA accompagne vos projets industriels.",
     "ad.sol.cta": "Découvrir Solution",
     "ad.a.kicker": "Prémix FOURN’OR",
-    "ad.a.title": "Banette, Tradition, Complet",
+    "ad.a.title": "Tradition, Complet, Campagne",
     "ad.a.lead": "Les prémix poudres pour un fournil régulier, chaque jour.",
     "ad.a.cta": "Voir les prémix",
     "ad.c.kicker": "Mix poudres",
@@ -160,7 +160,7 @@ const dict = {
     "gamme.filterLiquid": "Mix liquides",
     "gamme.sku": "Référence",
     "gamme.more": "Fiche produit",
-    "gamme.search": "Banette, mix, liquide…",
+    "gamme.search": "Tradition, mix, liquide…",
     "gamme.searchLabel": "Rechercher un mélange",
     "gamme.empty": "Aucun mélange ne correspond. Changez le filtre ou le mot recherché.",
     "sol.kicker": "01 — Solution",
@@ -290,7 +290,7 @@ const dict = {
     "meta.desc.maison":
       "SATIA supports food manufacturers, pastry chefs and artisan bakers: solutions, blends and ingredients.",
     "meta.desc.gamme":
-      "Ten Fourn’Or premixes — Banette, Tradition, Complet, Campagne, seeds and more — dosed at 2%, 30% or 50%.",
+      "Fourn’Or premixes — Tradition, Complet, Campagne, seeds and more — dosed at 2%, 30% or 50%.",
     "meta.desc.produit": "Technical sheet for a Fourn’Or premix: dosage, use and sensory profile.",
     "meta.desc.expertise": "Premix, the test bakery, and Fourn’Or baker-trainers in Tunis.",
     "meta.desc.partenaires":
@@ -358,7 +358,7 @@ const dict = {
       "Formulation, production lines and innovation — SATIA supports your industrial projects.",
     "ad.sol.cta": "Discover Solution",
     "ad.a.kicker": "FOURN’OR premixes",
-    "ad.a.title": "Banette, Tradition, Wholemeal",
+    "ad.a.title": "Tradition, Wholemeal, Country",
     "ad.a.lead": "Powder premixes for a consistent bakery, every day.",
     "ad.a.cta": "See the premixes",
     "ad.c.kicker": "Powder mixes",
@@ -424,7 +424,7 @@ const dict = {
     "gamme.filterLiquid": "Liquid mixes",
     "gamme.sku": "Reference",
     "gamme.more": "Product sheet",
-    "gamme.search": "Banette, mix, liquid…",
+    "gamme.search": "Tradition, mix, liquid…",
     "gamme.searchLabel": "Search a blend",
     "gamme.empty": "No blend matches. Change the filter or the search word.",
     "sol.kicker": "01 — Solution",
@@ -556,7 +556,7 @@ const dict = {
     "meta.desc.maison":
       "ترافق SATIA صناعيي الصناعات الغذائية والحلوانيّين والخبّازين الحرفيين: حلول وخلطات ومكوّنات.",
     "meta.desc.gamme":
-      "عشرة خلطات Fourn’Or جاهزة — بانيت، تراديسيون، كامل، كامبان وبذور وأكثر — بجرعات 2٪ و30٪ و50٪.",
+      "خلطات Fourn’Or الجاهزة — تراديسيون، كامل، كامبان وبذور وأكثر — بجرعات 2٪ و30٪ و50٪.",
     "meta.desc.produit": "بطاقة تقنية لخلطة Fourn’Or: الجرعة والاستخدام والملف الحسّي.",
     "meta.desc.expertise":
       "الخلطة الجاهزة، فرن التجربة ومرافقة خبّازي التكوين في Fourn’Or بتونس.",
@@ -623,7 +623,7 @@ const dict = {
       "صياغة وخطوط إنتاج وابتكار — SATIA ترافق مشاريعكم الصناعية.",
     "ad.sol.cta": "اكتشفوا الحلول",
     "ad.a.kicker": "خلطات FOURN’OR",
-    "ad.a.title": "بانيت، تراديسيون، كامل",
+    "ad.a.title": "تراديسيون، كامل، كامبان",
     "ad.a.lead": "خلطات بودرة جاهزة لفرن منتظم، كل يوم.",
     "ad.a.cta": "عرض الخلطات الجاهزة",
     "ad.c.kicker": "خلطات بودرة",
@@ -689,7 +689,7 @@ const dict = {
     "gamme.filterLiquid": "خلطات سائلة",
     "gamme.sku": "المرجع",
     "gamme.more": "بطاقة المنتج",
-    "gamme.search": "بانيت، خلطة، سائل…",
+    "gamme.search": "تراديسيون، خلطة، سائل…",
     "gamme.searchLabel": "البحث عن خلطة",
     "gamme.empty": "لا توجد خلطة مطابقة. غيّروا التصفية أو كلمة البحث.",
     "sol.kicker": "01 — الحلول",

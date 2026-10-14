@@ -40,7 +40,6 @@ function productCard(p, { decoy = false } = {}) {
   return `<a class="p-card" href="/produit.html?id=${p.id}"${extra}>
     <div class="p-card-img">
       <img src="${p.image}?v=2" alt="${loc(p.name, L)}" width="800" height="600" loading="lazy" decoding="async" />
-      <span class="photo-badge">${p.dosage}%</span>
     </div>
     <div class="p-card-body">
       <h3>${loc(p.name, L)}</h3>
@@ -217,15 +216,8 @@ function renderProduit() {
         </div>
       </section>`
     : "";
-  const sheetBtn = p.sheet
-    ? `<a class="btn btn-gold" href="${p.sheet}" target="_blank" rel="noopener noreferrer">
-        <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M7 3.5h6.5L18.5 9v11.5H7V3.5Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
-          <path d="M13.5 3.5V9H18.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
-          <path d="M9.5 13.5h5M9.5 16.5h5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-        </svg>
-        ${t("prod.download", L)}
-      </a>`
+  const watchBtn = p.video
+    ? `<div class="prod-actions"><a class="btn btn-ghost" href="#prod-video">${t("prod.watch", L)}</a></div>`
     : "";
   root.innerHTML = `
     <div class="prod-hero">
@@ -237,17 +229,7 @@ function renderProduit() {
         <h1>${loc(p.name, L)}</h1>
         <p class="sku">${p.sku}</p>
         <p class="lead">${loc(p.promise, L)}</p>
-        <div class="prod-mix">
-          ${ringSvg(p.dosage)}
-          <div>
-            <p class="badge">${p.dosage}%</p>
-            <p>${loc(dosageMeta[p.dosage].blurb, L)}</p>
-          </div>
-        </div>
-        <div class="prod-actions">
-          ${sheetBtn}
-          ${p.video ? `<a class="btn btn-ghost" href="#prod-video">${t("prod.watch", L)}</a>` : ""}
-        </div>
+        ${watchBtn}
       </div>
     </div>
     <div class="prod-specs">
@@ -276,7 +258,7 @@ function renderProduit() {
 }
 
 function composerLabel(p, L) {
-  return `${loc(p.name, L)} · ${p.dosage}%`;
+  return loc(p.name, L);
 }
 
 function closeComposerSelect() {
