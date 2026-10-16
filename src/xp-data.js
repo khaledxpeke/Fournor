@@ -3,7 +3,7 @@ const L = (fr, en, ar) => ({ fr, en, ar });
 export const xpTree = [
   {
     id: "metiers",
-    children: ["rd", "artisan", "industriel", "patisserie", "snacking", "agro", "autres"],
+    children: ["rd", "artisan", "industriel", "patisserie", "agro", "autres"],
   },
   {
     id: "xp-ingredient",

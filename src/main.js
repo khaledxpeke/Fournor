@@ -139,6 +139,7 @@ function mixTitleKey(mix) {
   return {
     "premix-poudres": "gamme.filterPremix",
     "mix-poudres": "gamme.filterMix",
+    "mix-graines": "gamme.filterGraines",
     "mix-liquides": "gamme.filterLiquid",
   }[mix];
 }
@@ -217,8 +218,13 @@ function renderProduit() {
       </section>`
     : "";
   const watchBtn = p.video
-    ? `<div class="prod-actions"><a class="btn btn-ghost" href="#prod-video">${t("prod.watch", L)}</a></div>`
+    ? `<a class="btn btn-ghost" href="#prod-video">${t("prod.watch", L)}</a>`
     : "";
+  const sheetName = `Fiche ${loc(p.name, L)}.pdf`;
+  const sheetBtn = p.sheet
+    ? `<a class="btn btn-ghost" href="${p.sheet}" download="${sheetName}">${t("prod.download", L)}</a>`
+    : "";
+  const actions = watchBtn || sheetBtn ? `<div class="prod-actions">${watchBtn}${sheetBtn}</div>` : "";
   root.innerHTML = `
     <div class="prod-hero">
       <div class="prod-photo">
@@ -229,7 +235,7 @@ function renderProduit() {
         <h1>${loc(p.name, L)}</h1>
         <p class="sku">${p.sku}</p>
         <p class="lead">${loc(p.promise, L)}</p>
-        ${watchBtn}
+        ${actions}
       </div>
     </div>
     <div class="prod-specs">

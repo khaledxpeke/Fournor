@@ -58,6 +58,7 @@ function mixMega() {
   return megaPanel([
     { href: "/gamme.html?mix=premix-poudres", attr: 'data-i18n="nav.premix"' },
     { href: "/gamme.html?mix=mix-poudres", attr: 'data-i18n="nav.mixpoudres"' },
+    { href: "/gamme.html?mix=mix-graines", attr: 'data-i18n="nav.mixgraines"' },
     { href: "/gamme.html?mix=mix-liquides", attr: 'data-i18n="nav.mixliquides"' },
   ]);
 }
@@ -231,7 +232,7 @@ export function mountLayout(active) {
   const toggle = document.querySelector(".nav-toggle");
   const nav = document.querySelector(".nav");
   const navItems = [...(nav?.querySelectorAll(".nav-item") || [])];
-  const isMobileNav = () => window.matchMedia("(max-width: 960px)").matches;
+  const isMobileNav = () => window.matchMedia("(max-width: 1100px)").matches;
   const topLink = (item) => item.querySelector(":scope > .nav-link");
 
   const closeSubs = () => {
