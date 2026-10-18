@@ -78,7 +78,7 @@ export const products = [
     family: "viennoiserie",
     mix: "mix-poudres",
     image: "/images/mix-poudres.webp",
-    name: { fr: "Mix farine croissant", en: "Croissant flour mix", ar: "خلطة دقيق الكرواسون" },
+    name: { fr: "Mix croissant", en: "Mix croissant", ar: "خلطة الكرواسون" },
     promise: {
       fr: "Une farine de croissant prête à laminer, régulière au fournil.",
       en: "A croissant flour ready to laminate, consistent in the bakery.",
@@ -183,7 +183,7 @@ export const products = [
     sku: "PREMIX CEREALES NOIR FOURN'OR 30%",
     dosage: 30,
     family: "caractere",
-    mix: "mix-graines",
+    mix: "premix-poudres",
     image: "/images/cereales-noir.jpg",
     name: { fr: "Céréales noir", en: "Dark cereals", ar: "حبوب داكنة" },
     promise: {
@@ -219,7 +219,7 @@ export const products = [
     sku: "PREMIX CHIA QUINOA FOURN'OR 30%",
     dosage: 30,
     family: "caractere",
-    mix: "mix-graines",
+    mix: "premix-poudres",
     image: "/images/chia-quinoa.jpg",
     name: { fr: "Chia quinoa", en: "Chia quinoa", ar: "شيا وكينوا" },
     promise: {
@@ -255,7 +255,7 @@ export const products = [
     sku: "PREMIX MAXI GRAINES FOURN'OR 50%",
     dosage: 50,
     family: "graines",
-    mix: "mix-graines",
+    mix: "premix-poudres",
     image: "/images/maxi-graines.jpg",
     name: { fr: "Maxi graines", en: "Maxi seeds", ar: "ماكسي بذور" },
     promise: {
@@ -291,7 +291,7 @@ export const products = [
     sku: "PREMIX MULTIGRAIN FOURN'OR 50%",
     dosage: 50,
     family: "graines",
-    mix: "mix-graines",
+    mix: "premix-poudres",
     image: "/images/multi-cereales.jpg",
     name: { fr: "Multi céréales", en: "Multi cereals", ar: "متعدد الحبوب" },
     promise: {
@@ -327,7 +327,7 @@ export const products = [
     sku: "PREMIX MAIS FOURN'OR 50%",
     dosage: 50,
     family: "graines",
-    mix: "mix-graines",
+    mix: "premix-poudres",
     image: "/images/mais.jpg",
     name: { fr: "Maïs", en: "Corn", ar: "ذرة" },
     promise: {
