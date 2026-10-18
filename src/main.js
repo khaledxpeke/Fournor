@@ -423,18 +423,53 @@ function renderPartners() {
 
 function setupContact() {
   const form = document.getElementById("contact-form");
-  if (!form) return;
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
+  if (!form || form.dataset.ready) return;
+  form.dataset.ready = "1";
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
     const L = lang();
     const name = form.name.value.trim();
     const email = form.email.value.trim();
     const msg = form.message.value.trim();
     const note = document.getElementById("form-note");
-    const ok = name && msg && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    note.textContent = ok ? t("contact.ok", L) : t("contact.error", L);
-    note.className = ok ? "form-note is-ok" : "form-note is-err";
-    if (ok) form.reset();
+    const button = form.querySelector("button[type=submit]");
+    const valid = name && msg && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    if (!valid) {
+      note.textContent = t("contact.error", L);
+      note.className = "form-note is-err";
+      return;
+    }
+    if (button) button.disabled = true;
+    note.textContent = "";
+    note.className = "form-note";
+    try {
+      const res = await fetch("https://formsubmit.co/ajax/contact@fournor.com", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          message: msg,
+          _subject: "Message depuis le site SATIA",
+          _replyto: email,
+          _template: "table",
+          _captcha: "false",
+        }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || data.success === false || data.success === "false") throw new Error("send");
+      note.textContent = t("contact.ok", L);
+      note.className = "form-note is-ok";
+      form.reset();
+    } catch {
+      note.textContent = t("contact.fail", L);
+      note.className = "form-note is-err";
+    } finally {
+      if (button) button.disabled = false;
+    }
   });
 }
 

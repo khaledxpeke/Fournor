@@ -142,8 +142,8 @@ function footer() {
         </a>
       </p>
       <p class="social">
-        <a href="https://www.facebook.com/profile.php?id=100088082392675" target="_blank" rel="noopener noreferrer">Facebook</a>
-        <a href="https://www.instagram.com/stdtayara.tn/" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a href="https://www.facebook.com/profile.php?id=61595196575088" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <a href="https://www.instagram.com/fournor.officielle?cplk=MTR4dXFkcnMwbGhvZw%3D%3D" target="_blank" rel="noopener noreferrer">Instagram</a>
       </p>
     </div>
   </div>
