@@ -965,7 +965,7 @@ body[data-page="home"] .sol-intro.wrap {
 
 .ad-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: var(--ad-gap);
   width: 100%;
 }
@@ -1005,7 +1005,7 @@ body[data-page="home"] .sol-intro.wrap {
 
 .ad-band-split .ad-frame {
   width: 100%;
-  height: calc(26rem * 10 / 16 * 3);
+  height: calc(18rem * 10 / 16 * 2.4);
   max-height: none;
   aspect-ratio: auto;
 }
@@ -2696,6 +2696,14 @@ body[data-page="formation"] .page-notes {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .ad-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ad-band-split .ad-frame {
+    height: 16rem;
+  }
+
   .nav-toggle {
     display: block;
   }
@@ -2947,14 +2955,14 @@ body[data-page="formation"] .page-notes {
   }
 
   .ad-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     width: 100%;
     max-width: none;
     gap: 1rem;
   }
 
   .ad-band-split .ad-frame {
-    height: calc(9.5rem * 3);
+    height: 14rem;
   }
 
   .prod-spec-main,
@@ -3228,8 +3236,12 @@ body[data-page="formation"] .page-notes {
     padding: 0.32rem 0.8rem;
   }
 
+  .ad-grid {
+    grid-template-columns: 1fr;
+  }
+
   .ad-band-split .ad-frame {
-    height: calc(9.5rem * 3);
+    height: 12.5rem;
     aspect-ratio: auto;
   }
 

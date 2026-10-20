@@ -27,7 +27,7 @@ export const products = [
       en: "Flour, water, salt, yeast",
       ar: "دقيق، ماء، ملح، خميرة",
     },
-    weight: "20 kg",
+    weight: "25 kg",
     composition: {
       fr: "Farine de blé, farine de seigle, gluten de blé, farine d’orge malté torréfié, enzymes, agent de traitement de la farine E300.",
       en: "Wheat flour, rye flour, wheat gluten, roasted malted barley flour, enzymes, flour treatment agent E300.",
@@ -63,7 +63,7 @@ export const products = [
       en: "Flour, water, salt, yeast",
       ar: "دقيق، ماء، ملح، خميرة",
     },
-    weight: "20 kg",
+    weight: "25 kg",
     composition: {
       fr: "Protéines de blé (gluten), farine de maïs, sel, farine de blé, levain de seigle dévitalisé et déshydraté, enzymes, agent de traitement de la farine : E300.",
       en: "Wheat proteins (gluten), maize flour, salt, wheat flour, deactivated dehydrated rye sourdough, enzymes, flour treatment agent E300.",
@@ -99,7 +99,7 @@ export const products = [
       en: "Water, butter, yeast",
       ar: "ماء، زبدة، خميرة",
     },
-    weight: "20 kg",
+    weight: "25 kg",
     composition: {
       fr: "Farine de blé composée pour pâte à croissant.",
       en: "Compound wheat flour for croissant dough.",
@@ -134,7 +134,7 @@ export const products = [
       en: "Flour, water, salt, yeast",
       ar: "دقيق، ماء، ملح، خميرة",
     },
-    weight: "20 kg",
+    weight: "25 kg",
     composition: {
       fr: "Farine de blé, issues de blé, gluten de blé, sel, enzymes.",
       en: "Wheat flour, wheat offals, wheat gluten, salt, enzymes.",
@@ -170,7 +170,7 @@ export const products = [
       en: "Flour, water, salt, yeast",
       ar: "دقيق، ماء، ملح، خميرة",
     },
-    weight: "20 kg",
+    weight: "25 kg",
     composition: {
       fr: "Farine de seigle, protéines de blé (gluten), sel, farine de blé, levain de seigle et de blé dévitalisés et déshydratés, issues de blé, farine d’orge malté torréfié, enzymes, agent de traitement de la farine : E300.",
       en: "Rye flour, wheat proteins (gluten), salt, wheat flour, deactivated dehydrated rye and wheat sourdough, wheat offals, roasted malted barley flour, enzymes, flour treatment agent E300.",
@@ -206,7 +206,7 @@ export const products = [
       en: "Flour, water, salt, yeast",
       ar: "دقيق، ماء، ملح، خميرة",
     },
-    weight: "20 kg",
+    weight: "25 kg",
     composition: {
       fr: "Farine de blé, farine de seigle, gluten de blé, farine d’orge malté torréfié, enzymes, agent de traitement de la farine E300.",
       en: "Wheat flour, rye flour, wheat gluten, roasted malted barley flour, enzymes, flour treatment agent E300.",
@@ -242,7 +242,7 @@ export const products = [
       en: "Flour, water, salt, yeast",
       ar: "دقيق، ماء، ملح، خميرة",
     },
-    weight: "20 kg",
+    weight: "25 kg",
     composition: {
       fr: "Graines (chia, quinoa, tournesol, lin), protéines de blé (gluten), farine de seigle, sel, levain de seigle dévitalisé et déshydraté, farine d’orge malté torréfié, farine de blé, enzymes, agent de traitement de la farine : E300.",
       en: "Seeds (chia, quinoa, sunflower, linseed), wheat proteins (gluten), rye flour, salt, deactivated dehydrated rye sourdough, roasted malted barley flour, wheat flour, enzymes, flour treatment agent E300.",
@@ -278,7 +278,7 @@ export const products = [
       en: "Flour, water, salt, yeast",
       ar: "دقيق، ماء، ملح، خميرة",
     },
-    weight: "20 kg",
+    weight: "25 kg",
     composition: {
       fr: "Farine de blé, graines (tournesol, lin, sésame, soja), son de seigle, gluten de blé, sel, farine d’orge malté torréfié, levain de seigle et de blé dévitalisés et déshydratés, farine de blé malté, émulsifiant E471, enzymes, agent de traitement de la farine E300.",
       en: "Wheat flour, seeds (sunflower, linseed, sesame, soya), rye bran, wheat gluten, salt, roasted malted barley flour, deactivated dehydrated rye and wheat sourdough, malted wheat flour, emulsifier E471, enzymes, flour treatment agent E300.",
@@ -314,7 +314,7 @@ export const products = [
       en: "Flour, water, salt, yeast",
       ar: "دقيق، ماء، ملح، خميرة",
     },
-    weight: "20 kg",
+    weight: "25 kg",
     composition: {
       fr: "Farine de blé, graines (tournesol, lin, sésame, soja concassé), farine de maïs, gluten de blé, sel, levain de seigle et de blé dévitalisés et déshydratés, farine de blé malté, émulsifiant E472e, enzymes.",
       en: "Wheat flour, seeds (sunflower, linseed, sesame, crushed soya), maize flour, wheat gluten, salt, deactivated dehydrated rye and wheat sourdough, malted wheat flour, emulsifier E472e, enzymes.",
@@ -350,7 +350,7 @@ export const products = [
       en: "Flour, water, salt, yeast",
       ar: "دقيق، ماء، ملح، خميرة",
     },
-    weight: "20 kg",
+    weight: "25 kg",
     composition: {
       fr: "Billes de maïs extrudés, protéines de blé (gluten), farine de maïs, sel, graines de tournesol, émulsifiant E472e, épices, farine d’orge malté torréfié, extrait d’épices, enzymes, agent de traitement de la farine : E300.",
       en: "Extruded maize pellets, wheat proteins (gluten), maize flour, salt, sunflower seeds, emulsifier E472e, spices, roasted malted barley flour, spice extract, enzymes, flour treatment agent E300.",
