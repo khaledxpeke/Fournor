@@ -1,0 +1,49 @@
+---
+import Base from "../layouts/BaseLayout.astro";
+import CtaBand from "../components/CtaBand.astro";
+import { t } from "../i18n.js";
+import { loc, localizeHref } from "../lib/locale.js";
+import { getXpPage, getXpTitle, xpHref, xpTree } from "../xp-data.js";
+
+const { locale = "fr" } = Astro.props;
+const tr = (key) => t(key, locale);
+---
+
+<Base
+  title={tr("meta.solution")}
+  description={tr("meta.desc.solution")}
+  page="solution"
+  locale={locale}
+  path="/solution/"
+>
+  <section class="page-hero wrap">
+    <p class="kicker">{tr("page.kicker")}</p>
+    <h1>{tr("nav.solution")}</h1>
+    <p class="lead">{tr("sol.hubLead")}</p>
+  </section>
+  <section class="section" style="padding-top:0">
+    <div class="wrap xp-hub" id="xp-hub">
+      {
+        xpTree.map((col) => {
+          const pageData = getXpPage(col.id);
+          return (
+            <article class="xp-pillar reveal">
+              <h2><a href={localizeHref(locale, xpHref(col.id))}>{getXpTitle(col.id, locale)}</a></h2>
+              <p class="pillar-tagline">{pageData ? loc(pageData.tag, locale) : ""}</p>
+              <p>{pageData ? loc(pageData.lead, locale) : ""}</p>
+              {(col.children || []).length > 0 && (
+                <div class="xp-pillar-links">
+                  {col.children.map((id) => (
+                    <a href={localizeHref(locale, xpHref(id))}>{getXpTitle(id, locale)}</a>
+                  ))}
+                </div>
+              )}
+              <a class="btn btn-gold" href={localizeHref(locale, xpHref(col.id))}>{tr("metier.more")}</a>
+            </article>
+          );
+        })
+      }
+    </div>
+  </section>
+  <CtaBand locale={locale} />
+</Base>

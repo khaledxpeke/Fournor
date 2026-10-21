@@ -1,5 +1,5 @@
 import { mountLayout, fillNavLabels } from "./layout.js";
-import { getLang, isRtl } from "./i18n.js";
+import { isRtl } from "./i18n.js";
 import { products, events, dosageMeta, partners, getProduct } from "./products.js";
 import { t } from "./i18n.js";
 import {
@@ -16,7 +16,10 @@ import {
 const page = document.body.dataset.page || "home";
 mountLayout(page === "produit" ? "gamme" : page === "xp" ? "solution" : page);
 
-const lang = () => getLang();
+const lang = () => {
+  const value = document.documentElement.lang;
+  return value === "en" || value === "ar" || value === "fr" ? value : "fr";
+};
 const loc = (obj, L = lang()) => obj?.[L] ?? obj?.fr ?? obj?.en ?? "";
 
 function dateLocale(L = lang()) {
@@ -37,7 +40,7 @@ function ringSvg(pct) {
 function productCard(p, { decoy = false } = {}) {
   const L = lang();
   const extra = decoy ? ' aria-hidden="true" tabindex="-1"' : "";
-  return `<a class="p-card" href="/produit.html?id=${p.id}"${extra}>
+  return `<a class="p-card" href="/produit/${p.id}/"${extra}>
     <div class="p-card-img">
       <img src="${p.image}?v=2" alt="${loc(p.name, L)}" width="800" height="600" loading="lazy" decoding="async" />
     </div>
@@ -62,6 +65,7 @@ function eventCard(e) {
 }
 
 function renderHome() {
+  if (document.querySelector("#atelier-rail .p-card") && document.querySelector("#home-news h3")) return;
   const L = lang();
   const rail = document.getElementById("atelier-rail");
   if (rail) {
@@ -119,14 +123,21 @@ function matchesGammeQuery(p, query) {
 
 function renderMarquee() {
   const track = document.querySelector(".marquee-track");
-  if (!track) return;
+  if (!track || track.querySelector("span")) return;
   const L = lang();
   const items = products.map((p) => loc(p.name, L));
   const html = items.map((item) => `<span>${item}</span>`).join("");
   track.innerHTML = html + html;
 }
 
+function pathPart(index) {
+  const parts = location.pathname.split("/").filter(Boolean);
+  return parts[index] ? decodeURIComponent(parts[index]) : "";
+}
+
 function currentMix() {
+  if (document.body.dataset.mix) return document.body.dataset.mix;
+  if (pathPart(0) === "gamme" && pathPart(1)) return pathPart(1);
   return new URLSearchParams(location.search).get("mix");
 }
 
@@ -168,19 +179,18 @@ function syncGammeView() {
 function renderGamme() {
   const grid = document.getElementById("gamme-grid");
   if (!grid) return;
-  syncGammeView();
-  if (isGammeHub()) return;
-  const L = lang();
-  const mix = currentMix();
+  const cards = [...grid.querySelectorAll(".p-card")];
+  if (!cards.length) return;
   const query = fold(document.getElementById("gamme-search")?.value.trim());
-  const list = products.filter((p) => p.mix === mix && matchesGammeQuery(p, query));
-  grid.innerHTML = list.map(productCard).join("");
+  let shown = 0;
+  cards.forEach((card) => {
+    const hay = fold(card.dataset.search || "");
+    const ok = !query || query.split(/\s+/).filter(Boolean).every((word) => hay.includes(word));
+    card.hidden = !ok;
+    if (ok) shown += 1;
+  });
   const empty = document.getElementById("gamme-empty");
-  if (empty) {
-    empty.hidden = list.length > 0;
-    empty.textContent = t("gamme.empty", L);
-  }
-  hydrateMedia(grid);
+  if (empty) empty.hidden = shown > 0;
 }
 
 function setupFilters() {
@@ -195,12 +205,18 @@ function setupGammeSearch() {
   input.addEventListener("search", renderGamme);
 }
 
+function currentProductId() {
+  if (document.body.dataset.product) return document.body.dataset.product;
+  if (pathPart(0) === "produit" && pathPart(1)) return pathPart(1);
+  return new URLSearchParams(location.search).get("id");
+}
+
 function renderProduit() {
-  const id = new URLSearchParams(location.search).get("id");
+  const root = document.getElementById("produit");
+  if (!root || root.querySelector("h1")) return;
+  const id = currentProductId();
   const p = getProduct(id);
   const L = lang();
-  const root = document.getElementById("produit");
-  if (!root) return;
   document.title = `${loc(p.name, L)} — Fourn’Or`;
   const videoBlock = p.video
     ? `<section class="prod-video" id="prod-video">
@@ -257,7 +273,7 @@ function renderProduit() {
       </div>
     </div>
     ${videoBlock}
-    <p><a class="btn btn-ghost" href="/gamme.html" data-i18n="prod.back">${t("prod.back", L)}</a></p>
+    <p><a class="btn btn-ghost" href="/gamme/" data-i18n="prod.back">${t("prod.back", L)}</a></p>
     <h2 class="section-title" data-i18n="prod.other">${t("prod.other", L)}</h2>
     <div class="card-grid">${products.filter((x) => x.id !== p.id).slice(0, 3).map(productCard).join("")}</div>
   `;
@@ -304,7 +320,9 @@ function moveComposerActive(delta) {
 
 function mountComposerSelect(wrap) {
   wrap.dataset.value = wrap.dataset.value || products[0].id;
-  wrap.innerHTML = `
+  if (wrap.dataset.bound) return;
+  wrap.dataset.bound = "1";
+  if (!wrap.querySelector(".fo-select-trigger")) wrap.innerHTML = `
     <button type="button" class="fo-select-trigger" id="composer-trigger" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="composer-label composer-value" aria-controls="composer-list">
       <span class="fo-select-value" id="composer-value"></span>
       <svg class="fo-select-chevron" viewBox="0 0 24 24" aria-hidden="true">
@@ -410,7 +428,8 @@ function renderComposer() {
 
 function renderNews() {
   const list = document.getElementById("news-list");
-  if (list) list.innerHTML = events.map(eventCard).join("");
+  if (!list || list.querySelector("h3")) return;
+  list.innerHTML = events.map(eventCard).join("");
 }
 
 function renderPartners() {
@@ -616,17 +635,24 @@ function fitPillarHeadings() {
   const ref = source.closest(".mix-copy")?.querySelector(".pillar-fit-ref");
   if (!ref) return;
 
+  const parent = source.parentElement;
   const probe = source.cloneNode(false);
   probe.className = source.className;
-  probe.textContent = t("maison.kicker");
+  probe.textContent = t("maison.kicker", "fr");
   probe.style.cssText =
-    "position:absolute;left:0;top:0;visibility:hidden;pointer-events:none;white-space:nowrap;width:max-content;font-size:inherit;";
-  source.parentElement.appendChild(probe);
+    'position:absolute;left:0;top:0;visibility:hidden;pointer-events:none;white-space:nowrap;width:max-content;font-size:inherit;font-family:"Cormorant Garamond",Georgia,serif;letter-spacing:-0.02em;';
 
-  const target = ref.getBoundingClientRect().width;
+  const refStyle = getComputedStyle(ref);
+  const refProbe = document.createElement("span");
+  refProbe.textContent = t("maison.titleFit", "fr");
+  refProbe.style.cssText = `position:absolute;left:0;top:0;visibility:hidden;pointer-events:none;white-space:nowrap;width:max-content;font-family:Montserrat,system-ui,sans-serif;font-size:${refStyle.fontSize};font-weight:${refStyle.fontWeight};letter-spacing:0;`;
+  parent.append(probe, refProbe);
+
+  const target = refProbe.getBoundingClientRect().width;
   const current = probe.getBoundingClientRect().width;
   const size = parseFloat(getComputedStyle(probe).fontSize);
   probe.remove();
+  refProbe.remove();
 
   if (target && current && size) {
     const maxW = source.parentElement?.clientWidth || target;
@@ -689,7 +715,7 @@ function xpCtaBand() {
         <h2>${t("cta.title", L)}</h2>
         <p>${t("cta.text", L)}</p>
       </div>
-      <a class="btn btn-gold" href="/contact.html">${t("cta.btn", L)}</a>
+      <a class="btn btn-gold" href="/contact/">${t("cta.btn", L)}</a>
     </div>
   </section>`;
 }
@@ -700,22 +726,22 @@ function parentOf(id) {
 
 function renderXp() {
   const root = document.getElementById("xp-root");
-  if (!root) return;
-  const id = new URLSearchParams(location.search).get("id");
+  if (!root || root.querySelector("h1")) return;
+  const id = document.body.dataset.xp || (pathPart(0) === "xp" ? pathPart(1) : "") || new URLSearchParams(location.search).get("id");
   if (id === "formation") {
-    location.replace("/formation.html");
+    location.replace("/formation/");
     return;
   }
   const pageData = getXpPage(id);
   if (!id || !pageData) {
-    location.replace("/solution.html");
+    location.replace("/solution/");
     return;
   }
   const L = lang();
   const title = getXpTitle(id, L);
   const parent = parentOf(id);
   const parentId = parent && parent.id !== id ? parent.id : "solution";
-  const parentHref = parentId === "solution" ? "/solution.html" : xpHref(parentId);
+  const parentHref = parentId === "solution" ? "/solution/" : xpHref(parentId);
   const parentLabel = parentId === "solution" ? t("nav.solution", L) : getXpTitle(parentId, L);
   document.title = `${title} — SATIA`;
   const desc = document.querySelector("meta[name='description']");
@@ -742,7 +768,7 @@ function renderXp() {
 
 function renderSolutionHub() {
   const hub = document.getElementById("xp-hub");
-  if (!hub) return;
+  if (!hub || hub.querySelector("article")) return;
   const L = lang();
   hub.innerHTML = xpTree
     .map((col) => {
@@ -763,8 +789,12 @@ function renderSolutionHub() {
 
 function renderIngredients() {
   if (document.body.dataset.page !== "ingredients") return;
+  if (document.querySelector("#ing-families a, #ing-detail h1")) return;
   const L = lang();
-  const fam = new URLSearchParams(location.search).get("fam");
+  const fam =
+    document.body.dataset.fam ||
+    (pathPart(0) === "ingredients" ? pathPart(1) : "") ||
+    new URLSearchParams(location.search).get("fam");
   const intro = document.getElementById("ing-intro");
   const detail = document.getElementById("ing-detail");
   const grid = document.getElementById("ing-families");
@@ -784,7 +814,7 @@ function renderIngredients() {
           <img src="${pageData.image}" alt="${title}" width="1600" height="1200" fetchpriority="high" decoding="async" />
         </figure>
         <div class="page-open-copy">
-          <p class="kicker"><a href="/ingredients.html">${t("ing.hero", L)}</a></p>
+          <p class="kicker"><a href="/ingredients/">${t("ing.hero", L)}</a></p>
           <h1>${title}</h1>
           <p class="lead pillar-tagline">${loc(pageData.tag, L)}</p>
           <p>${loc(pageData.lead, L)}</p>

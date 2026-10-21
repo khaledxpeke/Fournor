@@ -1,0 +1,11 @@
+---
+import XpPage from "../../views/XpPage.astro";
+import { xpSlugs } from "../../xp-data.js";
+
+export function getStaticPaths() {
+  return xpSlugs.map((id) => ({ params: { id } }));
+}
+
+const { id } = Astro.params;
+---
+<XpPage locale="fr" id={id} />

@@ -1,0 +1,98 @@
+---
+import Base from "../layouts/BaseLayout.astro";
+import ProductCard from "../components/ProductCard.astro";
+import { getProduct, products } from "../products.js";
+import { t } from "../i18n.js";
+import { absolute, loc, localePath } from "../lib/locale.js";
+
+const { locale = "fr", id } = Astro.props;
+const product = products.find((item) => item.id === id) || getProduct(id);
+const name = loc(product.name, locale);
+const tr = (key) => t(key, locale);
+const href = (to) => localePath(locale, to);
+const flourNote = tr("prod.usageText");
+const others = products.filter((item) => item.id !== product.id).slice(0, 3);
+const sheetName = `Fiche ${name}.pdf`;
+const productLd = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  name,
+  description: loc(product.promise, locale),
+  sku: product.sku,
+  image: absolute(product.image),
+  brand: { "@type": "Brand", name: "FOURN’OR" },
+};
+---
+
+<Base
+  title={`${name} — Fourn’Or`}
+  description={tr("meta.desc.produit")}
+  page="produit"
+  locale={locale}
+  path={`/produit/${product.id}/`}
+  product={product.id}
+  ogImage={product.image}
+  extraLd={[productLd]}
+>
+  <section class="section">
+    <div class="wrap" id="produit">
+      <div class="prod-hero">
+        <div class="prod-photo">
+          <img src={`${product.image}?v=2`} alt={name} width="900" height="900" fetchpriority="high" decoding="async" />
+        </div>
+        <div class="prod-intro">
+          <p class="kicker">{tr("prod.kicker")}</p>
+          <h1>{name}</h1>
+          <p class="sku">{product.sku}</p>
+          <p class="lead">{loc(product.promise, locale)}</p>
+          {(product.video || product.sheet) && (
+            <div class="prod-actions">
+              {product.video && <a class="btn btn-ghost" href="#prod-video">{tr("prod.watch")}</a>}
+              {product.sheet && <a class="btn btn-ghost" href={product.sheet} download={sheetName}>{tr("prod.download")}</a>}
+            </div>
+          )}
+        </div>
+      </div>
+      <div class="prod-specs">
+        <div class="prod-spec-main">
+          <article>
+            <h3>{tr("prod.composition")}</h3>
+            <p>{loc(product.composition, locale)}</p>
+          </article>
+          <article class="prod-spec-weight">
+            <h3>{tr("prod.weight")}</h3>
+            <p>{product.weight}</p>
+          </article>
+        </div>
+        <div class="prod-spec-grid">
+          <article><h3>{tr("prod.adds")}</h3><p>{loc(product.adds, locale)}</p></article>
+          <article><h3>{tr("prod.sensory")}</h3><p>{loc(product.sensory, locale)}</p></article>
+          <article><h3>{tr("prod.target")}</h3><p>{loc(product.target, locale)}</p></article>
+          <article><h3>{tr("prod.usage")}</h3><p>{flourNote}</p></article>
+        </div>
+      </div>
+      {
+        product.video && (
+          <section class="prod-video" id="prod-video">
+            <p class="kicker">{tr("prod.video")}</p>
+            <h2>{tr("prod.videoTitle")}</h2>
+            <div class="prod-video-frame">
+              <iframe
+                src={`https://www.youtube-nocookie.com/embed/${product.video}`}
+                title={name}
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </section>
+        )
+      }
+      <p><a class="btn btn-ghost" href={href("/gamme/")}>{tr("prod.back")}</a></p>
+      <h2 class="section-title">{tr("prod.other")}</h2>
+      <div class="card-grid">
+        {others.map((item) => <ProductCard product={item} locale={locale} />)}
+      </div>
+    </div>
+  </section>
+</Base>

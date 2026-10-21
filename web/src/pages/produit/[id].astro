@@ -1,0 +1,11 @@
+---
+import ProductPage from "../../views/ProductPage.astro";
+import { products } from "../../products.js";
+
+export function getStaticPaths() {
+  return products.map((product) => ({ params: { id: product.id } }));
+}
+
+const { id } = Astro.params;
+---
+<ProductPage locale="fr" id={id} />

@@ -10,6 +10,17 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+web/node_modules
+web/dist
+web/.astro
+cms/node_modules
+cms/.tmp
+cms/build
+cms/public/uploads
+cms/.env
+web/.env
+.env
+.astro
 *.local
 brand-extract
 scripts/render-pdf.mjs

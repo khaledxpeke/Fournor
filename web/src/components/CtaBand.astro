@@ -1,0 +1,16 @@
+---
+import { t } from "../i18n.js";
+import { localePath } from "../lib/locale.js";
+
+const { locale = "fr" } = Astro.props;
+---
+
+<section class="section" style="padding-top:0">
+  <div class="cta-band reveal">
+    <div>
+      <h2>{t("cta.title", locale)}</h2>
+      <p>{t("cta.text", locale)}</p>
+    </div>
+    <a class="btn btn-gold" href={localePath(locale, "/contact/")}>{t("cta.btn", locale)}</a>
+  </div>
+</section>

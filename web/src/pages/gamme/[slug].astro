@@ -1,0 +1,11 @@
+---
+import GammeCatalogPage from "../../views/GammeCatalogPage.astro";
+import { mixes } from "../../lib/routes.js";
+
+export function getStaticPaths() {
+  return mixes.map((slug) => ({ params: { slug } }));
+}
+
+const { slug } = Astro.params;
+---
+<GammeCatalogPage locale="fr" mix={slug} />

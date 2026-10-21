@@ -1,0 +1,17 @@
+---
+import { loc } from "../lib/locale.js";
+
+const { event, locale = "fr" } = Astro.props;
+const title = loc(event.title, locale);
+---
+
+<article class="e-card">
+  <div class="e-card-img">
+    <img src={event.image} alt={title} width="800" height="500" loading="lazy" decoding="async" />
+  </div>
+  <div>
+    <p class="kicker">{loc(event.place, locale)}</p>
+    <h3>{title}</h3>
+    <p>{loc(event.text, locale)}</p>
+  </div>
+</article>

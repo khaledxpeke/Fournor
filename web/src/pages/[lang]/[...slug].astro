@@ -1,0 +1,18 @@
+---
+import Routed from "../../views/Routed.astro";
+import { contentPaths } from "../../lib/routes.js";
+
+export function getStaticPaths() {
+  return contentPaths()
+    .filter((slug) => slug !== "")
+    .flatMap((slug) =>
+      ["en", "ar"].map((lang) => ({
+        params: { lang, slug },
+        props: { locale: lang, slug },
+      }))
+    );
+}
+
+const { locale, slug } = Astro.props;
+---
+<Routed locale={locale} slug={slug} />

@@ -1,0 +1,108 @@
+---
+import { ingFamilies, xpNav, xpTree } from "../xp-data.js";
+import { t } from "../i18n.js";
+import { alternates, localePath } from "../lib/locale.js";
+
+const { locale = "fr", active = "", path = "/" } = Astro.props;
+const tr = (key) => t(key, locale);
+const href = (to) => localePath(locale, to);
+const label = (id) => xpNav[id]?.[locale] || xpNav[id]?.fr || id;
+const alts = alternates(path);
+const on = (id) => (active === id ? " is-active" : "");
+const solActive = active === "solution";
+const mixActive = active === "gamme";
+const ingActive = active === "ingredients";
+const codes = [
+  ["fr", "FR"],
+  ["en", "EN"],
+  ["ar", "AR"],
+];
+---
+
+<header class="site-header">
+  <a class="brand" href={href("/")} aria-label="SATIA">
+    <img class="logo-satia" src="/logo-satia.webp" alt="SATIA" width="220" height="126" draggable="false" />
+  </a>
+  <nav class="nav" id="site-nav" aria-label="Primary">
+    <a class={`nav-link${on("home")}`} href={href("/")}>{tr("nav.home")}</a>
+    <a class={`nav-link${on("maison")}`} href={href("/maison/")}>{tr("nav.maison")}</a>
+    <div class:list={["nav-item", "nav-item-mega", { "is-active": solActive }]}>
+      <a
+        class:list={["nav-link", "nav-link-wrap", { "is-active": solActive }]}
+        href={href("/solution/")}
+        aria-haspopup="true"
+        aria-expanded="false">{tr("nav.solution")}</a>
+      <div class="nav-mega">
+        <div class="nav-mega-cats">
+          {
+            xpTree.map((col) => (
+              <div class:list={["nav-mega-row", { "has-kids": (col.children || []).length > 0 }]}>
+                <a class="nav-mega-head" href={href(`/xp/${col.id}/`)} data-xp-nav={col.id}>{label(col.id)}</a>
+                {(col.children || []).length > 0 && (
+                  <div class="nav-mega-kids">
+                    {col.children.map((id) => (
+                      <a href={href(`/xp/${id}/`)} data-xp-nav={id}>{label(id)}</a>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+    <div class:list={["nav-item", "nav-item-mega", { "is-active": mixActive }]}>
+      <a
+        class:list={["nav-link", { "is-active": mixActive }]}
+        href={href("/gamme/")}
+        aria-haspopup="true"
+        aria-expanded="false">{tr("nav.melanges")}</a>
+      <div class="nav-mega nav-mega-simple">
+        <div class="nav-mega-cats">
+          <div class="nav-mega-row"><a class="nav-mega-head" href={href("/gamme/premix-poudres/")}>{tr("nav.premix")}</a></div>
+          <div class="nav-mega-row"><a class="nav-mega-head" href={href("/gamme/mix-poudres/")}>{tr("nav.mixpoudres")}</a></div>
+          <div class="nav-mega-row"><a class="nav-mega-head" href={href("/gamme/mix-graines/")}>{tr("nav.mixgraines")}</a></div>
+          <div class="nav-mega-row"><a class="nav-mega-head" href={href("/gamme/mix-liquides/")}>{tr("nav.mixliquides")}</a></div>
+        </div>
+      </div>
+    </div>
+    <div class:list={["nav-item", "nav-item-mega", { "is-active": ingActive }]}>
+      <a
+        class:list={["nav-link", { "is-active": ingActive }]}
+        href={href("/ingredients/")}
+        aria-haspopup="true"
+        aria-expanded="false">{tr("nav.ingredients")}</a>
+      <div class="nav-mega nav-mega-simple">
+        <div class="nav-mega-cats">
+          {
+            ingFamilies.map((id) => (
+              <div class="nav-mega-row">
+                <a class="nav-mega-head" href={href(`/ingredients/${id}/`)} data-xp-nav={id}>{label(id)}</a>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+    <a class={`nav-link nav-link-wrap${on("formation")}`} href={href("/formation/")}>{tr("nav.formation")}</a>
+    <a class={`nav-link${on("partenaires")}`} href={href("/partenaires/")}>{tr("nav.partners")}</a>
+    <a class={`nav-link${on("contact")}`} href={href("/contact/")}>{tr("nav.contact")}</a>
+  </nav>
+  <div class="header-tools">
+    <div class="lang" role="group" aria-label={tr("nav.lang")}>
+      {
+        codes.map(([code, text]) => (
+          <a
+            href={alts[code]}
+            hreflang={code}
+            data-set-lang={code}
+            aria-current={code === locale ? "page" : undefined}
+          >{text}</a>
+        ))
+      }
+    </div>
+    <button class="nav-toggle" type="button" aria-label={tr("nav.open")} aria-expanded="false" aria-controls="site-nav">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>

@@ -1,0 +1,59 @@
+---
+import Base from "../layouts/BaseLayout.astro";
+import CtaBand from "../components/CtaBand.astro";
+import { t } from "../i18n.js";
+import { localePath } from "../lib/locale.js";
+
+const { locale = "fr" } = Astro.props;
+const tr = (key) => t(key, locale);
+const href = (to) => localePath(locale, to);
+---
+
+<Base
+  title={tr("meta.maison")}
+  description={tr("meta.desc.maison")}
+  page="maison"
+  locale={locale}
+  path="/maison/"
+  preload="/logo-satia-clear.webp"
+>
+  <section class="page-open wrap">
+    <figure class="page-open-photo page-open-logo">
+      <img src="/logo-satia-clear.webp" alt="SATIA" width="640" height="366" fetchpriority="high" decoding="async" />
+    </figure>
+    <div class="page-open-copy">
+      <p class="kicker">{tr("page.kicker")}</p>
+      <h1>{tr("maison.hero")}</h1>
+      <p class="lead">{tr("maison.lead")}</p>
+      <p>{tr("hero.quote")}</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="wrap pres-pillars">
+      <article class="reveal">
+        <h2>{tr("sol.hero")}</h2>
+        <p class="pillar-tagline">{tr("sol.title")}</p>
+        <p>{tr("sol.lead")}</p>
+        <p>{tr("sol.text")}</p>
+        <a class="btn btn-gold" href={href("/solution/")}>{tr("pillars.seeSol")}</a>
+      </article>
+      <article class="reveal">
+        <h2>{tr("atelier.kicker")}</h2>
+        <p class="pillar-tagline">{tr("atelier.title")}</p>
+        <p>{tr("atelier.lead")}</p>
+        <p>{tr("maison.mixExtra")}</p>
+        <a class="btn btn-gold" href={href("/gamme/")}>{tr("pillars.seeMix")}</a>
+      </article>
+      <article class="reveal">
+        <h2>{tr("ing.hero")}</h2>
+        <p class="pillar-tagline">{tr("ing.title")}</p>
+        <p>{tr("ing.lead")}</p>
+        <p>{tr("ing.text")}</p>
+        <a class="btn btn-gold" href={href("/ingredients/")}>{tr("pillars.seeIng")}</a>
+      </article>
+    </div>
+  </section>
+
+  <CtaBand locale={locale} />
+</Base>

@@ -1,0 +1,25 @@
+---
+import { t } from "../i18n.js";
+import { loc, localePath } from "../lib/locale.js";
+
+const { product, locale = "fr", decoy = false, search = "" } = Astro.props;
+const name = loc(product.name, locale);
+const href = localePath(locale, `/produit/${product.id}/`);
+---
+
+<a
+  class="p-card"
+  href={href}
+  data-search={search || undefined}
+  aria-hidden={decoy ? "true" : undefined}
+  tabindex={decoy ? "-1" : undefined}
+>
+  <div class="p-card-img">
+    <img src={`${product.image}?v=2`} alt={name} width="800" height="600" loading="lazy" decoding="async" />
+  </div>
+  <div class="p-card-body">
+    <h3>{name}</h3>
+    <p>{loc(product.promise, locale)}</p>
+    <span class="more">{t("gamme.more", locale)}</span>
+  </div>
+</a>

@@ -1,0 +1,76 @@
+---
+import Base from "../layouts/BaseLayout.astro";
+import CtaBand from "../components/CtaBand.astro";
+import { t } from "../i18n.js";
+import { loc, localizeHref, localePath } from "../lib/locale.js";
+import { getXpPage, getXpTitle, xpHref, xpTree } from "../xp-data.js";
+
+const { locale = "fr", id } = Astro.props;
+const pageData = getXpPage(id);
+const title = getXpTitle(id, locale);
+const parent = xpTree.find((col) => col.id === id || col.children.includes(id));
+const parentId = parent && parent.id !== id ? parent.id : "solution";
+const parentHref = parentId === "solution" ? localePath(locale, "/solution/") : localizeHref(locale, xpHref(parentId));
+const parentLabel = parentId === "solution" ? t("nav.solution", locale) : getXpTitle(parentId, locale);
+const tr = (key) => t(key, locale);
+---
+
+<Base
+  title={`${title} — SATIA`}
+  description={loc(pageData?.lead, locale) || tr("meta.desc.xp")}
+  page="xp"
+  locale={locale}
+  path={`/xp/${id}/`}
+  xp={id}
+  ogImage={pageData?.image}
+>
+  <div id="xp-root">
+    <section class="page-open wrap">
+      <figure class="page-open-photo">
+        <img src={pageData?.image} alt={title} width="1600" height="1200" fetchpriority="high" decoding="async" />
+      </figure>
+      <div class="page-open-copy">
+        <p class="kicker"><a href={parentHref}>{parentLabel}</a></p>
+        <h1>{title}</h1>
+        <p class="lead pillar-tagline">{loc(pageData?.tag, locale)}</p>
+        <p>{loc(pageData?.lead, locale)}</p>
+        <p>{loc(pageData?.text, locale)}</p>
+        {pageData?.cta && <a class="btn btn-gold" href={localizeHref(locale, pageData.cta.href)}>{tr(pageData.cta.key)}</a>}
+      </div>
+    </section>
+    {
+      pageData?.notes?.length > 0 && (
+        <section class="section" style="padding-top:0">
+          <div class="wrap page-notes">
+            {pageData.notes.map((note) => (
+              <article class="reveal">
+                <h2>{loc(note.title, locale)}</h2>
+                <p>{loc(note.text, locale)}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+      )
+    }
+    {
+      parent?.id === id && parent.children?.length > 0 && (
+        <section class="section" style="padding-top:0">
+          <div class="wrap xp-children">
+            {parent.children.map((cid) => {
+              const child = getXpPage(cid);
+              return (
+                <a class="xp-child reveal" href={localizeHref(locale, xpHref(cid))}>
+                  <h2>{getXpTitle(cid, locale)}</h2>
+                  <p class="pillar-tagline">{child ? loc(child.tag, locale) : ""}</p>
+                  <p>{child ? loc(child.lead, locale) : ""}</p>
+                  <span class="more">{tr("metier.more")}</span>
+                </a>
+              );
+            })}
+          </div>
+        </section>
+      )
+    }
+    <CtaBand locale={locale} />
+  </div>
+</Base>

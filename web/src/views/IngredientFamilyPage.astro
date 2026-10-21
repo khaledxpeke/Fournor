@@ -1,0 +1,40 @@
+---
+import Base from "../layouts/BaseLayout.astro";
+import CtaBand from "../components/CtaBand.astro";
+import { t } from "../i18n.js";
+import { loc, localizeHref, localePath } from "../lib/locale.js";
+import { getXpTitle, ingFamilyPages } from "../xp-data.js";
+
+const { locale = "fr", fam } = Astro.props;
+const pageData = ingFamilyPages[fam];
+const title = getXpTitle(fam, locale);
+const tr = (key) => t(key, locale);
+---
+
+<Base
+  title={`${title} — SATIA`}
+  description={loc(pageData?.lead, locale) || tr("meta.desc.ingredients")}
+  page="ingredients"
+  locale={locale}
+  path={`/ingredients/${fam}/`}
+  fam={fam}
+  preload={pageData?.image || "/images/maison.webp"}
+  ogImage={pageData?.image}
+>
+  <div id="ing-detail">
+    <section class="page-open wrap">
+      <figure class="page-open-photo">
+        <img src={pageData?.image} alt={title} width="1600" height="1200" fetchpriority="high" decoding="async" />
+      </figure>
+      <div class="page-open-copy">
+        <p class="kicker"><a href={localePath(locale, "/ingredients/")}>{tr("ing.hero")}</a></p>
+        <h1>{title}</h1>
+        <p class="lead pillar-tagline">{loc(pageData?.tag, locale)}</p>
+        <p>{loc(pageData?.lead, locale)}</p>
+        <p>{loc(pageData?.text, locale)}</p>
+        {pageData?.cta && <a class="btn btn-gold" href={localizeHref(locale, pageData.cta.href)}>{tr(pageData.cta.key)}</a>}
+      </div>
+    </section>
+  </div>
+  <CtaBand locale={locale} />
+</Base>

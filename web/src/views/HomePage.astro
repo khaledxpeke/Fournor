@@ -1,0 +1,145 @@
+---
+import Base from "../layouts/BaseLayout.astro";
+import ProductCard from "../components/ProductCard.astro";
+import EventCard from "../components/EventCard.astro";
+import CtaBand from "../components/CtaBand.astro";
+import { events, products } from "../products.js";
+import { t } from "../i18n.js";
+import { loc, localePath } from "../lib/locale.js";
+
+const { locale = "fr" } = Astro.props;
+const tr = (key) => t(key, locale);
+const href = (to) => localePath(locale, to);
+const names = products.map((product) => loc(product.name, locale));
+---
+
+<Base
+  title={tr("meta.home")}
+  description={tr("meta.desc.home")}
+  page="home"
+  locale={locale}
+  path="/"
+  preload="/images/banner.webp?v=2"
+  ogImage="/images/banner.webp?v=2"
+>
+  <section class="hero">
+    <img
+      class="hero-bg"
+      src="/images/banner.webp?v=2"
+      alt=""
+      width="1774"
+      height="887"
+      fetchpriority="high"
+      decoding="async"
+    />
+    <h1 class="visually-hidden">{tr("hero.title")}</h1>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      {names.map((name) => <span>{name}</span>)}
+      {names.map((name) => <span>{name}</span>)}
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="wrap sol-intro reveal">
+      <figure class="mix-photo">
+        <img src="/images/expertise.webp" alt={tr("nav.solution")} width="960" height="720" loading="lazy" decoding="async" />
+      </figure>
+      <div class="mix-copy">
+        <h2 class="pillar-heading">{tr("nav.solution")}</h2>
+        <p class="pillar-tagline">
+          <span class="pillar-fit-ref">{tr("maison.titleFit")}</span><span>{tr("maison.titleRest")}</span>
+        </p>
+        <p>{tr("maison.text")}</p>
+        <a class="btn btn-gold" href={href("/solution/")}>{tr("maison.more")}</a>
+      </div>
+    </div>
+  </section>
+
+  <aside class="ad-band">
+    <a class="ad-frame reveal" href={href("/solution/")} aria-label={tr("ad.sol.title")}>
+      <img src="/images/ad-sol.webp?v=2" alt="" width="3500" height="420" loading="lazy" decoding="async" />
+    </a>
+  </aside>
+
+  <section class="mix-band">
+    <div class="wrap">
+      <div class="mix-intro reveal">
+        <div class="mix-copy">
+          <h2 class="pillar-heading">{tr("atelier.kicker")}</h2>
+          <p class="pillar-tagline">
+            <span class="pillar-fit-ref">{tr("atelier.titleFit")}</span><span>{tr("atelier.titleRest")}</span>
+          </p>
+          <p>{tr("atelier.lead")}</p>
+          <a class="btn btn-ghost" href={href("/gamme/")}>{tr("atelier.all")}</a>
+        </div>
+        <figure class="mix-photo">
+          <img src="/images/mix-intro.webp?v=2" alt={tr("atelier.kicker")} width="1400" height="932" loading="lazy" decoding="async" />
+        </figure>
+      </div>
+      <div class="atelier-stage">
+        <button type="button" class="rail-nav prev" id="atelier-prev" aria-label={tr("atelier.prev")}>‹</button>
+        <div class="atelier" id="atelier-rail" tabindex="0">
+          <div class="atelier-shift">
+            <div class="atelier-track">
+              {products.map((product) => <ProductCard product={product} locale={locale} />)}
+              {products.map((product) => <ProductCard product={product} locale={locale} decoy />)}
+            </div>
+          </div>
+        </div>
+        <button type="button" class="rail-nav next" id="atelier-next" aria-label={tr("atelier.next")}>›</button>
+      </div>
+      <div class="atelier-dots" id="atelier-dots" role="tablist" aria-label={tr("atelier.dots")}></div>
+    </div>
+  </section>
+
+  <aside class="ad-band ad-band-split">
+    <div class="ad-grid">
+      <a class="ad-frame reveal" href={href("/gamme/premix-poudres/")} aria-label={tr("ad.a.title")}>
+        <img src="/images/ad-home-1.webp?v=3" alt="" width="1920" height="800" loading="lazy" decoding="async" />
+      </a>
+      <a class="ad-frame reveal" href={href("/gamme/mix-poudres/")} aria-label={tr("ad.c.title")}>
+        <img src="/images/ad-home-2.webp?v=3" alt="" width="1920" height="800" loading="lazy" decoding="async" />
+      </a>
+      <a class="ad-frame reveal" href={href("/gamme/mix-liquides/")} aria-label={tr("ad.b.title")}>
+        <img src="/images/ad-home-3.webp?v=3" alt="" width="1920" height="800" loading="lazy" decoding="async" />
+      </a>
+      <a class="ad-frame reveal" href={href("/gamme/mix-graines/")} aria-label={tr("ad.g.title")}>
+        <img src="/images/maxi-graines.jpg" alt="" width="800" height="600" loading="lazy" decoding="async" />
+      </a>
+    </div>
+  </aside>
+
+  <section class="section">
+    <div class="wrap sol-intro reveal">
+      <figure class="mix-photo">
+        <img src="/images/maison.webp" alt={tr("fournil.kicker")} width="960" height="720" loading="lazy" decoding="async" />
+      </figure>
+      <div class="mix-copy">
+        <h2 class="pillar-heading">{tr("fournil.kicker")}</h2>
+        <p class="pillar-tagline">
+          <span class="pillar-fit-ref">{tr("fournil.titleFit")}</span><span>{tr("fournil.titleRest")}</span>
+        </p>
+        <p>{tr("fournil.text")}</p>
+        <a class="btn btn-gold" href={href("/ingredients/")}>{tr("fournil.cta")}</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="kicker">{tr("news.kicker")}</p>
+        <h2>{tr("news.title")}</h2>
+        <a class="more" href={href("/actualites/")}>{tr("news.all")}</a>
+      </div>
+      <div id="home-news">
+        {events.slice(0, 3).map((event) => <EventCard event={event} locale={locale} />)}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand locale={locale} />
+</Base>

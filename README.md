@@ -1,46 +1,60 @@
-# Fourn’Or — board demo
+# SATIA — fournor.com
 
-Bilingual (FR / EN) demo site for the Fourn’Or premix brand, presented as a modern replacement for [std-tayara.com](https://www.std-tayara.com/home).
+French site for SATIA (Société Tayara Distribution), with English at `/en/` and Arabic at `/ar/`. French URLs stay at the root.
 
-A brand of **Société Tayara Distribution (STD)** · Tunis.
+The site lives in `web/` (Astro, static). `cms/` is reserved for Strapi and is not installed yet. Cloudinary settings are empty placeholders in `cms/.env` — paste the cloud name, API key, and API secret there. `UPLOAD_PROVIDER` stays `local` until those values are set. Existing images in `web/public/` are not moved to Cloudinary.
 
-## Present to the board
+## Run
+
+Node.js 22 (`.nvmrc` at the repo root and in `web/`).
 
 ```bash
+cd web
 npm install
 npm run dev
 ```
 
-Open the local URL Vite prints (usually `http://localhost:5173`). Default language is French. Use **FR | EN** in the header.
-
-To build a static folder you can zip and share:
+Open `http://localhost:4321`. French is the default. The header links go to the same page in FR, EN, or AR.
 
 ```bash
 npm run build
 npm run preview
 ```
 
-The built files are in `dist/`.
+The static build is `web/dist/`.
 
-## Pages
+## Old URL → new URL
 
-- Home — cinematic hero, 2 / 30 / 50% dosage system, product bench
-- La Maison — STD since 2020, values, Tayara / MMT context, partner bakeries
-- Gamme — 10 Fourn’Or premixes, filter by dosage
-- Product sheet — usage, sensory profile, technical block
-- Expertise — what a premix is, “compose the loaf”, test bakery
-- Actualités — events from the current STD site
-- Contact — Tunis address, phone, form (front-end only)
+| Old | New |
+|---|---|
+| `/` and `/index.html` | `/` |
+| `/maison.html` | `/maison/` |
+| `/solution.html` | `/solution/` |
+| `/gamme.html` | `/gamme/` |
+| `/gamme.html?mix=premix-poudres` | `/gamme/premix-poudres/` |
+| `/gamme.html?mix=mix-poudres` | `/gamme/mix-poudres/` |
+| `/gamme.html?mix=mix-graines` | `/gamme/mix-graines/` |
+| `/gamme.html?mix=mix-liquides` | `/gamme/mix-liquides/` |
+| `/produit.html?id={id}` | `/produit/{id}/` |
+| `/expertise.html` | `/expertise/` |
+| `/xp.html?id={id}` | `/xp/{id}/` |
+| `/ingredients.html` | `/ingredients/` |
+| `/ingredients.html?fam={id}` | `/ingredients/{id}/` |
+| `/formation.html` | `/formation/` |
+| `/partenaires.html` | `/partenaires/` |
+| `/actualites.html` | `/actualites/` |
+| `/contact.html` | `/contact/` |
 
-## Brand
+English and Arabic use the same path with `/en` or `/ar` in front, for example `/en/gamme/premix-poudres/` and `/ar/produit/tradition/`.
 
-Colours and type follow `Fournor_charte_graphique.pdf`:
+Product ids: `baguette-fournor`, `tradition`, `mix-farine-croissant`, `complet`, `campagne`, `cereales-noir`, `chia-quinoa`, `maxi-graines`, `multigrain`, `mais`.
 
-- Gold `#F0C667` (accent only)
-- Greige `#88857E`
-- Ivory `#F7F4ED`
-- Charcoal text
-- Cormorant Garamond + Manrope
-- No drop shadows or decorative gradients (charter rule)
+Expertise ids are every former `xp.html?id=` except `formation` (that page is `/formation/`). Ingredient family ids: `poudre`, `grains`, `liquide`, `sans-gluten`, `divers`.
 
-Product photos, bakery scenes and events are taken from the current STD Tayara website so the demo stays true to the real range.
+## Contact form
+
+The form posts in the browser to `https://formsubmit.co/ajax/contact@fournor.com`. There is no PHP handler. This phase does not change that.
+
+## Phase
+
+Phase 1.5 renders FR, EN, and AR in the HTML. Strapi is not started.

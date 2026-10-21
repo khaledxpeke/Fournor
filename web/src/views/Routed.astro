@@ -1,0 +1,38 @@
+---
+import HomePage from "./HomePage.astro";
+import MaisonPage from "./MaisonPage.astro";
+import SolutionPage from "./SolutionPage.astro";
+import GammeHubPage from "./GammeHubPage.astro";
+import GammeCatalogPage from "./GammeCatalogPage.astro";
+import ProductPage from "./ProductPage.astro";
+import ExpertisePage from "./ExpertisePage.astro";
+import IngredientsPage from "./IngredientsPage.astro";
+import IngredientFamilyPage from "./IngredientFamilyPage.astro";
+import FormationPage from "./FormationPage.astro";
+import PartnersPage from "./PartnersPage.astro";
+import NewsPage from "./NewsPage.astro";
+import ContactPage from "./ContactPage.astro";
+import XpPage from "./XpPage.astro";
+
+const { locale = "fr", slug = "" } = Astro.props;
+const clean = String(slug || "").replace(/^\/|\/$/g, "");
+const mix = clean.startsWith("gamme/") ? clean.slice("gamme/".length) : "";
+const product = clean.startsWith("produit/") ? clean.slice("produit/".length) : "";
+const xp = clean.startsWith("xp/") ? clean.slice("xp/".length) : "";
+const fam = clean.startsWith("ingredients/") ? clean.slice("ingredients/".length) : "";
+---
+
+{clean === "" && <HomePage locale={locale} />}
+{clean === "maison" && <MaisonPage locale={locale} />}
+{clean === "solution" && <SolutionPage locale={locale} />}
+{clean === "gamme" && <GammeHubPage locale={locale} />}
+{mix && <GammeCatalogPage locale={locale} mix={mix} />}
+{product && <ProductPage locale={locale} id={product} />}
+{clean === "expertise" && <ExpertisePage locale={locale} />}
+{clean === "ingredients" && <IngredientsPage locale={locale} />}
+{fam && <IngredientFamilyPage locale={locale} fam={fam} />}
+{clean === "formation" && <FormationPage locale={locale} />}
+{clean === "partenaires" && <PartnersPage locale={locale} />}
+{clean === "actualites" && <NewsPage locale={locale} />}
+{clean === "contact" && <ContactPage locale={locale} />}
+{xp && <XpPage locale={locale} id={xp} />}

@@ -1,0 +1,44 @@
+---
+import Base from "../layouts/BaseLayout.astro";
+import { t } from "../i18n.js";
+import { localePath } from "../lib/locale.js";
+
+const { locale = "fr" } = Astro.props;
+const tr = (key) => t(key, locale);
+const href = (to) => localePath(locale, to);
+const tiles = [
+  ["premix-poudres", "gamme.filterPremix", "/images/mix-premix.webp?v=4"],
+  ["mix-poudres", "gamme.filterMix", "/images/mix-poudres.webp?v=4"],
+  ["mix-graines", "gamme.filterGraines", "/images/maxi-graines.jpg"],
+  ["mix-liquides", "gamme.filterLiquid", "/images/mix-liquides.webp?v=4"],
+];
+---
+
+<Base
+  title={tr("meta.gamme")}
+  description={tr("meta.desc.gamme")}
+  page="gamme"
+  locale={locale}
+  path="/gamme/"
+>
+  <section class="page-hero wrap">
+    <h1 id="gamme-title">{tr("gamme.hero")}</h1>
+    <p class="lead" id="gamme-lead">{tr("gamme.lead")}</p>
+  </section>
+  <section class="section mix-landing" style="padding-top:0">
+    <div class="wrap">
+      <div class="mix-hub" id="mix-hub">
+        {
+          tiles.map(([mix, key, image]) => (
+            <a class="mix-tile" href={href(`/gamme/${mix}/`)}>
+              <span class="mix-tile-label">{tr(key)}</span>
+              <span class="mix-tile-photo">
+                <img src={image} alt="" width="496" height="744" loading="lazy" decoding="async" />
+              </span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Base>

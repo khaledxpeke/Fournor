@@ -1,0 +1,11 @@
+---
+import IngredientFamilyPage from "../../views/IngredientFamilyPage.astro";
+import { ingSlugs } from "../../xp-data.js";
+
+export function getStaticPaths() {
+  return ingSlugs.map((fam) => ({ params: { fam } }));
+}
+
+const { fam } = Astro.params;
+---
+<IngredientFamilyPage locale="fr" fam={fam} />

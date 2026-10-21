@@ -1,0 +1,59 @@
+---
+import Base from "../layouts/BaseLayout.astro";
+import { t } from "../i18n.js";
+
+const { locale = "fr" } = Astro.props;
+const tr = (key) => t(key, locale);
+---
+
+<Base
+  title={tr("meta.contact")}
+  description={tr("meta.desc.contact")}
+  page="contact"
+  locale={locale}
+  path="/contact/"
+>
+  <section class="page-hero wrap">
+    <p class="kicker">{tr("page.kicker")}</p>
+    <h1>{tr("contact.hero")}</h1>
+    <p class="lead">{tr("contact.lead")}</p>
+  </section>
+  <section class="section" style="padding-top:0">
+    <div class="wrap contact-grid">
+      <form class="form" id="contact-form" novalidate>
+        <div>
+          <label for="name">{tr("contact.formName")}</label>
+          <input id="name" name="name" type="text" required autocomplete="name" dir="auto" />
+        </div>
+        <div>
+          <label for="email">{tr("contact.formEmail")}</label>
+          <input id="email" name="email" type="email" required autocomplete="email" dir="ltr" />
+        </div>
+        <div>
+          <label for="message">{tr("contact.formMsg")}</label>
+          <textarea id="message" name="message" required dir="auto"></textarea>
+        </div>
+        <p class="form-note" id="form-note" role="status"></p>
+        <button class="btn btn-gold" type="submit">{tr("contact.send")}</button>
+      </form>
+      <aside>
+        <h2>{tr("contact.visit")}</h2>
+        <p>{tr("footer.address")}</p>
+        <p>
+          <a class="contact-line" href="tel:+21698692222">
+            <span>{tr("footer.phone")}</span>
+            <span dir="ltr">+216 98 692 222</span>
+          </a>
+        </p>
+        <iframe
+          class="map-frame"
+          title="SATIA — Soliman"
+          src="https://maps.google.com/maps?q=Route%20de%20Korbous%20km%202%208020%20Soliman%20Nabeul&z=15&output=embed"
+          loading="lazy"></iframe>
+        <p>
+          <a class="more" href="https://maps.google.com/?q=Route+de+Korbous+km+2+8020+Soliman+Nabeul" target="_blank" rel="noopener noreferrer">{tr("contact.map")}</a>
+        </p>
+      </aside>
+    </div>
+  </section>
+</Base>

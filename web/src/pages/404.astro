@@ -1,0 +1,18 @@
+---
+import Base from "../layouts/BaseLayout.astro";
+import { t } from "../i18n.js";
+import { localePath } from "../lib/locale.js";
+---
+
+<Base title="Page introuvable — SATIA" description="Page introuvable — SATIA" page="home" locale="fr" path="/404/">
+  <section class="page-hero wrap">
+    <p class="kicker">404</p>
+    <h1>Page introuvable</h1>
+    <p class="lead">Cette adresse n’existe pas.</p>
+    <p>
+      <a class="btn btn-gold" href={localePath("fr", "/")}>{t("nav.home", "fr")}</a>
+      <a class="btn btn-ghost" href={localePath("en", "/")}>{t("nav.home", "en")}</a>
+      <a class="btn btn-ghost" href={localePath("ar", "/")}>{t("nav.home", "ar")}</a>
+    </p>
+  </section>
+</Base>

@@ -1,0 +1,90 @@
+---
+import Base from "../layouts/BaseLayout.astro";
+import { products } from "../products.js";
+import { t } from "../i18n.js";
+import { loc } from "../lib/locale.js";
+
+const { locale = "fr" } = Astro.props;
+const tr = (key) => t(key, locale);
+const current = products[0];
+const flour = 100 - current.dosage;
+---
+
+<Base
+  title={tr("meta.expertise")}
+  description={tr("meta.desc.expertise")}
+  page="expertise"
+  locale={locale}
+  path="/expertise/"
+  preload="/images/expertise.webp"
+  ogImage="/images/expertise.webp"
+>
+  <section class="page-open wrap">
+    <figure class="page-open-photo">
+      <img src="/images/expertise.webp" alt={tr("exp.hero")} width="1600" height="1200" fetchpriority="high" decoding="async" />
+    </figure>
+    <div class="page-open-copy">
+      <p class="kicker">{tr("page.kicker")}</p>
+      <h1>{tr("exp.hero")}</h1>
+      <p class="lead">{tr("exp.lead")}</p>
+      <h2>{tr("exp.whatTitle")}</h2>
+      <p>{tr("exp.what")}</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="wrap">
+      <div class="composer">
+        <div class="composer-copy">
+          <p class="kicker">{tr("exp.compose")}</p>
+          <h2>{tr("exp.composeLead")}</h2>
+          <div class="composer-pick">
+            <label for="composer-trigger" id="composer-label">{tr("gamme.sku")}</label>
+            <div class="fo-select" id="composer-select" data-value={current.id}>
+              <button type="button" class="fo-select-trigger" id="composer-trigger" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="composer-label composer-value" aria-controls="composer-list">
+                <span class="fo-select-value" id="composer-value">{loc(current.name, locale)}</span>
+                <svg class="fo-select-chevron" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+              </button>
+              <ul class="fo-select-list" role="listbox" id="composer-list" aria-labelledby="composer-label" hidden>
+                {
+                  products.map((product) => (
+                    <li role="option" data-value={product.id} id={`composer-opt-${product.id}`} aria-selected={product.id === current.id ? "true" : "false"}>
+                      {loc(product.name, locale)}
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="composer-visual" id="composer-visual">
+          <div class="mix-readout">
+            <div class="mix-stat"><b>{current.dosage}%</b><span>{tr("exp.premix")}</span></div>
+            <div class="mix-stat"><b>{flour}%</b><span>{tr("exp.flour")}</span></div>
+          </div>
+          <div class="mix-bar" role="img" aria-label={`${current.dosage}% ${tr("exp.premix")}, ${flour}% ${tr("exp.flour")}`}>
+            <span class="mix-premix" style={`flex:${current.dosage} 0 ${current.dosage < 12 ? "12px" : "0"}`}></span>
+            <span class="mix-flour" style={`flex:${flour} 1 0`}></span>
+          </div>
+          <p class="mix-plus">{tr("exp.plus")}</p>
+          <p class="mix-note">{loc(current.promise, locale)}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="wrap page-notes">
+      <article>
+        <h2>{tr("exp.trainersTitle")}</h2>
+        <p>{tr("exp.trainers")}</p>
+      </article>
+      <article>
+        <h2>{tr("exp.rdTitle")}</h2>
+        <p>{tr("exp.rd")}</p>
+      </article>
+    </div>
+  </section>
+</Base>

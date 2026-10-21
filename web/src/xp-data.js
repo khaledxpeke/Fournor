@@ -22,8 +22,8 @@ export const xpTree = [
 
 export const ingFamilies = ["poudre", "grains", "liquide", "sans-gluten", "divers"];
 
-export const xpHref = (id) => `/xp.html?id=${id}`;
-export const ingHref = (id) => `/ingredients.html?fam=${id}`;
+export const xpHref = (id) => (id === "formation" ? "/formation/" : `/xp/${id}/`);
+export const ingHref = (id) => `/ingredients/${id}/`;
 
 export const xpNav = {
   metiers: L("Expertise métiers", "Craft expertise", "خبرة المهن"),
@@ -114,7 +114,7 @@ const pages = {
       "Tradition, Complet, Campagne, seeds… the baker completes with flour, water, salt and yeast. The aim: clarify the recipe, hold consistency, open the counter — from the artisan bakery to in-store bake-off.",
       "تراديسيون، كامل، كامبان، بذور… يكمّل الخبّاز بدقيقه والماء والملح والخميرة. الهدف: توضيح الوصفة، حفظ الانتظام، فتح الواجهة — من الفرن الحرفي إلى نقطة الخبز الساخن."
     ),
-    cta: { href: "/gamme.html?mix=premix-poudres", key: "ad.a.cta" },
+    cta: { href: "/gamme/premix-poudres/", key: "ad.a.cta" },
   },
   industriel: {
     image: "/images/maison.webp",
@@ -129,7 +129,7 @@ const pages = {
       "Sandwich bread, buns, baguettes, viennoiserie… we work with your R&D and production teams: dosage, machinability, shelf life, texture. Powder mixes, liquid mixes and FOURN’OR premixes fit your diagrams, from the trial to throughput.",
       "خبز التوست، بانز، باغيت، فينوازري… نعمل مع فرق البحث والإنتاج لديكم: الجرعة، قابلية الآلة، مدة الحياة، القوام. خلطات البودرة والسائلة وخلطات FOURN’OR تدخل في مخططاتكم، من التجربة إلى الإيقاع."
     ),
-    cta: { href: "/gamme.html", key: "pillars.seeMix" },
+    cta: { href: "/gamme/", key: "pillars.seeMix" },
   },
   patisserie: {
     image: "/images/mix-liquides.webp?v=4",
@@ -144,7 +144,7 @@ const pages = {
       "Sponges, fillings, yellow doughs, long-life cakes… SATIA brings together ready-dosed blends and all the ingredients production needs. The aim: simpler make-up, held flavour and texture, from the craft workshop to the line.",
       "جينواز، حشوات، عجائن صفراء، كعكات حفظ… تجمع SATIA خلطات جاهزة الجرعة وكل المكوّنات اللازمة. الهدف: تبسيط التحضير والحفاظ على الطعم والقوام، من الورشة الحرفية إلى الخط."
     ),
-    cta: { href: "/gamme.html?mix=mix-liquides", key: "ad.b.cta" },
+    cta: { href: "/gamme/mix-liquides/", key: "ad.b.cta" },
   },
   snacking: {
     image: "/images/mix-intro.webp?v=2",
@@ -215,7 +215,7 @@ const pages = {
       "SATIA works with a supply network and reference milling partners, including Artésienne de Minoterie. The aim: quality, traceability, price and performance, from sourcing to delivery in Soliman.",
       "تعتمد SATIA على شبكة توريد وشركاء مطاحن مرجعيين، منهم Artésienne de Minoterie. الهدف: جودة وتتبع وسعر وأداء، من التوريد إلى التسليم في سليمان."
     ),
-    cta: { href: "/partenaires.html", key: "nav.partners" },
+    cta: { href: "/partenaires/", key: "nav.partners" },
   },
   "solutions-ing": {
     image: "/images/mix-intro.webp?v=2",
@@ -230,7 +230,7 @@ const pages = {
       "Powders (premixes, mixes, flours), grains and inclusions, liquid mixes, gluten-free studies, packaging and other: one partner to qualify, dose and deliver. Whether you need a catalogue ingredient or a dedicated formula, the SATIA network guarantees follow-up and availability.",
       "بودرة (خلطات جاهزة وخلطات ودقيق)، حبوب وإضافات، خلطات سائلة، دراسات بدون غلوتين، تعبئة ومتنوّع: محاور واحد للتأهيل والجرعة والتسليم. سواء بحثتم عن مكوّن كتالوج أو صياغة مخصّصة، تضمن شبكة SATIA المتابعة والتوفّر."
     ),
-    cta: { href: "/ingredients.html", key: "pillars.seeIng" },
+    cta: { href: "/ingredients/", key: "pillars.seeIng" },
   },
   formulation: {
     image: "/images/expertise.webp",
@@ -343,7 +343,7 @@ const pages = {
       "Each reference is a starting point: 2%, 30% or 50% dosage, artisan or bake-off use. SATIA evolves this collection with you — new flavours, new formats — without flattening taste.",
       "كل مرجع نقطة انطلاق: جرعة 2٪ أو 30٪ أو 50٪، استخدام حرفي أو نقطة ساخنة. تطوّر SATIA هذه المجموعة معكم — نكهات وأشكال جديدة — دون تسطيح الطعم."
     ),
-    cta: { href: "/gamme.html?mix=premix-poudres", key: "atelier.all" },
+    cta: { href: "/gamme/premix-poudres/", key: "atelier.all" },
   },
   formation: {
     image: "/images/expertise.webp",
@@ -358,7 +358,7 @@ const pages = {
       "In the Soliman test bakery, teams learn how to run FOURN’OR premixes and SATIA blends: mixing, fermentation, baking, consistency. Training is a support lever, not a frozen course catalogue.",
       "في فرن التجربة بسليمان، تتعلّم الفرق تطبيق خلطات FOURN’OR وخلطات SATIA: عجن، تخمير، خبز، انتظام. التكوين رافعة للمرافقة، لا كتالوج دورات جامد."
     ),
-    cta: { href: "/contact.html", key: "cta.btn" },
+    cta: { href: "/contact/", key: "cta.btn" },
   },
   services: {
     image: "/images/maison.webp",
@@ -373,7 +373,7 @@ const pages = {
       "Diagnosis, formulation, bakery trials, training, logistics and packaging: support fits industry and craft. A project to launch? Teams are in Soliman, ready to listen.",
       "تشخيص، صياغة، تجارب في الفرن، تكوين، لوجستيك وتعبئة: تتكيّف المرافقة مع الصناعي كما مع الحرفي. مشروع تريدون إطلاقه؟ الفرق في سليمان، على الاستماع."
     ),
-    cta: { href: "/contact.html", key: "cta.btn" },
+    cta: { href: "/contact/", key: "cta.btn" },
   },
 };
 
@@ -391,7 +391,7 @@ export const ingFamilyPages = {
       "Whether you run a tradition loaf or an industrial line, SATIA supplies powder materials with traceability — and formulations that hold your process.",
       "سواء عملتم خبز تقاليد أو خطاً صناعياً، توفّر SATIA مادة البودرة مع التتبع — والصياغات التي تصمد لعمليتكم."
     ),
-    cta: { href: "/gamme.html?mix=mix-poudres", key: "ad.c.cta" },
+    cta: { href: "/gamme/mix-poudres/", key: "ad.c.cta" },
   },
   grains: {
     image: "/images/mix-premix.webp?v=4",
@@ -406,7 +406,7 @@ export const ingFamilyPages = {
       "Inclusions, flakes, seeds: SATIA selects for flavour, texture and consistency at the mixer, with the milling partner when the flour requires it.",
       "إضافات، رقائق، بذور: تختار SATIA للطعم والقوام والانتظام في العجّانة، مع شريك المطاحن عندما يطلب الدقيق ذلك."
     ),
-    cta: { href: "/gamme.html?mix=premix-poudres", key: "ad.a.cta" },
+    cta: { href: "/gamme/premix-poudres/", key: "ad.a.cta" },
   },
   liquide: {
     image: "/images/mix-liquides.webp?v=4",
@@ -421,7 +421,7 @@ export const ingFamilyPages = {
       "Dosage, station hygiene, repeatability: the liquid family completes powders and raw ingredients, under the same name.",
       "جرعة، نظافة المنصب، قابلية التكرار: تكمّل عائلة السائل البودرة والمواد الخام، تحت العلامة نفسها."
     ),
-    cta: { href: "/gamme.html?mix=mix-liquides", key: "ad.b.cta" },
+    cta: { href: "/gamme/mix-liquides/", key: "ad.b.cta" },
   },
   "sans-gluten": {
     image: "/images/maison.webp",
@@ -436,7 +436,7 @@ export const ingFamilyPages = {
       "Claims, process and cross-contamination risk need serious work. Talk to the team: R&D, the test bakery and sourcing can frame a project, without promising what is not yet held.",
       "الادّعاءات والعملية ومخاطر التلوث المتبادل تحتاج عملاً جدياً. حدّثوا الفريق: يمكن للبحث وفرن التجربة والتوريد تأطير مشروع، دون وعد بما لم يُنجز بعد."
     ),
-    cta: { href: "/contact.html", key: "cta.btn" },
+    cta: { href: "/contact/", key: "cta.btn" },
   },
   divers: {
     image: "/images/maison.webp",
@@ -451,7 +451,7 @@ export const ingFamilyPages = {
       "One partner to complete the bakery and the line: quality, traceability, availability. Tell us the need, we frame the supply.",
       "محاور واحد لاستكمال الفرن والخط: جودة، تتبع، توفّر. قولوا الحاجة، نؤطّر التوريد."
     ),
-    cta: { href: "/contact.html", key: "cta.btn" },
+    cta: { href: "/contact/", key: "cta.btn" },
   },
 };
 
@@ -462,3 +462,6 @@ export function getXpPage(id) {
 export function getXpTitle(id, lang) {
   return xpNav[id]?.[lang] || xpNav[id]?.fr || id;
 }
+
+export const xpSlugs = Object.keys(pages).filter((id) => id !== "formation");
+export const ingSlugs = Object.keys(ingFamilyPages);

@@ -1,0 +1,49 @@
+---
+import Base from "../layouts/BaseLayout.astro";
+import CtaBand from "../components/CtaBand.astro";
+import { t } from "../i18n.js";
+import { loc, localizeHref, localePath } from "../lib/locale.js";
+import { getXpTitle, ingFamilies, ingFamilyPages, ingHref } from "../xp-data.js";
+
+const { locale = "fr" } = Astro.props;
+const tr = (key) => t(key, locale);
+---
+
+<Base
+  title={tr("meta.ingredients")}
+  description={tr("meta.desc.ingredients")}
+  page="ingredients"
+  locale={locale}
+  path="/ingredients/"
+  preload="/images/maison.webp"
+>
+  <section class="page-open wrap" id="ing-intro">
+    <figure class="page-open-photo">
+      <img src="/images/maison.webp" alt={tr("ing.hero")} width="1600" height="1200" fetchpriority="high" decoding="async" />
+    </figure>
+    <div class="page-open-copy">
+      <h1>{tr("ing.hero")}</h1>
+      <p class="lead">{tr("ing.lead")}</p>
+      <h2>{tr("ing.title")}</h2>
+      <p>{tr("ing.text")}</p>
+    </div>
+  </section>
+  <section class="section" id="ing-family-list" style="padding-top:0">
+    <div class="wrap" id="ing-families">
+      {
+        ingFamilies.map((id) => {
+          const pageData = ingFamilyPages[id];
+          return (
+            <a class="xp-child reveal" href={localizeHref(locale, ingHref(id))}>
+              <h2>{getXpTitle(id, locale)}</h2>
+              <p class="pillar-tagline">{pageData ? loc(pageData.tag, locale) : ""}</p>
+              <p>{pageData ? loc(pageData.lead, locale) : ""}</p>
+              <span class="more">{tr("metier.more")}</span>
+            </a>
+          );
+        })
+      }
+    </div>
+  </section>
+  <CtaBand locale={locale} />
+</Base>

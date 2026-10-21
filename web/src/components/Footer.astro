@@ -1,0 +1,42 @@
+---
+import { xpNav } from "../xp-data.js";
+import { t } from "../i18n.js";
+import { localePath } from "../lib/locale.js";
+
+const { locale = "fr" } = Astro.props;
+const tr = (key) => t(key, locale);
+const href = (to) => localePath(locale, to);
+const label = (id) => xpNav[id]?.[locale] || xpNav[id]?.fr || id;
+---
+
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-about">
+      <p class="footer-brand">SATIA</p>
+      <p>{tr("footer.about")}</p>
+    </div>
+    <div class="footer-logo">
+      <img class="footer-mark" src="/logo-satia.webp" alt="SATIA" width="220" height="126" draggable="false" />
+    </div>
+    <div class="footer-xp">
+      <p class="footer-label">{tr("footer.expertises")}</p>
+      <a href={href("/xp/metiers/")} data-xp-nav="metiers">{label("metiers")}</a>
+      <a href={href("/xp/xp-ingredient/")} data-xp-nav="xp-ingredient">{label("xp-ingredient")}</a>
+      <a href={href("/xp/formulation/")} data-xp-nav="formulation">{label("formulation")}</a>
+    </div>
+    <div class="footer-contact">
+      <p class="footer-label">{tr("footer.contact")}</p>
+      <p>{tr("footer.address")}</p>
+      <p>
+        <a class="contact-line" href="tel:+21698692222">
+          <span>{tr("footer.phone")}</span>
+          <span dir="ltr">+216 98 692 222</span>
+        </a>
+      </p>
+      <p class="social">
+        <a href="https://www.facebook.com/profile.php?id=61595196575088" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <a href="https://www.instagram.com/fournor.officielle?cplk=MTR4dXFkcnMwbGhvZw%3D%3D" target="_blank" rel="noopener noreferrer">Instagram</a>
+      </p>
+    </div>
+  </div>
+</footer>

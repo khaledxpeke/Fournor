@@ -1,0 +1,68 @@
+---
+import Base from "../layouts/BaseLayout.astro";
+import CtaBand from "../components/CtaBand.astro";
+import { t } from "../i18n.js";
+import { localePath } from "../lib/locale.js";
+
+const { locale = "fr" } = Astro.props;
+const tr = (key) => t(key, locale);
+const caps = [
+  ["formation.cap1", "formation.cap1tag", "formation.cap1obj", "formation.cap1out"],
+  ["formation.cap2", "formation.cap2tag", "formation.cap2obj", "formation.cap2out"],
+  ["formation.cap3", "formation.cap3tag", "formation.cap3obj", "formation.cap3out"],
+];
+---
+
+<Base
+  title={tr("meta.formation")}
+  description={tr("meta.desc.formation")}
+  page="formation"
+  locale={locale}
+  path="/formation/"
+  ogImage="/images/expertise.webp"
+>
+  <section class="page-open wrap">
+    <figure class="page-open-photo">
+      <img src="/images/expertise.webp" alt="" width="1600" height="1200" fetchpriority="high" decoding="async" />
+    </figure>
+    <div class="page-open-copy">
+      <p class="kicker">{tr("page.kicker")}</p>
+      <h1>{tr("formation.hero")}</h1>
+      <p class="pillar-tagline">{tr("formation.tag")}</p>
+      <p class="lead">{tr("formation.lead")}</p>
+      <a class="btn btn-gold" href={localePath(locale, "/contact/")}>{tr("formation.cta")}</a>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="wrap page-notes">
+      {
+        caps.map(([title, tag, objective, outcome]) => (
+          <article class="form-cap reveal">
+            <h2>{tr(title)}</h2>
+            <p class="pillar-tagline">{tr(tag)}</p>
+            <h3>{tr("formation.obj")}</h3>
+            <p>{tr(objective)}</p>
+            <h3>{tr("formation.out")}</h3>
+            <p>{tr(outcome)}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="wrap">
+      <article class="form-why reveal">
+        <h2>{tr("formation.why")}</h2>
+        <ul>
+          <li>{tr("formation.why1")}</li>
+          <li>{tr("formation.why2")}</li>
+          <li>{tr("formation.why3")}</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <CtaBand locale={locale} />
+</Base>

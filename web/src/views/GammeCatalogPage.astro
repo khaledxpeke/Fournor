@@ -1,0 +1,56 @@
+---
+import Base from "../layouts/BaseLayout.astro";
+import ProductCard from "../components/ProductCard.astro";
+import { products } from "../products.js";
+import { t } from "../i18n.js";
+import { localePath } from "../lib/locale.js";
+import { mixTitleKey, productSearch } from "../lib/catalog.js";
+
+const { locale = "fr", mix } = Astro.props;
+const tr = (key) => t(key, locale);
+const title = tr(mixTitleKey(mix) || "gamme.hero");
+const list = products.filter((product) => product.mix === mix);
+---
+
+<Base
+  title={`${title} — SATIA`}
+  description={tr("meta.desc.gamme")}
+  page="gamme"
+  locale={locale}
+  path={`/gamme/${mix}/`}
+  mix={mix}
+>
+  <section class="page-hero wrap">
+    <p class="kicker" id="gamme-back">
+      <a href={localePath(locale, "/gamme/")}>{tr("gamme.hero")}</a>
+    </p>
+    <h1 id="gamme-title">{title}</h1>
+  </section>
+  <section class="section mix-landing" style="padding-top:0">
+    <div class="wrap">
+      <div class="gamme-catalog" id="gamme-catalog">
+        <div class="gamme-toolbar">
+          <div class="gamme-search">
+            <label class="visually-hidden" for="gamme-search">{tr("gamme.searchLabel")}</label>
+            <svg class="gamme-search-icon" width="17" height="17" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"></circle>
+              <path d="M16.2 16.2 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+            </svg>
+            <input
+              id="gamme-search"
+              type="search"
+              autocomplete="off"
+              enterkeyhint="search"
+              dir="auto"
+              placeholder={tr("gamme.search")}
+            />
+          </div>
+        </div>
+        <p class="gamme-empty" id="gamme-empty" hidden={list.length > 0}>{tr("gamme.empty")}</p>
+        <div class="card-grid" id="gamme-grid">
+          {list.map((product) => <ProductCard product={product} locale={locale} search={productSearch(product)} />)}
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

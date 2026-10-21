@@ -1,0 +1,31 @@
+---
+import Base from "../layouts/BaseLayout.astro";
+import { t } from "../i18n.js";
+
+const { locale = "fr" } = Astro.props;
+const tr = (key) => t(key, locale);
+---
+
+<Base
+  title={tr("meta.partenaires")}
+  description={tr("meta.desc.partenaires")}
+  page="partenaires"
+  locale={locale}
+  path="/partenaires/"
+>
+  <section class="page-hero wrap">
+    <p class="kicker">{tr("part.kicker")}</p>
+    <h1>{tr("part.hero")}</h1>
+    <p class="lead">{tr("part.lead")}</p>
+  </section>
+  <section class="section" style="padding-top:0">
+    <div class="wrap">
+      <article class="partner-feature reveal">
+        <figure class="partner-logo">
+          <img src="/images/partner-artesienne.png" alt="Artésienne de Minoterie — farines et mélanges meuniers" width="1024" height="341" loading="lazy" decoding="async" />
+        </figure>
+        <p class="lead">{tr("part.artesienne")}</p>
+      </article>
+    </div>
+  </section>
+</Base>
