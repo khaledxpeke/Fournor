@@ -4,6 +4,7 @@ import sitemap from "@astrojs/sitemap";
 export default defineConfig({
   site: "https://fournor.com",
   trailingSlash: "always",
+  compressHTML: true,
   devToolbar: { enabled: false },
   i18n: {
     defaultLocale: "fr",
