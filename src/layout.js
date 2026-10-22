@@ -124,7 +124,7 @@ function footer() {
       <p data-i18n="footer.about"></p>
     </div>
     <div class="footer-logo">
-      <img class="footer-mark" src="/logo-satia.webp" alt="SATIA" width="220" height="126" draggable="false" />
+      <img class="footer-mark" src="/logo-footer.png" alt="SATIA" width="1024" height="588" draggable="false" />
     </div>
     <div class="footer-xp">
       <p class="footer-label" data-i18n="footer.expertises"></p>
@@ -135,6 +135,11 @@ function footer() {
     <div class="footer-contact">
       <p class="footer-label" data-i18n="footer.contact"></p>
       <p data-i18n="footer.address"></p>
+      <p>
+        <a class="contact-line" href="mailto:contact.satia@fournor.com">
+          <span class="footer-mail" dir="ltr">contact.satia@fournor.com</span>
+        </a>
+      </p>
       <p>
         <a class="contact-line" href="tel:+21698692222">
           <span data-i18n="footer.phone"></span>
@@ -208,6 +213,7 @@ function mountHead() {
     legalName: "Société Tayara Distribution",
     url: origin,
     telephone: "+21698692222",
+    email: "contact.satia@fournor.com",
     address: {
       "@type": "PostalAddress",
       streetAddress: "Route de Korbous km 2",

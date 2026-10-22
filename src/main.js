@@ -253,7 +253,7 @@ function renderProduit() {
         <article><h3>${t("prod.adds", L)}</h3><p>${loc(p.adds, L)}</p></article>
         <article><h3>${t("prod.sensory", L)}</h3><p>${loc(p.sensory, L)}</p></article>
         <article><h3>${t("prod.target", L)}</h3><p>${loc(p.target, L)}</p></article>
-        <article><h3>${t("prod.usage", L)}</h3><p>${t("prod.usageText", L)}</p></article>
+        <article><h3>${t("prod.usage", L)}</h3><p>${p.usage ? loc(p.usage, L) : t("prod.usageText", L)}</p></article>
       </div>
     </div>
     ${videoBlock}
@@ -378,6 +378,7 @@ function renderComposer() {
   const list = wrap.querySelector(".fo-select-list");
   if (list) {
     list.innerHTML = products
+      .filter((p) => p.dosage > 0)
       .map(
         (p) =>
           `<li role="option" data-value="${p.id}" id="composer-opt-${p.id}" aria-selected="${p.id === current ? "true" : "false"}">${composerLabel(p, L)}</li>`
@@ -443,7 +444,7 @@ function setupContact() {
     note.textContent = "";
     note.className = "form-note";
     try {
-      const res = await fetch("https://formsubmit.co/ajax/contact@fournor.com", {
+      const res = await fetch("https://formsubmit.co/ajax/contact.satia@fournor.com", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
