@@ -349,6 +349,7 @@ async function seedProduits(files) {
         reference: product.sku,
         poids: product.weight,
         ajout: loc(product.adds, 'fr'),
+        utilisation: product.usage ? loc(product.usage, 'fr') : '',
         profilSensoriel: loc(product.sensory, 'fr'),
         famille: product.family,
         images: imageId ? [imageId] : [],
@@ -366,6 +367,7 @@ async function seedProduits(files) {
         reference: product.sku,
         poids: product.weight,
         ajout: loc(product.adds, locale),
+        utilisation: product.usage ? loc(product.usage, locale) : '',
         profilSensoriel: loc(product.sensory, locale),
         famille: product.family,
         seo: seo(locale, `/produit/${product.id}/`, `${loc(product.name, locale)} — Fourn’Or`, text('meta.desc.produit', locale), imageId),
@@ -517,7 +519,7 @@ async function seedParametres(files) {
   const logo = await files.id('/logo-satia.webp', 'SATIA');
   const favicon = await files.id('/favicon.png', 'SATIA');
   const imageHubExpertise = await files.id('/images/expertise.webp', text('nav.solution', 'fr'));
-  const imageHubIngredients = await files.id('/images/maison.webp', text('fournil.kicker', 'fr'));
+  const imageHubIngredients = await files.id('/images/ingredients.jpg', text('fournil.kicker', 'fr'));
   const menu = [
     ['nav.home', '/'],
     ['nav.maison', '/maison/'],
@@ -737,7 +739,7 @@ async function seedAccueil(files) {
     },
     compact({
       __component: 'sections.image-texte',
-      image: await files.id('/images/expertise.webp', text('nav.solution', locale)),
+      image: await files.id('/images/home-solution.jpg', text('nav.solution', locale)),
       positionImage: 'gauche',
       titre: text('nav.solution', locale),
       chapo: text('maison.titleFit', locale) + text('maison.titleRest', locale),
@@ -753,7 +755,7 @@ async function seedAccueil(files) {
     },
     compact({
       __component: 'sections.image-texte',
-      image: await files.id('/images/mix-intro.webp', text('atelier.kicker', locale)),
+      image: await files.id('/images/home-melanges.jpg', text('atelier.kicker', locale)),
       positionImage: 'droite',
       titre: text('atelier.kicker', locale),
       chapo: text('atelier.titleFit', locale) + text('atelier.titleRest', locale),
@@ -774,7 +776,7 @@ async function seedAccueil(files) {
     },
     compact({
       __component: 'sections.image-texte',
-      image: await files.id('/images/maison.webp', text('fournil.kicker', locale)),
+      image: await files.id('/images/ingredients.jpg', text('fournil.kicker', locale)),
       positionImage: 'gauche',
       titre: text('fournil.kicker', locale),
       chapo: text('fournil.titleFit', locale) + text('fournil.titleRest', locale),

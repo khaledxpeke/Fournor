@@ -130,7 +130,7 @@ Expertise ids are every former `xp.html?id=` except `formation` (that page is `/
 
 ## Contact form
 
-The form posts in the browser to `https://formsubmit.co/ajax/contact@fournor.com`. There is no PHP handler.
+The form posts in the browser to `https://formsubmit.co/ajax/contact.satia@fournor.com`. There is no PHP handler.
 
 ## Environment
 

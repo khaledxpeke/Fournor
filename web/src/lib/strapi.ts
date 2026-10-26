@@ -24,6 +24,7 @@ export type ProductRecord = {
   adds: Dict;
   weight: string;
   composition: Dict;
+  usage?: Dict;
   sheet?: string;
 };
 
@@ -406,6 +407,7 @@ export async function loadSiteCatalog(): Promise<SiteCatalog> {
         adds: dict(rows, (row) => text(row?.ajout)),
         weight: text(fr.poids),
         composition: dict(rows, (row) => text(row?.description)),
+        usage: dict(rows, (row) => text(row?.utilisation)),
         sheet: attachmentHref(mediaUrl(fr.ficheTechnique), `fiche-technique-${id}`) || undefined,
       };
     })

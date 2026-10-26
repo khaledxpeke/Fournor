@@ -13,6 +13,7 @@ const name = loc(product.name, locale);
 const tr = (key) => t(key, locale);
 const href = (to) => localePath(locale, to);
 const flourNote = tr("prod.usageText");
+const usageNote = loc(product.usage, locale) || flourNote;
 const others = products.filter((item) => item.id !== product.id).slice(0, 3);
 const photo = preloadFor(product.image, "product");
 const productLd = {
@@ -73,7 +74,7 @@ const productLd = {
           <article><h2>{tr("prod.adds")}</h2><p>{loc(product.adds, locale)}</p></article>
           <article><h2>{tr("prod.sensory")}</h2><p>{loc(product.sensory, locale)}</p></article>
           <article><h2>{tr("prod.target")}</h2><p>{loc(product.target, locale)}</p></article>
-          <article><h2>{tr("prod.usage")}</h2><p>{flourNote}</p></article>
+          <article><h2>{tr("prod.usage")}</h2><p>{usageNote}</p></article>
         </div>
       </div>
       {

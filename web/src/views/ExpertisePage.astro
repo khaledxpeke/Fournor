@@ -8,7 +8,8 @@ import { preloadFor } from "../lib/images.js";
 
 const { locale = "fr" } = Astro.props;
 const tr = (key) => t(key, locale);
-const current = products[0];
+const mixProducts = products.filter((product) => product.dosage > 0);
+const current = mixProducts[0];
 const flour = 100 - current.dosage;
 const photo = preloadFor(pageImages.expertise, "page");
 ---
@@ -54,7 +55,7 @@ const photo = preloadFor(pageImages.expertise, "page");
               </button>
               <ul class="fo-select-list" role="listbox" id="composer-list" aria-labelledby="composer-label" hidden>
                 {
-                  products.map((product) => (
+                  mixProducts.map((product) => (
                     <li role="option" data-value={product.id} id={`composer-opt-${product.id}`} aria-selected={product.id === current.id ? "true" : "false"}>
                       {loc(product.name, locale)}
                     </li>

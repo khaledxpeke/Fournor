@@ -2532,9 +2532,8 @@ body[data-page="formation"] .page-notes {
   display: block;
   height: 6.4rem;
   width: auto;
-  max-width: 12.5rem;
+  max-width: 13.5rem;
   object-fit: contain;
-  filter: brightness(0) invert(83%) sepia(35%) saturate(600%) hue-rotate(351deg) brightness(104%) contrast(92%);
 }
 
 .footer-label {
@@ -2585,6 +2584,11 @@ body[data-page="formation"] .page-notes {
 .contact-line [dir="ltr"] {
   unicode-bidi: isolate;
   white-space: nowrap;
+}
+
+.contact-line .footer-mail {
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 .site-footer .contact-line {

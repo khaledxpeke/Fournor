@@ -1,6 +1,6 @@
 const dict = {
   fr: {
-    "meta.home": "SATIA — Solution, mélange, ingrédient",
+    "meta.home": "SATIA",
     "meta.maison": "Présentation — SATIA",
     "meta.solution": "Solution & Expertise — SATIA",
     "meta.gamme": "Mélanges — SATIA",
@@ -272,7 +272,7 @@ const dict = {
     "contact.map": "Ouvrir dans Google Maps",
   },
   en: {
-    "meta.home": "SATIA — Solution, blend, ingredient",
+    "meta.home": "SATIA",
     "meta.maison": "Presentation — SATIA",
     "meta.solution": "Solution & Expertise — SATIA",
     "meta.gamme": "Blends — SATIA",
@@ -543,7 +543,7 @@ const dict = {
     "contact.map": "Open in Google Maps",
   },
   ar: {
-    "meta.home": "SATIA — حلول، خلطات، مكوّنات",
+    "meta.home": "SATIA",
     "meta.maison": "تقديم — SATIA",
     "meta.solution": "حلول وخبرة — SATIA",
     "meta.gamme": "الخلطات — SATIA",
