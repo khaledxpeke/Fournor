@@ -190,7 +190,6 @@ function renderGamme() {
   const grid = document.getElementById("gamme-grid");
   if (!grid) return;
   const cards = [...grid.querySelectorAll(".p-card")];
-  if (!cards.length) return;
   const query = fold(document.getElementById("gamme-search")?.value.trim());
   let shown = 0;
   cards.forEach((card) => {
