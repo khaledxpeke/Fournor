@@ -1,9 +1,11 @@
 ---
 import Base from "../layouts/BaseLayout.astro";
 import CtaBand from "../components/CtaBand.astro";
+import CmsImage from "../components/CmsImage.astro";
 import { t } from "../i18n.js";
 import { loc, localizeHref, localePath } from "../lib/locale.js";
-import { getXpPage, getXpTitle, xpHref, xpTree } from "../xp-data.js";
+import { getXpPage, getXpTitle, xpHref, xpTree } from "virtual:fournor-catalog";
+import { preloadFor } from "../lib/images.js";
 
 const { locale = "fr", id } = Astro.props;
 const pageData = getXpPage(id);
@@ -13,6 +15,7 @@ const parentId = parent && parent.id !== id ? parent.id : "solution";
 const parentHref = parentId === "solution" ? localePath(locale, "/solution/") : localizeHref(locale, xpHref(parentId));
 const parentLabel = parentId === "solution" ? t("nav.solution", locale) : getXpTitle(parentId, locale);
 const tr = (key) => t(key, locale);
+const photo = preloadFor(pageData?.image, "page");
 ---
 
 <Base
@@ -23,11 +26,14 @@ const tr = (key) => t(key, locale);
   path={`/xp/${id}/`}
   xp={id}
   ogImage={pageData?.image}
+  preload={photo.href}
+  preloadSrcset={photo.srcset}
+  preloadSizes={photo.sizes}
 >
   <div id="xp-root">
     <section class="page-open wrap">
       <figure class="page-open-photo">
-        <img src={pageData?.image} alt={title} width="1600" height="1200" fetchpriority="high" decoding="async" />
+        <CmsImage src={pageData?.image} alt={title} slot="page" fetchpriority="high" />
       </figure>
       <div class="page-open-copy">
         <p class="kicker"><a href={parentHref}>{parentLabel}</a></p>
@@ -35,7 +41,7 @@ const tr = (key) => t(key, locale);
         <p class="lead pillar-tagline">{loc(pageData?.tag, locale)}</p>
         <p>{loc(pageData?.lead, locale)}</p>
         <p>{loc(pageData?.text, locale)}</p>
-        {pageData?.cta && <a class="btn btn-gold" href={localizeHref(locale, pageData.cta.href)}>{tr(pageData.cta.key)}</a>}
+        {pageData?.cta && <a class="btn btn-gold" href={localizeHref(locale, pageData.cta.href)}>{pageData.cta.label ? loc(pageData.cta.label, locale) : tr(pageData.cta.key)}</a>}
       </div>
     </section>
     {

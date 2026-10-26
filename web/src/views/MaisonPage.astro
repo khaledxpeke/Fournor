@@ -1,12 +1,16 @@
 ---
 import Base from "../layouts/BaseLayout.astro";
 import CtaBand from "../components/CtaBand.astro";
+import CmsImage from "../components/CmsImage.astro";
+import { pageImages } from "virtual:fournor-catalog";
 import { t } from "../i18n.js";
 import { localePath } from "../lib/locale.js";
+import { preloadFor } from "../lib/images.js";
 
 const { locale = "fr" } = Astro.props;
 const tr = (key) => t(key, locale);
 const href = (to) => localePath(locale, to);
+const photo = preloadFor(pageImages.maison, "logoClear");
 ---
 
 <Base
@@ -15,11 +19,14 @@ const href = (to) => localePath(locale, to);
   page="maison"
   locale={locale}
   path="/maison/"
-  preload="/logo-satia-clear.webp"
+  preload={photo.href}
+  preloadSrcset={photo.srcset}
+  preloadSizes={photo.sizes}
+  ogImage={pageImages.maison || "/logo-satia.webp"}
 >
   <section class="page-open wrap">
     <figure class="page-open-photo page-open-logo">
-      <img src="/logo-satia-clear.webp" alt="SATIA" width="640" height="366" fetchpriority="high" decoding="async" />
+      <CmsImage src={pageImages.maison} alt="SATIA" slot="logoClear" fetchpriority="high" />
     </figure>
     <div class="page-open-copy">
       <p class="kicker">{tr("page.kicker")}</p>

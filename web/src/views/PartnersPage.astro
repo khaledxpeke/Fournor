@@ -1,5 +1,7 @@
 ---
 import Base from "../layouts/BaseLayout.astro";
+import CmsImage from "../components/CmsImage.astro";
+import { pageImages } from "virtual:fournor-catalog";
 import { t } from "../i18n.js";
 
 const { locale = "fr" } = Astro.props;
@@ -22,7 +24,7 @@ const tr = (key) => t(key, locale);
     <div class="wrap">
       <article class="partner-feature reveal">
         <figure class="partner-logo">
-          <img src="/images/partner-artesienne.png" alt="Artésienne de Minoterie — farines et mélanges meuniers" width="1024" height="341" loading="lazy" decoding="async" />
+          <CmsImage src={pageImages.partenaires} alt="Artésienne de Minoterie — farines et mélanges meuniers" slot="partner" loading="lazy" />
         </figure>
         <p class="lead">{tr("part.artesienne")}</p>
       </article>

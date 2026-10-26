@@ -1,0 +1,11 @@
+---
+const { block } = Astro.props;
+const items = Array.isArray(block?.elements) ? block.elements : [];
+---
+{items.length > 0 && (
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      {items.map((item) => <span>{item?.texte || ""}</span>)}
+    </div>
+  </div>
+)}

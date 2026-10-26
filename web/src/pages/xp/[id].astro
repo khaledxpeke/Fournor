@@ -1,6 +1,6 @@
 ---
 import XpPage from "../../views/XpPage.astro";
-import { xpSlugs } from "../../xp-data.js";
+import { xpSlugs } from "virtual:fournor-catalog";
 
 export function getStaticPaths() {
   return xpSlugs.map((id) => ({ params: { id } }));

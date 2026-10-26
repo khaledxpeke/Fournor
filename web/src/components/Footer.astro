@@ -1,12 +1,18 @@
 ---
-import { xpNav } from "../xp-data.js";
+import { navigation } from "virtual:fournor-catalog";
 import { t } from "../i18n.js";
 import { localePath } from "../lib/locale.js";
 
 const { locale = "fr" } = Astro.props;
 const tr = (key) => t(key, locale);
 const href = (to) => localePath(locale, to);
-const label = (id) => xpNav[id]?.[locale] || xpNav[id]?.fr || id;
+const footerLinks = navigation?.[locale]?.footer?.length
+  ? navigation[locale].footer
+  : [
+      { label: "", href: href("/xp/metiers/") },
+      { label: "", href: href("/xp/xp-ingredient/") },
+      { label: "", href: href("/xp/formulation/") },
+    ];
 ---
 
 <footer class="site-footer">
@@ -20,9 +26,7 @@ const label = (id) => xpNav[id]?.[locale] || xpNav[id]?.fr || id;
     </div>
     <div class="footer-xp">
       <p class="footer-label">{tr("footer.expertises")}</p>
-      <a href={href("/xp/metiers/")} data-xp-nav="metiers">{label("metiers")}</a>
-      <a href={href("/xp/xp-ingredient/")} data-xp-nav="xp-ingredient">{label("xp-ingredient")}</a>
-      <a href={href("/xp/formulation/")} data-xp-nav="formulation">{label("formulation")}</a>
+      {footerLinks.map((item) => <a href={item.href}>{item.label}</a>)}
     </div>
     <div class="footer-contact">
       <p class="footer-label">{tr("footer.contact")}</p>

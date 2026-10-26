@@ -1,0 +1,24 @@
+---
+import CmsPage from "../views/CmsPage.astro";
+import { cmsPages } from "virtual:fournor-catalog";
+
+export function getStaticPaths() {
+  const reserved = new Set([
+    "maison",
+    "solution",
+    "gamme",
+    "expertise",
+    "ingredients",
+    "formation",
+    "partenaires",
+    "actualites",
+    "contact",
+  ]);
+  return (cmsPages || [])
+    .filter((page) => page?.slug && !reserved.has(page.slug))
+    .map((page) => ({ params: { slug: page.slug }, props: { page } }));
+}
+
+const { page } = Astro.props;
+---
+<CmsPage locale="fr" page={page} />

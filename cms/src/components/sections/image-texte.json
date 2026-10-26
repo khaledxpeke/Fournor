@@ -1,0 +1,80 @@
+{
+  "collectionName": "components_sections_image_texte",
+  "info": {
+    "displayName": "Image + texte",
+    "icon": "layer",
+    "description": "Bloc image a gauche ou a droite avec titre et texte"
+  },
+  "options": {},
+  "attributes": {
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ],
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    },
+    "positionImage": {
+      "type": "enumeration",
+      "enum": [
+        "gauche",
+        "droite"
+      ],
+      "default": "gauche",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    },
+    "surtitre": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "titre": {
+      "type": "string",
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "chapo": {
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "texte": {
+      "type": "richtext",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "bouton": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.bouton",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    }
+  }
+}

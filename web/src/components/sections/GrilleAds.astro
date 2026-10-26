@@ -1,0 +1,9 @@
+---
+const { block } = Astro.props;
+---
+<section class="section">
+  <div class="wrap">
+    {block?.titre && <h2>{block.titre}</h2>}
+    <div data-ad-slot={block?.emplacement || ""} data-max={block?.nombreMax || 4}></div>
+  </div>
+</section>

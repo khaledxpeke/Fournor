@@ -1,0 +1,36 @@
+{
+  "collectionName": "components_shared_liens_sociaux",
+  "info": {
+    "displayName": "Lien social",
+    "icon": "link"
+  },
+  "options": {},
+  "attributes": {
+    "reseau": {
+      "type": "enumeration",
+      "enum": [
+        "facebook",
+        "instagram",
+        "linkedin",
+        "youtube",
+        "tiktok",
+        "x"
+      ],
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    },
+    "url": {
+      "type": "string",
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    }
+  }
+}

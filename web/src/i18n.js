@@ -816,6 +816,8 @@ const dict = {
   },
 };
 
+export { dict };
+
 const KEY = "fournor-lang";
 const LANGS = ["fr", "en", "ar"];
 
@@ -824,11 +826,10 @@ export function isRtl(lang = getLang()) {
 }
 
 export function getLang() {
-  const saved = localStorage.getItem(KEY);
-  if (LANGS.includes(saved)) return saved;
-  const nav = (navigator.language || "").toLowerCase();
-  if (nav.startsWith("ar")) return "ar";
-  if (nav.startsWith("en")) return "en";
+  try {
+    const saved = localStorage.getItem(KEY);
+    if (LANGS.includes(saved)) return saved;
+  } catch (e) {}
   return "fr";
 }
 

@@ -1,0 +1,51 @@
+{
+  "collectionName": "components_sections_listes_produits",
+  "info": {
+    "displayName": "Liste de produits",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "titre": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "gamme": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::gamme.gamme",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    },
+    "nombreMax": {
+      "type": "integer",
+      "default": 8,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    },
+    "affichage": {
+      "type": "enumeration",
+      "enum": [
+        "grille",
+        "carrousel",
+        "liste"
+      ],
+      "default": "grille",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    }
+  }
+}

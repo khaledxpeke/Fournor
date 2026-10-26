@@ -1,0 +1,13 @@
+---
+import ActualitePage from "../../views/ActualitePage.astro";
+import { actualites } from "virtual:fournor-catalog";
+
+export function getStaticPaths() {
+  return (actualites || [])
+    .filter((item) => item?.slug)
+    .map((article) => ({ params: { slug: article.slug }, props: { article } }));
+}
+
+const { article } = Astro.props;
+---
+<ActualitePage locale="fr" article={article} />

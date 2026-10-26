@@ -1,0 +1,22 @@
+---
+import { actualites } from "virtual:fournor-catalog";
+
+const { block, locale = "fr" } = Astro.props;
+const max = Number(block?.nombreMax) || 3;
+const list = (actualites || []).slice(0, max);
+const prefix = locale === "fr" ? "" : `/${locale}`;
+---
+{list.length > 0 && (
+  <section class="section">
+    <div class="wrap">
+      {block?.titre && <h2>{block.titre}</h2>}
+      <div class="card-grid">
+        {list.map((item) => (
+          <a href={`${prefix}/actualites/${item.slug}/`}>
+            <h3>{item.titre?.[locale] || item.titre?.fr || ""}</h3>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+)}

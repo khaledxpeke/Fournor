@@ -1,0 +1,37 @@
+{
+  "collectionName": "components_shared_liens_nav",
+  "info": {
+    "displayName": "Lien navigation",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "libelle": {
+      "type": "string",
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "lien": {
+      "type": "string",
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "ordre": {
+      "type": "integer",
+      "default": 0,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    }
+  }
+}

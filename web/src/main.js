@@ -1,7 +1,9 @@
 import { mountLayout, fillNavLabels } from "./layout.js";
 import { isRtl } from "./i18n.js";
-import { products, events, dosageMeta, partners, getProduct } from "./products.js";
+import { products, events, getProduct } from "virtual:fournor-catalog";
+import { dosageMeta, partners } from "./lib/local-meta.js";
 import { t } from "./i18n.js";
+import { displaySrc, srcsetFor, slots } from "./lib/images.js";
 import {
   xpTree,
   xpNav,
@@ -11,7 +13,7 @@ import {
   ingFamilies,
   ingFamilyPages,
   ingHref,
-} from "./xp-data.js";
+} from "virtual:fournor-catalog";
 
 const page = document.body.dataset.page || "home";
 mountLayout(page === "produit" ? "gamme" : page === "xp" ? "solution" : page);
@@ -37,12 +39,20 @@ function ringSvg(pct) {
   </svg>`;
 }
 
+function mediaTag(url, { alt, width, height, slot, extra = "" }) {
+  const preset = slots[slot];
+  const src = displaySrc(url, preset.widths);
+  const set = srcsetFor(url, preset.widths);
+  const responsive = set ? ` srcset="${set}" sizes="${preset.sizes}"` : "";
+  return `<img src="${src}"${responsive} alt="${alt}" width="${width}" height="${height}" ${extra} />`;
+}
+
 function productCard(p, { decoy = false } = {}) {
   const L = lang();
   const extra = decoy ? ' aria-hidden="true" tabindex="-1"' : "";
   return `<a class="p-card" href="/produit/${p.id}/"${extra}>
     <div class="p-card-img">
-      <img src="${p.image}?v=2" alt="${loc(p.name, L)}" width="800" height="600" loading="lazy" decoding="async" />
+      ${mediaTag(p.image, { alt: loc(p.name, L), width: 800, height: 600, slot: "card", extra: 'loading="lazy" decoding="async"' })}
     </div>
     <div class="p-card-body">
       <h3>${loc(p.name, L)}</h3>
@@ -55,7 +65,7 @@ function productCard(p, { decoy = false } = {}) {
 function eventCard(e) {
   const L = lang();
   return `<article class="e-card">
-    <div class="e-card-img"><img src="${e.image}" alt="${loc(e.title, L)}" width="800" height="500" loading="lazy" decoding="async"/></div>
+    <div class="e-card-img">${mediaTag(e.image, { alt: loc(e.title, L), width: 800, height: 500, slot: "franchise", extra: 'loading="lazy" decoding="async"' })}</div>
     <div>
       <p class="kicker">${loc(e.place, L)}</p>
       <h3>${loc(e.title, L)}</h3>
@@ -74,7 +84,7 @@ function renderHome() {
     rail.innerHTML = `<div class="atelier-shift"><div class="atelier-track">${cards}${decoys}</div></div>`;
   }
   const news = document.getElementById("home-news");
-  if (news) news.innerHTML = events.slice(0, 3).map(eventCard).join("");
+  if (news && events.length) news.innerHTML = events.slice(0, 3).map(eventCard).join("");
   document.querySelectorAll("[data-dosage-label]").forEach((el) => {
     const d = Number(el.dataset.dosageLabel);
     el.textContent = loc(dosageMeta[d].label, L);
@@ -236,15 +246,14 @@ function renderProduit() {
   const watchBtn = p.video
     ? `<a class="btn btn-ghost" href="#prod-video">${t("prod.watch", L)}</a>`
     : "";
-  const sheetName = `Fiche ${loc(p.name, L)}.pdf`;
   const sheetBtn = p.sheet
-    ? `<a class="btn btn-ghost" href="${p.sheet}" download="${sheetName}">${t("prod.download", L)}</a>`
+    ? `<a class="btn btn-ghost" href="${p.sheet}" rel="noopener">${t("prod.download", L)}</a>`
     : "";
   const actions = watchBtn || sheetBtn ? `<div class="prod-actions">${watchBtn}${sheetBtn}</div>` : "";
   root.innerHTML = `
     <div class="prod-hero">
       <div class="prod-photo">
-        <img src="${p.image}?v=2" alt="${loc(p.name, L)}" width="900" height="900" fetchpriority="high" decoding="async" />
+        ${mediaTag(p.image, { alt: loc(p.name, L), width: 900, height: 900, slot: "product", extra: 'fetchpriority="high" decoding="async"' })}
       </div>
       <div class="prod-intro">
         <p class="kicker" data-i18n="prod.kicker">${t("prod.kicker", L)}</p>
@@ -257,19 +266,19 @@ function renderProduit() {
     <div class="prod-specs">
       <div class="prod-spec-main">
         <article>
-          <h3>${t("prod.composition", L)}</h3>
+          <h2>${t("prod.composition", L)}</h2>
           <p>${loc(p.composition, L)}</p>
         </article>
         <article class="prod-spec-weight">
-          <h3>${t("prod.weight", L)}</h3>
+          <h2>${t("prod.weight", L)}</h2>
           <p>${p.weight}</p>
         </article>
       </div>
       <div class="prod-spec-grid">
-        <article><h3>${t("prod.adds", L)}</h3><p>${loc(p.adds, L)}</p></article>
-        <article><h3>${t("prod.sensory", L)}</h3><p>${loc(p.sensory, L)}</p></article>
-        <article><h3>${t("prod.target", L)}</h3><p>${loc(p.target, L)}</p></article>
-        <article><h3>${t("prod.usage", L)}</h3><p>${t("prod.usageText", L)}</p></article>
+        <article><h2>${t("prod.adds", L)}</h2><p>${loc(p.adds, L)}</p></article>
+        <article><h2>${t("prod.sensory", L)}</h2><p>${loc(p.sensory, L)}</p></article>
+        <article><h2>${t("prod.target", L)}</h2><p>${loc(p.target, L)}</p></article>
+        <article><h2>${t("prod.usage", L)}</h2><p>${t("prod.usageText", L)}</p></article>
       </div>
     </div>
     ${videoBlock}
@@ -666,7 +675,8 @@ function fitPillarHeadings() {
 function xpCta(page) {
   if (!page?.cta) return "";
   const L = lang();
-  return `<a class="btn btn-gold" href="${page.cta.href}">${t(page.cta.key, L)}</a>`;
+  const label = loc(page.cta.label, L) || (page.cta.key ? t(page.cta.key, L) : "");
+  return `<a class="btn btn-gold" href="${page.cta.href}">${label}</a>`;
 }
 
 function xpNotes(page) {
@@ -750,7 +760,7 @@ function renderXp() {
   root.innerHTML = `
     <section class="page-open wrap">
       <figure class="page-open-photo">
-        <img src="${pageData.image}" alt="${title}" width="1600" height="1200" fetchpriority="high" decoding="async" />
+        ${mediaTag(pageData.image, { alt: title, width: 1600, height: 1200, slot: "page", extra: 'fetchpriority="high" decoding="async"' })}
       </figure>
       <div class="page-open-copy">
         <p class="kicker"><a href="${parentHref}">${parentLabel}</a></p>
@@ -811,7 +821,7 @@ function renderIngredients() {
       detail.innerHTML = `
       <section class="page-open wrap">
         <figure class="page-open-photo">
-          <img src="${pageData.image}" alt="${title}" width="1600" height="1200" fetchpriority="high" decoding="async" />
+          ${mediaTag(pageData.image, { alt: title, width: 1600, height: 1200, slot: "page", extra: 'fetchpriority="high" decoding="async"' })}
         </figure>
         <div class="page-open-copy">
           <p class="kicker"><a href="/ingredients/">${t("ing.hero", L)}</a></p>

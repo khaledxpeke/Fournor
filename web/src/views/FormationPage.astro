@@ -1,8 +1,11 @@
 ---
 import Base from "../layouts/BaseLayout.astro";
 import CtaBand from "../components/CtaBand.astro";
+import CmsImage from "../components/CmsImage.astro";
+import { pageImages } from "virtual:fournor-catalog";
 import { t } from "../i18n.js";
 import { localePath } from "../lib/locale.js";
+import { preloadFor } from "../lib/images.js";
 
 const { locale = "fr" } = Astro.props;
 const tr = (key) => t(key, locale);
@@ -11,6 +14,7 @@ const caps = [
   ["formation.cap2", "formation.cap2tag", "formation.cap2obj", "formation.cap2out"],
   ["formation.cap3", "formation.cap3tag", "formation.cap3obj", "formation.cap3out"],
 ];
+const photo = preloadFor(pageImages.formation, "page");
 ---
 
 <Base
@@ -19,11 +23,14 @@ const caps = [
   page="formation"
   locale={locale}
   path="/formation/"
-  ogImage="/images/expertise.webp"
+  preload={photo.href}
+  preloadSrcset={photo.srcset}
+  preloadSizes={photo.sizes}
+  ogImage={pageImages.formation}
 >
   <section class="page-open wrap">
     <figure class="page-open-photo">
-      <img src="/images/expertise.webp" alt="" width="1600" height="1200" fetchpriority="high" decoding="async" />
+      <CmsImage src={pageImages.formation} alt="" slot="page" fetchpriority="high" />
     </figure>
     <div class="page-open-copy">
       <p class="kicker">{tr("page.kicker")}</p>

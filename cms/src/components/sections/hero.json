@@ -1,0 +1,51 @@
+{
+  "collectionName": "components_sections_heros",
+  "info": {
+    "displayName": "Hero",
+    "icon": "picture",
+    "description": "Banniere principale en haut de page"
+  },
+  "options": {},
+  "attributes": {
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ],
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    },
+    "titre": {
+      "type": "string",
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "sousTitre": {
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "bouton": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.bouton",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    }
+  }
+}

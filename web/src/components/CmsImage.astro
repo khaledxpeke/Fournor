@@ -1,0 +1,42 @@
+---
+import { displaySrc, slots, srcsetFor } from "../lib/images.js";
+
+const {
+  src = "",
+  alt = "",
+  slot = "",
+  widths,
+  sizes,
+  width,
+  height,
+  class: className,
+  loading,
+  fetchpriority,
+  decoding = "async",
+} = Astro.props;
+
+const preset = slots[slot] || {};
+const srcWidths = widths || preset.widths;
+const srcSizes = sizes || preset.sizes;
+const srcWidth = width || preset.width;
+const srcHeight = height || preset.height;
+const href = displaySrc(src, srcWidths);
+const srcset = srcsetFor(src, srcWidths);
+---
+
+{
+  src && (
+    <img
+      class={className}
+      src={href}
+      srcset={srcset}
+      sizes={srcset ? srcSizes : undefined}
+      alt={alt}
+      width={srcWidth}
+      height={srcHeight}
+      loading={loading}
+      fetchpriority={fetchpriority}
+      decoding={decoding}
+    />
+  )
+}

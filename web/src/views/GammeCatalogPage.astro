@@ -1,15 +1,16 @@
 ---
 import Base from "../layouts/BaseLayout.astro";
 import ProductCard from "../components/ProductCard.astro";
-import { products } from "../products.js";
+import { products } from "virtual:fournor-catalog";
 import { t } from "../i18n.js";
 import { localePath } from "../lib/locale.js";
-import { mixTitleKey, productSearch } from "../lib/catalog.js";
+import { mixLeadKey, mixTitleKey, productSearch } from "../lib/catalog.js";
 
 const { locale = "fr", mix } = Astro.props;
 const tr = (key) => t(key, locale);
 const title = tr(mixTitleKey(mix) || "gamme.hero");
 const list = products.filter((product) => product.mix === mix);
+const description = tr(mixLeadKey(mix) || "gamme.lead");
 ---
 
 <Base
@@ -25,7 +26,10 @@ const list = products.filter((product) => product.mix === mix);
       <a href={localePath(locale, "/gamme/")}>{tr("gamme.hero")}</a>
     </p>
     <h1 id="gamme-title">{title}</h1>
+    {list.length === 0 && <p class="lead">{description}</p>}
+    {list.length === 0 && <p><a class="btn btn-gold" href={localePath(locale, "/contact/")}>{tr("cta.btn")}</a></p>}
   </section>
+  {list.length !== 0 && (
   <section class="section mix-landing" style="padding-top:0">
     <div class="wrap">
       <div class="gamme-catalog" id="gamme-catalog">
@@ -46,11 +50,12 @@ const list = products.filter((product) => product.mix === mix);
             />
           </div>
         </div>
-        <p class="gamme-empty" id="gamme-empty" hidden={list.length > 0}>{tr("gamme.empty")}</p>
+        <p class="gamme-empty" id="gamme-empty" hidden>{tr("gamme.empty")}</p>
         <div class="card-grid" id="gamme-grid">
-          {list.map((product) => <ProductCard product={product} locale={locale} search={productSearch(product)} />)}
+          {list.map((product) => <ProductCard product={product} locale={locale} level={2} search={productSearch(product)} />)}
         </div>
       </div>
     </div>
   </section>
+  )}
 </Base>

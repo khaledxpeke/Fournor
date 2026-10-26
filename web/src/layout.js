@@ -1,5 +1,5 @@
 import { t } from "./i18n.js";
-import { xpNav } from "./xp-data.js";
+import { xpNav } from "virtual:fournor-catalog";
 
 (function applyDesktopSiteViewport() {
   const ua = navigator.userAgent || "";

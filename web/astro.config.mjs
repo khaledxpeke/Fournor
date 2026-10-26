@@ -1,5 +1,6 @@
 import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
+import { fournorCatalog } from "./catalog-plugin";
 
 export default defineConfig({
   site: "https://fournor.com",
@@ -12,6 +13,9 @@ export default defineConfig({
     routing: {
       prefixDefaultLocale: false,
     },
+  },
+  vite: {
+    plugins: [fournorCatalog()],
   },
   integrations: [
     sitemap({

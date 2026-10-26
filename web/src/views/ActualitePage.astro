@@ -1,0 +1,17 @@
+---
+import Base from "../layouts/BaseLayout.astro";
+import CmsImage from "../components/CmsImage.astro";
+import { localePath } from "../lib/locale.js";
+
+const { locale = "fr", article } = Astro.props;
+const titre = article?.titre?.[locale] || article?.titre?.fr || "";
+---
+<Base title={`${titre} — SATIA`} description={titre} page="actualites" locale={locale} path={`/actualites/${article?.slug || ""}/`}>
+  <article class="section wrap">
+    <p class="kicker"><a href={localePath(locale, "/actualites/")}>{locale === "en" ? "News" : locale === "ar" ? "الأخبار" : "Actualités"}</a></p>
+    <h1>{titre}</h1>
+    {article?.image && <CmsImage src={article.image} alt={titre} slot="page" />}
+    {article?.extrait && <p class="lead">{article.extrait?.[locale] || article.extrait?.fr || ""}</p>}
+    {article?.contenu && <div set:html={article.contenu?.[locale] || article.contenu?.fr || ""} />}
+  </article>
+</Base>

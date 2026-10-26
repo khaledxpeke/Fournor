@@ -1,0 +1,58 @@
+{
+  "kind": "singleType",
+  "collectionName": "accueils",
+  "info": {
+    "singularName": "accueil",
+    "pluralName": "accueils",
+    "displayName": "Accueil",
+    "description": "Page d'accueil composee de blocs"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "titre": {
+      "type": "string",
+      "default": "Accueil",
+      "private": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    },
+    "sections": {
+      "type": "dynamiczone",
+      "components": [
+        "sections.hero",
+        "sections.bandeau-defilant",
+        "sections.image-texte",
+        "sections.grille-ads",
+        "sections.liste-produits",
+        "sections.actualites-recentes",
+        "sections.cta",
+        "sections.texte"
+      ],
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    }
+  }
+}

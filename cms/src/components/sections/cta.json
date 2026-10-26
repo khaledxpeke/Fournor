@@ -1,0 +1,49 @@
+{
+  "collectionName": "components_sections_cta",
+  "info": {
+    "displayName": "Appel a l'action",
+    "icon": "bell"
+  },
+  "options": {},
+  "attributes": {
+    "titre": {
+      "type": "string",
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "texte": {
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ],
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    },
+    "bouton": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.bouton",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    }
+  }
+}

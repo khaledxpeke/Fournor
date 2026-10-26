@@ -3,14 +3,19 @@ import Base from "../layouts/BaseLayout.astro";
 import ProductCard from "../components/ProductCard.astro";
 import EventCard from "../components/EventCard.astro";
 import CtaBand from "../components/CtaBand.astro";
-import { events, products } from "../products.js";
+import CmsImage from "../components/CmsImage.astro";
+import { events, home, products } from "virtual:fournor-catalog";
 import { t } from "../i18n.js";
 import { loc, localePath } from "../lib/locale.js";
+import { preloadFor } from "../lib/images.js";
 
 const { locale = "fr" } = Astro.props;
 const tr = (key) => t(key, locale);
 const href = (to) => localePath(locale, to);
 const names = products.map((product) => loc(product.name, locale));
+const hero = preloadFor(home.hero, "hero");
+const band = home.band[0];
+const gridSlots = ["adTile", "adTile", "adTile", "adPhoto"];
 ---
 
 <Base
@@ -19,19 +24,13 @@ const names = products.map((product) => loc(product.name, locale));
   page="home"
   locale={locale}
   path="/"
-  preload="/images/banner.webp?v=2"
-  ogImage="/images/banner.webp?v=2"
+  preload={hero.href}
+  preloadSrcset={hero.srcset}
+  preloadSizes={hero.sizes}
+  ogImage={home.hero}
 >
   <section class="hero">
-    <img
-      class="hero-bg"
-      src="/images/banner.webp?v=2"
-      alt=""
-      width="1774"
-      height="887"
-      fetchpriority="high"
-      decoding="async"
-    />
+    <CmsImage class="hero-bg" src={home.hero} alt="" slot="hero" fetchpriority="high" />
     <h1 class="visually-hidden">{tr("hero.title")}</h1>
   </section>
 
@@ -45,7 +44,7 @@ const names = products.map((product) => loc(product.name, locale));
   <section class="section">
     <div class="wrap sol-intro reveal">
       <figure class="mix-photo">
-        <img src="/images/expertise.webp" alt={tr("nav.solution")} width="960" height="720" loading="lazy" decoding="async" />
+        <CmsImage src={home.solution} alt={tr("nav.solution")} slot="pillar" loading="lazy" />
       </figure>
       <div class="mix-copy">
         <h2 class="pillar-heading">{tr("nav.solution")}</h2>
@@ -58,11 +57,13 @@ const names = products.map((product) => loc(product.name, locale));
     </div>
   </section>
 
-  <aside class="ad-band">
-    <a class="ad-frame reveal" href={href("/solution/")} aria-label={tr("ad.sol.title")}>
-      <img src="/images/ad-sol.webp?v=2" alt="" width="3500" height="420" loading="lazy" decoding="async" />
-    </a>
-  </aside>
+  {band && (
+    <aside class="ad-band">
+      <a class="ad-frame reveal" href={href(band.href)} aria-label={loc(band.alt, locale) || tr("ad.sol.title")}>
+        <CmsImage src={band.image} alt="" slot="adBand" loading="lazy" />
+      </a>
+    </aside>
+  )}
 
   <section class="mix-band">
     <div class="wrap">
@@ -76,7 +77,7 @@ const names = products.map((product) => loc(product.name, locale));
           <a class="btn btn-ghost" href={href("/gamme/")}>{tr("atelier.all")}</a>
         </div>
         <figure class="mix-photo">
-          <img src="/images/mix-intro.webp?v=2" alt={tr("atelier.kicker")} width="1400" height="932" loading="lazy" decoding="async" />
+          <CmsImage src={home.atelier} alt={tr("atelier.kicker")} slot="mix" loading="lazy" />
         </figure>
       </div>
       <div class="atelier-stage">
@@ -91,31 +92,26 @@ const names = products.map((product) => loc(product.name, locale));
         </div>
         <button type="button" class="rail-nav next" id="atelier-next" aria-label={tr("atelier.next")}>›</button>
       </div>
-      <div class="atelier-dots" id="atelier-dots" role="tablist" aria-label={tr("atelier.dots")}></div>
+      <div class="atelier-dots" id="atelier-dots" role="group" aria-label={tr("atelier.dots")}></div>
     </div>
   </section>
 
-  <aside class="ad-band ad-band-split">
-    <div class="ad-grid">
-      <a class="ad-frame reveal" href={href("/gamme/premix-poudres/")} aria-label={tr("ad.a.title")}>
-        <img src="/images/ad-home-1.webp?v=3" alt="" width="1920" height="800" loading="lazy" decoding="async" />
-      </a>
-      <a class="ad-frame reveal" href={href("/gamme/mix-poudres/")} aria-label={tr("ad.c.title")}>
-        <img src="/images/ad-home-2.webp?v=3" alt="" width="1920" height="800" loading="lazy" decoding="async" />
-      </a>
-      <a class="ad-frame reveal" href={href("/gamme/mix-liquides/")} aria-label={tr("ad.b.title")}>
-        <img src="/images/ad-home-3.webp?v=3" alt="" width="1920" height="800" loading="lazy" decoding="async" />
-      </a>
-      <a class="ad-frame reveal" href={href("/gamme/mix-graines/")} aria-label={tr("ad.g.title")}>
-        <img src="/images/maxi-graines.jpg" alt="" width="800" height="600" loading="lazy" decoding="async" />
-      </a>
-    </div>
-  </aside>
+  {home.grid.length > 0 && (
+    <aside class="ad-band ad-band-split">
+      <div class="ad-grid">
+        {home.grid.map((ad, index) => (
+          <a class="ad-frame reveal" href={href(ad.href)} aria-label={loc(ad.alt, locale)}>
+            <CmsImage src={ad.image} alt="" slot={gridSlots[index] || "adTile"} loading="lazy" />
+          </a>
+        ))}
+      </div>
+    </aside>
+  )}
 
   <section class="section">
     <div class="wrap sol-intro reveal">
       <figure class="mix-photo">
-        <img src="/images/maison.webp" alt={tr("fournil.kicker")} width="960" height="720" loading="lazy" decoding="async" />
+        <CmsImage src={home.fournil} alt={tr("fournil.kicker")} slot="pillar" loading="lazy" />
       </figure>
       <div class="mix-copy">
         <h2 class="pillar-heading">{tr("fournil.kicker")}</h2>
@@ -128,18 +124,20 @@ const names = products.map((product) => loc(product.name, locale));
     </div>
   </section>
 
-  <section class="section" style="padding-top:0">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <p class="kicker">{tr("news.kicker")}</p>
-        <h2>{tr("news.title")}</h2>
-        <a class="more" href={href("/actualites/")}>{tr("news.all")}</a>
+  {events.length > 0 && (
+    <section class="section" style="padding-top:0">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <p class="kicker">{tr("news.kicker")}</p>
+          <h2>{tr("news.title")}</h2>
+          <a class="more" href={href("/actualites/")}>{tr("news.all")}</a>
+        </div>
+        <div id="home-news">
+          {events.slice(0, 3).map((event) => <EventCard event={event} locale={locale} />)}
+        </div>
       </div>
-      <div id="home-news">
-        {events.slice(0, 3).map((event) => <EventCard event={event} locale={locale} />)}
-      </div>
-    </div>
-  </section>
+    </section>
+  )}
 
   <CtaBand locale={locale} />
 </Base>

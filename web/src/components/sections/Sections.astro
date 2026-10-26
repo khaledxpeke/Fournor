@@ -1,0 +1,28 @@
+---
+import Hero from "./Hero.astro";
+import Bandeau from "./Bandeau.astro";
+import ImageTexte from "./ImageTexte.astro";
+import GrilleAds from "./GrilleAds.astro";
+import ListeProduits from "./ListeProduits.astro";
+import ActualitesRecentes from "./ActualitesRecentes.astro";
+import Cta from "./Cta.astro";
+import Texte from "./Texte.astro";
+
+const views = {
+  "sections.hero": Hero,
+  "sections.bandeau-defilant": Bandeau,
+  "sections.image-texte": ImageTexte,
+  "sections.grille-ads": GrilleAds,
+  "sections.liste-produits": ListeProduits,
+  "sections.actualites-recentes": ActualitesRecentes,
+  "sections.cta": Cta,
+  "sections.texte": Texte,
+};
+
+const { sections = [], locale = "fr" } = Astro.props;
+const blocks = Array.isArray(sections) ? sections.filter(Boolean) : [];
+---
+{blocks.map((block) => {
+  const View = views[block.__component];
+  return View ? <View block={block} locale={locale} /> : null;
+})}

@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_shared_notes",
+  "info": {
+    "displayName": "Note",
+    "icon": "bulletList",
+    "description": "Titre et texte, reutilisable"
+  },
+  "options": {},
+  "attributes": {
+    "titre": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "texte": {
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    }
+  }
+}

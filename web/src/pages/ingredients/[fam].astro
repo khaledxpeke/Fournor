@@ -1,6 +1,6 @@
 ---
 import IngredientFamilyPage from "../../views/IngredientFamilyPage.astro";
-import { ingSlugs } from "../../xp-data.js";
+import { ingSlugs } from "virtual:fournor-catalog";
 
 export function getStaticPaths() {
   return ingSlugs.map((fam) => ({ params: { fam } }));

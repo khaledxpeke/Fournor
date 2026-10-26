@@ -22,6 +22,8 @@ web/.env
 .env
 .astro
 *.local
+*.sql
+*.sql.gz
 brand-extract
 scripts/render-pdf.mjs
 

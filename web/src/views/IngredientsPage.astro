@@ -1,12 +1,15 @@
 ---
 import Base from "../layouts/BaseLayout.astro";
 import CtaBand from "../components/CtaBand.astro";
+import CmsImage from "../components/CmsImage.astro";
 import { t } from "../i18n.js";
 import { loc, localizeHref, localePath } from "../lib/locale.js";
-import { getXpTitle, ingFamilies, ingFamilyPages, ingHref } from "../xp-data.js";
+import { getXpTitle, ingFamilies, ingFamilyPages, ingHref, pageImages } from "virtual:fournor-catalog";
+import { preloadFor } from "../lib/images.js";
 
 const { locale = "fr" } = Astro.props;
 const tr = (key) => t(key, locale);
+const intro = preloadFor(pageImages.ingredients, "page");
 ---
 
 <Base
@@ -15,11 +18,14 @@ const tr = (key) => t(key, locale);
   page="ingredients"
   locale={locale}
   path="/ingredients/"
-  preload="/images/maison.webp"
+  preload={intro.href}
+  preloadSrcset={intro.srcset}
+  preloadSizes={intro.sizes}
+  ogImage={pageImages.ingredients}
 >
   <section class="page-open wrap" id="ing-intro">
     <figure class="page-open-photo">
-      <img src="/images/maison.webp" alt={tr("ing.hero")} width="1600" height="1200" fetchpriority="high" decoding="async" />
+      <CmsImage src={pageImages.ingredients} alt={tr("ing.hero")} slot="page" fetchpriority="high" />
     </figure>
     <div class="page-open-copy">
       <h1>{tr("ing.hero")}</h1>

@@ -13,6 +13,9 @@ import PartnersPage from "./PartnersPage.astro";
 import NewsPage from "./NewsPage.astro";
 import ContactPage from "./ContactPage.astro";
 import XpPage from "./XpPage.astro";
+import CmsPage from "./CmsPage.astro";
+import ActualitePage from "./ActualitePage.astro";
+import { cmsPages, actualites } from "virtual:fournor-catalog";
 
 const { locale = "fr", slug = "" } = Astro.props;
 const clean = String(slug || "").replace(/^\/|\/$/g, "");
@@ -20,6 +23,12 @@ const mix = clean.startsWith("gamme/") ? clean.slice("gamme/".length) : "";
 const product = clean.startsWith("produit/") ? clean.slice("produit/".length) : "";
 const xp = clean.startsWith("xp/") ? clean.slice("xp/".length) : "";
 const fam = clean.startsWith("ingredients/") ? clean.slice("ingredients/".length) : "";
+const newsSlug = clean.startsWith("actualites/") ? clean.slice("actualites/".length) : "";
+const article = newsSlug ? (actualites || []).find((item) => item.slug === newsSlug) : null;
+const reserved = new Set(["", "maison", "solution", "gamme", "expertise", "ingredients", "formation", "partenaires", "actualites", "contact"]);
+const cmsPage = !reserved.has(clean) && !mix && !product && !xp && !fam && !newsSlug
+  ? (cmsPages || []).find((item) => item.slug === clean)
+  : null;
 ---
 
 {clean === "" && <HomePage locale={locale} />}
@@ -36,3 +45,5 @@ const fam = clean.startsWith("ingredients/") ? clean.slice("ingredients/".length
 {clean === "actualites" && <NewsPage locale={locale} />}
 {clean === "contact" && <ContactPage locale={locale} />}
 {xp && <XpPage locale={locale} id={xp} />}
+{article && <ActualitePage locale={locale} article={article} />}
+{cmsPage && <CmsPage locale={locale} page={cmsPage} />}

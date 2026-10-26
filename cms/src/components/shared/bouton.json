@@ -1,0 +1,51 @@
+{
+  "collectionName": "components_shared_boutons",
+  "info": {
+    "displayName": "Bouton",
+    "icon": "cursor"
+  },
+  "options": {},
+  "attributes": {
+    "libelle": {
+      "type": "string",
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "lien": {
+      "type": "string",
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "style": {
+      "type": "enumeration",
+      "enum": [
+        "primaire",
+        "secondaire",
+        "lien"
+      ],
+      "default": "primaire",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    },
+    "nouvelOnglet": {
+      "type": "boolean",
+      "default": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    }
+  }
+}

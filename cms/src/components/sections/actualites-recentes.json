@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_sections_actualites_recentes",
+  "info": {
+    "displayName": "Actualites recentes",
+    "icon": "calendar"
+  },
+  "options": {},
+  "attributes": {
+    "titre": {
+      "type": "string",
+      "default": "Actualites",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "nombreMax": {
+      "type": "integer",
+      "default": 3,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    }
+  }
+}

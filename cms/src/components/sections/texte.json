@@ -1,0 +1,45 @@
+{
+  "collectionName": "components_sections_textes",
+  "info": {
+    "displayName": "Texte",
+    "icon": "pencil",
+    "description": "Bloc de texte sans image"
+  },
+  "options": {},
+  "attributes": {
+    "surtitre": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "titre": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "texte": {
+      "type": "richtext",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "bouton": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.bouton",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    }
+  }
+}

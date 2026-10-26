@@ -1,0 +1,15 @@
+---
+import CmsImage from "../CmsImage.astro";
+
+const { block } = Astro.props;
+const src = block?.image?.url || "";
+const bouton = block?.bouton;
+---
+<section class="hero">
+  <CmsImage src={src} alt={block?.titre || ""} slot="hero" fetchpriority="high" />
+  <div class="wrap">
+    {block?.titre && <h1>{block.titre}</h1>}
+    {block?.sousTitre && <p>{block.sousTitre}</p>}
+    {bouton?.lien && <a class="btn btn-gold" href={bouton.lien}>{bouton.libelle}</a>}
+  </div>
+</section>

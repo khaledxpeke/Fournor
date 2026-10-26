@@ -1,0 +1,12 @@
+---
+const { block } = Astro.props;
+const bouton = block?.bouton;
+---
+<section class="section">
+  <div class="wrap">
+    {block?.surtitre && <p class="kicker">{block.surtitre}</p>}
+    {block?.titre && <h2>{block.titre}</h2>}
+    {block?.texte && <div set:html={block.texte} />}
+    {bouton?.lien && <a class="btn btn-gold" href={bouton.lien}>{bouton.libelle}</a>}
+  </div>
+</section>

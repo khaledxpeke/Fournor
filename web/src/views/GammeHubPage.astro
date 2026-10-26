@@ -1,17 +1,13 @@
 ---
 import Base from "../layouts/BaseLayout.astro";
+import { gammes } from "virtual:fournor-catalog";
 import { t } from "../i18n.js";
-import { localePath } from "../lib/locale.js";
+import { loc, localePath } from "../lib/locale.js";
+import CmsImage from "../components/CmsImage.astro";
 
 const { locale = "fr" } = Astro.props;
 const tr = (key) => t(key, locale);
 const href = (to) => localePath(locale, to);
-const tiles = [
-  ["premix-poudres", "gamme.filterPremix", "/images/mix-premix.webp?v=4"],
-  ["mix-poudres", "gamme.filterMix", "/images/mix-poudres.webp?v=4"],
-  ["mix-graines", "gamme.filterGraines", "/images/maxi-graines.jpg"],
-  ["mix-liquides", "gamme.filterLiquid", "/images/mix-liquides.webp?v=4"],
-];
 ---
 
 <Base
@@ -29,11 +25,11 @@ const tiles = [
     <div class="wrap">
       <div class="mix-hub" id="mix-hub">
         {
-          tiles.map(([mix, key, image]) => (
-            <a class="mix-tile" href={href(`/gamme/${mix}/`)}>
-              <span class="mix-tile-label">{tr(key)}</span>
+          gammes.map((gamme) => (
+            <a class="mix-tile" href={href(`/gamme/${gamme.slug}/`)}>
+              <span class="mix-tile-label">{loc(gamme.name, locale)}</span>
               <span class="mix-tile-photo">
-                <img src={image} alt="" width="496" height="744" loading="lazy" decoding="async" />
+                <CmsImage src={gamme.image} alt="" slot="tile" loading="lazy" />
               </span>
             </a>
           ))

@@ -8,6 +8,15 @@ export function productSearch(product) {
   return bits.filter(Boolean).join(" ");
 }
 
+export function mixLeadKey(mix) {
+  return {
+    "premix-poudres": "ad.a.lead",
+    "mix-poudres": "ad.c.lead",
+    "mix-graines": "ad.g.lead",
+    "mix-liquides": "ad.b.lead",
+  }[mix];
+}
+
 export function mixTitleKey(mix) {
   return {
     "premix-poudres": "gamme.filterPremix",

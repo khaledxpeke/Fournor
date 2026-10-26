@@ -1,0 +1,11 @@
+---
+import Base from "../layouts/BaseLayout.astro";
+import Sections from "../components/sections/Sections.astro";
+
+const { locale = "fr", page } = Astro.props;
+const titre = page?.titre?.[locale] || page?.titre?.fr || "";
+const path = `/${page?.slug || ""}/`;
+---
+<Base title={`${titre} — SATIA`} description={titre} page="page" locale={locale} path={path}>
+  <Sections sections={page?.sections} locale={locale} />
+</Base>

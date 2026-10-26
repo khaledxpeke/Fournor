@@ -1,0 +1,35 @@
+{
+  "collectionName": "components_sections_bandeaux_defilants",
+  "info": {
+    "displayName": "Bandeau defilant",
+    "icon": "arrowRight",
+    "description": "Bande de texte qui defile (noms de produits)"
+  },
+  "options": {},
+  "attributes": {
+    "elements": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.element-texte",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "vitesse": {
+      "type": "enumeration",
+      "enum": [
+        "lente",
+        "normale",
+        "rapide"
+      ],
+      "default": "normale",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    }
+  }
+}

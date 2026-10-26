@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_shared_elements_texte",
+  "info": {
+    "displayName": "Element texte",
+    "icon": "alignLeft"
+  },
+  "options": {},
+  "attributes": {
+    "texte": {
+      "type": "string",
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    }
+  }
+}

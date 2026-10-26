@@ -1,19 +1,26 @@
 ---
 import Base from "../layouts/BaseLayout.astro";
 import EventCard from "../components/EventCard.astro";
-import { events } from "../products.js";
+import { events } from "virtual:fournor-catalog";
 import { t } from "../i18n.js";
 import { absolute, loc } from "../lib/locale.js";
 
 const { locale = "fr" } = Astro.props;
 const tr = (key) => t(key, locale);
+const pageUrl = absolute(locale === "fr" ? "/actualites/" : `/${locale}/actualites/`);
 const articles = events.map((event) => ({
   "@context": "https://schema.org",
-  "@type": "NewsArticle",
-  headline: loc(event.title, locale),
+  "@type": "LocalBusiness",
+  "@id": `${pageUrl}#${event.id}`,
+  name: loc(event.title, locale),
   description: loc(event.text, locale),
   image: absolute(event.image.split("?")[0]),
-  mainEntityOfPage: absolute(locale === "fr" ? "/actualites/" : `/${locale}/actualites/`),
+  url: pageUrl,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: loc(event.place, locale),
+    addressCountry: "TN",
+  },
 }));
 ---
 

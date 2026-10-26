@@ -1,13 +1,16 @@
 ---
 import Base from "../layouts/BaseLayout.astro";
-import { products } from "../products.js";
+import CmsImage from "../components/CmsImage.astro";
+import { products, pageImages } from "virtual:fournor-catalog";
 import { t } from "../i18n.js";
 import { loc } from "../lib/locale.js";
+import { preloadFor } from "../lib/images.js";
 
 const { locale = "fr" } = Astro.props;
 const tr = (key) => t(key, locale);
 const current = products[0];
 const flour = 100 - current.dosage;
+const photo = preloadFor(pageImages.expertise, "page");
 ---
 
 <Base
@@ -16,12 +19,14 @@ const flour = 100 - current.dosage;
   page="expertise"
   locale={locale}
   path="/expertise/"
-  preload="/images/expertise.webp"
-  ogImage="/images/expertise.webp"
+  preload={photo.href}
+  preloadSrcset={photo.srcset}
+  preloadSizes={photo.sizes}
+  ogImage={pageImages.expertise}
 >
   <section class="page-open wrap">
     <figure class="page-open-photo">
-      <img src="/images/expertise.webp" alt={tr("exp.hero")} width="1600" height="1200" fetchpriority="high" decoding="async" />
+      <CmsImage src={pageImages.expertise} alt={tr("exp.hero")} slot="page" fetchpriority="high" />
     </figure>
     <div class="page-open-copy">
       <p class="kicker">{tr("page.kicker")}</p>

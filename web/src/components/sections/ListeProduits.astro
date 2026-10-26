@@ -1,0 +1,19 @@
+---
+import { products } from "virtual:fournor-catalog";
+import ProductCard from "../ProductCard.astro";
+
+const { block, locale = "fr" } = Astro.props;
+const mix = block?.gamme?.slug || "";
+const max = Number(block?.nombreMax) || 8;
+const list = (products || []).filter((product) => !mix || product.mix === mix).slice(0, max);
+---
+{list.length > 0 && (
+  <section class="section">
+    <div class="wrap">
+      {block?.titre && <h2>{block.titre}</h2>}
+      <div class="card-grid">
+        {list.map((product) => <ProductCard product={product} locale={locale} />)}
+      </div>
+    </div>
+  </section>
+)}

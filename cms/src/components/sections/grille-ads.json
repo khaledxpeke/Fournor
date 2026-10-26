@@ -1,0 +1,51 @@
+{
+  "collectionName": "components_sections_grilles_ads",
+  "info": {
+    "displayName": "Grille de blocs publicitaires",
+    "icon": "grid",
+    "description": "Affiche les blocs publicitaires d'un emplacement donne"
+  },
+  "options": {},
+  "attributes": {
+    "titre": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "emplacement": {
+      "type": "string",
+      "required": true,
+      "default": "accueil-grille",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    },
+    "nombreMax": {
+      "type": "integer",
+      "default": 4,
+      "min": 1,
+      "max": 12,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    },
+    "colonnes": {
+      "type": "integer",
+      "default": 4,
+      "min": 1,
+      "max": 6,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    }
+  }
+}

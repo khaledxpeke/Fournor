@@ -3,7 +3,7 @@ import Base from "../layouts/BaseLayout.astro";
 import CtaBand from "../components/CtaBand.astro";
 import { t } from "../i18n.js";
 import { loc, localizeHref } from "../lib/locale.js";
-import { getXpPage, getXpTitle, xpHref, xpTree } from "../xp-data.js";
+import { getXpPage, getXpTitle, xpHref, xpTree } from "virtual:fournor-catalog";
 
 const { locale = "fr" } = Astro.props;
 const tr = (key) => t(key, locale);

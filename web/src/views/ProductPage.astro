@@ -1,9 +1,11 @@
 ---
 import Base from "../layouts/BaseLayout.astro";
 import ProductCard from "../components/ProductCard.astro";
-import { getProduct, products } from "../products.js";
+import CmsImage from "../components/CmsImage.astro";
+import { getProduct, products } from "virtual:fournor-catalog";
 import { t } from "../i18n.js";
 import { absolute, loc, localePath } from "../lib/locale.js";
+import { preloadFor } from "../lib/images.js";
 
 const { locale = "fr", id } = Astro.props;
 const product = products.find((item) => item.id === id) || getProduct(id);
@@ -12,7 +14,7 @@ const tr = (key) => t(key, locale);
 const href = (to) => localePath(locale, to);
 const flourNote = tr("prod.usageText");
 const others = products.filter((item) => item.id !== product.id).slice(0, 3);
-const sheetName = `Fiche ${name}.pdf`;
+const photo = preloadFor(product.image, "product");
 const productLd = {
   "@context": "https://schema.org",
   "@type": "Product",
@@ -31,6 +33,9 @@ const productLd = {
   locale={locale}
   path={`/produit/${product.id}/`}
   product={product.id}
+  preload={photo.href}
+  preloadSrcset={photo.srcset}
+  preloadSizes={photo.sizes}
   ogImage={product.image}
   extraLd={[productLd]}
 >
@@ -38,7 +43,7 @@ const productLd = {
     <div class="wrap" id="produit">
       <div class="prod-hero">
         <div class="prod-photo">
-          <img src={`${product.image}?v=2`} alt={name} width="900" height="900" fetchpriority="high" decoding="async" />
+          <CmsImage src={product.image} alt={name} slot="product" fetchpriority="high" />
         </div>
         <div class="prod-intro">
           <p class="kicker">{tr("prod.kicker")}</p>
@@ -48,7 +53,7 @@ const productLd = {
           {(product.video || product.sheet) && (
             <div class="prod-actions">
               {product.video && <a class="btn btn-ghost" href="#prod-video">{tr("prod.watch")}</a>}
-              {product.sheet && <a class="btn btn-ghost" href={product.sheet} download={sheetName}>{tr("prod.download")}</a>}
+              {product.sheet && <a class="btn btn-ghost" href={product.sheet} rel="noopener">{tr("prod.download")}</a>}
             </div>
           )}
         </div>
@@ -56,19 +61,19 @@ const productLd = {
       <div class="prod-specs">
         <div class="prod-spec-main">
           <article>
-            <h3>{tr("prod.composition")}</h3>
+            <h2>{tr("prod.composition")}</h2>
             <p>{loc(product.composition, locale)}</p>
           </article>
           <article class="prod-spec-weight">
-            <h3>{tr("prod.weight")}</h3>
+            <h2>{tr("prod.weight")}</h2>
             <p>{product.weight}</p>
           </article>
         </div>
         <div class="prod-spec-grid">
-          <article><h3>{tr("prod.adds")}</h3><p>{loc(product.adds, locale)}</p></article>
-          <article><h3>{tr("prod.sensory")}</h3><p>{loc(product.sensory, locale)}</p></article>
-          <article><h3>{tr("prod.target")}</h3><p>{loc(product.target, locale)}</p></article>
-          <article><h3>{tr("prod.usage")}</h3><p>{flourNote}</p></article>
+          <article><h2>{tr("prod.adds")}</h2><p>{loc(product.adds, locale)}</p></article>
+          <article><h2>{tr("prod.sensory")}</h2><p>{loc(product.sensory, locale)}</p></article>
+          <article><h2>{tr("prod.target")}</h2><p>{loc(product.target, locale)}</p></article>
+          <article><h2>{tr("prod.usage")}</h2><p>{flourNote}</p></article>
         </div>
       </div>
       {
