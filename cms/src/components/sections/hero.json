@@ -3,7 +3,7 @@
   "info": {
     "displayName": "Hero",
     "icon": "picture",
-    "description": "Banniere principale en haut de page"
+    "description": "Banniere principale en haut de page. Le champ image accepte une photo ou une video."
   },
   "options": {},
   "attributes": {
@@ -11,7 +11,8 @@
       "type": "media",
       "multiple": false,
       "allowedTypes": [
-        "images"
+        "images",
+        "videos"
       ],
       "required": true,
       "pluginOptions": {

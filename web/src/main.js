@@ -911,6 +911,7 @@ function setupHeroVideo() {
   video.muted = true;
   video.defaultMuted = true;
   video.playsInline = true;
+  video.loop = true;
 
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
   const play = () => {

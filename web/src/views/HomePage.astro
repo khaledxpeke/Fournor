@@ -7,13 +7,14 @@ import CmsImage from "../components/CmsImage.astro";
 import { events, home, products } from "virtual:fournor-catalog";
 import { t } from "../i18n.js";
 import { loc, localePath } from "../lib/locale.js";
-import { preloadFor } from "../lib/images.js";
+import { preloadFor, videoPoster } from "../lib/images.js";
 
 const { locale = "fr" } = Astro.props;
 const tr = (key) => t(key, locale);
 const href = (to) => localePath(locale, to);
 const names = products.map((product) => loc(product.name, locale));
-const hero = preloadFor(home.hero, "hero");
+const hero = home.heroVideo ? null : preloadFor(home.hero, "hero");
+const heroPoster = home.heroVideo ? videoPoster(home.hero) : "";
 const band = home.band[0];
 const gridSlots = ["adTile", "adTile", "adTile", "adPhoto"];
 ---
@@ -24,13 +25,27 @@ const gridSlots = ["adTile", "adTile", "adTile", "adPhoto"];
   page="home"
   locale={locale}
   path="/"
-  preload={hero.href}
-  preloadSrcset={hero.srcset}
-  preloadSizes={hero.sizes}
-  ogImage={home.hero}
+  preload={hero?.href}
+  preloadSrcset={hero?.srcset}
+  preloadSizes={hero?.sizes}
+  ogImage={heroPoster || home.hero}
 >
   <section class="hero">
-    <CmsImage class="hero-bg" src={home.hero} alt="" slot="hero" fetchpriority="high" />
+    {home.heroVideo ? (
+      <video
+        class="hero-bg"
+        src={home.hero}
+        poster={heroPoster || undefined}
+        muted
+        autoplay
+        loop
+        playsinline
+        preload="metadata"
+        aria-hidden="true"
+      />
+    ) : (
+      <CmsImage class="hero-bg" src={home.hero} alt="" slot="hero" fetchpriority="high" />
+    )}
     <h1 class="visually-hidden">{tr("hero.title")}</h1>
   </section>
 

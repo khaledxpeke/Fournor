@@ -81,6 +81,7 @@ export type SiteCatalog = {
   actualites: { slug: string; titre: Dict; extrait?: Dict; contenu?: Dict; date?: string; image?: string }[];
   home: {
     hero: string;
+    heroVideo: boolean;
     solution: string;
     atelier: string;
     fournil: string;
@@ -157,9 +158,22 @@ function text(value: unknown) {
   return typeof value === "string" ? value : "";
 }
 
+function mediaFile(file: any) {
+  if (!file) return null;
+  return Array.isArray(file) ? file[0] || null : file;
+}
+
+function isVideo(file: any) {
+  const media = mediaFile(file);
+  if (!media) return false;
+  const mime = text(media.mime);
+  if (mime.startsWith("video/")) return true;
+  const url = text(media.url);
+  return url.includes("/video/upload/") || /\.(mp4|webm|mov)(?:$|\?)/i.test(url);
+}
+
 function mediaUrl(file: any) {
-  if (!file) return "";
-  const media = Array.isArray(file) ? file[0] : file;
+  const media = mediaFile(file);
   if (!media) return "";
   const url = text(media.url);
   if (!url) return "";
@@ -479,8 +493,10 @@ export async function loadSiteCatalog(): Promise<SiteCatalog> {
   const accueil = entryOf(accueilBody);
   const accueilSections = accueil.sections || [];
   const imageText = blocksNamed(accueilSections, "sections.image-texte");
+  const heroFile = blocksNamed(accueilSections, "sections.hero")[0]?.image;
   const home = {
-    hero: mediaUrl(blocksNamed(accueilSections, "sections.hero")[0]?.image),
+    hero: mediaUrl(heroFile),
+    heroVideo: isVideo(heroFile),
     solution: mediaUrl(imageText[0]?.image),
     atelier: mediaUrl(imageText[1]?.image),
     fournil: mediaUrl(imageText[2]?.image),

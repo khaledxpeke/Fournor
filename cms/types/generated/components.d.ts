@@ -150,7 +150,7 @@ export interface SectionsHero extends Struct.ComponentSchema {
           localized: true;
         };
       }>;
-    image: Schema.Attribute.Media<'images'> &
+    image: Schema.Attribute.Media<'images' | 'videos'> &
       Schema.Attribute.Required &
       Schema.Attribute.SetPluginOptions<{
         i18n: {

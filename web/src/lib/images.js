@@ -118,6 +118,14 @@ export function displaySrc(url, widths) {
   return cloudinarySrc(url, widths[widths.length - 1]);
 }
 
+export function videoPoster(url) {
+  if (typeof url !== "string" || !url.includes("/video/upload/")) return "";
+  const marker = "/video/upload/";
+  const index = url.indexOf(marker);
+  const rest = url.slice(index + marker.length).replace(/\.[a-z0-9]+(?:\?.*)?$/i, ".jpg");
+  return `${url.slice(0, index)}${marker}so_0,f_jpg,q_auto,w_1774/${rest}`;
+}
+
 export function preloadFor(url, slotName) {
   const slot = slots[slotName];
   if (!url || !slot) return { href: url || "", srcset: undefined, sizes: undefined };
