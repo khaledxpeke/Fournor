@@ -118,18 +118,35 @@ function config() {
   return { token, base };
 }
 
+function wait(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 async function strapiGet(pathname: string, params: Record<string, string> = {}) {
   const { token, base } = config();
   const url = new URL(pathname, `${base}/`);
   for (const [key, value] of Object.entries(params)) url.searchParams.set(key, value);
-  let response: Response;
-  try {
-    response = await fetch(url, { headers: { authorization: `Bearer ${token}` } });
-  } catch (error) {
-    throw new Error(`Strapi is unreachable at ${base}. Start it before building the site. (${(error as Error).message})`);
+  const pauses = [0, 5000, 10000, 15000, 20000];
+  let response: Response | undefined;
+  let cause = "";
+  for (const pause of pauses) {
+    if (pause) await wait(pause);
+    try {
+      response = await fetch(url, { headers: { authorization: `Bearer ${token}` } });
+    } catch (error) {
+      cause = (error as Error).message;
+      response = undefined;
+      continue;
+    }
+    if (response.ok || (response.status !== 502 && response.status !== 503 && response.status !== 504)) break;
+    cause = `HTTP ${response.status}`;
+    response = undefined;
+  }
+  if (!response) {
+    throw new Error(`Strapi is unreachable at ${base}. Start it before building the site. (${cause})`);
   }
   if (!response.ok) {
-    throw new Error(`Strapi ${response.status} for ${pathname}. The site was not built.`);
+    throw new Error(`Strapi ${response.status} for ${url.origin}${pathname}. The site was not built.`);
   }
   if (pathname === "/_health") return null;
   return response.json();
@@ -383,19 +400,16 @@ export async function loadSiteCatalog(): Promise<SiteCatalog> {
     );
   }
 
-  const [productRows, families, franchiseRows, expertiseRows, pageRows, newsRows, gammeRows, adRows, accueilBody, settings] =
-    await Promise.all([
-      getProduits(),
-      getIndexRecherche(),
-      getFranchises(),
-      getExpertises(),
-      getPages(),
-      getActualites(),
-      getGammes(),
-      getBlocs(),
-      getAccueil("fr"),
-      loadNavigation(),
-    ]);
+  const productRows = await getProduits();
+  const families = await getIndexRecherche();
+  const franchiseRows = await getFranchises();
+  const expertiseRows = await getExpertises();
+  const pageRows = await getPages();
+  const newsRows = await getActualites();
+  const gammeRows = await getGammes();
+  const adRows = await getBlocs();
+  const accueilBody = await getAccueil("fr");
+  const settings = await loadNavigation();
   const navigation = settings.navigation;
 
   const familleBySlug = new Map<string, string>(
