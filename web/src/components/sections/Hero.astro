@@ -1,6 +1,6 @@
 ---
 import CmsImage from "../CmsImage.astro";
-import { videoPoster } from "../../lib/images.js";
+import { videoPoster, videoSrc } from "../../lib/images.js";
 
 const { block } = Astro.props;
 const file = block?.image;
@@ -16,7 +16,7 @@ const poster = video ? videoPoster(src) : "";
   {video ? (
     <video
       class="hero-bg"
-      src={src}
+      src={videoSrc(src)}
       poster={poster || undefined}
       muted
       autoplay

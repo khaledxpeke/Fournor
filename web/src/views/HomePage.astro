@@ -7,7 +7,7 @@ import CmsImage from "../components/CmsImage.astro";
 import { events, home, products } from "virtual:fournor-catalog";
 import { t } from "../i18n.js";
 import { loc, localePath } from "../lib/locale.js";
-import { preloadFor, videoPoster } from "../lib/images.js";
+import { preloadFor, videoPoster, videoSrc } from "../lib/images.js";
 
 const { locale = "fr" } = Astro.props;
 const tr = (key) => t(key, locale);
@@ -34,7 +34,7 @@ const gridSlots = ["adTile", "adTile", "adTile", "adPhoto"];
     {home.heroVideo ? (
       <video
         class="hero-bg"
-        src={home.hero}
+        src={videoSrc(home.hero)}
         poster={heroPoster || undefined}
         muted
         autoplay

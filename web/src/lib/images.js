@@ -118,12 +118,24 @@ export function displaySrc(url, widths) {
   return cloudinarySrc(url, widths[widths.length - 1]);
 }
 
-export function videoPoster(url) {
-  if (typeof url !== "string" || !url.includes("/video/upload/")) return "";
+function videoPath(url) {
+  if (typeof url !== "string" || !url.includes("/video/upload/")) return null;
   const marker = "/video/upload/";
   const index = url.indexOf(marker);
-  const rest = url.slice(index + marker.length).replace(/\.[a-z0-9]+(?:\?.*)?$/i, ".jpg");
-  return `${url.slice(0, index)}${marker}so_0,f_jpg,q_auto,w_1774/${rest}`;
+  return { head: url.slice(0, index), rest: url.slice(index + marker.length) };
+}
+
+export function videoSrc(url) {
+  const parts = videoPath(url);
+  if (!parts) return url || "";
+  return `${parts.head}/video/upload/q_auto,f_auto,w_1774,c_limit/${parts.rest}`;
+}
+
+export function videoPoster(url) {
+  const parts = videoPath(url);
+  if (!parts) return "";
+  const rest = parts.rest.replace(/\.[a-z0-9]+(?:\?.*)?$/i, ".jpg");
+  return `${parts.head}/video/upload/so_0,f_jpg,q_auto,w_1774/${rest}`;
 }
 
 export function preloadFor(url, slotName) {
