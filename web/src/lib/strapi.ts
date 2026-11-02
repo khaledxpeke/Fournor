@@ -82,6 +82,7 @@ export type SiteCatalog = {
   home: {
     hero: string;
     heroVideo: boolean;
+    heroYoutube: string;
     solution: string;
     atelier: string;
     fournil: string;
@@ -507,10 +508,12 @@ export async function loadSiteCatalog(): Promise<SiteCatalog> {
   const accueil = entryOf(accueilBody);
   const accueilSections = accueil.sections || [];
   const imageText = blocksNamed(accueilSections, "sections.image-texte");
-  const heroFile = blocksNamed(accueilSections, "sections.hero")[0]?.image;
+  const heroBlock = blocksNamed(accueilSections, "sections.hero")[0];
+  const heroFile = heroBlock?.image;
   const home = {
     hero: mediaUrl(heroFile),
     heroVideo: isVideo(heroFile),
+    heroYoutube: text(heroBlock?.lienYoutube),
     solution: mediaUrl(imageText[0]?.image),
     atelier: mediaUrl(imageText[1]?.image),
     fournil: mediaUrl(imageText[2]?.image),

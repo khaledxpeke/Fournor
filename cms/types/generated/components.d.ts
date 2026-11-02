@@ -150,6 +150,12 @@ export interface SectionsHero extends Struct.ComponentSchema {
           localized: true;
         };
       }>;
+    lienYoutube: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
     image: Schema.Attribute.Media<'images' | 'videos'> &
       Schema.Attribute.Required &
       Schema.Attribute.SetPluginOptions<{

@@ -3,7 +3,7 @@
   "info": {
     "displayName": "Hero",
     "icon": "picture",
-    "description": "Banniere principale en haut de page. Le champ image accepte une photo ou une video."
+    "description": "Banniere principale. lienYoutube joue une video YouTube. Sinon, le champ image est affiche."
   },
   "options": {},
   "attributes": {
@@ -15,6 +15,14 @@
         "videos"
       ],
       "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    },
+    "lienYoutube": {
+      "type": "string",
       "pluginOptions": {
         "i18n": {
           "localized": false

@@ -118,6 +118,43 @@ export function displaySrc(url, widths) {
   return cloudinarySrc(url, widths[widths.length - 1]);
 }
 
+export function youtubeId(value) {
+  const raw = String(value || "").trim();
+  if (!raw) return "";
+  if (/^[\w-]{11}$/.test(raw)) return raw;
+  try {
+    const url = new URL(raw);
+    const host = url.hostname.replace(/^www\./, "");
+    if (host === "youtu.be") return url.pathname.split("/").filter(Boolean)[0] || "";
+    const watch = url.searchParams.get("v");
+    if (watch) return watch;
+    const parts = url.pathname.split("/").filter(Boolean);
+    const marker = parts.findIndex((part) => part === "embed" || part === "shorts" || part === "live");
+    if (marker >= 0 && parts[marker + 1]) return parts[marker + 1];
+  } catch {
+    return "";
+  }
+  return "";
+}
+
+export function youtubeEmbed(value) {
+  const id = youtubeId(value);
+  if (!id) return "";
+  const params = new URLSearchParams({
+    autoplay: "1",
+    mute: "1",
+    controls: "0",
+    loop: "1",
+    playlist: id,
+    playsinline: "1",
+    rel: "0",
+    modestbranding: "1",
+    iv_load_policy: "3",
+    disablekb: "1",
+  });
+  return `https://www.youtube-nocookie.com/embed/${id}?${params}`;
+}
+
 function videoPath(url) {
   if (typeof url !== "string" || !url.includes("/video/upload/")) return null;
   const marker = "/video/upload/";

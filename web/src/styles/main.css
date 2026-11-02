@@ -714,6 +714,21 @@ html[dir="rtl"] .nav-mega-row.has-kids > .nav-mega-head::after {
   z-index: 0;
 }
 
+.hero-youtube {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 0;
+  width: 100%;
+  height: auto;
+  min-width: 100%;
+  min-height: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}
+
 .section {
   padding: var(--section-y) 0;
 }
@@ -3413,6 +3428,10 @@ body[data-page="formation"] .page-notes {
     opacity: 1;
   }
 
+  .hero-youtube {
+    display: none !important;
+  }
+
   .p-card-img::after,
   .e-card-img::after,
   .page-open-photo::after,
@@ -3433,6 +3452,7 @@ body[data-page="formation"] .page-notes {
   form,
   .site-footer .social,
   .prod-video,
+  .hero-youtube,
   .hero-bg {
     display: none !important;
   }

@@ -7,13 +7,14 @@ import CmsImage from "../components/CmsImage.astro";
 import { events, home, products } from "virtual:fournor-catalog";
 import { t } from "../i18n.js";
 import { loc, localePath } from "../lib/locale.js";
-import { preloadFor, videoPoster, videoSrc } from "../lib/images.js";
+import { preloadFor, videoPoster, videoSrc, youtubeEmbed } from "../lib/images.js";
 
 const { locale = "fr" } = Astro.props;
 const tr = (key) => t(key, locale);
 const href = (to) => localePath(locale, to);
 const names = products.map((product) => loc(product.name, locale));
-const hero = home.heroVideo ? null : preloadFor(home.hero, "hero");
+const heroYoutube = youtubeEmbed(home.heroYoutube);
+const hero = home.heroVideo || heroYoutube ? null : preloadFor(home.hero, "hero");
 const heroPoster = home.heroVideo ? videoPoster(home.hero) : "";
 const band = home.band[0];
 const gridSlots = ["adTile", "adTile", "adTile", "adPhoto"];
@@ -31,7 +32,18 @@ const gridSlots = ["adTile", "adTile", "adTile", "adPhoto"];
   ogImage={heroPoster || home.hero}
 >
   <section class="hero">
-    {home.heroVideo ? (
+    <CmsImage class="hero-bg" src={home.hero} alt="" slot="hero" fetchpriority={heroYoutube ? undefined : "high"} />
+    {heroYoutube ? (
+      <iframe
+        class="hero-youtube"
+        src={heroYoutube}
+        title=""
+        tabindex="-1"
+        allow="autoplay; encrypted-media"
+        referrerpolicy="strict-origin-when-cross-origin"
+        aria-hidden="true"
+      />
+    ) : home.heroVideo ? (
       <video
         class="hero-bg"
         src={videoSrc(home.hero)}
@@ -43,9 +55,7 @@ const gridSlots = ["adTile", "adTile", "adTile", "adPhoto"];
         preload="metadata"
         aria-hidden="true"
       />
-    ) : (
-      <CmsImage class="hero-bg" src={home.hero} alt="" slot="hero" fetchpriority="high" />
-    )}
+    ) : null}
     <h1 class="visually-hidden">{tr("hero.title")}</h1>
   </section>
 
