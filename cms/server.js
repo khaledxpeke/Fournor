@@ -39,8 +39,11 @@ async function boot() {
   const app = strapi.createStrapi();
   console.log('Strapi load starting');
   await app.load();
+  // listen() is what normally attaches the admin and API routes. The port is
+  // already open, so attach the routes without calling listen() again.
+  app.server.mount();
   ready = true;
-  console.log('Strapi load finished');
+  console.log(`Strapi load finished, ${app.server.listRoutes().length} routes`);
   for (const [req, res] of queued.splice(0)) {
     if (!res.writableEnded && !res.destroyed) strapiListener(req, res);
   }
