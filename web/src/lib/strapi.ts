@@ -123,17 +123,23 @@ function wait(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-async function strapiGet(pathname: string, params: Record<string, string> = {}) {
+async function strapiGet(
+  pathname: string,
+  params: Record<string, string> = {},
+  pauses = [0, 5000, 10000, 15000, 20000]
+) {
   const { token, base } = config();
   const url = new URL(pathname, `${base}/`);
   for (const [key, value] of Object.entries(params)) url.searchParams.set(key, value);
-  const pauses = [0, 5000, 10000, 15000, 20000];
   let response: Response | undefined;
   let cause = "";
   for (const pause of pauses) {
     if (pause) await wait(pause);
     try {
-      response = await fetch(url, { headers: { authorization: `Bearer ${token}` } });
+      response = await fetch(url, {
+        headers: { authorization: `Bearer ${token}` },
+        signal: AbortSignal.timeout(20000),
+      });
     } catch (error) {
       cause = (error as Error).message;
       response = undefined;
@@ -393,7 +399,7 @@ async function loadNavigation() {
 export async function loadSiteCatalog(): Promise<SiteCatalog> {
   const { base } = config();
   try {
-    await strapiGet("/_health");
+    await strapiGet("/_health", {}, [0, 30000, 60000, 60000, 60000, 60000, 60000, 60000, 60000]);
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     throw new Error(

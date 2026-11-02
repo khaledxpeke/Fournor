@@ -19,16 +19,26 @@ gate.listen(port, host, () => {
 
 function closeGate() {
   if (!gate.listening) return Promise.resolve();
-  return new Promise((resolve, reject) => {
-    gate.close((error) => (error ? reject(error) : resolve()));
+  console.log('Startup gate closing');
+  return new Promise((resolve) => {
+    gate.close(() => {
+      console.log('Startup gate closed');
+      resolve();
+    });
+    // Hostinger keeps the proxy connection open. Without this, close() never
+    // finishes and Strapi never binds the port.
+    if (typeof gate.closeAllConnections === 'function') gate.closeAllConnections();
   });
 }
 
 async function boot() {
   const strapi = require('@strapi/strapi');
   const app = strapi.createStrapi();
+  console.log('Strapi load starting');
   await app.load();
+  console.log('Strapi load finished');
   await closeGate();
+  console.log('Strapi listen starting');
   await app.start();
 }
 
