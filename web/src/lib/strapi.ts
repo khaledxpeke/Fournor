@@ -399,7 +399,7 @@ async function loadNavigation() {
 export async function loadSiteCatalog(): Promise<SiteCatalog> {
   const { base } = config();
   try {
-    await strapiGet("/_health", {}, [0, 30000, 60000, 60000, 60000, 60000, 60000, 60000, 60000]);
+    await strapiGet("/_health");
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     throw new Error(
