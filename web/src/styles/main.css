@@ -729,8 +729,7 @@ html[dir="rtl"] .nav-mega-row.has-kids > .nav-mega-head::after {
   max-width: none;
   border: 0;
   pointer-events: none;
-  transform-origin: center center;
-  transform: translate(-50%, -50%) scale(max(100cqw / 1920px, 100cqh / 1080px));
+  transform: translate(-50%, -50%);
 }
 
 .section {
@@ -3173,6 +3172,11 @@ body[data-page="formation"] .page-notes {
 
   .hero-bg {
     object-position: center 40%;
+  }
+
+  .hero-youtube {
+    width: max(100cqw, calc(26rem * 16 / 9));
+    height: calc(max(100cqw, calc(26rem * 16 / 9)) * 9 / 16);
   }
 
   .rings,
