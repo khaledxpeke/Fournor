@@ -215,8 +215,32 @@ async function ensureContentManagerViews(strapi) {
   }
 }
 
+function keepMysqlSchemaSyncFromHanging(strapi) {
+  const client = strapi.config.get('database.connection.client');
+  if (client !== 'mysql' && client !== 'mysql2') return;
+
+  const builder = strapi.db?.schema?.builder;
+  const connection = strapi.db?.connection;
+  if (!builder?.updateSchema || !connection?.transaction) return;
+
+  const updateSchema = builder.updateSchema.bind(builder);
+  builder.updateSchema = async (diff) => {
+    const transaction = connection.transaction.bind(connection);
+    // MariaDB commits a schema change immediately, then Knex waits on the
+    // transaction forever. Run this one update on the open connection.
+    connection.transaction = (callback) => Promise.resolve(callback(connection));
+    try {
+      return await updateSchema(diff);
+    } finally {
+      connection.transaction = transaction;
+    }
+  };
+}
+
 module.exports = {
-  register() {},
+  register({ strapi }) {
+    keepMysqlSchemaSyncFromHanging(strapi);
+  },
 
   async bootstrap({ strapi }) {
     await ensureLocales(strapi);

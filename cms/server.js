@@ -20,8 +20,12 @@ const server = http.createServer((req, res) => {
   strapiListener(req, res);
 });
 
+function log(line) {
+  process.stdout.write(`${line}\n`);
+}
+
 server.listen(port, host, () => {
-  console.log(`Listening on ${host}:${port}`);
+  log(`Listening on ${host}:${port}`);
 });
 
 const createServer = http.createServer.bind(http);
@@ -37,13 +41,13 @@ http.createServer = function createStrapiServer(...args) {
 async function boot() {
   const strapi = require('@strapi/strapi');
   const app = strapi.createStrapi();
-  console.log('Strapi load starting');
+  log('Strapi load starting');
   await app.load();
   // listen() is what normally attaches the admin and API routes. The port is
   // already open, so attach the routes without calling listen() again.
   app.server.mount();
   ready = true;
-  console.log(`Strapi load finished, ${app.server.listRoutes().length} routes`);
+  log(`Strapi load finished, ${app.server.listRoutes().length} routes`);
   for (const [req, res] of queued.splice(0)) {
     if (!res.writableEnded && !res.destroyed) strapiListener(req, res);
   }
