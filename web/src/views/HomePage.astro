@@ -31,8 +31,7 @@ const gridSlots = ["adTile", "adTile", "adTile", "adPhoto"];
   preloadSizes={hero?.sizes}
   ogImage={heroPoster || home.hero}
 >
-  <section class="hero">
-    <CmsImage class="hero-bg" src={home.hero} alt="" slot="hero" fetchpriority={heroYoutube ? undefined : "high"} />
+  <section class:list={["hero", { "hero-film": Boolean(heroYoutube || home.heroVideo) }]}>
     {heroYoutube ? (
       <iframe
         class="hero-youtube"
@@ -47,15 +46,16 @@ const gridSlots = ["adTile", "adTile", "adTile", "adPhoto"];
       <video
         class="hero-bg"
         src={videoSrc(home.hero)}
-        poster={heroPoster || undefined}
         muted
         autoplay
         loop
         playsinline
-        preload="metadata"
+        preload="auto"
         aria-hidden="true"
       />
-    ) : null}
+    ) : (
+      <CmsImage class="hero-bg" src={home.hero} alt="" slot="hero" fetchpriority="high" />
+    )}
     <h1 class="visually-hidden">{tr("hero.title")}</h1>
   </section>
 

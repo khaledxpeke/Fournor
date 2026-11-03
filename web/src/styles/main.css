@@ -715,14 +715,18 @@ html[dir="rtl"] .nav-mega-row.has-kids > .nav-mega-head::after {
   z-index: 0;
 }
 
+.hero-film {
+  background: #141210;
+}
+
 .hero-youtube {
   position: absolute;
   top: 50%;
   left: 50%;
-  z-index: 0;
+  z-index: 1;
   width: max(100cqw, calc(100cqh * 16 / 9));
-  height: auto;
-  aspect-ratio: 16 / 9;
+  height: max(100cqh, calc(100cqw * 9 / 16));
+  max-width: none;
   border: 0;
   pointer-events: none;
   transform: translate(-50%, -50%);
