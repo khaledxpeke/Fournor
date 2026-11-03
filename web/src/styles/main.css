@@ -719,6 +719,13 @@ html[dir="rtl"] .nav-mega-row.has-kids > .nav-mega-head::after {
   background: #141210;
 }
 
+.hero-film::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
 .hero-youtube {
   position: absolute;
   top: 50%;
@@ -730,6 +737,20 @@ html[dir="rtl"] .nav-mega-row.has-kids > .nav-mega-head::after {
   border: 0;
   pointer-events: none;
   transform: translate(-50%, -50%);
+}
+
+@media (min-width: 721px) {
+  .hero-film {
+    aspect-ratio: 16 / 9;
+  }
+
+  .hero-film .hero-youtube {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: none;
+  }
 }
 
 .section {

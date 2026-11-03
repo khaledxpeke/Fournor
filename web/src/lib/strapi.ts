@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { attachmentHref } from "./images.js";
+import { attachmentHref, youtubeId } from "./images.js";
 
 export type Locale = "fr" | "en" | "ar";
 
@@ -26,6 +26,7 @@ export type ProductRecord = {
   composition: Dict;
   usage?: Dict;
   sheet?: string;
+  video?: string;
 };
 
 export type EventRecord = {
@@ -444,6 +445,7 @@ export async function loadSiteCatalog(): Promise<SiteCatalog> {
         composition: dict(rows, (row) => text(row?.description)),
         usage: dict(rows, (row) => text(row?.utilisation)),
         sheet: attachmentHref(mediaUrl(fr.ficheTechnique), `fiche-technique-${id}`) || undefined,
+        video: youtubeId(fr.lienYoutube) || undefined,
       };
     })
     .filter((product) => product.id);

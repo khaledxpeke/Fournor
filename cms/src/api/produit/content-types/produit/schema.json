@@ -151,6 +151,14 @@
         }
       }
     },
+    "lienYoutube": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    },
     "miseEnAvant": {
       "type": "boolean",
       "default": false,

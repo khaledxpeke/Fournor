@@ -1304,6 +1304,12 @@ export interface ApiProduitProduit extends Struct.CollectionTypeSchema {
           localized: false;
         };
       }>;
+    lienYoutube: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<
       'oneToMany',

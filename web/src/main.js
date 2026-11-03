@@ -896,6 +896,7 @@ setupFilters();
 setupGammeSearch();
 setupContact();
 setupHeroVideo();
+setupHeroYoutube();
 paint();
 
 document.querySelectorAll(".ring").forEach((el) => {
@@ -945,6 +946,54 @@ function setupHeroVideo() {
     if (document.hidden) pause();
     else play();
   });
+}
+
+function setupHeroYoutube() {
+  const frame = document.querySelector("iframe.hero-youtube");
+  const base = frame?.dataset.src;
+  if (!frame || !base) return;
+
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const send = (func, args = []) => {
+    frame.contentWindow?.postMessage(
+      JSON.stringify({ event: "command", func, args, id: "hero", channel: "widget" }),
+      "*"
+    );
+  };
+
+  window.addEventListener("message", (event) => {
+    if (event.source !== frame.contentWindow) return;
+    let data = event.data;
+    if (typeof data === "string") {
+      try {
+        data = JSON.parse(data);
+      } catch {
+        return;
+      }
+    }
+    if (data?.event === "onReady") send("playVideo");
+    if (data?.info?.playerState === 0) send("playVideo");
+  });
+
+  frame.addEventListener("load", () => {
+    frame.contentWindow?.postMessage(
+      JSON.stringify({ event: "listening", id: "hero", channel: "widget" }),
+      "*"
+    );
+  });
+
+  if (reduce.matches) return;
+
+  const url = new URL(base);
+  url.searchParams.set("origin", location.origin);
+  frame.src = url.toString();
+
+  if (typeof reduce.addEventListener === "function") {
+    reduce.addEventListener("change", () => {
+      if (reduce.matches) send("pauseVideo");
+      else send("playVideo");
+    });
+  }
 }
 
 function setupMotion() {
