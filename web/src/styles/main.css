@@ -724,12 +724,13 @@ html[dir="rtl"] .nav-mega-row.has-kids > .nav-mega-head::after {
   top: 50%;
   left: 50%;
   z-index: 1;
-  width: max(100cqw, calc(100cqh * 16 / 9));
-  height: max(100cqh, calc(100cqw * 9 / 16));
+  width: 1920px;
+  height: 1080px;
   max-width: none;
   border: 0;
   pointer-events: none;
-  transform: translate(-50%, -50%);
+  transform-origin: center center;
+  transform: translate(-50%, -50%) scale(max(100cqw / 1920px, 100cqh / 1080px));
 }
 
 .section {
