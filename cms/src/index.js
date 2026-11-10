@@ -376,18 +376,26 @@ function keepMysqlSchemaSyncFromHanging(strapi) {
 
   const builder = strapi.db?.schema?.builder;
   const connection = strapi.db?.connection;
-  if (!builder?.updateSchema || !connection?.transaction) return;
+  const current = connection && Object.getOwnPropertyDescriptor(connection, 'transaction');
+  if (!builder?.updateSchema || !current?.configurable || typeof current.value !== 'function') return;
 
   const updateSchema = builder.updateSchema.bind(builder);
   builder.updateSchema = async (diff) => {
-    const transaction = connection.transaction.bind(connection);
-    // MariaDB commits a schema change immediately, then Knex waits on the
-    // transaction forever. Run this one update on the open connection.
-    connection.transaction = (callback) => Promise.resolve(callback(connection));
+    // Knex 3 defines transaction as a locked property, so assignment throws.
+    // MariaDB also commits a schema change immediately and then Knex waits
+    // on that transaction forever. Run this one update on the open connection.
+    Object.defineProperty(connection, 'transaction', {
+      configurable: true,
+      writable: true,
+      value(callback, config) {
+        if (typeof callback !== 'function') return current.value.call(connection, callback, config);
+        return Promise.resolve().then(() => callback(connection));
+      },
+    });
     try {
       return await updateSchema(diff);
     } finally {
-      connection.transaction = transaction;
+      Object.defineProperty(connection, 'transaction', current);
     }
   };
 }
