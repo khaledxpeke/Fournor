@@ -741,15 +741,16 @@ html[dir="rtl"] .nav-mega-row.has-kids > .nav-mega-head::after {
 
 @media (min-width: 721px) {
   .hero-film {
-    width: min(1920px, calc(100% - 2rem));
-    aspect-ratio: 16 / 9;
+    width: min(var(--page-wide), calc(100% - 2rem));
+    aspect-ratio: 21 / 9;
   }
 
   .hero-film .hero-youtube {
     top: 0;
     left: 50%;
-    width: 1920px;
-    height: 1080px;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
     transform: translateX(-50%);
   }
 }
