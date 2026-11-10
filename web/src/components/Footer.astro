@@ -30,22 +30,37 @@ const footerLinks = navigation?.[locale]?.footer?.length
     </div>
     <div class="footer-contact">
       <p class="footer-label">{tr("footer.contact")}</p>
-      <p>{tr("footer.address")}</p>
-      <p>
-        <a class="contact-line" href="mailto:contact.satia@fournor.com">
-          <span class="footer-mail" dir="ltr">contact.satia@fournor.com</span>
-        </a>
-      </p>
-      <p>
-        <a class="contact-line" href="tel:+21698692222">
-          <span>{tr("footer.phone")}</span>
-          <span dir="ltr">+216 98 692 222</span>
-        </a>
-      </p>
-      <p class="social">
-        <a href="https://www.facebook.com/profile.php?id=61595196575088" target="_blank" rel="noopener noreferrer">Facebook</a>
-        <a href="https://www.instagram.com/fournor.officielle?cplk=MTR4dXFkcnMwbGhvZw%3D%3D" target="_blank" rel="noopener noreferrer">Instagram</a>
-      </p>
+      <div class="footer-offices">
+        <div>
+          <p class="footer-office">{tr("footer.tunisia")}</p>
+          <p>{tr("footer.address")}</p>
+          <p>
+            <a class="contact-line" href="mailto:contact.satia@fournor.com">
+              <span class="footer-mail" dir="ltr">contact.satia@fournor.com</span>
+            </a>
+          </p>
+          <p>
+            <a class="contact-line" href="tel:+21698692222">
+              <span>{tr("footer.phone")}</span>
+              <span dir="ltr">+216 98 692 222</span>
+            </a>
+          </p>
+          <p class="social">
+            <a href="https://www.facebook.com/profile.php?id=61595196575088" target="_blank" rel="noopener noreferrer">Facebook</a>
+            <a href="https://www.instagram.com/fournor.officielle?cplk=MTR4dXFkcnMwbGhvZw%3D%3D" target="_blank" rel="noopener noreferrer">Instagram</a>
+          </p>
+        </div>
+        <div>
+          <p class="footer-office">{tr("footer.france")}</p>
+          <p>{tr("footer.franceAddress")}</p>
+          <p>
+            <a class="contact-line" href="tel:+33321501272">
+              <span>{tr("footer.francePhone")}</span>
+              <span dir="ltr">+33 3 21 50 12 72</span>
+            </a>
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </footer>

@@ -850,6 +850,13 @@ export interface ApiFamilleIngredientFamilleIngredient
       'oneToMany',
       'api::famille-ingredient.famille-ingredient'
     >;
+    ordre: Schema.Attribute.Integer &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }> &
+      Schema.Attribute.DefaultTo<0>;
     publishedAt: Schema.Attribute.DateTime;
     seo: Schema.Attribute.Component<'shared.seo', false> &
       Schema.Attribute.SetPluginOptions<{

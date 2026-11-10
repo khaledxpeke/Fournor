@@ -219,10 +219,37 @@ function blocksNamed(sections: any[], name: string) {
 
 function navLinks(list: any[]) {
   return (Array.isArray(list) ? list : [])
-    .slice()
-    .sort((a, b) => (a?.ordre ?? 0) - (b?.ordre ?? 0))
-    .map((item) => ({ label: text(item?.libelle), href: text(item?.lien) }))
+    .map((item, index) => ({ item, index }))
+    .sort((a, b) => (Number(a.item?.ordre) || 0) - (Number(b.item?.ordre) || 0) || a.index - b.index)
+    .map(({ item }) => ({ label: text(item?.libelle), href: text(item?.lien) }))
     .filter((item) => item.label && item.href);
+}
+
+const INGREDIENT_RANK: Record<string, number> = {
+  poudre: 1,
+  grains: 2,
+  graines: 2,
+  liquide: 3,
+  "sans-gluten": 4,
+  divers: 5,
+};
+
+function savedPosition(row: any, fallback?: Record<string, number>) {
+  const value = Number(row?.ordre);
+  if (value) return value;
+  if (fallback) return fallback[text(row?.slug)] ?? 100;
+  return 0;
+}
+
+function bySavedPosition(fallback?: Record<string, number>) {
+  return (a: any, b: any) => {
+    const left = a.fr || a;
+    const right = b.fr || b;
+    return (
+      savedPosition(left, fallback) - savedPosition(right, fallback) ||
+      String(left.documentId || left.id || "").localeCompare(String(right.documentId || right.id || ""))
+    );
+  };
 }
 
 function barePath(lien: string) {
@@ -431,6 +458,7 @@ export async function loadSiteCatalog(): Promise<SiteCatalog> {
     (families.data || []).map((row: { slug: string; famille: string }) => [row.slug, row.famille || ""])
   );
 
+  productRows.sort(bySavedPosition());
   const products: ProductRecord[] = productRows
     .map((rows) => {
       const fr = rows.fr || {};
@@ -481,10 +509,7 @@ export async function loadSiteCatalog(): Promise<SiteCatalog> {
   const expertises = expertiseRows
     .map((rows) => ({ rows, fr: rows.fr || {} }))
     .filter((entry) => entry.fr.slug)
-    .sort(
-      (a, b) =>
-        (a.fr.ordre ?? 0) - (b.fr.ordre ?? 0) || String(a.fr.slug).localeCompare(String(b.fr.slug))
-    );
+    .sort(bySavedPosition());
 
   const xpNav: Record<string, Dict> = {};
   const xpPages: Record<string, XpPageRecord> = {};
@@ -506,14 +531,7 @@ export async function loadSiteCatalog(): Promise<SiteCatalog> {
   const xpTree = roots.map((id) => ({ id, children: children.get(id) || [] }));
 
   const familyRows = await getFamillesIngredient();
-  const order = ["poudre", "grains", "liquide", "sans-gluten", "divers"];
-  familyRows.sort((a, b) => {
-    const rank = (slug: string) => {
-      const index = order.indexOf(slug);
-      return index < 0 ? order.length : index;
-    };
-    return rank(a.fr?.slug) - rank(b.fr?.slug);
-  });
+  familyRows.sort(bySavedPosition(INGREDIENT_RANK));
   const ingFamilies = familyRows.map((rows) => text(rows.fr?.slug)).filter(Boolean);
   const ingFamilyPages: Record<string, XpPageRecord> = {};
   for (const rows of familyRows) {
@@ -581,9 +599,10 @@ export async function loadSiteCatalog(): Promise<SiteCatalog> {
       image: mediaUrl(rows.fr?.image),
       name: dict(rows, (row) => text(row?.nom)),
       ordre: Number(rows.fr?.ordre) || 0,
+      stable: text(rows.fr?.documentId || rows.fr?.id),
     }))
     .filter((gamme) => gamme.slug)
-    .sort((a, b) => a.ordre - b.ordre || a.slug.localeCompare(b.slug))
+    .sort((a, b) => a.ordre - b.ordre || a.stable.localeCompare(b.stable))
     .map(({ slug, image, name }) => ({ slug, image, name }));
 
   return {

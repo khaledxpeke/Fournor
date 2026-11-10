@@ -185,7 +185,8 @@ const ENTRY_TITLES = {
 const LIST_COLUMNS = {
   'api::gamme.gamme': ['ordre', 'nom', 'slug'],
   'api::produit.produit': ['ordre', 'nom', 'gamme'],
-  'api::expertise.expertise': ['ordre', 'titre'],
+  'api::expertise.expertise': ['ordre', 'titre', 'slug'],
+  'api::famille-ingredient.famille-ingredient': ['ordre', 'titre', 'slug'],
   'api::actualite.actualite': ['titre', 'date'],
   'api::bloc-publicitaire.bloc-publicitaire': ['ordre', 'titre', 'emplacement', 'actif'],
 };
@@ -194,8 +195,26 @@ const POSITION_TYPES = new Set([
   'api::gamme.gamme',
   'api::produit.produit',
   'api::expertise.expertise',
+  'api::famille-ingredient.famille-ingredient',
   'api::bloc-publicitaire.bloc-publicitaire',
 ]);
+
+const KNOWN_POSITIONS = {
+  'api::famille-ingredient.famille-ingredient': {
+    poudre: 1,
+    grains: 2,
+    graines: 2,
+    liquide: 3,
+    'sans-gluten': 4,
+    divers: 5,
+  },
+  'api::gamme.gamme': {
+    'premix-poudres': 1,
+    'mix-poudres': 2,
+    'mix-graines': 3,
+    'mix-liquides': 4,
+  },
+};
 
 let publishTimer = null;
 
@@ -263,6 +282,25 @@ async function ensureContentManagerViews(strapi) {
     const gammeLabel = configuration.metadatas?.gamme?.edit;
     if (gammeLabel) gammeLabel.mainField = 'nom';
     await contentTypes.updateConfiguration(model, configuration);
+  }
+}
+
+async function fillMissingPositions(strapi) {
+  for (const [uid, bySlug] of Object.entries(KNOWN_POSITIONS)) {
+    if (!strapi.contentType(uid)?.attributes?.ordre) continue;
+    const rows = await strapi.db.query(uid).findMany({
+      where: { locale: 'fr' },
+      select: ['documentId', 'slug', 'ordre'],
+    });
+    for (const row of rows) {
+      if (row.ordre) continue;
+      const next = bySlug[row.slug];
+      if (!next || !row.documentId) continue;
+      await strapi.db.query(uid).updateMany({
+        where: { documentId: row.documentId },
+        data: { ordre: next },
+      });
+    }
   }
 }
 
@@ -367,6 +405,7 @@ module.exports = {
     await ensureAdminUser(strapi);
     await ensureReadToken(strapi);
     await ensureContentManagerViews(strapi);
+    await fillMissingPositions(strapi);
     keepEntryPosition(strapi);
     watchPublications(strapi);
   },

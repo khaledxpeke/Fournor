@@ -2585,10 +2585,29 @@ body[data-page="formation"] .page-notes {
   margin: 0 0 0.7rem;
 }
 
-.footer-xp,
-.footer-contact {
+.footer-xp {
   flex: 0 1 16rem;
   min-width: 0;
+}
+
+.footer-contact {
+  flex: 1 1 34rem;
+  max-width: 42rem;
+  min-width: 0;
+}
+
+.footer-offices {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: 0.35rem 1.6rem;
+  align-items: start;
+}
+
+.footer-office {
+  margin: 0 0 0.35rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--surface);
 }
 
 .footer-xp a {
@@ -2999,6 +3018,7 @@ body[data-page="formation"] .page-notes {
   .footer-contact {
     flex: 0 0 auto;
     width: 100%;
+    max-width: none;
   }
 
   .footer-logo {
@@ -3382,6 +3402,12 @@ body[data-page="formation"] .page-notes {
   .footer-contact {
     flex: 0 0 auto;
     width: 100%;
+    max-width: none;
+  }
+
+  .footer-offices {
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
 
   .footer-logo {

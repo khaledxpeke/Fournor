@@ -35,6 +35,15 @@
         }
       }
     },
+    "ordre": {
+      "type": "integer",
+      "default": 0,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    },
     "image": {
       "type": "media",
       "multiple": false,

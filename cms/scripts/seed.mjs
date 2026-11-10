@@ -377,14 +377,14 @@ async function seedProduits(files) {
 }
 
 async function seedFamilles(files) {
-  for (const slug of xp.ingFamilies) {
+  for (const [index, slug] of xp.ingFamilies.entries()) {
     const page = xp.ingFamilyPages[slug];
     const imageId = await files.id(page.image, loc(xp.xpNav[slug], 'fr'));
     const href = page.cta?.href;
     const key = page.cta?.key;
     await save('api::famille-ingredient.famille-ingredient', {
       slug,
-      fr: familyData('fr', slug, page, imageId, href, key),
+      fr: { ...familyData('fr', slug, page, imageId, href, key), ordre: index + 1 },
       localized: (locale) => familyData(locale, slug, page, imageId, href, key),
     });
   }
