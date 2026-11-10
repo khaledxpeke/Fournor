@@ -43,15 +43,55 @@ async function ensureEditorRole(strapi) {
     restrictedSubjects: ['plugin::users-permissions.user', ...hidden],
   });
   const uploadPermissions = [
-    'plugin::upload.read',
-    'plugin::upload.configure-view',
-    'plugin::upload.assets.create',
-    'plugin::upload.assets.update',
-    'plugin::upload.assets.download',
-    'plugin::upload.assets.copy-link',
-  ].map((action) => ({ action }));
+    { action: 'plugin::upload.read' },
+    { action: 'plugin::upload.configure-view' },
+    { action: 'plugin::upload.assets.create' },
+    { action: 'plugin::upload.assets.create', subject: 'plugin::upload.file' },
+    { action: 'plugin::upload.assets.create', subject: 'plugin::upload.folder' },
+    { action: 'plugin::upload.assets.update' },
+    { action: 'plugin::upload.assets.update', subject: 'plugin::upload.file' },
+    { action: 'plugin::upload.assets.update', subject: 'plugin::upload.folder' },
+    { action: 'plugin::upload.assets.download' },
+    { action: 'plugin::upload.assets.copy-link' },
+  ];
 
   await roleService.assignPermissions(role.id, [...contentPermissions, ...uploadPermissions]);
+}
+
+async function ensureMediaUpload(strapi) {
+  const roleService = strapi.service('admin::role');
+  const roles = await roleService.find();
+  const superAdmin = await roleService.getSuperAdmin();
+  const uploadPermissions = [
+    { action: 'plugin::upload.read' },
+    { action: 'plugin::upload.configure-view' },
+    { action: 'plugin::upload.assets.create' },
+    { action: 'plugin::upload.assets.create', subject: 'plugin::upload.file' },
+    { action: 'plugin::upload.assets.create', subject: 'plugin::upload.folder' },
+    { action: 'plugin::upload.assets.update' },
+    { action: 'plugin::upload.assets.update', subject: 'plugin::upload.file' },
+    { action: 'plugin::upload.assets.update', subject: 'plugin::upload.folder' },
+    { action: 'plugin::upload.assets.download' },
+    { action: 'plugin::upload.assets.copy-link' },
+  ];
+
+  for (const role of roles) {
+    if (superAdmin && role.id === superAdmin.id) continue;
+    const existing = await strapi.db.query('admin::permission').findMany({
+      where: { role: role.id },
+    });
+    const canEdit = existing.some(
+      (row) =>
+        row.action === 'plugin::content-manager.explorer.create' ||
+        row.action === 'plugin::content-manager.explorer.update'
+    );
+    if (!canEdit) continue;
+    const have = new Set(existing.map((row) => `${row.action}::${row.subject || ''}`));
+    const missing = uploadPermissions.filter(
+      (permission) => !have.has(`${permission.action}::${permission.subject || ''}`)
+    );
+    if (missing.length) await roleService.addPermissions(role.id, missing);
+  }
 }
 
 async function ensureAdminUser(strapi) {
@@ -143,10 +183,19 @@ const ENTRY_TITLES = {
 };
 
 const LIST_COLUMNS = {
-  'api::produit.produit': ['nom', 'gamme'],
+  'api::gamme.gamme': ['ordre', 'nom', 'slug'],
+  'api::produit.produit': ['ordre', 'nom', 'gamme'],
+  'api::expertise.expertise': ['ordre', 'titre'],
   'api::actualite.actualite': ['titre', 'date'],
-  'api::bloc-publicitaire.bloc-publicitaire': ['titre', 'emplacement', 'actif'],
+  'api::bloc-publicitaire.bloc-publicitaire': ['ordre', 'titre', 'emplacement', 'actif'],
 };
+
+const POSITION_TYPES = new Set([
+  'api::gamme.gamme',
+  'api::produit.produit',
+  'api::expertise.expertise',
+  'api::bloc-publicitaire.bloc-publicitaire',
+]);
 
 let publishTimer = null;
 
@@ -204,15 +253,83 @@ async function ensureContentManagerViews(strapi) {
     if (!model?.attributes?.[mainField]) continue;
     const configuration = await contentTypes.findConfiguration(model);
     configuration.settings.mainField = mainField;
-    configuration.settings.defaultSortBy = mainField;
+    const hasPosition = Boolean(model.attributes.ordre);
+    configuration.settings.defaultSortBy = hasPosition ? 'ordre' : mainField;
     configuration.settings.defaultSortOrder = 'ASC';
     if (LIST_COLUMNS[uid]) {
       configuration.layouts.list = LIST_COLUMNS[uid];
     }
+    if (hasPosition) placePositionFirst(configuration);
     const gammeLabel = configuration.metadatas?.gamme?.edit;
     if (gammeLabel) gammeLabel.mainField = 'nom';
     await contentTypes.updateConfiguration(model, configuration);
   }
+}
+
+function placePositionFirst(configuration) {
+  const meta = configuration.metadatas?.ordre;
+  if (meta?.edit) {
+    meta.edit.label = 'Position';
+    meta.edit.description =
+      '1 s’affiche en premier. Modifier le titre ne change pas cette place.';
+    meta.edit.visible = true;
+    meta.edit.editable = true;
+  }
+  if (meta?.list) {
+    meta.list.label = 'Position';
+    meta.list.sortable = true;
+  }
+  const edit = configuration.layouts?.edit;
+  if (!Array.isArray(edit)) return;
+  let field = null;
+  const rows = [];
+  for (const row of edit) {
+    if (!Array.isArray(row)) continue;
+    const kept = row.filter((item) => {
+      if (item?.name !== 'ordre') return true;
+      if (!field) field = item;
+      return false;
+    });
+    if (kept.length) rows.push(kept);
+  }
+  configuration.layouts.edit = [[{ ...(field || { name: 'ordre' }), size: 4 }], ...rows];
+}
+
+function keepEntryPosition(strapi) {
+  strapi.documents.use(async (context, next) => {
+    if (!POSITION_TYPES.has(context.uid) || context.action !== 'update') return next();
+    const data = context.params?.data;
+    const documentId = context.params?.documentId;
+    const missing = !data || data.ordre === undefined || data.ordre === null || data.ordre === '';
+    if (missing && documentId) {
+      const current = await strapi.db.query(context.uid).findOne({
+        where: { documentId },
+        select: ['ordre'],
+      });
+      if (current && current.ordre !== undefined && current.ordre !== null && data) {
+        data.ordre = current.ordre;
+      }
+    }
+    return next();
+  });
+}
+
+function allowDocumentUploads(strapi) {
+  const provider = strapi.plugin('upload')?.provider;
+  if (!provider) return;
+  const configured = strapi.config.get('plugin::upload.actionOptions') || {};
+  const wrap = (method) => {
+    if (typeof provider[method] !== 'function') return;
+    const original = provider[method].bind(provider);
+    const defaults = configured[method] || {};
+    provider[method] = (file, options = {}) => {
+      const mime = String(file?.mime || '');
+      const resourceType = mime.startsWith('image/') ? 'image' : mime.startsWith('video/') ? 'video' : 'raw';
+      return original(file, { ...defaults, ...options, resource_type: resourceType });
+    };
+  };
+  wrap('upload');
+  wrap('uploadStream');
 }
 
 function keepMysqlSchemaSyncFromHanging(strapi) {
@@ -240,14 +357,17 @@ function keepMysqlSchemaSyncFromHanging(strapi) {
 module.exports = {
   register({ strapi }) {
     keepMysqlSchemaSyncFromHanging(strapi);
+    allowDocumentUploads(strapi);
   },
 
   async bootstrap({ strapi }) {
     await ensureLocales(strapi);
     await ensureEditorRole(strapi);
+    await ensureMediaUpload(strapi);
     await ensureAdminUser(strapi);
     await ensureReadToken(strapi);
     await ensureContentManagerViews(strapi);
+    keepEntryPosition(strapi);
     watchPublications(strapi);
   },
 };

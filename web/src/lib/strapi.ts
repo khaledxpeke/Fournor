@@ -314,6 +314,7 @@ export function getProduits() {
     "populate[ficheTechnique]": "true",
     "populate[gamme][fields][0]": "slug",
     "sort[0]": "ordre:asc",
+    "sort[1]": "slug:asc",
   });
 }
 
@@ -322,7 +323,11 @@ export function getIndexRecherche() {
 }
 
 export function getGammes() {
-  return localizedCollection("/api/gammes", { "populate[image]": "true", "sort[0]": "ordre:asc" });
+  return localizedCollection("/api/gammes", {
+    "populate[image]": "true",
+    "sort[0]": "ordre:asc",
+    "sort[1]": "slug:asc",
+  });
 }
 
 export function getFranchises() {
@@ -335,6 +340,7 @@ export function getExpertises() {
     "populate[notes]": "true",
     "populate[bouton]": "true",
     "sort[0]": "ordre:asc",
+    "sort[1]": "slug:asc",
   });
 }
 
@@ -376,6 +382,7 @@ export function getBlocs() {
     "populate[image]": "true",
     "filters[actif][$eq]": "true",
     "sort[0]": "ordre:asc",
+    "sort[1]": "createdAt:asc",
   });
 }
 
@@ -474,7 +481,10 @@ export async function loadSiteCatalog(): Promise<SiteCatalog> {
   const expertises = expertiseRows
     .map((rows) => ({ rows, fr: rows.fr || {} }))
     .filter((entry) => entry.fr.slug)
-    .sort((a, b) => (a.fr.ordre ?? 0) - (b.fr.ordre ?? 0));
+    .sort(
+      (a, b) =>
+        (a.fr.ordre ?? 0) - (b.fr.ordre ?? 0) || String(a.fr.slug).localeCompare(String(b.fr.slug))
+    );
 
   const xpNav: Record<string, Dict> = {};
   const xpPages: Record<string, XpPageRecord> = {};
@@ -573,7 +583,7 @@ export async function loadSiteCatalog(): Promise<SiteCatalog> {
       ordre: Number(rows.fr?.ordre) || 0,
     }))
     .filter((gamme) => gamme.slug)
-    .sort((a, b) => a.ordre - b.ordre)
+    .sort((a, b) => a.ordre - b.ordre || a.slug.localeCompare(b.slug))
     .map(({ slug, image, name }) => ({ slug, image, name }));
 
   return {
